@@ -1,0 +1,12 @@
+ENTERPRISE SERVICES AGREEMENT (SAMPLE CONTRACT A)
+
+1. DATA RETENTION & SECURITY POLICY
+1.1 Customer Data Retention: All customer data, personal information, and transactional logs processed under this Agreement must be securely retained and archived for a minimum period of 5 (five) years following contract termination or expiration.
+1.2 Backup Schedule: Automated daily backups shall be performed and preserved in accordance with the 5-year data retention schedule.
+
+2. PAYMENT & INVOICING TERMS
+2.1 Payment Deadline: Net 30 Days. All undisputed invoices issued by Service Provider must be paid in full by Customer within 30 (thirty) calendar days of invoice date.
+2.2 Late Interest: Unpaid invoices after 30 days shall accrue interest at 1.5% per month.
+
+3. CONFIDENTIALITY
+3.1 Non-Disclosure: Each party agrees to hold all proprietary technical and financial information in strict confidence for a period of 3 years.

@@ -1,0 +1,11 @@
+VENDOR DATA MANAGEMENT AGREEMENT (SAMPLE CONTRACT B)
+
+1. DATA PRIVACY & LIFECYCLE
+1.1 Data Deletion Mandate: In order to maintain strict compliance with global privacy regulations, all Customer data, personal identifiers, and user records must be permanently deleted and purged from all servers after 2 (two) years.
+1.2 Certificate of Destruction: A formal certificate of data erasure shall be issued to Customer within 14 days of the 2-year deletion deadline.
+
+2. PAYMENT TERMS
+2.1 Payment Schedule: Net 60 Days. Customer shall remit payment for delivered services within 60 (sixty) calendar days following receipt of a valid tax invoice.
+
+3. TERMINATION
+3.1 Convenience: Either party may terminate this agreement upon 30 days written notice to the other party.

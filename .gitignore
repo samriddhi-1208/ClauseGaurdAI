@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+**/node_modules/
+venv/
+**/venv/
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+
+# Builds & Production Artifacts
+dist/
+**/dist/
+build/
+**/build/
+
+# Uploads, Local Persistence, and Vector Indexes
+uploads/*
+!uploads/.gitkeep
+**/uploads/*
+!**/uploads/.gitkeep
+storage/
+**/storage/
+chroma_db/
+**/chroma_db/
+db_fallback.json
+**/db_fallback.json
+
+# Environment Variables & Credentials
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Logs
+*.log
+**/logs/
+
+# Operating System & IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
