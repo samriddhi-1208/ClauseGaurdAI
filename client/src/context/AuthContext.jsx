@@ -29,27 +29,37 @@ export const AuthProvider = ({ children }) => {
   }, [token]);
 
   const login = async (email, password) => {
-    const res = await authAPI.login({ email, password });
-    if (res.data.success) {
-      const { token: newToken, user: userData } = res.data;
-      localStorage.setItem('clauseguard_token', newToken);
-      setToken(newToken);
-      setUser(userData);
-      return res.data;
+    try {
+      const res = await authAPI.login({ email, password });
+      if (res.data.success) {
+        const { token: newToken, user: userData } = res.data;
+        localStorage.setItem('clauseguard_token', newToken);
+        setToken(newToken);
+        setUser(userData);
+        return res.data;
+      }
+      throw new Error(res.data.message || 'Login failed');
+    } catch (err) {
+      const message = err.response?.data?.message || err.message || 'Login failed';
+      throw new Error(message);
     }
-    throw new Error(res.data.message || 'Login failed');
   };
 
   const register = async (name, email, password) => {
-    const res = await authAPI.register({ name, email, password });
-    if (res.data.success) {
-      const { token: newToken, user: userData } = res.data;
-      localStorage.setItem('clauseguard_token', newToken);
-      setToken(newToken);
-      setUser(userData);
-      return res.data;
+    try {
+      const res = await authAPI.register({ name, email, password });
+      if (res.data.success) {
+        const { token: newToken, user: userData } = res.data;
+        localStorage.setItem('clauseguard_token', newToken);
+        setToken(newToken);
+        setUser(userData);
+        return res.data;
+      }
+      throw new Error(res.data.message || 'Registration failed');
+    } catch (err) {
+      const message = err.response?.data?.message || err.message || 'Registration failed';
+      throw new Error(message);
     }
-    throw new Error(res.data.message || 'Registration failed');
   };
 
   const logout = () => {
