@@ -218,7 +218,7 @@ const ChatPage = () => {
                 e.preventDefault();
                 handleSend();
               }}
-              className="flex items-center gap-2 bg-slate-900 p-1.5 rounded-lg border border-slate-800 focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500/20 transition-colors"
+              className="flex items-center gap-2 bg-[#111827] p-1.5 rounded-lg border border-slate-800 focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500 transition-colors"
             >
               <input
                 type="text"
@@ -231,7 +231,7 @@ const ChatPage = () => {
                 type="submit"
                 disabled={!inputQuestion.trim() || loading}
                 aria-label="Send question"
-                className="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs rounded-md shadow-xs transition-colors flex items-center gap-1.5 disabled:opacity-50 shrink-0"
+                className="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-500 text-white font-medium text-xs rounded-md shadow-xs transition-colors flex items-center gap-1.5 disabled:opacity-50 shrink-0"
               >
                 <span>Ask AI</span>
                 <Send className="w-3.5 h-3.5" />
@@ -255,7 +255,7 @@ const ChatPage = () => {
               <select
                 value={selectedDocId}
                 onChange={(e) => setSelectedDocId(e.target.value)}
-                className="w-full px-3 py-2 bg-slate-900 border border-slate-800 rounded-md text-xs font-medium text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+                className="w-full px-3 py-2 bg-[#0B101D] border border-slate-800 rounded-md text-xs font-medium text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
               >
                 <option value="">All Uploaded Contracts ({documents.length})</option>
                 {documents.map((d) => (
@@ -277,7 +277,7 @@ const ChatPage = () => {
                     className={`p-2 rounded-lg border text-xs cursor-pointer transition-colors flex items-center justify-between ${
                       isSelected
                         ? 'bg-blue-950/50 border-blue-600 text-white font-medium'
-                        : 'bg-slate-900/80 border-slate-800 text-slate-300 hover:bg-slate-850 font-normal'
+                        : 'bg-[#0B101D] border-slate-800 text-slate-300 hover:bg-slate-800/60 font-normal'
                     }`}
                   >
                     <div className="flex items-center gap-2 truncate">
@@ -306,14 +306,14 @@ const ChatPage = () => {
             </div>
 
             {activeSources.length === 0 ? (
-              <div className="p-3 bg-slate-900 rounded-lg border border-slate-800 text-xs text-slate-400 font-normal flex items-center gap-2">
+              <div className="p-3 bg-[#0B101D] rounded-lg border border-slate-800 text-xs text-slate-400 font-normal flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-slate-500 shrink-0" />
                 <span>Ask a question to inspect retrieved citations.</span>
               </div>
             ) : (
               <div className="space-y-2">
                 {activeSources.map((src, idx) => (
-                  <div key={idx} className="p-2.5 bg-slate-900 rounded-lg border border-slate-800 text-xs space-y-1">
+                  <div key={idx} className="p-2.5 bg-[#0B101D] rounded-lg border border-slate-800 text-xs space-y-1">
                     <div className="flex items-center justify-between font-medium text-white">
                       <span className="truncate max-w-[140px]">{src.documentName}</span>
                       <span className="text-[10px] bg-blue-950 text-blue-300 px-1.5 py-0.2 rounded font-mono border border-blue-800/60">
@@ -344,7 +344,7 @@ const ChatPage = () => {
                     key={idx}
                     onClick={() => handleSend(item.prompt)}
                     disabled={loading}
-                    className="w-full text-left p-2.5 bg-slate-900 hover:bg-slate-850 border border-slate-800 hover:border-slate-700 rounded-lg text-xs font-normal text-white transition-colors flex items-start gap-2.5 group disabled:opacity-50"
+                    className="w-full text-left p-2.5 bg-[#0B101D] hover:bg-slate-800/60 border border-slate-800 hover:border-slate-700 rounded-lg text-xs font-normal text-white transition-colors flex items-start gap-2.5 group disabled:opacity-50"
                   >
                     <Icon className="w-3.5 h-3.5 text-blue-400 mt-0.5 shrink-0" />
                     <div>

@@ -167,7 +167,7 @@ const ComparePage = () => {
                     className={`p-3.5 rounded-lg border cursor-pointer transition-colors flex items-start gap-3 ${
                       isSelected
                         ? 'bg-blue-950/40 border-blue-600'
-                        : 'bg-slate-900/80 border-slate-800 hover:border-slate-700'
+                        : 'bg-[#0B101D] border-slate-800 hover:border-slate-700'
                     }`}
                   >
                     <div className="mt-0.5 text-blue-400">
@@ -191,7 +191,7 @@ const ComparePage = () => {
         <div className="bg-[#111827] rounded-xl border border-slate-800 shadow-xs p-5 space-y-4">
           <div className="flex items-center justify-between border-b border-slate-800 pb-3">
             <h3 className="font-semibold text-sm text-white flex items-center gap-2">
-              <span className="w-5 h-5 rounded-full bg-indigo-600 text-white text-xs flex items-center justify-center font-bold">2</span>
+              <span className="w-5 h-5 rounded-full bg-blue-600 text-white text-xs flex items-center justify-center font-bold">2</span>
               <span>Target Analysis Categories</span>
             </h3>
             <span className="text-xs text-slate-400 font-normal">Specific clause categories to cross-analyze</span>
@@ -206,11 +206,11 @@ const ComparePage = () => {
                   onClick={() => toggleCategory(cat)}
                   className={`p-2.5 rounded-lg border cursor-pointer transition-colors flex items-center gap-2 text-xs font-medium ${
                     isChecked
-                      ? 'bg-indigo-950/40 border-indigo-600 text-indigo-300'
-                      : 'bg-slate-900/80 border-slate-800 text-slate-300 hover:bg-slate-850'
+                      ? 'bg-blue-950/50 border-blue-600 text-blue-300'
+                      : 'bg-[#0B101D] border-slate-800 text-slate-300 hover:bg-slate-800'
                   }`}
                 >
-                  {isChecked ? <CheckCircle2 className="w-4 h-4 text-indigo-400 shrink-0" /> : <Square className="w-4 h-4 text-slate-500 shrink-0" />}
+                  {isChecked ? <CheckCircle2 className="w-4 h-4 text-blue-400 shrink-0" /> : <Square className="w-4 h-4 text-slate-500 shrink-0" />}
                   <span>{cat}</span>
                 </div>
               );
@@ -233,7 +233,7 @@ const ComparePage = () => {
           <button
             onClick={handleStartAnalysis}
             disabled={analyzing || selectedDocIds.length < 2}
-            className="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs md:text-sm rounded-lg transition-colors shadow-xs flex items-center justify-center gap-2 disabled:opacity-50"
+            className="w-full py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-medium text-xs md:text-sm rounded-lg transition-colors shadow-xs flex items-center justify-center gap-2 disabled:opacity-50"
           >
             {analyzing ? (
               <>

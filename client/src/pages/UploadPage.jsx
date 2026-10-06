@@ -178,7 +178,7 @@ const UploadPage = () => {
 
             <div className="space-y-2">
               {selectedFiles.map((file, idx) => (
-                <div key={idx} className="flex items-center justify-between p-3 bg-slate-900/80 rounded-lg border border-slate-800 text-xs">
+                <div key={idx} className="flex items-center justify-between p-3 bg-[#0B101D] rounded-lg border border-slate-800 text-xs">
                   <div className="flex items-center gap-3 truncate">
                     <FileText className="w-4 h-4 text-blue-400 shrink-0" />
                     <div className="truncate">
@@ -216,7 +216,7 @@ const UploadPage = () => {
             <button
               onClick={handleUploadAll}
               disabled={uploading}
-              className="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs md:text-sm rounded-lg transition-colors shadow-xs flex items-center justify-center gap-2 disabled:opacity-50"
+              className="w-full py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-medium text-xs md:text-sm rounded-lg transition-colors shadow-xs flex items-center justify-center gap-2 disabled:opacity-50"
             >
               {uploading ? (
                 <>
@@ -246,7 +246,7 @@ const UploadPage = () => {
 
               <Link
                 to="/compare"
-                className="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs rounded-md transition-colors flex items-center gap-1.5 shadow-xs"
+                className="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-500 text-white font-medium text-xs rounded-md transition-colors flex items-center gap-1.5 shadow-xs"
               >
                 <span>Proceed to Contradiction Scan</span>
                 <ArrowRight className="w-3.5 h-3.5" />

@@ -97,7 +97,7 @@ const DashboardPage = () => {
 
             <Link
               to="/upload"
-              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs rounded-lg shadow-xs flex items-center gap-2 transition-colors"
+              className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-medium text-xs rounded-lg shadow-xs flex items-center gap-2 transition-colors"
             >
               <Plus className="w-4 h-4" />
               <span>Upload Contract</span>
@@ -126,7 +126,7 @@ const DashboardPage = () => {
           <div className="bg-[#111827] p-5 rounded-xl border border-slate-800 shadow-xs hover:border-slate-700 transition-colors">
             <div className="flex items-center justify-between">
               <span className="text-xs font-medium text-slate-400 uppercase tracking-wider">Extracted Clauses</span>
-              <div className="w-8 h-8 rounded-lg bg-indigo-950/60 text-indigo-400 border border-indigo-800/60 flex items-center justify-center">
+              <div className="w-8 h-8 rounded-lg bg-blue-950/60 text-blue-400 border border-blue-800/60 flex items-center justify-center">
                 <Brain className="w-4 h-4" />
               </div>
             </div>
@@ -165,7 +165,7 @@ const DashboardPage = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <Link
               to="/upload"
-              className="bg-[#111827] p-3.5 rounded-xl border border-slate-800 hover:border-blue-600/60 hover:bg-[#162032] transition-colors flex items-center gap-3 group shadow-xs"
+              className="bg-[#111827] p-3.5 rounded-xl border border-slate-800 hover:border-blue-600/60 hover:bg-slate-800/60 transition-colors flex items-center gap-3 group shadow-xs"
             >
               <div className="w-9 h-9 rounded-lg bg-blue-950 text-blue-400 flex items-center justify-center shrink-0 border border-blue-800/60">
                 <UploadCloud className="w-4 h-4" />
@@ -178,9 +178,9 @@ const DashboardPage = () => {
 
             <Link
               to="/compare"
-              className="bg-[#111827] p-3.5 rounded-xl border border-slate-800 hover:border-blue-600/60 hover:bg-[#162032] transition-colors flex items-center gap-3 group shadow-xs"
+              className="bg-[#111827] p-3.5 rounded-xl border border-slate-800 hover:border-blue-600/60 hover:bg-slate-800/60 transition-colors flex items-center gap-3 group shadow-xs"
             >
-              <div className="w-9 h-9 rounded-lg bg-indigo-950 text-indigo-400 flex items-center justify-center shrink-0 border border-indigo-800/60">
+              <div className="w-9 h-9 rounded-lg bg-blue-950 text-blue-400 flex items-center justify-center shrink-0 border border-blue-800/60">
                 <GitCompare className="w-4 h-4" />
               </div>
               <div className="truncate">
@@ -191,7 +191,7 @@ const DashboardPage = () => {
 
             <Link
               to="/chat"
-              className="bg-[#111827] p-3.5 rounded-xl border border-slate-800 hover:border-blue-600/60 hover:bg-[#162032] transition-colors flex items-center gap-3 group shadow-xs"
+              className="bg-[#111827] p-3.5 rounded-xl border border-slate-800 hover:border-blue-600/60 hover:bg-slate-800/60 transition-colors flex items-center gap-3 group shadow-xs"
             >
               <div className="w-9 h-9 rounded-lg bg-emerald-950 text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-800/60">
                 <MessageSquare className="w-4 h-4" />
@@ -204,9 +204,9 @@ const DashboardPage = () => {
 
             <Link
               to="/results"
-              className="bg-[#111827] p-3.5 rounded-xl border border-slate-800 hover:border-blue-600/60 hover:bg-[#162032] transition-colors flex items-center gap-3 group shadow-xs"
+              className="bg-[#111827] p-3.5 rounded-xl border border-slate-800 hover:border-blue-600/60 hover:bg-slate-800/60 transition-colors flex items-center gap-3 group shadow-xs"
             >
-              <div className="w-9 h-9 rounded-lg bg-purple-950 text-purple-400 flex items-center justify-center shrink-0 border border-purple-800/60">
+              <div className="w-9 h-9 rounded-lg bg-blue-950 text-blue-400 flex items-center justify-center shrink-0 border border-blue-800/60">
                 <BarChart3 className="w-4 h-4" />
               </div>
               <div className="truncate">
@@ -244,7 +244,7 @@ const DashboardPage = () => {
                 <div className="flex items-center justify-center gap-3 pt-2">
                   <Link
                     to="/upload"
-                    className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs rounded-lg transition-colors"
+                    className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-medium text-xs rounded-lg transition-colors"
                   >
                     Upload Contract
                   </Link>
@@ -272,7 +272,7 @@ const DashboardPage = () => {
                     {documents.slice(0, 5).map((doc) => {
                       const docId = doc._id || doc.id;
                       return (
-                        <tr key={docId} className="hover:bg-slate-900/60 transition-colors">
+                        <tr key={docId} className="hover:bg-slate-800/50 transition-colors">
                           <td className="py-3 px-3 font-medium text-white flex items-center gap-2">
                             <FileText className="w-4 h-4 text-blue-400 shrink-0" />
                             <span className="truncate max-w-[200px]">{doc.fileName}</span>

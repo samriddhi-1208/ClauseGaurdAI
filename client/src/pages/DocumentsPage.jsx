@@ -111,7 +111,7 @@ const DocumentsPage = () => {
             {selectedIds.length >= 2 && (
               <button
                 onClick={handleCompareSelected}
-                className="px-3.5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs rounded-lg shadow-xs flex items-center gap-2 transition-colors"
+                className="px-3.5 py-2 bg-blue-600 hover:bg-blue-500 text-white font-medium text-xs rounded-lg shadow-xs flex items-center gap-2 transition-colors"
               >
                 <GitCompare className="w-4 h-4" />
                 <span>Compare Selected ({selectedIds.length})</span>
@@ -129,7 +129,7 @@ const DocumentsPage = () => {
 
             <Link
               to="/upload"
-              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs rounded-lg shadow-xs flex items-center gap-2 transition-colors"
+              className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-medium text-xs rounded-lg shadow-xs flex items-center gap-2 transition-colors"
             >
               <Plus className="w-4 h-4" />
               <span>Upload Contract</span>
@@ -146,7 +146,7 @@ const DocumentsPage = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search contracts by file name..."
-              className="w-full pl-10 pr-4 py-2 bg-slate-900/90 border border-slate-700/80 rounded-lg text-xs text-white placeholder-slate-500 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+              className="w-full pl-10 pr-4 py-2 bg-[#0B101D] border border-slate-800 rounded-lg text-xs text-white placeholder-slate-500 font-medium focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
             />
           </div>
 
@@ -157,7 +157,7 @@ const DocumentsPage = () => {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="bg-slate-900 border border-slate-700/80 rounded-md px-2.5 py-1 text-xs font-medium text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+                className="bg-[#0B101D] border border-slate-800 rounded-md px-2.5 py-1 text-xs font-medium text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
               >
                 <option value="newest">Newest First</option>
                 <option value="clauses">Most Clauses</option>
@@ -222,7 +222,7 @@ const DocumentsPage = () => {
                     return (
                       <tr
                         key={docId}
-                        className={`transition-colors ${isSelected ? 'bg-blue-950/30' : 'hover:bg-slate-900/60'}`}
+                        className={`transition-colors ${isSelected ? 'bg-blue-950/30' : 'hover:bg-slate-800/50'}`}
                       >
                         <td className="py-3.5 px-4">
                           <button

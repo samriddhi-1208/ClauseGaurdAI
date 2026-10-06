@@ -138,7 +138,7 @@ const ResultsPage = () => {
 
             <Link
               to="/compare"
-              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs rounded-lg shadow-xs flex items-center gap-2 transition-colors"
+              className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-medium text-xs rounded-lg shadow-xs flex items-center gap-2 transition-colors"
             >
               <span>Run Comparison Scan</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -298,7 +298,7 @@ const ResultsPage = () => {
                                   Page {item.clauseA?.pageNumber || 1}
                                 </span>
                               </div>
-                              <div className="p-3 bg-slate-950/80 rounded border border-slate-800 text-xs text-slate-200 font-mono leading-relaxed">
+                              <div className="p-3 bg-[#090D16] rounded border border-slate-800 text-xs text-slate-200 font-mono leading-relaxed">
                                 "{item.clauseA?.content}"
                               </div>
                             </div>
@@ -314,7 +314,7 @@ const ResultsPage = () => {
                                   Page {item.clauseB?.pageNumber || 1}
                                 </span>
                               </div>
-                              <div className="p-3 bg-slate-950/80 rounded border border-slate-800 text-xs text-slate-200 font-mono leading-relaxed">
+                              <div className="p-3 bg-[#090D16] rounded border border-slate-800 text-xs text-slate-200 font-mono leading-relaxed">
                                 "{item.clauseB?.content}"
                               </div>
                             </div>

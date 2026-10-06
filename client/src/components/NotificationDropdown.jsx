@@ -53,7 +53,7 @@ const NotificationDropdown = ({ isOpen, onClose }) => {
           </div>
         ) : (
           notifications.map((n) => (
-            <div key={n.id} className="p-3.5 hover:bg-slate-900/60 transition-colors flex items-start justify-between gap-3 group">
+            <div key={n.id} className="p-3.5 hover:bg-slate-800/50 transition-colors flex items-start justify-between gap-3 group">
               <div className="flex items-start gap-2.5">
                 {n.type === 'risk' && <ShieldAlert className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />}
                 {n.type === 'success' && <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />}

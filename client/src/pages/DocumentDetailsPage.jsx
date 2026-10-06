@@ -126,7 +126,7 @@ const DocumentDetailsPage = () => {
 
             <Link
               to="/compare"
-              className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs rounded-lg shadow-xs flex items-center justify-center gap-2 transition-colors"
+              className="w-full py-2 bg-blue-600 hover:bg-blue-500 text-white font-medium text-xs rounded-lg shadow-xs flex items-center justify-center gap-2 transition-colors"
             >
               <GitCompare className="w-4 h-4" />
               <span>Compare with Another Contract</span>
@@ -153,7 +153,7 @@ const DocumentDetailsPage = () => {
                       className={`px-2.5 py-1 rounded-md text-xs font-medium transition-colors ${
                         selectedCategory === cat
                           ? 'bg-blue-600 text-white shadow-xs'
-                          : 'bg-slate-900 border border-slate-800 text-slate-300 hover:bg-slate-800'
+                          : 'bg-[#0B101D] border border-slate-800 text-slate-300 hover:bg-slate-800'
                       }`}
                     >
                       {cat.replace('_', ' ')} ({count})
@@ -193,7 +193,7 @@ const DocumentDetailsPage = () => {
                         </div>
                       </div>
 
-                      <p className="text-xs font-normal text-slate-200 bg-slate-900/80 p-3.5 rounded-lg border border-slate-800/80 leading-relaxed font-mono">
+                      <p className="text-xs font-normal text-slate-200 bg-[#0B101D] p-3.5 rounded-lg border border-slate-800 leading-relaxed font-mono">
                         "{clause.content}"
                       </p>
                     </div>

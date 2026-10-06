@@ -10,16 +10,16 @@
   }
 }
 
-/* Custom Scrollbar Styling for Dark Theme */
+/* Custom Scrollbar Styling for ClauseGuard Dark Theme */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #090d16;
+  background: #090D16;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #1E293B;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {

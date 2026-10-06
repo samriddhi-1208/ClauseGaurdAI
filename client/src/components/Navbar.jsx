@@ -41,11 +41,11 @@ const Navbar = ({ title, subtitle }) => {
           <button
             onClick={() => setIsSearchOpen(true)}
             aria-label="Search contracts and findings"
-            className="flex items-center gap-2 px-3 py-1.5 bg-slate-900/90 hover:bg-slate-800 border border-slate-700/70 rounded-lg text-xs font-medium text-slate-300 hover:text-white transition-colors group"
+            className="flex items-center gap-2 px-3 py-1.5 bg-[#111827] hover:bg-slate-800 border border-slate-800 rounded-lg text-xs font-medium text-slate-300 hover:text-white transition-colors group"
           >
             <Search className="w-3.5 h-3.5 text-blue-400 shrink-0" />
             <span className="hidden sm:inline">Search contracts...</span>
-            <kbd className="hidden sm:inline px-1.5 py-0.5 bg-slate-950 border border-slate-700/80 rounded text-[10px] font-mono text-slate-400">
+            <kbd className="hidden sm:inline px-1.5 py-0.5 bg-[#0B101D] border border-slate-800 rounded text-[10px] font-mono text-slate-400">
               Ctrl K
             </kbd>
           </button>
@@ -65,7 +65,7 @@ const Navbar = ({ title, subtitle }) => {
               className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors relative"
             >
               <Bell className="w-4 h-4" />
-              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 rounded-full"></span>
+              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-600 rounded-full"></span>
             </button>
 
             <NotificationDropdown isOpen={isNotifOpen} onClose={() => setIsNotifOpen(false)} />

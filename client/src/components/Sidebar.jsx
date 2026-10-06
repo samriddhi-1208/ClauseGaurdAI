@@ -52,11 +52,11 @@ const Sidebar = () => {
   };
 
   return (
-    <aside className="w-64 bg-[#080D18] text-slate-200 min-h-screen flex flex-col justify-between border-r border-slate-800 shrink-0 sticky top-0 h-screen select-none font-sans z-40">
+    <aside className="w-64 bg-[#0B101D] text-slate-200 min-h-screen flex flex-col justify-between border-r border-slate-800 shrink-0 sticky top-0 h-screen select-none font-sans z-40">
       <div>
         {/* Brand Header */}
         <div className="px-5 py-4 flex items-center gap-3 border-b border-slate-800">
-          <div className="w-9 h-9 rounded-lg bg-blue-600 flex items-center justify-center text-white shadow-sm shrink-0">
+          <div className="w-9 h-9 rounded-lg bg-blue-600 flex items-center justify-center text-white shadow-xs shrink-0">
             <Scale className="w-5 h-5" />
           </div>
           <div>
@@ -111,7 +111,7 @@ const Sidebar = () => {
       </div>
 
       {/* Bottom User Profile Section */}
-      <div className="p-3.5 border-t border-slate-800 bg-[#060910]">
+      <div className="p-3.5 border-t border-slate-800 bg-[#090D16]">
         <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-2.5 truncate">
             <div className="w-8 h-8 rounded-full bg-blue-700 text-white flex items-center justify-center text-xs font-semibold shrink-0 border border-blue-500/40">
