@@ -94,10 +94,10 @@ sequenceDiagram
     %% Cross-Document Analysis
     Note over User,Gemini: 2. Cross-Document Contradiction Analysis
     User->>Client: Trigger Analysis for Selected Documents
-    Client->>Server: POST /api/analysis/start { documentIds }
+    Client->>Server: POST /api/analysis/compare { documentIds }
     Server->>Server: Verify document ownership (IDOR check)
     Server->>DB: Fetch all clauses for target documents
-    Server->>AI: POST /analyze-contradictions { clauses, documentIds }
+    Server->>AI: POST /compare-documents { clauses, documentIds }
     AI->>AI: Group clauses by category & pair across distinct documents
     alt Gemini Available
         AI->>Gemini: Semantic contradiction analysis prompt
@@ -112,9 +112,9 @@ sequenceDiagram
     %% Grounded QA Chat
     Note over User,Gemini: 3. Grounded Contract QA (RAG)
     User->>Client: Ask question: "What is the liability cap under the MSA?"
-    Client->>Server: POST /api/chat/ask { documentId, question }
-    Server->>AI: POST /query-rag { userId, documentId, query }
-    AI->>Chroma: Vector similarity search (top_k = 4, where: {userId, documentId})
+    Client->>Server: POST /api/chat { documentIds, question }
+    Server->>AI: POST /rag-chat { userId, question, documentIds }
+    AI->>Chroma: Vector similarity search (top_k = 4, where: {userId, documentIds})
     Chroma-->>AI: Top 4 relevant text chunks + metadata
     AI->>Gemini: Grounded QA prompt with chunk context & citations requirement
     Gemini-->>AI: Grounded answer + citation objects

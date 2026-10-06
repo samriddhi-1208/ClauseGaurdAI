@@ -131,7 +131,7 @@ Deletes a document and its associated clauses and vector indexes.
 
 ### 1.3 Contradiction Analysis Endpoints
 
-#### `POST /analysis/start`
+#### `POST /analysis/compare`
 Triggers cross-document contradiction detection across 2 or more contracts.
 - **Access**: Private (Bearer JWT)
 - **Request Body**:
@@ -182,13 +182,13 @@ Retrieves a specific analysis run with its complete findings.
 
 ### 1.4 Grounded QA Chat Endpoint
 
-#### `POST /chat/ask`
+#### `POST /chat`
 Queries a contract using grounded retrieval-augmented generation.
 - **Access**: Private (Bearer JWT)
 - **Request Body**:
   ```json
   {
-    "documentId": "660c2df8b1a3...",
+    "documentIds": ["660c2df8b1a3..."],
     "question": "What is the penalty for late payment?"
   }
   ```

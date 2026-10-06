@@ -79,6 +79,8 @@ def clean_text(text: str) -> str:
     """Clean excess whitespace and formatting artifacts while preserving meaningful content."""
     if not text:
         return ""
+    # Strip non-printable control characters except whitespace (\n, \r, \t)
+    text = re.sub(r'[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]', '', text)
     # Normalize line breaks and multiple spaces
     text = re.sub(r'\r\n', '\n', text)
     text = re.sub(r'[ \t]+', ' ', text)

@@ -128,13 +128,4 @@ def extract_clauses_fallback(pages: List[Dict[str, Any]]) -> List[Dict[str, Any]
                     "confidence": 0.85
                 })
                 
-    if not clauses:
-        # Generic fallback clause if no keywords matched
-        clauses.append({
-            "category": "OTHER",
-            "content": "General contract terms and conditions.",
-            "pageNumber": 1,
-            "confidence": 0.70
-        })
-        
     return clauses
