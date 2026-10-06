@@ -22,6 +22,7 @@ Detailed architectural and engineering documentation is available in the [`docs/
 | [Technology Stack](docs/TECH_STACK.md) | Matrix of all technologies, libraries, and frameworks with 1-sentence architectural rationales. |
 | [Requirements & Traceability](docs/REQUIREMENTS.md) | Functional MVP vs supporting features, non-functional criteria, and codebase traceability matrix. |
 | [Production Deployment](docs/DEPLOYMENT.md) | Architecture, deployment order, environment variables, persistent volumes, health checks, and troubleshooting. |
+| [Interview & Defense Prep](docs/INTERVIEW_PREPARATION.md) | 52 comprehensive viva/interview questions, 2-3 minute presentation script, demo flow, and roadmap. |
 
 ---
 
