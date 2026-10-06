@@ -54,16 +54,28 @@ class LocalVectorStore:
 # Global vector store instance
 vector_db = LocalVectorStore()
 
+from pathlib import Path
+
+# Deterministic persistent storage directory
+CHROMA_DATA_DIR = Path(__file__).resolve().parent.parent / "chroma_db"
+
 try:
     import chromadb
     from chromadb.config import Settings
     
+    # Ensure persistent storage directory exists
+    CHROMA_DATA_DIR.mkdir(parents=True, exist_ok=True)
+    
     # Initialize persistent ChromaDB client
-    chroma_client = chromadb.Client(Settings(anonymized_telemetry=False, is_persistent=False))
+    chroma_client = chromadb.PersistentClient(
+        path=str(CHROMA_DATA_DIR),
+        settings=Settings(anonymized_telemetry=False)
+    )
     collection = chroma_client.get_or_create_collection(name="clauseguard_contracts")
     HAS_CHROMADB = True
+    print(f"[ChromaDB Initialization] Persistent vector store active at: {CHROMA_DATA_DIR}")
 except Exception as e:
-    print(f"[ChromaDB Info] ChromaDB native init bypassed ({e}), using LocalVectorStore engine.")
+    print(f"[ChromaDB Error] ChromaDB persistent client failed to initialize ({e}). Falling back to LocalVectorStore engine.")
     HAS_CHROMADB = False
 
 def index_document_chunks(userId: str, documentId: str, documentName: str, chunks: List[Dict[str, Any]]):
