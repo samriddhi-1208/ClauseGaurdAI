@@ -41,7 +41,7 @@ const UploadPage = () => {
 
   const handleUploadAll = async () => {
     if (selectedFiles.length === 0) {
-      setError('Please select at least one PDF or TXT legal document.');
+      setError('Please select at least one PDF, DOCX, or TXT legal document.');
       return;
     }
 
@@ -132,7 +132,7 @@ const UploadPage = () => {
             ref={fileInputRef}
             onChange={handleFileChange}
             multiple
-            accept=".pdf,.txt"
+            accept=".pdf,.docx,.txt"
             className="hidden"
           />
 
@@ -148,6 +148,9 @@ const UploadPage = () => {
           <div className="flex items-center justify-center gap-2 mt-5">
             <span className="px-3 py-1 bg-[#0D1322] text-slate-300 rounded-full text-[11px] font-extrabold border border-slate-800">
               PDF
+            </span>
+            <span className="px-3 py-1 bg-[#0D1322] text-slate-300 rounded-full text-[11px] font-extrabold border border-slate-800">
+              DOCX
             </span>
             <span className="px-3 py-1 bg-[#0D1322] text-slate-300 rounded-full text-[11px] font-extrabold border border-slate-800">
               TXT

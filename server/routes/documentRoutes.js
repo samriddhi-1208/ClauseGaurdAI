@@ -26,17 +26,38 @@ const upload = multer({
   limits: { fileSize: 25 * 1024 * 1024 }, // 25MB limit
   fileFilter: (req, file, cb) => {
     const ext = path.extname(file.originalname).toLowerCase();
-    if (ext === '.pdf' || ext === '.txt') {
+    const validExtensions = ['.pdf', '.docx', '.txt'];
+    const validMimes = [
+      'application/pdf',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      'application/msword',
+      'text/plain',
+      'application/octet-stream'
+    ];
+
+    if (validExtensions.includes(ext) && (!file.mimetype || validMimes.includes(file.mimetype))) {
       cb(null, true);
     } else {
-      cb(new Error('Only PDF and TXT legal documents are supported.'));
+      cb(new Error('Only PDF, DOCX, and TXT legal documents are supported.'));
     }
   }
 });
 
+const handleUpload = (req, res, next) => {
+  upload.single('file')(req, res, (err) => {
+    if (err) {
+      if (err.code === 'LIMIT_FILE_SIZE') {
+        return res.status(400).json({ success: false, message: 'File exceeds maximum upload limit of 25MB.' });
+      }
+      return res.status(400).json({ success: false, message: err.message || 'File upload error.' });
+    }
+    next();
+  });
+};
+
 router.use(authMiddleware);
 
-router.post('/upload', upload.single('file'), documentController.uploadDocument);
+router.post('/upload', handleUpload, documentController.uploadDocument);
 router.get('/', documentController.getDocuments);
 router.get('/:id', documentController.getDocumentById);
 router.get('/:id/clauses', documentController.getDocumentClauses);
