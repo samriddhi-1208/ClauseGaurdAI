@@ -2,9 +2,24 @@ import os
 import uvicorn
 from fastapi import FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
+from pathlib import Path
 from dotenv import load_dotenv
 
-load_dotenv()
+# Ensure ai-service .env is loaded regardless of current working directory
+env_path = Path(__file__).resolve().parent / ".env"
+if env_path.exists():
+    load_dotenv(dotenv_path=env_path)
+else:
+    load_dotenv()
+
+# Startup Diagnostic Check (never prints the actual key)
+gemini_key = os.getenv("GEMINI_API_KEY", "")
+is_gemini_configured = bool(gemini_key and gemini_key.strip() and gemini_key != "your_gemini_api_key_here")
+
+if is_gemini_configured:
+    print("[AI Service Startup] Gemini API key: configured")
+else:
+    print("[AI Service Startup] Gemini API key: not configured — heuristic fallback enabled")
 
 from models.schemas import (
     ProcessDocumentRequest, ProcessDocumentResponse, ExtractedClause,
@@ -33,7 +48,14 @@ app.add_middleware(
 
 @app.get("/health")
 def health_check():
-    return {"status": "ok", "service": "ClauseGuard Python AI Service", "port": int(os.getenv("AI_PORT", 8000))}
+    key = os.getenv("GEMINI_API_KEY", "")
+    configured = bool(key and key.strip() and key != "your_gemini_api_key_here")
+    return {
+        "status": "ok",
+        "service": "ClauseGuard Python AI Service",
+        "port": int(os.getenv("AI_PORT", 8000)),
+        "gemini_status": "configured" if configured else "heuristic_fallback"
+    }
 
 @app.post("/process-document", response_model=ProcessDocumentResponse)
 def process_document(req: ProcessDocumentRequest):
