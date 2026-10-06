@@ -17,12 +17,22 @@ exports.compareDocuments = async (req, res) => {
     let clauses = [];
     let docs = [];
 
+const mongoose = require('mongoose');
+
     if (global.isMongoConnected) {
-      clauses = await Clause.find({ documentId: { $in: documentIds }, userId });
-      docs = await Document.find({ _id: { $in: documentIds }, userId });
+      const validDocIds = documentIds.filter(id => typeof id === 'string' && mongoose.Types.ObjectId.isValid(id));
+      if (validDocIds.length < 2) {
+        return res.status(403).json({ success: false, message: 'Unauthorized: At least two of the selected documents must belong to your account.' });
+      }
+      clauses = await Clause.find({ documentId: { $in: validDocIds }, userId });
+      docs = await Document.find({ _id: { $in: validDocIds }, userId });
     } else {
       clauses = db.clauses.filter(c => documentIds.includes(c.documentId) && c.userId === userId);
       docs = db.documents.filter(d => documentIds.includes(d._id || d.id) && d.userId === userId);
+    }
+
+    if (docs.length < 2) {
+      return res.status(403).json({ success: false, message: 'Unauthorized: At least two of the selected documents must belong to your account.' });
     }
 
     if (clauses.length === 0) {
@@ -117,6 +127,9 @@ exports.compareDocuments = async (req, res) => {
       findings: savedFindings
     });
   } catch (error) {
+    if (error.name === 'CastError') {
+      return res.status(400).json({ success: false, message: 'Invalid document ID format provided.' });
+    }
     console.error('[Compare Documents Error]', error.message || error);
     const statusCode = error.statusCode || 500;
     return res.status(statusCode).json({
@@ -162,6 +175,10 @@ exports.getAnalysisById = async (req, res) => {
       return res.json({ success: true, analysis, findings });
     }
   } catch (error) {
+    if (error.name === 'CastError') {
+      return res.status(404).json({ success: false, message: 'Analysis not found or unauthorized.' });
+    }
     return res.status(500).json({ success: false, message: 'Failed to fetch analysis details.' });
   }
 };
+

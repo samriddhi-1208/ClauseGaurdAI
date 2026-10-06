@@ -1,3 +1,5 @@
+const Document = require('../models/Document');
+const { db } = require('../storage/store');
 const { askRagChatWithAI } = require('../services/aiService');
 
 exports.askChat = async (req, res) => {
@@ -9,7 +11,22 @@ exports.askChat = async (req, res) => {
       return res.status(400).json({ success: false, message: 'Question cannot be empty.' });
     }
 
-    const response = await askRagChatWithAI(userId, question.trim(), documentIds);
+    let scopedDocIds = undefined;
+    if (documentIds && Array.isArray(documentIds) && documentIds.length > 0) {
+      if (global.isMongoConnected) {
+        const userDocs = await Document.find({ _id: { $in: documentIds }, userId }).select('_id');
+        scopedDocIds = userDocs.map(d => d._id.toString());
+      } else {
+        const userDocs = db.documents.filter(d => documentIds.includes(d._id || d.id) && d.userId === userId);
+        scopedDocIds = userDocs.map(d => (d._id || d.id).toString());
+      }
+
+      if (scopedDocIds.length === 0) {
+        return res.status(403).json({ success: false, message: 'Unauthorized: None of the specified documents belong to your account.' });
+      }
+    }
+
+    const response = await askRagChatWithAI(userId, question.trim(), scopedDocIds);
 
     return res.json({
       success: true,

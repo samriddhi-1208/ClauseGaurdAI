@@ -17,7 +17,11 @@ const storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, uniqueSuffix + '-' + file.originalname);
+    // Sanitize filename: strip path characters, control characters, null bytes, and non-alphanumeric chars
+    const baseName = path.basename(file.originalname).replace(/[\0\x00-\x1f\x7f-\x9f]/g, '');
+    const sanitizedBase = baseName.replace(/[^a-zA-Z0-9._-]/g, '_');
+    const safeName = sanitizedBase.length > 0 ? sanitizedBase : 'document';
+    cb(null, `${uniqueSuffix}-${safeName}`);
   }
 });
 
@@ -25,7 +29,19 @@ const upload = multer({
   storage: storage,
   limits: { fileSize: 25 * 1024 * 1024 }, // 25MB limit
   fileFilter: (req, file, cb) => {
+    // Null byte / path traversal check
+    if (!file.originalname || file.originalname.includes('\0') || file.originalname.includes('..')) {
+      return cb(new Error('Invalid filename: Path traversal and null bytes are strictly prohibited.'));
+    }
+
     const ext = path.extname(file.originalname).toLowerCase();
+    
+    // Explicit blacklist for dangerous executable and macro-enabled files
+    const dangerousExtensions = ['.docm', '.exe', '.bat', '.cmd', '.sh', '.py', '.js', '.vbs', '.scr', '.ps1', '.msi'];
+    if (dangerousExtensions.includes(ext)) {
+      return cb(new Error(`Security violation: '${ext}' files are prohibited.`));
+    }
+
     const validExtensions = ['.pdf', '.docx', '.txt'];
     const validMimes = [
       'application/pdf',

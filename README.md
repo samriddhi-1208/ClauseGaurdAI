@@ -132,5 +132,13 @@ npm run dev
 
 ---
 
-## 🔒 Security & Privacy Notice
-ClauseGuard AI enforces strict user document isolation. All vector queries in ChromaDB and document references in MongoDB are filtered by authenticated User ID. ClauseGuard AI never issues definitive legal verdicts ("invalid contract"), always framing findings as *Potential Contradictions* or *Potential Inconsistencies* requiring professional review.
+## 🔒 Security & Privacy Architecture
+ClauseGuard AI implements multi-layered security hardening across both the Node.js backend and the Python AI microservice:
+- **HTTP Security Headers**: Enforced via `helmet` with custom resource policies.
+- **Strict CORS Protection**: Whitelist-based origin filtering via `ALLOWED_ORIGINS` (server) and `AI_ALLOWED_ORIGINS` (FastAPI).
+- **Brute Force Protection**: IP-based rate limiting via `express-rate-limit` on `/api/auth/login` and `/api/auth/register` (max 10 requests per 15-minute window), plus global API rate limiting.
+- **Tenant Isolation & IDOR Prevention**: Every query for documents, clauses, cross-document analyses, and RAG retrieval strictly validates document and clause ownership against the authenticated JWT `userId`.
+- **Upload Hardening**: Path traversal prevention (`..`), null byte stripping, filename sanitization, strict extension whitelist (`.pdf`, `.docx`, `.txt`), explicit rejection of macro-enabled/executable formats (`.docm`, `.exe`, etc.), and 25MB file size ceilings.
+- **Secret Redaction**: Environment secrets are isolated, diagnostic health checks never leak API keys, and production error responses sanitize stack traces and database connection strings.
+- **Ethical AI Framing**: ClauseGuard AI never issues definitive legal verdicts ("invalid contract"), strictly framing findings as *Potential Contradictions* or *Potential Inconsistencies* requiring human legal review.
+

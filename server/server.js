@@ -11,30 +11,55 @@ const analysisRoutes = require('./routes/analysisRoutes');
 const chatRoutes = require('./routes/chatRoutes');
 const demoRoutes = require('./routes/demoRoutes');
 
+const helmet = require('helmet');
+const { apiLimiter } = require('./middleware/rateLimiter');
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Connect Database
 connectDB();
 
-// Middleware
-app.use(cors());
+// Security Headers with Helmet
+app.use(helmet({
+  crossOriginResourcePolicy: { policy: "cross-origin" }
+}));
+
+// CORS Configuration
+const allowedOrigins = (process.env.ALLOWED_ORIGINS || 'http://localhost:5173,http://127.0.0.1:5173')
+  .split(',')
+  .map(o => o.trim())
+  .filter(Boolean);
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin) || allowedOrigins.includes('*')) {
+      return callback(null, true);
+    }
+    return callback(new Error('CORS blocked: Request origin not allowed'));
+  },
+  credentials: true
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Serve Uploads Static Directory
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Health Check Endpoint
+// Health Check Endpoint (not rate-limited)
 app.get('/api/health', (req, res) => {
   res.json({
     status: 'ok',
     service: 'ClauseGuard AI Express Server',
-    mongoConnected: global.isMongoConnected,
+    mongoConnected: Boolean(global.isMongoConnected),
     port: PORT,
-    timestamp: new Date()
+    timestamp: new Date().toISOString()
   });
 });
+
+// General API Rate Limiting for all other /api routes
+app.use('/api', apiLimiter);
 
 // API Routes
 app.use('/api/auth', authRoutes);
@@ -43,12 +68,17 @@ app.use('/api/analysis', analysisRoutes);
 app.use('/api/chat', chatRoutes);
 app.use('/api/demo', demoRoutes);
 
-// Global Error Handler
+// Global Error Handler (Sanitizes stack traces and internal secrets)
 app.use((err, req, res, next) => {
-  console.error('[Unhandled Express Error]', err);
-  res.status(err.status || 500).json({
+  console.error('[Unhandled Express Error]', err.message || err);
+  const status = err.status || (err.message && err.message.startsWith('CORS') ? 403 : 500);
+  const message = (process.env.NODE_ENV === 'production' && status === 500)
+    ? 'Internal Server Error'
+    : (err.message || 'Internal Server Error');
+
+  res.status(status).json({
     success: false,
-    message: err.message || 'Internal Server Error'
+    message
   });
 });
 

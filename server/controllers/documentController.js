@@ -131,6 +131,9 @@ exports.getDocumentById = async (req, res) => {
       return res.json({ success: true, document, clauses });
     }
   } catch (error) {
+    if (error.name === 'CastError') {
+      return res.status(404).json({ success: false, message: 'Document not found or unauthorized.' });
+    }
     return res.status(500).json({ success: false, message: 'Failed to fetch document details.' });
   }
 };
@@ -141,13 +144,24 @@ exports.getDocumentClauses = async (req, res) => {
     const { id } = req.params;
 
     if (global.isMongoConnected) {
+      const doc = await Document.findOne({ _id: id, userId });
+      if (!doc) {
+        return res.status(404).json({ success: false, message: 'Document not found or unauthorized.' });
+      }
       const clauses = await Clause.find({ documentId: id, userId });
       return res.json({ success: true, clauses });
     } else {
+      const doc = db.documents.find(d => (d._id === id || d.id === id) && d.userId === userId);
+      if (!doc) {
+        return res.status(404).json({ success: false, message: 'Document not found or unauthorized.' });
+      }
       const clauses = db.clauses.filter(c => c.documentId === id && c.userId === userId);
       return res.json({ success: true, clauses });
     }
   } catch (error) {
+    if (error.name === 'CastError') {
+      return res.status(404).json({ success: false, message: 'Document not found or unauthorized.' });
+    }
     return res.status(500).json({ success: false, message: 'Failed to fetch clauses.' });
   }
 };
@@ -160,7 +174,7 @@ exports.deleteDocument = async (req, res) => {
     if (global.isMongoConnected) {
       const doc = await Document.findOneAndDelete({ _id: id, userId });
       if (!doc) {
-        return res.status(404).json({ success: false, message: 'Document not found.' });
+        return res.status(404).json({ success: false, message: 'Document not found or unauthorized.' });
       }
       await Clause.deleteMany({ documentId: id, userId });
 
@@ -171,11 +185,11 @@ exports.deleteDocument = async (req, res) => {
     } else {
       const docIndex = db.documents.findIndex(d => (d._id === id || d.id === id) && d.userId === userId);
       if (docIndex === -1) {
-        return res.status(404).json({ success: false, message: 'Document not found.' });
+        return res.status(404).json({ success: false, message: 'Document not found or unauthorized.' });
       }
       const doc = db.documents[docIndex];
       db.documents.splice(docIndex, 1);
-      db.clauses = db.clauses.filter(c => c.documentId !== id);
+      db.clauses = db.clauses.filter(c => !(c.documentId === id && c.userId === userId));
       saveData();
 
       if (doc.filePath && fs.existsSync(doc.filePath)) {
@@ -188,6 +202,10 @@ exports.deleteDocument = async (req, res) => {
 
     return res.json({ success: true, message: 'Document and associated clauses deleted successfully.' });
   } catch (error) {
+    if (error.name === 'CastError') {
+      return res.status(404).json({ success: false, message: 'Document not found or unauthorized.' });
+    }
     return res.status(500).json({ success: false, message: 'Failed to delete document.' });
   }
 };
+
