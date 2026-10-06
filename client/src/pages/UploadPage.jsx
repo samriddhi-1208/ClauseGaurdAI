@@ -97,25 +97,25 @@ const UploadPage = () => {
       <main className="p-6 md:p-8 max-w-4xl w-full mx-auto space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-xl md:text-2xl font-extrabold text-white tracking-tight">Upload Contracts</h1>
-            <p className="text-xs text-slate-400 font-semibold mt-0.5">
-              Upload multiple agreements to perform cross-document contradiction detection
+            <h1 className="text-xl md:text-2xl font-bold text-white tracking-tight">Upload Contracts</h1>
+            <p className="text-xs text-slate-400 font-normal mt-0.5">
+              Upload agreements to extract clauses and perform cross-document contradiction detection
             </p>
           </div>
 
           <button
             onClick={handleRunDemo}
             disabled={seeding}
-            className="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-xs rounded-xl shadow-xs flex items-center gap-2 transition-all disabled:opacity-50 shrink-0"
+            className="px-3.5 py-2 bg-amber-950/40 hover:bg-amber-900/40 text-amber-300 border border-amber-800/60 font-medium text-xs rounded-lg shadow-xs flex items-center gap-2 transition-colors disabled:opacity-50 shrink-0"
           >
-            <Zap className="w-4 h-4 fill-slate-950" />
-            <span>{seeding ? 'Loading...' : '⚡ Load Demo Contracts'}</span>
+            <Zap className="w-3.5 h-3.5 text-amber-400" />
+            <span>{seeding ? 'Loading...' : 'Instant Demo Mode'}</span>
           </button>
         </div>
 
         {error && (
-          <div className="p-3.5 bg-red-950/60 border border-red-800 rounded-xl flex items-center gap-2.5 text-xs font-bold text-red-300">
-            <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
+          <div className="p-3.5 bg-rose-950/50 border border-rose-800/60 rounded-xl flex items-center gap-2.5 text-xs font-medium text-rose-300">
+            <AlertCircle className="w-4 h-4 text-rose-400 shrink-0" />
             <span>{error}</span>
           </div>
         )}
@@ -125,7 +125,7 @@ const UploadPage = () => {
           onDrop={handleDrop}
           onDragOver={handleDragOver}
           onClick={() => fileInputRef.current?.click()}
-          className="border-2 border-dashed border-slate-700 hover:border-blue-500 bg-[#131C31] p-10 md:p-12 rounded-2xl text-center cursor-pointer transition-all shadow-sm group"
+          className="border-2 border-dashed border-slate-700/80 hover:border-blue-500 bg-[#111827] p-10 md:p-12 rounded-xl text-center cursor-pointer transition-colors shadow-xs group"
         >
           <input
             type="file"
@@ -136,26 +136,26 @@ const UploadPage = () => {
             className="hidden"
           />
 
-          <div className="w-14 h-14 rounded-2xl bg-blue-950 text-blue-400 border border-blue-800/60 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
-            <UploadCloud className="w-7 h-7" />
+          <div className="w-12 h-12 rounded-xl bg-blue-950 text-blue-400 border border-blue-800/60 flex items-center justify-center mx-auto mb-3 group-hover:scale-105 transition-transform">
+            <UploadCloud className="w-6 h-6" />
           </div>
 
-          <h3 className="font-extrabold text-base text-white tracking-tight">Upload Legal Documents</h3>
-          <p className="text-xs text-slate-400 font-medium mt-1 max-w-md mx-auto">
-            Upload contracts, agreements, NDAs, or policies for AI-powered clause extraction and contradiction matrix matching.
+          <h3 className="font-semibold text-base text-white tracking-tight">Upload Legal Agreements</h3>
+          <p className="text-xs text-slate-400 font-normal mt-1 max-w-md mx-auto">
+            Drag and drop contracts here, or click to browse files on your computer.
           </p>
 
           <div className="flex items-center justify-center gap-2 mt-5">
-            <span className="px-3 py-1 bg-[#0D1322] text-slate-300 rounded-full text-[11px] font-extrabold border border-slate-800">
+            <span className="px-2.5 py-1 bg-slate-900 text-slate-300 rounded text-xs font-medium border border-slate-800">
               PDF
             </span>
-            <span className="px-3 py-1 bg-[#0D1322] text-slate-300 rounded-full text-[11px] font-extrabold border border-slate-800">
+            <span className="px-2.5 py-1 bg-slate-900 text-slate-300 rounded text-xs font-medium border border-slate-800">
               DOCX
             </span>
-            <span className="px-3 py-1 bg-[#0D1322] text-slate-300 rounded-full text-[11px] font-extrabold border border-slate-800">
+            <span className="px-2.5 py-1 bg-slate-900 text-slate-300 rounded text-xs font-medium border border-slate-800">
               TXT
             </span>
-            <span className="px-3 py-1 bg-[#0D1322] text-slate-300 rounded-full text-[11px] font-extrabold border border-slate-800">
+            <span className="px-2.5 py-1 bg-slate-900 text-slate-400 rounded text-xs font-normal border border-slate-800">
               Max 25MB per file
             </span>
           </div>
@@ -163,14 +163,14 @@ const UploadPage = () => {
 
         {/* Upload Queue */}
         {selectedFiles.length > 0 && (
-          <div className="bg-[#131C31] p-5 rounded-2xl border border-slate-800 shadow-sm space-y-4">
+          <div className="bg-[#111827] p-5 rounded-xl border border-slate-800 shadow-xs space-y-4">
             <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-              <h4 className="font-extrabold text-xs text-white uppercase tracking-wider">
+              <h4 className="font-semibold text-xs text-white uppercase tracking-wider">
                 Upload Queue ({selectedFiles.length} Selected)
               </h4>
               <button
                 onClick={() => setSelectedFiles([])}
-                className="text-xs font-extrabold text-slate-400 hover:text-red-400 transition-colors"
+                className="text-xs font-medium text-slate-400 hover:text-rose-400 transition-colors"
               >
                 Clear All
               </button>
@@ -178,18 +178,19 @@ const UploadPage = () => {
 
             <div className="space-y-2">
               {selectedFiles.map((file, idx) => (
-                <div key={idx} className="flex items-center justify-between p-3 bg-[#0D1322] rounded-xl border border-slate-800 text-xs">
+                <div key={idx} className="flex items-center justify-between p-3 bg-slate-900/80 rounded-lg border border-slate-800 text-xs">
                   <div className="flex items-center gap-3 truncate">
                     <FileText className="w-4 h-4 text-blue-400 shrink-0" />
                     <div className="truncate">
-                      <h5 className="font-extrabold text-white truncate">{file.name}</h5>
-                      <span className="text-[11px] text-slate-400 font-medium">{Math.round(file.size / 1024)} KB</span>
+                      <h5 className="font-medium text-white truncate">{file.name}</h5>
+                      <span className="text-[11px] text-slate-400 font-normal">{Math.round(file.size / 1024)} KB</span>
                     </div>
                   </div>
 
                   <button
                     onClick={() => removeFile(idx)}
-                    className="p-1 rounded-lg text-slate-400 hover:text-red-400 hover:bg-slate-800 transition-colors"
+                    aria-label={`Remove ${file.name} from queue`}
+                    className="p-1 rounded text-slate-400 hover:text-rose-400 hover:bg-slate-800 transition-colors"
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -199,11 +200,11 @@ const UploadPage = () => {
 
             {uploading && (
               <div className="space-y-2 pt-2">
-                <div className="flex justify-between text-xs font-extrabold text-blue-400">
+                <div className="flex justify-between text-xs font-medium text-blue-400">
                   <span>Uploading & Extracting Clauses via Gemini AI...</span>
                   <span>{uploadProgress}%</span>
                 </div>
-                <div className="w-full h-2 bg-slate-900 rounded-full overflow-hidden border border-slate-800">
+                <div className="w-full h-1.5 bg-slate-900 rounded-full overflow-hidden border border-slate-800">
                   <div
                     className="h-full bg-blue-500 transition-all duration-300 rounded-full"
                     style={{ width: `${uploadProgress}%` }}
@@ -215,7 +216,7 @@ const UploadPage = () => {
             <button
               onClick={handleUploadAll}
               disabled={uploading}
-              className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs rounded-xl transition-all shadow-sm flex items-center justify-center gap-2 disabled:opacity-50"
+              className="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs md:text-sm rounded-lg transition-colors shadow-xs flex items-center justify-center gap-2 disabled:opacity-50"
             >
               {uploading ? (
                 <>
@@ -234,20 +235,20 @@ const UploadPage = () => {
 
         {/* Processed Results Notification */}
         {processedDocs.length > 0 && (
-          <div className="bg-[#131C31] p-5 rounded-2xl border border-emerald-800/80 shadow-sm space-y-4">
+          <div className="bg-[#111827] p-5 rounded-xl border border-emerald-800/60 shadow-xs space-y-4">
             <div className="flex items-center justify-between border-b border-slate-800 pb-3">
               <div className="flex items-center gap-2 text-emerald-400">
-                <CheckCircle2 className="w-5 h-5 text-emerald-400" />
-                <h4 className="font-extrabold text-xs uppercase tracking-wider">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                <h4 className="font-semibold text-xs uppercase tracking-wider">
                   Upload Complete ({processedDocs.length} Documents)
                 </h4>
               </div>
 
               <Link
                 to="/compare"
-                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs rounded-xl transition-all flex items-center gap-1.5 shadow-sm"
+                className="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs rounded-md transition-colors flex items-center gap-1.5 shadow-xs"
               >
-                <span>Start Contradiction Scan</span>
+                <span>Proceed to Contradiction Scan</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
@@ -256,10 +257,10 @@ const UploadPage = () => {
               {processedDocs.map((doc) => {
                 const docId = doc._id || doc.id;
                 return (
-                  <div key={docId} className="flex items-center justify-between p-3 bg-emerald-950/40 rounded-xl border border-emerald-800/60 text-xs">
+                  <div key={docId} className="flex items-center justify-between p-3 bg-emerald-950/20 rounded-lg border border-emerald-800/40 text-xs">
                     <div className="flex items-center gap-2.5">
                       <FileText className="w-4 h-4 text-emerald-400" />
-                      <span className="font-extrabold text-white">{doc.fileName}</span>
+                      <span className="font-medium text-white">{doc.fileName}</span>
                     </div>
                     <StatusBadge status={doc.processingStatus} />
                   </div>

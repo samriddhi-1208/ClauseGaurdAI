@@ -5,15 +5,13 @@ import {
   FileText, 
   Brain, 
   Lightbulb, 
-  AlertTriangle, 
   Calendar, 
   Layers,
   ChevronDown,
   ChevronUp,
   Zap,
-  CheckCircle2,
-  FileCode,
-  ArrowRight
+  ArrowRight,
+  Scale
 } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import RiskBadge from '../components/RiskBadge';
@@ -106,7 +104,7 @@ const ResultsPage = () => {
     return (
       <div className="flex-1 bg-[#090D16] flex flex-col min-w-0 font-sans text-slate-100">
         <Navbar title="Risk Analysis Report" />
-        <div className="p-16 text-center text-slate-400 text-xs font-bold">Loading cross-document contradiction report...</div>
+        <div className="p-16 text-center text-slate-400 text-xs font-normal">Loading cross-document contradiction report...</div>
       </div>
     );
   }
@@ -117,14 +115,14 @@ const ResultsPage = () => {
 
       <main className="p-6 md:p-8 max-w-7xl w-full mx-auto space-y-6">
         
-        {/* Top Actions & Disclaimers */}
+        {/* Top Actions Bar */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-xl md:text-2xl font-extrabold text-white tracking-tight">
+            <h1 className="text-xl md:text-2xl font-bold text-white tracking-tight">
               Cross-Document Risk Analysis
             </h1>
-            <p className="text-xs text-slate-400 font-semibold mt-0.5">
-              Review side-by-side evidence, clause mismatches, and legal recommendations
+            <p className="text-xs text-slate-400 font-normal mt-0.5">
+              Side-by-side comparative evidence, clause friction, and legal recommendations
             </p>
           </div>
 
@@ -132,143 +130,144 @@ const ResultsPage = () => {
             <button
               onClick={handleRunDemo}
               disabled={seeding}
-              className="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-xs rounded-xl shadow-xs flex items-center gap-2 transition-all disabled:opacity-50"
+              className="px-3.5 py-2 bg-amber-950/40 hover:bg-amber-900/40 text-amber-300 border border-amber-800/60 font-medium text-xs rounded-lg shadow-xs flex items-center gap-2 transition-colors disabled:opacity-50"
             >
-              <Zap className="w-4 h-4 fill-slate-950" />
-              <span>{seeding ? 'Loading...' : '⚡ Load Demo Findings'}</span>
+              <Zap className="w-3.5 h-3.5 text-amber-400" />
+              <span>{seeding ? 'Loading...' : 'Instant Demo Mode'}</span>
             </button>
 
             <Link
               to="/compare"
-              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs rounded-xl shadow-xs flex items-center gap-2 transition-all"
+              className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium text-xs rounded-lg shadow-xs flex items-center gap-2 transition-colors"
             >
-              <span>Run New Scan</span>
+              <span>Run Comparison Scan</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
         </div>
 
-        {/* Compact Horizontal Risk Analysis Summary Card */}
+        {/* Risk Analysis Overview Banner */}
         {selectedAnalysis && (
-          <div className="bg-[#131C31] text-white p-5 rounded-2xl border border-slate-800 shadow-md">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4 mb-4">
+          <div className="bg-[#111827] text-white p-5 rounded-xl border border-slate-800 shadow-xs space-y-4">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
               <div>
                 <div className="flex items-center gap-2.5">
-                  <ShieldAlert className="w-5 h-5 text-red-500" />
-                  <h2 className="font-extrabold text-base text-white tracking-tight">
-                    Risk Analysis Overview
+                  <ShieldAlert className="w-5 h-5 text-rose-400" />
+                  <h2 className="font-semibold text-base text-white tracking-tight">
+                    Contradiction Assessment Overview
                   </h2>
-                  <span className="px-2.5 py-0.5 bg-blue-500/20 text-blue-300 text-[10px] font-extrabold rounded-full border border-blue-400/30">
-                    Latest Contract Comparison Results
+                  <span className="px-2 py-0.5 bg-blue-950/80 text-blue-300 text-xs font-medium rounded-md border border-blue-800/60">
+                    Cross-Contract Evaluation
                   </span>
                 </div>
                 
-                <div className="flex items-center gap-4 text-xs text-slate-400 font-medium mt-1.5 flex-wrap">
+                <div className="flex items-center gap-3 text-xs text-slate-400 font-normal mt-1.5 flex-wrap">
                   <span className="flex items-center gap-1">
                     <Calendar className="w-3.5 h-3.5 text-slate-400" />
-                    Date: <strong className="text-slate-200">{new Date(selectedAnalysis.createdAt || Date.now()).toLocaleDateString()}</strong>
+                    Scan Date: <strong className="text-slate-200 font-medium">{new Date(selectedAnalysis.createdAt || Date.now()).toLocaleDateString()}</strong>
                   </span>
-                  <span>•</span>
+                  <span>&bull;</span>
                   <span className="flex items-center gap-1">
                     <Layers className="w-3.5 h-3.5 text-slate-400" />
-                    Documents Analyzed: <strong className="text-slate-200">{docsAnalyzedCount}</strong>
+                    Contracts Compared: <strong className="text-slate-200 font-medium">{docsAnalyzedCount}</strong>
                   </span>
-                  <span>•</span>
+                  <span>&bull;</span>
                   <span>
-                    Total Findings: <strong className="text-slate-200">{findings.length}</strong>
+                    Total Identified Clashes: <strong className="text-slate-200 font-medium">{findings.length}</strong>
                   </span>
                 </div>
               </div>
 
-              {/* Compact Risk Pills */}
+              {/* Risk Counter Pills */}
               <div className="flex items-center gap-2 flex-wrap shrink-0">
-                <div className="px-3 py-1.5 bg-red-950/80 border border-red-500/50 rounded-xl flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-red-500"></span>
-                  <span className="text-xs font-extrabold text-red-200">🔴 High Risk: {highRiskCount}</span>
+                <div className="px-2.5 py-1 bg-rose-950/40 border border-rose-800/50 rounded-lg flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-rose-500"></span>
+                  <span className="text-xs font-medium text-rose-200">High Risk: {highRiskCount}</span>
                 </div>
 
-                <div className="px-3 py-1.5 bg-amber-950/80 border border-amber-500/50 rounded-xl flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
-                  <span className="text-xs font-extrabold text-amber-200">🟠 Medium Risk: {mediumRiskCount}</span>
+                <div className="px-2.5 py-1 bg-amber-950/40 border border-amber-800/50 rounded-lg flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-amber-500"></span>
+                  <span className="text-xs font-medium text-amber-200">Medium Risk: {mediumRiskCount}</span>
                 </div>
 
-                <div className="px-3 py-1.5 bg-emerald-950/80 border border-emerald-500/50 rounded-xl flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-                  <span className="text-xs font-extrabold text-emerald-200">🟢 Low Risk: {lowRiskCount}</span>
+                <div className="px-2.5 py-1 bg-emerald-950/40 border border-emerald-800/50 rounded-lg flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+                  <span className="text-xs font-medium text-emerald-200">Low Risk: {lowRiskCount}</span>
                 </div>
               </div>
             </div>
 
-            <p className="text-xs text-slate-400 font-medium">
-              💡 Note: ClauseGuard AI evaluates semantic friction across contractual obligations. Review the side-by-side evidence below to resolve clashes.
+            <p className="text-xs text-slate-400 font-normal">
+              Notice: ClauseGuard AI evaluates semantic and logical friction across contractual obligations. Findings are classified as Potential Contradictions or Potential Inconsistencies for legal review.
             </p>
           </div>
         )}
 
         {!selectedAnalysis ? (
-          <div className="bg-[#131C31] p-12 rounded-2xl border border-slate-800 text-center space-y-4 shadow-sm">
-            <ShieldAlert className="w-12 h-12 text-slate-600 mx-auto" />
-            <h3 className="font-extrabold text-base text-white">No Contradiction Analysis Scans Found</h3>
-            <p className="text-xs text-slate-400 font-medium">Run a cross-document comparison or load instant sample data to view findings.</p>
+          <div className="bg-[#111827] p-12 rounded-xl border border-slate-800 text-center space-y-4 shadow-xs">
+            <Scale className="w-12 h-12 text-slate-600 mx-auto" />
+            <h3 className="font-semibold text-base text-white">No Contradiction Analysis Reports Found</h3>
+            <p className="text-xs text-slate-400 font-normal max-w-sm mx-auto">
+              Run a cross-document comparison or load sample contracts to view side-by-side contradiction findings.
+            </p>
             <button
               onClick={handleRunDemo}
-              className="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-xs rounded-xl inline-block"
+              className="px-4 py-2 bg-amber-950/40 hover:bg-amber-900/40 text-amber-300 border border-amber-800/60 font-medium text-xs rounded-lg transition-colors inline-block"
             >
-              ⚡ Load Demo Findings (Data Retention & Payment)
+              Load Demo Contracts (Retention & Payment Clashes)
             </button>
           </div>
         ) : (
           /* Contradiction Findings Reports */
-          <div className="space-y-6">
+          <div className="space-y-5">
             {findings.length === 0 ? (
-              <div className="bg-[#131C31] p-10 rounded-2xl border border-slate-800 text-center text-slate-300 text-xs font-bold shadow-xs">
-                🟢 No significant contradictions detected between the selected contracts.
+              <div className="bg-[#111827] p-10 rounded-xl border border-slate-800 text-center text-slate-300 text-xs font-normal shadow-xs">
+                No significant contradictions or conflicting terms detected between the evaluated contracts.
               </div>
             ) : (
               findings.map((item, idx) => {
                 const findingId = item._id || item.id || idx;
                 const isExpanded = expandedIds[findingId];
 
-                // Strict Risk Colors for Dark Theme
-                let riskBorder = 'border-[#EF4444] bg-red-950/20';
-                let riskHeaderBg = 'bg-red-950/40 border-red-900/60';
+                let riskBorder = 'border-rose-900/50 bg-rose-950/10';
+                let riskHeaderBg = 'bg-rose-950/30 border-rose-900/50';
                 let riskBadge = <RiskBadge riskLevel="HIGH" classification="POTENTIAL_CONTRADICTION" compact={true} />;
                 
                 if (item.riskLevel === 'MEDIUM' || item.classification === 'POTENTIAL_INCONSISTENCY') {
-                  riskBorder = 'border-[#F59E0B] bg-amber-950/20';
-                  riskHeaderBg = 'bg-amber-950/40 border-amber-900/60';
+                  riskBorder = 'border-amber-900/50 bg-amber-950/10';
+                  riskHeaderBg = 'bg-amber-950/30 border-amber-900/50';
                   riskBadge = <RiskBadge riskLevel="MEDIUM" classification="POTENTIAL_INCONSISTENCY" compact={true} />;
                 } else if (item.riskLevel === 'LOW' || item.classification === 'NO_SIGNIFICANT_CONFLICT') {
-                  riskBorder = 'border-[#22C55E] bg-emerald-950/20';
-                  riskHeaderBg = 'bg-emerald-950/40 border-emerald-900/60';
+                  riskBorder = 'border-emerald-900/50 bg-emerald-950/10';
+                  riskHeaderBg = 'bg-emerald-950/30 border-emerald-900/50';
                   riskBadge = <RiskBadge riskLevel="LOW" classification="NO_SIGNIFICANT_CONFLICT" compact={true} />;
                 }
 
                 return (
                   <div
                     key={findingId}
-                    className={`bg-[#131C31] rounded-2xl border-2 shadow-md overflow-hidden transition-all ${riskBorder}`}
+                    className={`bg-[#111827] rounded-xl border shadow-xs overflow-hidden transition-colors ${riskBorder}`}
                   >
                     {/* Finding Intelligence Header */}
                     <div
                       onClick={() => toggleExpand(findingId)}
-                      className={`px-6 py-4 flex items-center justify-between cursor-pointer border-b transition-colors ${riskHeaderBg}`}
+                      className={`px-5 py-3.5 flex items-center justify-between cursor-pointer border-b transition-colors ${riskHeaderBg}`}
                     >
                       <div className="flex items-center gap-3 flex-wrap">
                         {riskBadge}
 
-                        <span className="font-extrabold text-xs text-white tracking-wider uppercase bg-[#0D1322] border border-slate-700 px-3 py-1 rounded-lg">
+                        <span className="font-semibold text-xs text-white tracking-wider uppercase bg-slate-900 border border-slate-700/80 px-2.5 py-0.5 rounded-md">
                           {item.category}
                         </span>
 
-                        <span className="text-xs text-slate-300 font-bold hidden md:inline">
+                        <span className="text-xs text-slate-400 font-normal hidden md:inline">
                           Confidence: {Math.round((item.confidence || 0.92) * 100)}%
                         </span>
                       </div>
 
                       <div className="flex items-center gap-2">
-                        <span className="text-xs font-bold text-slate-400 hidden sm:inline">
-                          {isExpanded ? 'Collapse' : 'Expand Finding'}
+                        <span className="text-xs font-medium text-slate-400 hidden sm:inline">
+                          {isExpanded ? 'Collapse' : 'Expand'}
                         </span>
                         {isExpanded ? <ChevronUp className="w-4 h-4 text-slate-400" /> : <ChevronDown className="w-4 h-4 text-slate-400" />}
                       </div>
@@ -276,46 +275,46 @@ const ResultsPage = () => {
 
                     {/* Finding Detailed Body */}
                     {isExpanded && (
-                      <div className="p-6 space-y-6">
+                      <div className="p-5 md:p-6 space-y-6">
                         
                         {/* Two-Column Comparison Layout */}
                         <div>
-                          <div className="flex items-center justify-between mb-3">
-                            <span className="text-xs font-extrabold text-slate-400 uppercase tracking-wider">
-                              ⚖️ Side-by-Side Clause Evidence
+                          <div className="flex items-center justify-between mb-2.5">
+                            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+                              Comparative Contract Clauses
                             </span>
-                            <span className="text-[11px] text-slate-500 font-medium">Cross-Document Match</span>
+                            <span className="text-xs text-slate-500 font-normal">Cross-Document Evidence</span>
                           </div>
 
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {/* Document A */}
-                            <div className="bg-[#0D1322] p-4 rounded-xl border border-slate-800 space-y-2">
+                            <div className="bg-[#0B101D] p-4 rounded-lg border border-slate-800 space-y-2">
                               <div className="flex items-center justify-between">
-                                <span className="font-bold text-xs text-white flex items-center gap-1.5 truncate max-w-[200px]">
+                                <span className="font-medium text-xs text-white flex items-center gap-1.5 truncate max-w-[200px]">
                                   <FileText className="w-4 h-4 text-blue-400 shrink-0" />
                                   {item.documentA?.name || 'Document A'}
                                 </span>
-                                <span className="text-[10px] font-extrabold text-blue-300 bg-blue-950 px-2 py-0.5 rounded border border-blue-800">
+                                <span className="text-[11px] font-medium text-blue-300 bg-blue-950 px-2 py-0.5 rounded border border-blue-800/60">
                                   Page {item.clauseA?.pageNumber || 1}
                                 </span>
                               </div>
-                              <div className="p-3.5 bg-[#090D16] rounded-lg border border-slate-800 text-xs text-slate-100 font-medium leading-relaxed italic">
+                              <div className="p-3 bg-slate-950/80 rounded border border-slate-800 text-xs text-slate-200 font-mono leading-relaxed">
                                 "{item.clauseA?.content}"
                               </div>
                             </div>
 
                             {/* Document B */}
-                            <div className="bg-[#0D1322] p-4 rounded-xl border border-slate-800 space-y-2">
+                            <div className="bg-[#0B101D] p-4 rounded-lg border border-slate-800 space-y-2">
                               <div className="flex items-center justify-between">
-                                <span className="font-bold text-xs text-white flex items-center gap-1.5 truncate max-w-[200px]">
+                                <span className="font-medium text-xs text-white flex items-center gap-1.5 truncate max-w-[200px]">
                                   <FileText className="w-4 h-4 text-amber-400 shrink-0" />
                                   {item.documentB?.name || 'Document B'}
                                 </span>
-                                <span className="text-[10px] font-extrabold text-amber-300 bg-amber-950 px-2 py-0.5 rounded border border-amber-800">
+                                <span className="text-[11px] font-medium text-amber-300 bg-amber-950 px-2 py-0.5 rounded border border-amber-800/60">
                                   Page {item.clauseB?.pageNumber || 1}
                                 </span>
                               </div>
-                              <div className="p-3.5 bg-[#090D16] rounded-lg border border-slate-800 text-xs text-slate-100 font-medium leading-relaxed italic">
+                              <div className="p-3 bg-slate-950/80 rounded border border-slate-800 text-xs text-slate-200 font-mono leading-relaxed">
                                 "{item.clauseB?.content}"
                               </div>
                             </div>
@@ -323,26 +322,26 @@ const ResultsPage = () => {
                         </div>
 
                         {/* AI Explanation & Legal Recommendation */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-slate-800">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t border-slate-800">
                           
                           {/* AI Explanation */}
-                          <div className="space-y-2">
-                            <h4 className="text-xs font-extrabold text-white flex items-center gap-1.5 uppercase tracking-wider">
+                          <div className="space-y-1.5">
+                            <h4 className="text-xs font-semibold text-white flex items-center gap-1.5 uppercase tracking-wider">
                               <Brain className="w-4 h-4 text-blue-400" />
-                              <span>🧠 AI Analysis & Conflict Explanation</span>
+                              <span>AI Conflict Rationale</span>
                             </h4>
-                            <p className="text-xs text-slate-200 font-medium leading-relaxed bg-blue-950/40 p-4 rounded-xl border border-blue-900/60">
+                            <p className="text-xs text-slate-200 font-normal leading-relaxed bg-blue-950/30 p-3.5 rounded-lg border border-blue-900/40">
                               {item.explanation}
                             </p>
                           </div>
 
                           {/* Actionable Recommendation */}
-                          <div className="space-y-2">
-                            <h4 className="text-xs font-extrabold text-white flex items-center gap-1.5 uppercase tracking-wider">
+                          <div className="space-y-1.5">
+                            <h4 className="text-xs font-semibold text-white flex items-center gap-1.5 uppercase tracking-wider">
                               <Lightbulb className="w-4 h-4 text-amber-400" />
-                              <span>💡 Recommended Action</span>
+                              <span>Recommended Counsel Action</span>
                             </h4>
-                            <p className="text-xs text-slate-200 font-medium leading-relaxed bg-amber-950/40 p-4 rounded-xl border border-amber-900/60">
+                            <p className="text-xs text-slate-200 font-normal leading-relaxed bg-amber-950/30 p-3.5 rounded-lg border border-amber-900/40">
                               {item.recommendation}
                             </p>
                           </div>
