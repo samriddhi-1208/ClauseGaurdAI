@@ -86,7 +86,7 @@ const ChatPage = () => {
         ...prev,
         {
           sender: 'ai',
-          text: 'I encountered an error retrieving contract information from vector memory. Please verify backend service connectivity.',
+          text: err.response?.data?.message || 'I encountered an error retrieving contract information from vector memory. Please verify backend service connectivity.',
           sources: []
         }
       ]);

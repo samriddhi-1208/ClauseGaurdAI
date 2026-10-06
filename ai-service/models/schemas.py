@@ -25,7 +25,7 @@ class ClauseItem(BaseModel):
     documentName: str
     category: str
     content: str
-    pageNumber: int
+    pageNumber: int = 1
 
 class CompareRequest(BaseModel):
     userId: str

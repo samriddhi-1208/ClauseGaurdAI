@@ -2,6 +2,14 @@ const axios = require('axios');
 
 const AI_SERVICE_URL = process.env.AI_SERVICE_URL || 'http://127.0.0.1:8000';
 
+class AIServiceUnavailableError extends Error {
+  constructor(message = 'AI service is currently unavailable. Please make sure the Python AI service is running and try again.') {
+    super(message);
+    this.name = 'AIServiceUnavailableError';
+    this.statusCode = 503;
+  }
+}
+
 async function processDocumentWithAI(userId, documentId, documentName, filePath) {
   try {
     const res = await axios.post(`${AI_SERVICE_URL}/process-document`, {
@@ -9,30 +17,11 @@ async function processDocumentWithAI(userId, documentId, documentName, filePath)
       documentId,
       documentName,
       filePath
-    }, { timeout: 15000 });
+    }, { timeout: 30000 });
     return res.data;
   } catch (error) {
-    console.warn(`[AI Service Proxy Notice] Could not reach Python AI service at ${AI_SERVICE_URL}: ${error.message}. Running Node.js fallback processor.`);
-    return {
-      success: true,
-      documentId,
-      totalPages: 1,
-      totalClauses: 2,
-      clauses: [
-        {
-          category: 'DATA_RETENTION',
-          content: 'Customer data must be retained for 5 years.',
-          pageNumber: 1,
-          confidence: 0.92
-        },
-        {
-          category: 'PAYMENT',
-          content: 'Payment must be completed within 30 days of invoice date.',
-          pageNumber: 1,
-          confidence: 0.90
-        }
-      ]
-    };
+    console.error('[AI Service] FastAPI unavailable: connection failed');
+    throw new AIServiceUnavailableError();
   }
 }
 
@@ -42,28 +31,11 @@ async function compareDocumentsWithAI(userId, documentIds, clauses) {
       userId,
       documentIds,
       clauses
-    }, { timeout: 20000 });
+    }, { timeout: 45000 });
     return res.data;
   } catch (error) {
-    console.warn(`[AI Service Proxy Notice] Python AI comparison endpoint unreachable: ${error.message}. Using fallback comparison generator.`);
-    return {
-      success: true,
-      totalFindings: 1,
-      findings: [
-        {
-          category: 'DATA_RETENTION',
-          classification: 'POTENTIAL_CONTRADICTION',
-          riskLevel: 'HIGH',
-          confidence: 0.94,
-          documentA: { id: clauses[0]?.documentId || 'doc1', name: clauses[0]?.documentName || 'Document A' },
-          documentB: { id: clauses[1]?.documentId || 'doc2', name: clauses[1]?.documentName || 'Document B' },
-          clauseA: { content: clauses[0]?.content || 'Customer data must be retained for 5 years.', pageNumber: 1 },
-          clauseB: { content: clauses[1]?.content || 'Customer data must be deleted after 2 years.', pageNumber: 1 },
-          explanation: 'Document A specifies a 5-year retention period, whereas Document B demands permanent deletion after 2 years. These obligations directly contradict each other.',
-          recommendation: 'Review data lifecycle policies and execute a single harmonized addendum.'
-        }
-      ]
-    };
+    console.error('[AI Service] FastAPI comparison endpoint unavailable: connection failed');
+    throw new AIServiceUnavailableError();
   }
 }
 
@@ -73,33 +45,24 @@ async function askRagChatWithAI(userId, question, documentIds) {
       userId,
       question,
       documentIds
-    }, { timeout: 15000 });
+    }, { timeout: 30000 });
     return res.data;
   } catch (error) {
-    console.warn(`[AI Service Proxy Notice] RAG Chat endpoint unreachable: ${error.message}. Returning fallback grounded answer.`);
-    return {
-      answer: `Based on your uploaded legal documents: Information regarding "${question}" indicates standard compliance obligations apply. Please review page citations for exact terms.`,
-      sources: [
-        {
-          documentId: documentIds ? documentIds[0] : 'demo_doc_1',
-          documentName: 'Contract Overview',
-          pageNumber: 1,
-          snippet: 'Clause terms and retention schedules.'
-        }
-      ]
-    };
+    console.error('[AI Service] FastAPI RAG endpoint unavailable: connection failed');
+    throw new AIServiceUnavailableError();
   }
 }
 
 async function deleteDocumentVectorsWithAI(userId, documentId) {
   try {
-    await axios.delete(`${AI_SERVICE_URL}/documents/${userId}/${documentId}`);
+    await axios.delete(`${AI_SERVICE_URL}/documents/${userId}/${documentId}`, { timeout: 10000 });
   } catch (err) {
-    console.warn(`[AI Service Proxy Notice] Vector delete notification failed: ${err.message}`);
+    console.warn('[AI Service] Vector delete notification failed: connection failed');
   }
 }
 
 module.exports = {
+  AIServiceUnavailableError,
   processDocumentWithAI,
   compareDocumentsWithAI,
   askRagChatWithAI,

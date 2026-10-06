@@ -117,8 +117,12 @@ exports.compareDocuments = async (req, res) => {
       findings: savedFindings
     });
   } catch (error) {
-    console.error('[Compare Documents Error]', error);
-    return res.status(500).json({ success: false, message: 'Failed to run cross-document analysis.' });
+    console.error('[Compare Documents Error]', error.message || error);
+    const statusCode = error.statusCode || 500;
+    return res.status(statusCode).json({
+      success: false,
+      message: error.message || 'Failed to run cross-document analysis.'
+    });
   }
 };
 

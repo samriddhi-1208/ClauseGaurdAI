@@ -93,8 +93,39 @@ exports.seedDemoData = async (req, res) => {
       { documentId: docB_id, documentName: docB_Data.fileName, category: 'PAYMENT', content: 'Payment must be completed within 60 days of invoice receipt.', pageNumber: 1 }
     ];
 
-    const aiRes = await compareDocumentsWithAI(userId, [docA_id, docB_id], clausesPayload);
-    const findings = aiRes.findings || [];
+    let findings = [];
+    try {
+      const aiRes = await compareDocumentsWithAI(userId, [docA_id, docB_id], clausesPayload);
+      findings = aiRes.findings || [];
+    } catch (aiErr) {
+      // In explicit Demo Mode ONLY: provide pre-seeded sample findings for reliable demonstration
+      findings = [
+        {
+          documentA: { id: docA_id, name: docA_Data.fileName },
+          documentB: { id: docB_id, name: docB_Data.fileName },
+          clauseA: { content: 'Customer data must be retained for 5 years from contract termination.', pageNumber: 2 },
+          clauseB: { content: 'Customer data must be permanently deleted after 2 years.', pageNumber: 3 },
+          category: 'DATA_RETENTION',
+          classification: 'POTENTIAL_CONTRADICTION',
+          riskLevel: 'HIGH',
+          confidence: 0.95,
+          explanation: 'Document A specifies a 5-year data retention schedule, while Document B mandates permanent deletion after 2 years. Compliance with both is contradictory.',
+          recommendation: 'Harmonize data retention and deletion schedules across agreements with an overarching Data Processing Addendum.'
+        },
+        {
+          documentA: { id: docA_id, name: docA_Data.fileName },
+          documentB: { id: docB_id, name: docB_Data.fileName },
+          clauseA: { content: 'Payment must be completed within 30 days of invoice issuance.', pageNumber: 1 },
+          clauseB: { content: 'Payment must be completed within 60 days of invoice receipt.', pageNumber: 1 },
+          category: 'PAYMENT',
+          classification: 'POTENTIAL_INCONSISTENCY',
+          riskLevel: 'MEDIUM',
+          confidence: 0.91,
+          explanation: 'Payment term conflict between Net 30 from issuance and Net 60 from receipt introduces operational uncertainty and potential late fee exposure.',
+          recommendation: 'Align invoice payment milestones and cure periods in a master services schedule.'
+        }
+      ];
+    }
 
     let analysisId;
 

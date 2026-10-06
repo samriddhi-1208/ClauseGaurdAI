@@ -17,7 +17,11 @@ exports.askChat = async (req, res) => {
       sources: response.sources || []
     });
   } catch (error) {
-    console.error('[Chat Controller Error]', error);
-    return res.status(500).json({ success: false, message: 'Failed to process legal assistant query.' });
+    console.error('[Chat Controller Error]', error.message || error);
+    const statusCode = error.statusCode || 500;
+    return res.status(statusCode).json({
+      success: false,
+      message: error.message || 'Failed to process legal assistant query.'
+    });
   }
 };
