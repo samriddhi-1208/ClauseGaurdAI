@@ -21,6 +21,7 @@ Detailed architectural and engineering documentation is available in the [`docs/
 | [Project Structure](docs/PROJECT_STRUCTURE.md) | Complete directory tree layout and module breakdowns across client, server, and AI service. |
 | [Technology Stack](docs/TECH_STACK.md) | Matrix of all technologies, libraries, and frameworks with 1-sentence architectural rationales. |
 | [Requirements & Traceability](docs/REQUIREMENTS.md) | Functional MVP vs supporting features, non-functional criteria, and codebase traceability matrix. |
+| [Production Deployment](docs/DEPLOYMENT.md) | Architecture, deployment order, environment variables, persistent volumes, health checks, and troubleshooting. |
 
 ---
 

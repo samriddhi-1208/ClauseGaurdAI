@@ -114,8 +114,8 @@ app.use(cors({
 
 ### 4.3 Rate Limiting
 Enforces IP-based request throttling using `express-rate-limit`:
-- **Auth Routes (`/api/auth/*`)**: Capped at **100 requests per 15-minute window** to prevent credential stuffing and brute-force attacks.
-- **Upload Routes (`/api/documents/upload`)**: Protected against rapid unauthenticated file flooding.
+- **Auth Routes (`/api/auth/*`)**: Capped at **10 requests per 15-minute window** (configurable via `AUTH_RATE_LIMIT_MAX`) to prevent credential stuffing and brute-force attacks.
+- **General API Routes (`/api/*`)**: Capped at **300 requests per 15-minute window** to protect against resource exhaustion.
 
 ---
 

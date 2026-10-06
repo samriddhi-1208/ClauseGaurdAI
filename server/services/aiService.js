@@ -20,7 +20,8 @@ async function processDocumentWithAI(userId, documentId, documentName, filePath)
     }, { timeout: 30000 });
     return res.data;
   } catch (error) {
-    console.error('[AI Service] FastAPI error:', error.message, error.response ? error.response.data : '');
+    const detail = (error.response && error.response.data && error.response.data.detail) ? error.response.data.detail : error.message;
+    console.error('[AI Service] FastAPI error:', detail);
     throw new AIServiceUnavailableError();
   }
 }

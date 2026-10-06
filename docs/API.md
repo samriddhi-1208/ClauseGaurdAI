@@ -19,7 +19,7 @@ Authorization: Bearer <jwt_token>
 
 #### `POST /auth/register`
 Creates a new user account.
-- **Access**: Public (Subject to Rate Limiting: 100 req / 15 min)
+- **Access**: Public (Subject to Rate Limiting: 10 req / 15 min, configurable via `AUTH_RATE_LIMIT_MAX`)
 - **Request Body**:
   ```json
   {

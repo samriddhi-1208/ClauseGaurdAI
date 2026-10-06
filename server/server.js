@@ -26,14 +26,15 @@ app.use(helmet({
 }));
 
 // CORS Configuration
-const allowedOrigins = (process.env.ALLOWED_ORIGINS || 'http://localhost:5173,http://127.0.0.1:5173')
+const rawOrigins = process.env.ALLOWED_ORIGINS || process.env.CLIENT_URL || 'http://localhost:5173,http://127.0.0.1:5173';
+const allowedOrigins = rawOrigins
   .split(',')
   .map(o => o.trim())
   .filter(Boolean);
 
 app.use(cors({
   origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin) || allowedOrigins.includes('*')) {
+    if (!origin || allowedOrigins.includes(origin)) {
       return callback(null, true);
     }
     return callback(new Error('CORS blocked: Request origin not allowed'));
@@ -82,9 +83,17 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`====================================================`);
   console.log(`⚖️ ClauseGuard AI Backend Server Running on Port ${PORT}`);
   console.log(`API Base URL: http://localhost:${PORT}/api`);
   console.log(`====================================================`);
+});
+
+process.on('SIGTERM', () => {
+  console.log('[Server Shutdown] SIGTERM received. Closing HTTP server gracefully.');
+  server.close(() => {
+    console.log('[Server Shutdown] HTTP server closed.');
+    process.exit(0);
+  });
 });
