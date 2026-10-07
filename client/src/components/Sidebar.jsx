@@ -50,11 +50,11 @@ const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
         {/* Brand Header */}
         <div className="px-5 py-5 border-b border-[#D7D5CB] flex items-center justify-between shrink-0">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-xl bg-[#3F6149] text-white flex items-center justify-center shrink-0 shadow-2xs">
-              <Shield className="w-4 h-4 stroke-[2.2]" />
+            <div className="w-9 h-9 rounded-xl bg-[#3F6149] text-white flex items-center justify-center shrink-0 shadow-2xs">
+              <Shield className="w-5 h-5 stroke-[2.2]" />
             </div>
             <div>
-              <h1 className="font-bold text-[15px] text-[#101A13] leading-snug">
+              <h1 className="font-extrabold text-[16px] text-[#101A13] leading-snug">
                 ClauseGuard AI
               </h1>
               <p className="text-xs text-[#38463C] font-semibold leading-normal mt-0.5">

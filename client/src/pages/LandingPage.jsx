@@ -43,15 +43,19 @@ const LandingPage = () => {
   return (
     <div className="min-h-screen bg-[#F8F7F2] text-[#18231C] flex flex-col font-sans">
       {/* Top Header Navigation */}
-      <header className="border-b border-[#E2DFD5] bg-[#F8F7F2] sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-[#3F6149] flex items-center justify-center text-white shadow-2xs">
-              <Shield className="w-4 h-4 stroke-[2]" />
+      <header className="border-b border-[#E2DFD5] bg-[#F8F7F2] sticky top-0 z-50 py-1">
+        <div className="max-w-7xl mx-auto px-6 h-18 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-[#3F6149] flex items-center justify-center text-white shadow-2xs shrink-0">
+              <Shield className="w-5 h-5 stroke-[2.2]" />
             </div>
             <div>
-              <span className="font-semibold text-sm text-[#18231C] tracking-tight">ClauseGuard AI</span>
-              <span className="hidden sm:block text-[10px] text-[#5A665D] font-normal">Smarter Contracts. Safer Decisions.</span>
+              <span className="font-extrabold text-lg md:text-xl text-[#101A13] tracking-tight block leading-tight">
+                ClauseGuard AI
+              </span>
+              <span className="hidden sm:block text-xs md:text-[13px] text-[#38463C] font-semibold leading-normal mt-0.5">
+                Smarter Contracts. Safer Decisions.
+              </span>
             </div>
           </div>
 
@@ -59,7 +63,7 @@ const LandingPage = () => {
             {isAuthenticated ? (
               <Link
                 to="/dashboard"
-                className="px-4 py-2 bg-[#3F6149] hover:bg-[#34503C] text-white font-semibold text-xs rounded-xl transition-colors shadow-2xs"
+                className="px-4 py-2.5 bg-[#3F6149] hover:bg-[#34503C] text-white font-bold text-xs md:text-sm rounded-xl transition-colors shadow-2xs cursor-pointer"
               >
                 Go to Workspace →
               </Link>
