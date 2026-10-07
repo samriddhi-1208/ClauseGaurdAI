@@ -102,14 +102,14 @@ const ComparePage = () => {
   };
 
   return (
-    <div className="flex-1 bg-[#090D16] flex flex-col min-w-0 pb-12 font-sans text-slate-100">
+    <div className="flex-1 bg-slate-50 flex flex-col min-w-0 pb-12 font-sans text-slate-900">
       <Navbar title="Compare Contracts" subtitle="Identify potential contradictions and legal inconsistencies across multiple agreements" />
 
       <main className="p-6 md:p-8 max-w-5xl w-full mx-auto space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-xl md:text-2xl font-bold text-white tracking-tight">Cross-Document Contradiction Analysis</h1>
-            <p className="text-xs text-slate-400 font-normal mt-0.5">
+            <h1 className="text-xl md:text-2xl font-bold text-slate-900 tracking-tight">Cross-Document Contradiction Analysis</h1>
+            <p className="text-xs text-slate-500 font-normal mt-0.5">
               Select 2 or more contracts to compare related clauses within matching legal categories
             </p>
           </div>
@@ -117,40 +117,40 @@ const ComparePage = () => {
           <button
             onClick={handleRunDemo}
             disabled={seeding}
-            className="px-3.5 py-2 bg-amber-950/40 hover:bg-amber-900/40 text-amber-300 border border-amber-800/60 font-medium text-xs rounded-lg shadow-xs flex items-center gap-2 transition-colors disabled:opacity-50 shrink-0"
+            className="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 font-medium text-xs rounded-lg shadow-2xs flex items-center gap-2 transition-colors disabled:opacity-50 shrink-0"
           >
-            <Zap className="w-3.5 h-3.5 text-amber-400" />
+            <Zap className="w-3.5 h-3.5 text-amber-600" />
             <span>{seeding ? 'Loading...' : 'Instant Demo Mode'}</span>
           </button>
         </div>
 
         {error && (
-          <div className="p-3.5 bg-rose-950/50 border border-rose-800/60 rounded-xl flex items-center gap-2 text-xs font-medium text-rose-300">
-            <ShieldAlert className="w-4 h-4 text-rose-400 shrink-0" />
+          <div className="p-3.5 bg-rose-50 border border-rose-200 rounded-xl flex items-center gap-2 text-xs font-medium text-rose-700">
+            <ShieldAlert className="w-4 h-4 text-rose-600 shrink-0" />
             <span>{error}</span>
           </div>
         )}
 
         {/* STEP 1: Select Documents */}
-        <div className="bg-[#111827] rounded-xl border border-slate-800 shadow-xs p-5 space-y-4">
-          <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-            <h3 className="font-semibold text-sm text-white flex items-center gap-2">
-              <span className="w-5 h-5 rounded-full bg-blue-600 text-white text-xs flex items-center justify-center font-bold">1</span>
+        <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6 space-y-4">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+            <h3 className="font-semibold text-sm text-slate-900 flex items-center gap-2">
+              <span className="w-5 h-5 rounded-full bg-[#0F172A] text-white text-xs flex items-center justify-center font-bold">1</span>
               <span>Select Documents to Compare ({selectedDocIds.length} Selected)</span>
             </h3>
-            <span className="text-xs text-slate-400 font-normal">Requires at least 2 contracts</span>
+            <span className="text-xs text-slate-500 font-normal">Requires at least 2 contracts</span>
           </div>
 
           {loadingDocs ? (
-            <div className="py-10 text-center text-slate-400 text-xs font-normal">Loading contract library...</div>
+            <div className="py-10 text-center text-slate-500 text-xs font-normal">Loading contract library...</div>
           ) : documents.length === 0 ? (
             <div className="py-10 text-center space-y-3">
-              <FileText className="w-10 h-10 text-slate-600 mx-auto" />
-              <h4 className="text-sm font-semibold text-white">No contracts available to compare</h4>
-              <p className="text-xs text-slate-400 font-normal">Upload at least two contracts or load sample contracts to run comparison.</p>
+              <FileText className="w-10 h-10 text-slate-400 mx-auto" />
+              <h4 className="text-sm font-semibold text-slate-900">No contracts available to compare</h4>
+              <p className="text-xs text-slate-500 font-normal">Upload at least two contracts or load sample contracts to run comparison.</p>
               <button
                 onClick={handleRunDemo}
-                className="px-4 py-2 bg-amber-950/40 hover:bg-amber-900/40 text-amber-300 border border-amber-800/60 font-medium text-xs rounded-lg shadow-xs"
+                className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 font-medium text-xs rounded-lg shadow-2xs"
               >
                 Load Sample Contracts (Contract A vs B)
               </button>
@@ -164,19 +164,19 @@ const ComparePage = () => {
                   <div
                     key={docId}
                     onClick={() => toggleSelectDoc(docId)}
-                    className={`p-3.5 rounded-lg border cursor-pointer transition-colors flex items-start gap-3 ${
+                    className={`p-3.5 rounded-lg border cursor-pointer transition-all flex items-start gap-3 ${
                       isSelected
-                        ? 'bg-blue-950/40 border-blue-600'
-                        : 'bg-[#0B101D] border-slate-800 hover:border-slate-700'
+                        ? 'bg-blue-50/50 border-blue-500 shadow-2xs'
+                        : 'bg-slate-50 border-slate-200 hover:border-slate-300'
                     }`}
                   >
-                    <div className="mt-0.5 text-blue-400">
-                      {isSelected ? <CheckSquare className="w-4 h-4 text-blue-400" /> : <Square className="w-4 h-4 text-slate-500" />}
+                    <div className="mt-0.5 text-blue-600">
+                      {isSelected ? <CheckSquare className="w-4 h-4 text-blue-600" /> : <Square className="w-4 h-4 text-slate-400" />}
                     </div>
 
                     <div className="flex-1 truncate">
-                      <h4 className="font-semibold text-xs text-white truncate">{doc.fileName}</h4>
-                      <p className="text-[11px] text-slate-400 font-normal mt-0.5">
+                      <h4 className="font-semibold text-xs text-slate-900 truncate">{doc.fileName}</h4>
+                      <p className="text-[11px] text-slate-500 font-normal mt-0.5">
                         {doc.totalClauses || 0} clauses extracted &bull; {doc.totalPages || 1} pages
                       </p>
                     </div>
@@ -188,13 +188,13 @@ const ComparePage = () => {
         </div>
 
         {/* STEP 2: Category Scope */}
-        <div className="bg-[#111827] rounded-xl border border-slate-800 shadow-xs p-5 space-y-4">
-          <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-            <h3 className="font-semibold text-sm text-white flex items-center gap-2">
-              <span className="w-5 h-5 rounded-full bg-blue-600 text-white text-xs flex items-center justify-center font-bold">2</span>
+        <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6 space-y-4">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+            <h3 className="font-semibold text-sm text-slate-900 flex items-center gap-2">
+              <span className="w-5 h-5 rounded-full bg-[#0F172A] text-white text-xs flex items-center justify-center font-bold">2</span>
               <span>Target Analysis Categories</span>
             </h3>
-            <span className="text-xs text-slate-400 font-normal">Specific clause categories to cross-analyze</span>
+            <span className="text-xs text-slate-500 font-normal">Specific clause categories to cross-analyze</span>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
@@ -204,13 +204,13 @@ const ComparePage = () => {
                 <div
                   key={cat}
                   onClick={() => toggleCategory(cat)}
-                  className={`p-2.5 rounded-lg border cursor-pointer transition-colors flex items-center gap-2 text-xs font-medium ${
+                  className={`p-2.5 rounded-lg border cursor-pointer transition-all flex items-center gap-2 text-xs font-medium ${
                     isChecked
-                      ? 'bg-blue-950/50 border-blue-600 text-blue-300'
-                      : 'bg-[#0B101D] border-slate-800 text-slate-300 hover:bg-slate-800'
+                      ? 'bg-[#0F172A] text-white border-[#0F172A] shadow-2xs'
+                      : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
                   }`}
                 >
-                  {isChecked ? <CheckCircle2 className="w-4 h-4 text-blue-400 shrink-0" /> : <Square className="w-4 h-4 text-slate-500 shrink-0" />}
+                  {isChecked ? <CheckCircle2 className="w-4 h-4 text-blue-400 shrink-0" /> : <Square className="w-4 h-4 text-slate-400 shrink-0" />}
                   <span>{cat}</span>
                 </div>
               );
@@ -219,21 +219,21 @@ const ComparePage = () => {
         </div>
 
         {/* Execution Card */}
-        <div className="bg-[#111827] rounded-xl p-5 text-white shadow-xs space-y-4 border border-slate-800">
+        <div className="bg-white rounded-xl p-6 shadow-sm space-y-4 border border-slate-200">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-blue-950 text-blue-400 border border-blue-800/60 flex items-center justify-center shrink-0">
-              <Sparkles className="w-4 h-4" />
+            <div className="w-9 h-9 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
+              <Sparkles className="w-4 h-4 text-slate-700" />
             </div>
             <div>
-              <h3 className="font-semibold text-sm text-white tracking-tight">AI Contradiction Detection Engine</h3>
-              <p className="text-xs text-slate-400 font-normal">Cross-document semantic matching, category grouping, and risk assessment</p>
+              <h3 className="font-semibold text-sm text-slate-900 tracking-tight">AI Contradiction Detection Engine</h3>
+              <p className="text-xs text-slate-500 font-normal">Cross-document semantic matching, category grouping, and risk assessment</p>
             </div>
           </div>
 
           <button
             onClick={handleStartAnalysis}
             disabled={analyzing || selectedDocIds.length < 2}
-            className="w-full py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-medium text-xs md:text-sm rounded-lg transition-colors shadow-xs flex items-center justify-center gap-2 disabled:opacity-50"
+            className="w-full py-2.5 bg-[#0F172A] hover:bg-slate-800 text-white font-medium text-xs md:text-sm rounded-lg transition-colors shadow-sm flex items-center justify-center gap-2 disabled:opacity-50"
           >
             {analyzing ? (
               <>

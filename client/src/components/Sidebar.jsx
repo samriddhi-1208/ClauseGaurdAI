@@ -52,27 +52,27 @@ const Sidebar = () => {
   };
 
   return (
-    <aside className="w-64 bg-[#0B101D] text-slate-200 min-h-screen flex flex-col justify-between border-r border-slate-800 shrink-0 sticky top-0 h-screen select-none font-sans z-40">
+    <aside className="w-64 bg-[#0F172A] text-slate-200 min-h-screen flex flex-col justify-between border-r border-slate-800 shrink-0 sticky top-0 h-screen select-none font-sans z-40">
       <div>
         {/* Brand Header */}
-        <div className="px-5 py-4 flex items-center gap-3 border-b border-slate-800">
-          <div className="w-9 h-9 rounded-lg bg-blue-600 flex items-center justify-center text-white shadow-xs shrink-0">
+        <div className="px-5 py-4 flex items-center gap-3 border-b border-slate-800/80">
+          <div className="w-9 h-9 rounded-lg bg-blue-600/90 flex items-center justify-center text-white shadow-sm shrink-0">
             <Scale className="w-5 h-5" />
           </div>
           <div>
             <h1 className="font-bold text-white text-sm tracking-tight leading-none">
               ClauseGuard <span className="text-blue-400">AI</span>
             </h1>
-            <p className="text-[10px] text-slate-400 font-medium tracking-wide uppercase mt-1">Legal Intelligence</p>
+            <p className="text-[10px] text-slate-400 font-semibold tracking-wider uppercase mt-1">Legal Intelligence</p>
           </div>
         </div>
 
         {/* Demo Mode Button */}
-        <div className="px-4 pt-4 pb-2">
+        <div className="px-4 pt-3.5 pb-2">
           <button
             onClick={handleRunDemo}
             disabled={seeding}
-            className="w-full flex items-center justify-center gap-2 px-3 py-2 bg-amber-950/40 hover:bg-amber-900/40 text-amber-300 border border-amber-800/60 font-medium text-xs rounded-lg transition-colors disabled:opacity-50 group"
+            className="w-full flex items-center justify-center gap-2 px-3 py-2 bg-slate-800/80 hover:bg-slate-800 text-amber-300 border border-amber-500/30 font-medium text-xs rounded-lg transition-colors disabled:opacity-50 group"
           >
             <Zap className="w-3.5 h-3.5 text-amber-400 shrink-0" />
             <span>{seeding ? 'Loading Demo...' : 'Instant Demo Mode'}</span>
@@ -80,8 +80,8 @@ const Sidebar = () => {
         </div>
 
         {/* Navigation Section */}
-        <div className="px-3 py-3">
-          <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider px-3 mb-2">Main Navigation</p>
+        <div className="px-3 py-2">
+          <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider px-3 mb-2">Main Navigation</p>
           <nav className="space-y-1">
             {navItems.map((item) => {
               const Icon = item.icon;
@@ -90,16 +90,16 @@ const Sidebar = () => {
                   key={item.path}
                   to={item.path}
                   className={({ isActive }) =>
-                    `flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-medium transition-colors relative ${
+                    `flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-medium transition-all ${
                       isActive
-                        ? 'bg-blue-600 text-white font-semibold shadow-xs'
-                        : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
+                        ? 'bg-slate-800 text-white font-semibold shadow-xs border-l-2 border-blue-500 pl-2.5'
+                        : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
                     }`
                   }
                 >
                   {({ isActive }) => (
                     <>
-                      <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-white' : 'text-slate-400'}`} />
+                      <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-blue-400' : 'text-slate-400'}`} />
                       <span>{item.label}</span>
                     </>
                   )}
@@ -111,15 +111,15 @@ const Sidebar = () => {
       </div>
 
       {/* Bottom User Profile Section */}
-      <div className="p-3.5 border-t border-slate-800 bg-[#090D16]">
+      <div className="p-3.5 border-t border-slate-800/80 bg-[#0B132B]">
         <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-2.5 truncate">
-            <div className="w-8 h-8 rounded-full bg-blue-700 text-white flex items-center justify-center text-xs font-semibold shrink-0 border border-blue-500/40">
+            <div className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-semibold shrink-0">
               {getInitials(user?.name)}
             </div>
             <div className="truncate">
               <p className="text-xs font-semibold text-white truncate">{user?.name || 'Counsel'}</p>
-              <p className="text-[10px] text-slate-400 font-normal truncate">{user?.email || 'counsel@firm.com'}</p>
+              <p className="text-[11px] text-slate-400 font-normal truncate">{user?.email || 'counsel@firm.com'}</p>
             </div>
           </div>
 

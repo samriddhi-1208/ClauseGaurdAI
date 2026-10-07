@@ -95,14 +95,14 @@ const DocumentsPage = () => {
     });
 
   return (
-    <div className="flex-1 bg-[#090D16] flex flex-col min-w-0 pb-12 font-sans text-slate-100">
+    <div className="flex-1 bg-slate-50 flex flex-col min-w-0 pb-12 font-sans text-slate-900">
       <Navbar title="Document Library" subtitle="Manage legal contracts, extracted clauses, and vector storage" />
 
       <main className="p-6 md:p-8 max-w-7xl w-full mx-auto space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-xl md:text-2xl font-bold text-white tracking-tight">Contract Library</h1>
-            <p className="text-xs text-slate-400 font-normal mt-0.5">
+            <h1 className="text-xl md:text-2xl font-bold text-slate-900 tracking-tight">Contract Library</h1>
+            <p className="text-xs text-slate-500 font-normal mt-0.5">
               Select 2 or more contracts to initiate automated cross-document contradiction analysis
             </p>
           </div>
@@ -111,7 +111,7 @@ const DocumentsPage = () => {
             {selectedIds.length >= 2 && (
               <button
                 onClick={handleCompareSelected}
-                className="px-3.5 py-2 bg-blue-600 hover:bg-blue-500 text-white font-medium text-xs rounded-lg shadow-xs flex items-center gap-2 transition-colors"
+                className="px-3.5 py-2 bg-[#0F172A] hover:bg-slate-800 text-white font-medium text-xs rounded-lg shadow-sm flex items-center gap-2 transition-colors"
               >
                 <GitCompare className="w-4 h-4" />
                 <span>Compare Selected ({selectedIds.length})</span>
@@ -121,15 +121,15 @@ const DocumentsPage = () => {
             <button
               onClick={handleRunDemo}
               disabled={seeding}
-              className="px-3.5 py-2 bg-amber-950/40 hover:bg-amber-900/40 text-amber-300 border border-amber-800/60 font-medium text-xs rounded-lg shadow-xs flex items-center gap-2 transition-colors disabled:opacity-50"
+              className="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 font-medium text-xs rounded-lg shadow-2xs flex items-center gap-2 transition-colors disabled:opacity-50"
             >
-              <Zap className="w-3.5 h-3.5 text-amber-400" />
+              <Zap className="w-3.5 h-3.5 text-amber-600" />
               <span>{seeding ? 'Loading...' : 'Instant Demo Mode'}</span>
             </button>
 
             <Link
               to="/upload"
-              className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-medium text-xs rounded-lg shadow-xs flex items-center gap-2 transition-colors"
+              className="px-4 py-2 bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 font-medium text-xs rounded-lg shadow-2xs flex items-center gap-2 transition-colors"
             >
               <Plus className="w-4 h-4" />
               <span>Upload Contract</span>
@@ -138,7 +138,7 @@ const DocumentsPage = () => {
         </div>
 
         {/* Search & Sort Bar */}
-        <div className="bg-[#111827] p-4 rounded-xl border border-slate-800 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="relative w-full sm:w-96">
             <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
             <input
@@ -146,18 +146,18 @@ const DocumentsPage = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search contracts by file name..."
-              className="w-full pl-10 pr-4 py-2 bg-[#0B101D] border border-slate-800 rounded-lg text-xs text-white placeholder-slate-500 font-medium focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+              className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-900 placeholder-slate-400 font-medium focus:outline-none focus:border-slate-400 focus:bg-white transition-colors"
             />
           </div>
 
           <div className="flex items-center gap-3 w-full sm:w-auto justify-end">
-            <div className="flex items-center gap-2 text-xs text-slate-300 font-medium">
-              <Filter className="w-3.5 h-3.5 text-slate-400" />
+            <div className="flex items-center gap-2 text-xs text-slate-700 font-medium">
+              <Filter className="w-3.5 h-3.5 text-slate-500" />
               <span>Sort:</span>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="bg-[#0B101D] border border-slate-800 rounded-md px-2.5 py-1 text-xs font-medium text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                className="bg-slate-50 border border-slate-200 rounded-md px-2.5 py-1 text-xs font-medium text-slate-800 focus:outline-none focus:border-slate-400"
               >
                 <option value="newest">Newest First</option>
                 <option value="clauses">Most Clauses</option>
@@ -165,43 +165,45 @@ const DocumentsPage = () => {
               </select>
             </div>
 
-            <span className="text-xs text-slate-400 font-medium pl-3 border-l border-slate-800">
+            <span className="text-xs text-slate-500 font-medium pl-3 border-l border-slate-200">
               {filteredDocs.length} Contracts
             </span>
           </div>
         </div>
 
         {/* Contracts Table */}
-        <div className="bg-[#111827] rounded-xl border border-slate-800 shadow-xs overflow-hidden">
+        <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
           {loading ? (
-            <div className="py-14 text-center text-slate-400 text-xs font-normal">Loading contract library...</div>
+            <div className="py-14 text-center text-slate-500 text-xs font-normal">Loading contract library...</div>
           ) : filteredDocs.length === 0 ? (
             <div className="py-14 text-center space-y-3">
-              <FolderOpen className="w-10 h-10 text-slate-600 mx-auto" />
-              <h4 className="text-sm font-semibold text-white">No contracts found</h4>
-              <p className="text-xs text-slate-400 font-normal max-w-sm mx-auto">
+              <div className="w-12 h-12 rounded-xl bg-slate-100 text-slate-500 flex items-center justify-center mx-auto">
+                <FolderOpen className="w-6 h-6" />
+              </div>
+              <h4 className="text-sm font-semibold text-slate-900">No contracts found</h4>
+              <p className="text-xs text-slate-500 font-normal max-w-sm mx-auto">
                 No legal agreements matched your search filter. Clear your query or upload new documents.
               </p>
               <button
                 onClick={handleRunDemo}
-                className="px-4 py-2 bg-amber-950/40 hover:bg-amber-900/40 text-amber-300 border border-amber-800/60 font-medium text-xs rounded-lg shadow-xs"
+                className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 font-medium text-xs rounded-lg shadow-2xs"
               >
                 Load Sample Contracts
               </button>
             </div>
           ) : (
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs text-slate-300">
-                <thead className="bg-[#0B101D] text-[10px] font-semibold text-slate-400 uppercase tracking-wider border-b border-slate-800">
+              <table className="w-full text-left text-xs text-slate-700">
+                <thead className="bg-slate-50 text-[11px] font-semibold text-slate-500 uppercase tracking-wider border-b border-slate-200">
                   <tr>
                     <th className="py-3 px-4 w-10">
                       <button
                         onClick={toggleSelectAll}
                         aria-label="Select all contracts"
-                        className="text-slate-400 hover:text-blue-400"
+                        className="text-slate-400 hover:text-slate-700"
                       >
                         {selectedIds.length === filteredDocs.length && filteredDocs.length > 0 ? (
-                          <CheckSquare className="w-4 h-4 text-blue-400" />
+                          <CheckSquare className="w-4 h-4 text-blue-600" />
                         ) : (
                           <Square className="w-4 h-4" />
                         )}
@@ -215,47 +217,47 @@ const DocumentsPage = () => {
                     <th className="py-3 px-4 text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-800">
+                <tbody className="divide-y divide-slate-100">
                   {filteredDocs.map((doc) => {
                     const docId = doc._id || doc.id;
                     const isSelected = selectedIds.includes(docId);
                     return (
                       <tr
                         key={docId}
-                        className={`transition-colors ${isSelected ? 'bg-blue-950/30' : 'hover:bg-slate-800/50'}`}
+                        className={`transition-colors ${isSelected ? 'bg-blue-50/40' : 'hover:bg-slate-50/70'}`}
                       >
                         <td className="py-3.5 px-4">
                           <button
                             onClick={() => toggleSelect(docId)}
                             aria-label={`Select contract ${doc.fileName}`}
-                            className="text-slate-400 hover:text-blue-400"
+                            className="text-slate-400 hover:text-slate-700"
                           >
                             {isSelected ? (
-                              <CheckSquare className="w-4 h-4 text-blue-400" />
+                              <CheckSquare className="w-4 h-4 text-blue-600" />
                             ) : (
                               <Square className="w-4 h-4" />
                             )}
                           </button>
                         </td>
-                        <td className="py-3.5 px-4 font-medium text-white flex items-center gap-2.5">
-                          <div className="w-7 h-7 rounded-md bg-blue-950 text-blue-400 flex items-center justify-center shrink-0 border border-blue-800/60">
+                        <td className="py-3.5 px-4 font-semibold text-slate-900 flex items-center gap-2.5">
+                          <div className="w-7 h-7 rounded-md bg-slate-100 text-slate-700 flex items-center justify-center shrink-0 border border-slate-200">
                             <FileText className="w-4 h-4" />
                           </div>
                           <span className="truncate max-w-[260px]">{doc.fileName}</span>
                         </td>
-                        <td className="py-3.5 px-4 text-slate-400 font-normal">
+                        <td className="py-3.5 px-4 text-slate-500 font-normal">
                           {new Date(doc.uploadDate || Date.now()).toLocaleDateString()}
                         </td>
                         <td className="py-3.5 px-4">
                           <StatusBadge status={doc.processingStatus} />
                         </td>
-                        <td className="py-3.5 px-4 font-normal text-slate-300">{doc.totalPages || 1}</td>
-                        <td className="py-3.5 px-4 font-normal text-slate-300">{doc.totalClauses || 0} clauses</td>
+                        <td className="py-3.5 px-4 font-normal text-slate-600">{doc.totalPages || 1}</td>
+                        <td className="py-3.5 px-4 font-normal text-slate-600">{doc.totalClauses || 0} clauses</td>
                         <td className="py-3.5 px-4 text-right">
                           <div className="flex items-center justify-end gap-1.5">
                             <Link
                               to={`/documents/${docId}`}
-                              className="px-2.5 py-1 rounded-md bg-slate-800 text-slate-200 hover:bg-blue-600 hover:text-white font-medium transition-colors text-xs flex items-center gap-1 border border-slate-700"
+                              className="px-2.5 py-1 rounded-md bg-white hover:bg-slate-50 text-slate-700 font-medium transition-colors text-xs flex items-center gap-1 border border-slate-200 shadow-2xs"
                               title="Inspect Clauses"
                             >
                               <Eye className="w-3.5 h-3.5" />
@@ -266,7 +268,7 @@ const DocumentsPage = () => {
                               onClick={() => handleDelete(docId)}
                               disabled={deletingId === docId}
                               aria-label={`Delete ${doc.fileName}`}
-                              className="p-1.5 rounded-md text-slate-400 hover:text-rose-400 hover:bg-rose-950/40 transition-colors disabled:opacity-50"
+                              className="p-1.5 rounded-md text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors disabled:opacity-50"
                               title="Delete Contract"
                             >
                               <Trash2 className="w-3.5 h-3.5" />
