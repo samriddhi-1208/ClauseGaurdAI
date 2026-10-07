@@ -36,7 +36,7 @@ const RegisterPage = () => {
     try {
       setLoading(true);
       await register(name, email, password);
-      navigate('/dashboard');
+      navigate('/profile', { state: { isNewAccount: true } });
     } catch (err) {
       setError(err.message || 'Registration failed.');
     } finally {
