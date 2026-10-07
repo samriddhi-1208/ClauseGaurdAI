@@ -48,14 +48,14 @@ const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
       {isMobileOpen && (
         <div 
           onClick={onCloseMobile}
-          className="fixed inset-0 bg-[#18231C]/30 backdrop-blur-xs z-40 lg:hidden"
+          className="fixed inset-0 bg-[#18231C]/30 backdrop-blur-xs z-40 md:hidden"
           aria-hidden="true"
         />
       )}
 
       <aside 
-        className={`fixed lg:sticky top-0 left-0 h-screen w-64 bg-[#EAE8DF] text-[#242C26] flex flex-col justify-between border-r border-[#D7D5CB] z-50 select-none font-sans transition-transform duration-200 ease-in-out shrink-0 ${
-          isMobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+        className={`fixed md:sticky top-0 left-0 h-screen w-64 bg-[#EAE8DF] text-[#242C26] flex flex-col justify-between border-r border-[#D7D5CB] z-50 select-none font-sans shrink-0 transition-transform duration-200 ease-in-out ${
+          isMobileOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
         }`}
       >
         {/* Top & Navigation Section */}
@@ -79,7 +79,7 @@ const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
             {/* Mobile Close Button */}
             <button
               onClick={onCloseMobile}
-              className="lg:hidden p-1.5 rounded-lg text-[#5A635B] hover:text-[#18231C] hover:bg-[#DCD8CB] transition-colors"
+              className="md:hidden p-1.5 rounded-lg text-[#5A635B] hover:text-[#18231C] hover:bg-[#DCD8CB] transition-colors"
               aria-label="Close sidebar"
             >
               <X className="w-4 h-4 stroke-[2]" />
@@ -88,6 +88,9 @@ const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
 
           {/* Main Navigation */}
           <div className="px-3.5 py-4 space-y-1">
+            <p className="px-3 text-[11px] font-semibold text-[#6E7B71] uppercase tracking-[0.05em] mb-2">
+              Workspace
+            </p>
             {mainNav.map((item) => {
               const Icon = item.icon;
               return (
@@ -119,6 +122,9 @@ const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
 
           {/* Settings & Profile Navigation */}
           <div className="px-3.5 py-2 space-y-1">
+            <p className="px-3 text-[11px] font-semibold text-[#6E7B71] uppercase tracking-[0.05em] mb-1.5">
+              Preferences
+            </p>
             {bottomNav.map((item) => {
               const Icon = item.icon;
               return (

@@ -42,7 +42,7 @@ const Navbar = ({ title, subtitle }) => {
           {outletContext?.toggleMobileSidebar && (
             <button
               onClick={outletContext.toggleMobileSidebar}
-              className="lg:hidden p-2 rounded-xl bg-white border border-[#DDDCD3] text-[#4E5650] hover:text-[#18231C] transition-colors shrink-0 shadow-2xs"
+              className="md:hidden p-2 rounded-xl bg-white border border-[#DDDCD3] text-[#4E5650] hover:text-[#18231C] transition-colors shrink-0 shadow-2xs"
               aria-label="Toggle navigation menu"
             >
               <Menu className="w-4 h-4 stroke-[2]" />
