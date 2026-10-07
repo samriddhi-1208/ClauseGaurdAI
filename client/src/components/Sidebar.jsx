@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { 
+  Shield, 
   LayoutDashboard, 
   UploadCloud, 
-  Search,
+  Search, 
   GitCompare, 
   ShieldAlert, 
   Clock, 
-  Scale, 
-  Settings,
-  LogOut,
-  User
+  Settings, 
+  User,
+  LogOut 
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
@@ -18,7 +18,7 @@ const Sidebar = () => {
   const { logout, user } = useAuth();
   const navigate = useNavigate();
 
-  const navItems = [
+  const mainNav = [
     { label: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
     { label: 'Upload Documents', path: '/upload', icon: UploadCloud },
     { label: 'Analyze', path: '/chat', icon: Search },
@@ -28,89 +28,100 @@ const Sidebar = () => {
   ];
 
   const getInitials = (name) => {
-    if (!name) return 'ST';
-    const parts = name.trim().split(' ');
-    if (parts.length >= 2) return `${parts[0][0]}${parts[1][0]}`.toUpperCase();
-    return name.substring(0, 2).toUpperCase();
+    if (!name) return 'S';
+    return name.charAt(0).toUpperCase();
   };
 
   return (
-    <aside className="w-60 bg-[#F5F4EE] text-[#2E3430] min-h-screen flex flex-col justify-between border-r border-[#E8E7E0] shrink-0 sticky top-0 h-screen select-none font-sans z-40">
+    <aside className="w-64 bg-[#EAE8DF] text-[#242C26] min-h-screen flex flex-col justify-between border-r border-[#D7D5CB] shrink-0 sticky top-0 h-screen select-none font-sans z-40">
       <div>
         {/* Brand Header */}
-        <div className="px-5 py-5 flex items-center gap-3 border-b border-[#E8E7E0]/70">
-          <div className="w-8 h-8 rounded-lg bg-[#E7ECE7] text-[#2F4335] flex items-center justify-center shrink-0">
-            <Scale className="w-4 h-4 stroke-[1.75]" />
-          </div>
-          <div>
-            <h1 className="font-semibold text-sm text-[#1F2421] tracking-tight leading-none">
-              ClauseGuard <span className="text-[#5B8266] font-medium">AI</span>
-            </h1>
-            <p className="text-[10px] text-[#7B847E] font-normal tracking-wide mt-1">Contract Intelligence</p>
+        <div className="px-6 py-6 border-b border-[#D7D5CB]/70">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg bg-[#3F6149] text-white flex items-center justify-center shrink-0 shadow-2xs">
+              <Shield className="w-4 h-4 stroke-[2]" />
+            </div>
+            <div>
+              <h1 className="font-semibold text-sm text-[#18231C] tracking-tight leading-none">
+                ClauseGuard AI
+              </h1>
+              <p className="text-[10px] text-[#5A635B] font-normal tracking-tight mt-1">
+                Smarter Contracts. Safer Decisions.
+              </p>
+            </div>
           </div>
         </div>
 
         {/* Navigation Section */}
-        <div className="px-3 py-4">
-          <nav className="space-y-1">
-            {navItems.map((item) => {
-              const Icon = item.icon;
-              return (
-                <NavLink
-                  key={item.path}
-                  to={item.path}
-                  className={({ isActive }) =>
-                    `flex items-center gap-3 px-3 py-2 rounded-xl text-xs transition-colors ${
-                      isActive
-                        ? 'bg-[#E7ECE7] text-[#1C2D24] font-medium shadow-2xs'
-                        : 'text-[#606963] hover:text-[#1F2421] hover:bg-[#EBEAE3] font-normal'
-                    }`
-                  }
-                >
-                  {({ isActive }) => (
-                    <>
-                      <Icon className={`w-4 h-4 shrink-0 stroke-[1.75] ${isActive ? 'text-[#3D5745]' : 'text-[#7B847E]'}`} />
-                      <span>{item.label}</span>
-                    </>
-                  )}
-                </NavLink>
-              );
-            })}
-          </nav>
+        <div className="px-3.5 py-5 space-y-1">
+          {mainNav.map((item) => {
+            const Icon = item.icon;
+            return (
+              <NavLink
+                key={item.path}
+                to={item.path}
+                className={({ isActive }) =>
+                  `flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium transition-colors ${
+                    isActive
+                      ? 'bg-[#DCD8CB] text-[#18231C] shadow-2xs font-semibold'
+                      : 'text-[#4E5650] hover:text-[#18231C] hover:bg-[#E3E0D6]'
+                  }`
+                }
+              >
+                {({ isActive }) => (
+                  <>
+                    <Icon className={`w-4 h-4 shrink-0 stroke-[1.8] ${isActive ? 'text-[#304E39]' : 'text-[#616A63]'}`} />
+                    <span>{item.label}</span>
+                  </>
+                )}
+              </NavLink>
+            );
+          })}
+        </div>
+
+        {/* Divider */}
+        <div className="mx-5 my-2 border-t border-[#D7D5CB]"></div>
+
+        {/* Secondary Navigation */}
+        <div className="px-3.5 space-y-1">
+          <button
+            onClick={() => alert('Settings: General preferences & AI parameters.')}
+            className="w-full flex items-center gap-3 px-3.5 py-2 rounded-xl text-xs font-medium text-[#4E5650] hover:text-[#18231C] hover:bg-[#E3E0D6] transition-colors"
+          >
+            <Settings className="w-4 h-4 shrink-0 stroke-[1.8] text-[#616A63]" />
+            <span>Settings</span>
+          </button>
+          <button
+            onClick={() => alert(`Profile Information\nUser: ${user?.name || 'Samriddhi Tiwari'}\nEmail: ${user?.email || 'tiwari.samriddhi12@gmail.com'}`)}
+            className="w-full flex items-center gap-3 px-3.5 py-2 rounded-xl text-xs font-medium text-[#4E5650] hover:text-[#18231C] hover:bg-[#E3E0D6] transition-colors"
+          >
+            <User className="w-4 h-4 stroke-[1.8] text-[#616A63]" />
+            <span>Profile</span>
+          </button>
         </div>
       </div>
 
-      {/* Bottom Profile / Settings Section */}
-      <div className="p-3 border-t border-[#E8E7E0]/80 bg-[#EFEFE8]">
+      {/* Bottom Profile Footer */}
+      <div className="p-4 border-t border-[#D7D5CB] bg-[#E3E0D6]/60">
         <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-2.5 truncate">
-            <div className="w-7 h-7 rounded-full bg-[#5B8266] text-white flex items-center justify-center text-[11px] font-medium shrink-0">
+            <div className="w-8 h-8 rounded-full bg-[#3F6149] text-white flex items-center justify-center text-xs font-semibold shrink-0 shadow-2xs">
               {getInitials(user?.name)}
             </div>
             <div className="truncate">
-              <p className="text-xs font-medium text-[#1F2421] truncate">{user?.name || 'Samriddhi'}</p>
-              <p className="text-[10px] text-[#7B847E] truncate font-normal">{user?.email || 'user@workspace.com'}</p>
+              <p className="text-xs font-semibold text-[#18231C] truncate">{user?.name || 'Samriddhi Tiwari'}</p>
+              <p className="text-[11px] text-[#5A635B] truncate">{user?.email || 'counsel@lawfirm.com'}</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-0.5 shrink-0">
-            <button
-              onClick={() => alert(`ClauseGuard AI Workspace\nUser: ${user?.name || 'Samriddhi'}\nRole: Contract Counsel`)}
-              title="Settings & Profile"
-              aria-label="Settings and Profile"
-              className="p-1.5 rounded-lg text-[#7B847E] hover:text-[#1F2421] hover:bg-[#E4E3DC] transition-colors"
-            >
-              <Settings className="w-3.5 h-3.5 stroke-[1.75]" />
-            </button>
-            <button
-              onClick={logout}
-              title="Sign out"
-              aria-label="Sign out"
-              className="p-1.5 rounded-lg text-[#7B847E] hover:text-[#C25450] hover:bg-[#E4E3DC] transition-colors"
-            >
-              <LogOut className="w-3.5 h-3.5 stroke-[1.75]" />
-            </button>
-          </div>
+          <button
+            onClick={logout}
+            title="Sign out"
+            aria-label="Sign out"
+            className="p-1.5 rounded-lg text-[#616A63] hover:text-[#B5413D] hover:bg-[#DCD8CB] transition-colors"
+          >
+            <LogOut className="w-3.5 h-3.5 stroke-[1.8]" />
+          </button>
         </div>
       </div>
     </aside>
