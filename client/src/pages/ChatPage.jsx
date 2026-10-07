@@ -7,16 +7,11 @@ import {
   FileText, 
   Sparkles, 
   Loader2, 
-  BookOpen, 
-  Filter, 
-  CheckCircle2, 
-  ShieldCheck,
-  Search,
-  Lightbulb,
-  Clock,
-  CreditCard,
-  Lock,
-  FileQuestion
+  Clock, 
+  CreditCard, 
+  Lock, 
+  FileQuestion,
+  Filter
 } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import { chatAPI, documentAPI } from '../services/api';
@@ -98,166 +93,25 @@ const ChatPage = () => {
     }
   };
 
-  const selectedDocument = documents.find(d => (d._id || d.id) === selectedDocId);
-  const lastAiMessage = [...messages].reverse().find(m => m.sender === 'ai');
-  const activeSources = lastAiMessage?.sources || [];
-
   return (
-    <div className="flex-1 bg-slate-50 flex flex-col min-w-0 h-screen overflow-hidden font-sans text-slate-900">
-      <Navbar title="AI Legal Research Assistant" subtitle="Inquire about contractual terms with grounded citations from vector memory" />
+    <div className="flex-1 bg-[#F8F7F2] flex flex-col min-w-0 h-screen font-sans text-[#18231C]">
+      <Navbar title="Contract Analysis Assistant" subtitle="Interactive legal Q&A grounded in vectorized contract clauses" />
 
-      <main className="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 flex flex-col md:flex-row gap-5 min-h-0 overflow-hidden">
-        {/* Main Conversation Area */}
-        <div className="flex-1 flex flex-col min-h-0 bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-          
-          {/* Conversation Header Bar */}
-          <div className="px-5 py-3.5 bg-slate-50 text-slate-900 flex items-center justify-between border-b border-slate-200 shrink-0">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center shrink-0 border border-slate-200">
-                <Sparkles className="w-4 h-4 text-slate-700" />
-              </div>
-              <div>
-                <h2 className="text-xs font-semibold text-slate-900 flex items-center gap-2">
-                  <span>Legal Research Dialogue</span>
-                  <span className="px-2 py-0.5 bg-slate-200 text-slate-700 text-[10px] font-semibold rounded-md">
-                    Grounded RAG
-                  </span>
-                </h2>
-                <p className="text-[11px] text-slate-500 font-normal">ChromaDB Persistent Vector Index & Gemini AI</p>
-              </div>
-            </div>
-
-            {/* Scope Badge */}
-            <div className="hidden sm:flex items-center gap-2 bg-white px-3 py-1 rounded-md border border-slate-200 shadow-2xs">
-              <Filter className="w-3.5 h-3.5 text-slate-500" />
-              <span className="text-xs text-slate-700 font-medium truncate max-w-[180px]">
-                {selectedDocument ? selectedDocument.fileName : `All Contracts (${documents.length})`}
-              </span>
-            </div>
-          </div>
-
-          {/* Conversation Feed */}
-          <div className="flex-1 p-5 overflow-y-auto space-y-4 bg-slate-50/50">
-            {messages.map((msg, idx) => (
-              <div
-                key={idx}
-                className={`flex gap-3 max-w-3xl ${msg.sender === 'user' ? 'ml-auto flex-row-reverse' : ''}`}
-              >
-                <div
-                  className={`w-7 h-7 rounded-lg flex items-center justify-center text-white shrink-0 shadow-2xs ${
-                    msg.sender === 'user'
-                      ? 'bg-[#0F172A]'
-                      : 'bg-white border border-slate-200 text-slate-700'
-                  }`}
-                >
-                  {msg.sender === 'user' ? <User className="w-3.5 h-3.5" /> : <Bot className="w-3.5 h-3.5 text-slate-700" />}
-                </div>
-
-                <div
-                  className={`p-4 rounded-xl text-xs leading-relaxed font-normal ${
-                    msg.sender === 'user'
-                      ? 'bg-[#0F172A] text-white rounded-tr-none shadow-sm'
-                      : 'bg-white text-slate-800 border border-slate-200 rounded-tl-none space-y-3 shadow-sm'
-                  }`}
-                >
-                  <p className="whitespace-pre-wrap">{msg.text}</p>
-
-                  {/* Sources Citations */}
-                  {msg.sources && msg.sources.length > 0 && (
-                    <div className="pt-3 border-t border-slate-100 space-y-2">
-                      <div className="flex items-center justify-between">
-                        <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider flex items-center gap-1">
-                          <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                          Retrieved Document Sources:
-                        </span>
-                        <span className="text-[10px] text-slate-500 font-medium">
-                          {msg.sources.length} citation{msg.sources.length > 1 ? 's' : ''}
-                        </span>
-                      </div>
-                      <div className="flex flex-wrap gap-1.5">
-                        {msg.sources.map((src, sIdx) => (
-                          <div
-                            key={sIdx}
-                            className="px-2.5 py-1 bg-slate-50 border border-slate-200 rounded-md text-xs font-medium text-slate-800 flex items-center gap-1.5 shadow-2xs"
-                          >
-                            <FileText className="w-3.5 h-3.5 text-slate-500 shrink-0" />
-                            <span className="truncate max-w-[150px]">{src.documentName}</span>
-                            <span className="text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded text-[10px] font-semibold border border-blue-200">
-                              Page {src.pageNumber}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            ))}
-
-            {loading && (
-              <div className="flex gap-3 max-w-3xl">
-                <div className="w-7 h-7 rounded-lg bg-white flex items-center justify-center text-slate-700 shrink-0 border border-slate-200">
-                  <Bot className="w-3.5 h-3.5" />
-                </div>
-                <div className="p-3.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-600 flex items-center gap-2.5 shadow-2xs">
-                  <Loader2 className="w-4 h-4 animate-spin text-slate-600 shrink-0" />
-                  <span className="font-normal text-xs text-slate-600">
-                    Retrieving vector chunks and generating response...
-                  </span>
-                </div>
-              </div>
-            )}
-
-            <div ref={chatEndRef} />
-          </div>
-
-          {/* Form Input Bar */}
-          <div className="p-3 bg-white border-t border-slate-200 shrink-0">
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                handleSend();
-              }}
-              className="flex items-center gap-2 bg-slate-50 p-1.5 rounded-lg border border-slate-200 focus-within:border-slate-400 focus-within:bg-white transition-colors"
-            >
-              <input
-                type="text"
-                value={inputQuestion}
-                onChange={(e) => setInputQuestion(e.target.value)}
-                placeholder="Ask a question about terms in your contract library..."
-                className="flex-1 px-3 py-1.5 text-xs font-medium text-slate-900 bg-transparent focus:outline-none placeholder:text-slate-400"
-              />
-              <button
-                type="submit"
-                disabled={!inputQuestion.trim() || loading}
-                aria-label="Send question"
-                className="px-3.5 py-1.5 bg-[#0F172A] hover:bg-slate-800 text-white font-medium text-xs rounded-md shadow-2xs transition-colors flex items-center gap-1.5 disabled:opacity-50 shrink-0"
-              >
-                <span>Ask AI</span>
-                <Send className="w-3.5 h-3.5" />
-              </button>
-            </form>
-          </div>
-        </div>
-
-        {/* Right Sidebar: Context & Citations */}
-        <div className="w-full md:w-80 flex flex-col gap-4 shrink-0 overflow-y-auto">
-          
-          {/* Section 1: Active Context Selection */}
-          <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-3">
-            <div className="flex items-center gap-2 text-xs font-semibold text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-2.5">
-              <BookOpen className="w-4 h-4 text-slate-600" />
-              <span>Target Scope</span>
-            </div>
-
-            <div>
-              <label className="block text-[11px] font-medium text-slate-500 mb-1">Inquire across:</label>
+      {/* Main Chat Workspace */}
+      <div className="flex-1 overflow-hidden flex flex-col max-w-5xl w-full mx-auto p-4 md:p-6">
+        
+        {/* Top Control Bar: Document Filter & Prompt Chips */}
+        <div className="bg-white rounded-2xl border border-[#DDDCD3] p-4 shadow-card mb-4 space-y-3">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="flex items-center gap-2 text-xs font-semibold text-[#18231C]">
+              <Filter className="w-3.5 h-3.5 text-[#3F6149]" />
+              <span>Query Scope:</span>
               <select
                 value={selectedDocId}
                 onChange={(e) => setSelectedDocId(e.target.value)}
-                className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-md text-xs font-medium text-slate-800 focus:outline-none focus:border-slate-400"
+                className="bg-[#FAF9F5] border border-[#DDDCD3] rounded-lg px-2.5 py-1 text-xs font-semibold text-[#18231C] focus:outline-none focus:border-[#3F6149]"
               >
-                <option value="">All Uploaded Contracts ({documents.length})</option>
+                <option value="">All Uploaded Contracts (Global Library)</option>
                 {documents.map((d) => (
                   <option key={d._id || d.id} value={d._id || d.id}>
                     {d.fileName}
@@ -266,103 +120,128 @@ const ChatPage = () => {
               </select>
             </div>
 
-            <div className="space-y-1.5 pt-1">
-              {documents.slice(0, 4).map((d) => {
-                const dId = d._id || d.id;
-                const isSelected = selectedDocId === dId;
-                return (
-                  <div
-                    key={dId}
-                    onClick={() => setSelectedDocId(dId)}
-                    className={`p-2 rounded-lg border text-xs cursor-pointer transition-all flex items-center justify-between ${
-                      isSelected
-                        ? 'bg-blue-50/60 border-blue-500 text-slate-900 font-medium'
-                        : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100 font-normal'
-                    }`}
-                  >
-                    <div className="flex items-center gap-2 truncate">
-                      <FileText className="w-3.5 h-3.5 text-slate-500 shrink-0" />
-                      <span className="truncate max-w-[150px]">{d.fileName}</span>
-                    </div>
-                    <span className="text-[10px] bg-white border border-slate-200 px-1.5 py-0.5 rounded text-slate-600">
-                      {d.totalClauses || 0} clauses
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
+            <span className="text-[11px] text-[#758177]">
+              Vector Memory Powered by Gemini & ChromaDB
+            </span>
           </div>
 
-          {/* Section 2: Grounded Citations */}
-          <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-3">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
-              <span className="text-xs font-semibold text-slate-900 uppercase tracking-wider flex items-center gap-2">
-                <Search className="w-4 h-4 text-emerald-600" />
-                <span>Grounded Citations</span>
-              </span>
-              <span className="text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
-                {activeSources.length} Found
-              </span>
-            </div>
-
-            {activeSources.length === 0 ? (
-              <div className="p-3 bg-slate-50 rounded-lg border border-slate-200 text-xs text-slate-500 font-normal flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-slate-400 shrink-0" />
-                <span>Ask a question to inspect retrieved citations.</span>
-              </div>
-            ) : (
-              <div className="space-y-2">
-                {activeSources.map((src, idx) => (
-                  <div key={idx} className="p-2.5 bg-slate-50 rounded-lg border border-slate-200 text-xs space-y-1">
-                    <div className="flex items-center justify-between font-semibold text-slate-900">
-                      <span className="truncate max-w-[140px]">{src.documentName}</span>
-                      <span className="text-[10px] bg-blue-50 text-blue-700 px-1.5 py-0.5 rounded font-mono border border-blue-200">
-                        Page {src.pageNumber}
-                      </span>
-                    </div>
-                    <p className="text-[11px] text-slate-600 line-clamp-2 italic font-sans leading-relaxed">
-                      "{src.textSnippet || 'Retrieved grounded clause matching search intent.'}"
-                    </p>
-                  </div>
-                ))}
-              </div>
-            )}
+          {/* Quick Prompts */}
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 pt-1">
+            {SUGGESTED_PROMPTS.map((sp, idx) => {
+              const Icon = sp.icon;
+              return (
+                <button
+                  key={idx}
+                  onClick={() => handleSend(sp.prompt)}
+                  className="px-3 py-1.5 rounded-xl bg-[#FAF9F5] hover:bg-[#EAECE4] border border-[#DDDCD3] hover:border-[#CADBCC] text-xs font-medium text-[#2E3731] flex items-center gap-1.5 shrink-0 transition-colors shadow-2xs"
+                >
+                  <Icon className="w-3.5 h-3.5 text-[#3F6149]" />
+                  <span>{sp.title}</span>
+                </button>
+              );
+            })}
           </div>
-
-          {/* Section 3: Suggested Inquiries */}
-          <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-3">
-            <div className="flex items-center gap-2 text-xs font-semibold text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-2.5">
-              <Lightbulb className="w-4 h-4 text-amber-600" />
-              <span>Suggested Inquiries</span>
-            </div>
-
-            <div className="space-y-2">
-              {SUGGESTED_PROMPTS.map((item, idx) => {
-                const Icon = item.icon;
-                return (
-                  <button
-                    key={idx}
-                    onClick={() => handleSend(item.prompt)}
-                    disabled={loading}
-                    className="w-full text-left p-2.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 hover:border-slate-300 rounded-lg text-xs font-normal text-slate-800 transition-colors flex items-start gap-2.5 group disabled:opacity-50"
-                  >
-                    <Icon className="w-3.5 h-3.5 text-slate-500 mt-0.5 shrink-0" />
-                    <div>
-                      <span className="block font-medium text-slate-900 group-hover:text-blue-700 transition-colors">
-                        {item.title}
-                      </span>
-                      <span className="block text-[11px] text-slate-500 font-normal line-clamp-1">
-                        {item.prompt}
-                      </span>
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
         </div>
-      </main>
+
+        {/* Message Stream */}
+        <div className="flex-1 overflow-y-auto space-y-4 px-2 pr-3">
+          {messages.map((msg, idx) => (
+            <div
+              key={idx}
+              className={`flex items-start gap-3 ${
+                msg.sender === 'user' ? 'justify-end' : 'justify-start'
+              }`}
+            >
+              {msg.sender === 'ai' && (
+                <div className="w-8 h-8 rounded-xl bg-[#3F6149] text-white flex items-center justify-center shrink-0 shadow-2xs">
+                  <Bot className="w-4 h-4 stroke-[2]" />
+                </div>
+              )}
+
+              <div
+                className={`max-w-2xl rounded-2xl p-4.5 text-xs md:text-sm leading-relaxed shadow-card ${
+                  msg.sender === 'user'
+                    ? 'bg-[#EAECE4] text-[#18231C] border border-[#D7DACD]'
+                    : 'bg-white text-[#18231C] border border-[#DDDCD3]'
+                }`}
+              >
+                <p className="whitespace-pre-line leading-relaxed font-normal">{msg.text}</p>
+
+                {/* Grounded Source Citations */}
+                {msg.sources && msg.sources.length > 0 && (
+                  <div className="mt-4 pt-3 border-t border-[#ECEAE2] space-y-1.5">
+                    <p className="text-[10px] font-semibold text-[#6B736D] uppercase tracking-wider">
+                      Source Citations ({msg.sources.length})
+                    </p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {msg.sources.map((src, sIdx) => (
+                        <div
+                          key={sIdx}
+                          className="px-2.5 py-1 rounded-lg bg-[#FAF9F5] border border-[#DDDCD3] text-[11px] font-medium text-[#2E3731] flex items-center gap-1.5"
+                        >
+                          <FileText className="w-3 h-3 text-[#3F6149]" />
+                          <span className="font-semibold">{src.fileName || 'Contract'}</span>
+                          {src.pageNumber && (
+                            <span className="text-[#758177]">p. {src.pageNumber}</span>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {msg.sender === 'user' && (
+                <div className="w-8 h-8 rounded-xl bg-[#EDE9DE] text-[#685F4D] flex items-center justify-center shrink-0 shadow-2xs font-bold text-xs">
+                  U
+                </div>
+              )}
+            </div>
+          ))}
+
+          {loading && (
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-xl bg-[#3F6149] text-white flex items-center justify-center shrink-0">
+                <Bot className="w-4 h-4" />
+              </div>
+              <div className="bg-white rounded-2xl p-4 border border-[#DDDCD3] shadow-card flex items-center gap-2 text-xs text-[#5A665D]">
+                <Loader2 className="w-4 h-4 animate-spin text-[#3F6149]" />
+                <span>Searching semantic contract vectors & reasoning with Gemini...</span>
+              </div>
+            </div>
+          )}
+
+          <div ref={chatEndRef} />
+        </div>
+
+        {/* Input Bar */}
+        <div className="pt-3">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSend();
+            }}
+            className="bg-white rounded-2xl border border-[#DDDCD3] p-2 shadow-card flex items-center gap-2"
+          >
+            <input
+              type="text"
+              value={inputQuestion}
+              onChange={(e) => setInputQuestion(e.target.value)}
+              placeholder="Ask any question regarding warranties, termination, or confidentiality..."
+              className="flex-1 px-3 py-2 bg-transparent text-xs md:text-sm text-[#18231C] placeholder-[#8C948C] focus:outline-none"
+            />
+            <button
+              type="submit"
+              disabled={loading || !inputQuestion.trim()}
+              className="py-2.5 px-4 bg-[#3F6149] hover:bg-[#34503C] text-white font-semibold text-xs rounded-xl shadow-2xs transition-colors flex items-center gap-1.5 disabled:opacity-40"
+            >
+              <span>Send</span>
+              <Send className="w-3.5 h-3.5 stroke-[2]" />
+            </button>
+          </form>
+        </div>
+
+      </div>
     </div>
   );
 };

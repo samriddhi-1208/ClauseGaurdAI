@@ -10,64 +10,89 @@ export default {
         sans: ['"Plus Jakarta Sans"', 'Inter', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
       },
       colors: {
+        // Deep muted sage green palette
         sage: {
-          50: '#F5F7F5',
-          100: '#E7ECE7',
-          200: '#D2DDD2',
-          300: '#B4C6B5',
-          400: '#91AB93',
-          500: '#5B8266', // Primary soft sage green
-          600: '#4D6F57',
-          700: '#3D5745',
-          800: '#2F4335',
-          900: '#1C2D24', // Deep green text
+          50: '#F6F8F6',
+          100: '#EAECE4',
+          200: '#D7DCD3',
+          300: '#BDC7B8',
+          400: '#899E84',
+          500: '#52725A',
+          600: '#3F6149', // Primary forest-sage
+          700: '#34503C', // Hover / strong action
+          800: '#273C2D',
+          900: '#18231C', // Darkest green / charcoal text
         },
+        // Warm off-white backgrounds & surfaces
         warm: {
-          bg: '#FAF9F6',       // Warm off-white
-          sidebar: '#F5F4EE',  // Warm light sidebar
-          card: '#FFFFFF',     // Clean white / light cream
-          subtle: '#F6F5F0',   // Very light cream surface
-          border: '#E8E7E0',   // Delicate warm border
-          borderLight: '#F0EFE8',
+          bg: '#F8F7F2',       // Warm off-white page background
+          card: '#FFFFFF',     // Clean surface
+          surface: '#FDFCF9',  // Warm light surface
+          sidebar: '#EAE8DF',  // Sidebar background
+          border: '#E2DFD5',   // Delicate border
+          borderLight: '#ECEAE2',
+          borderDark: '#D5D2C5',
         },
+        // Typography text shades
         charcoal: {
-          900: '#1F2421',      // Dark charcoal text
-          800: '#2E3430',
-          700: '#47504A',
-          600: '#606963',
-          500: '#7B847E',      // Muted gray
-          400: '#9BA39E',
+          900: '#18231C',      // Deepest charcoal / dark green
+          800: '#242C26',
+          700: '#3B453E',
+          600: '#5A665D',      // Supporting text
+          500: '#758177',      // Muted label
+          400: '#949F96',
         },
+        // Accent 1: Muted Lavender
         lavender: {
-          50: '#F7F6FA',
-          100: '#EDEAF3',
-          200: '#DDD8E7',
-          500: '#8E84A3',      // Muted lavender
+          50: '#F6F4FA',
+          100: '#E3DEEC',
+          200: '#D2CBDF',
+          700: '#5B4F73',
+          800: '#463B5D',
         },
-        softblue: {
-          50: '#F4F7FA',
-          100: '#E4ECF3',
-          200: '#C9DBE8',
-          500: '#6B8BA4',      // Soft blue
+        // Accent 2: Dusty Blue
+        dustyblue: {
+          50: '#F2F6F9',
+          100: '#D8E4EE',
+          200: '#BDD2E2',
+          700: '#35536D',
+          800: '#263D52',
         },
-        palepeach: {
-          50: '#FDF7F4',
-          100: '#FAEDE7',
-          200: '#F5D5C9',
-          500: '#DF8F75',      // Pale peach
+        // Accent 3: Muted Peach
+        peach: {
+          50: '#FAF4F1',
+          100: '#F5DDD3',
+          200: '#EBC3B4',
+          700: '#9B4F37',
+          800: '#7C3A25',
         },
+        // Accent 4: Warm Beige / Sand
+        sand: {
+          50: '#F9F8F5',
+          100: '#EDE9DE',
+          200: '#DDD6C5',
+          700: '#685F4D',
+          800: '#50483A',
+        },
+        // Risk indicators (restrained, muted)
         risk: {
-          bg: '#FDF3F2',
-          border: '#F8D1CE',
-          text: '#C25450',     // Muted red only for important risk
+          highBg: '#F9DFDE',
+          highText: '#B5413D',
+          highBorder: '#F2CAC8',
+          medBg: '#FDF0DD',
+          medText: '#9C6A28',
+          medBorder: '#F5DFBF',
+          lowBg: '#E2ECE3',
+          lowText: '#2F5236',
+          lowBorder: '#CADBCC',
         }
       },
       borderRadius: {
-        'card': '12px',
+        'card': '14px',
       },
       boxShadow: {
-        'subtle': '0 1px 3px 0 rgba(31, 36, 33, 0.03), 0 1px 2px -1px rgba(31, 36, 33, 0.02)',
-        'soft': '0 4px 14px -2px rgba(31, 36, 33, 0.04)',
+        'card': '0 1px 3px 0 rgba(24, 35, 28, 0.04), 0 1px 2px -1px rgba(24, 35, 28, 0.02)',
+        'dropdown': '0 10px 25px -3px rgba(24, 35, 28, 0.08), 0 4px 6px -4px rgba(24, 35, 28, 0.03)',
       }
     },
   },

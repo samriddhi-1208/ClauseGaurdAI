@@ -1,13 +1,13 @@
 import React from 'react';
-import { CheckCircle2, Loader2, Clock, AlertCircle } from 'lucide-react';
+import { Check, Loader2, Clock, AlertTriangle } from 'lucide-react';
 
 const StatusBadge = ({ status }) => {
   const s = (status || '').toLowerCase();
   
   if (s === 'completed') {
     return (
-      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-[#E7ECE7] text-[#2F4335] border border-[#D2DDD2]">
-        <span className="w-1.5 h-1.5 rounded-full bg-[#5B8266]"></span>
+      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-[#E2ECE3] text-[#2F5236] border border-[#CADBCC]">
+        <Check className="w-3 h-3 stroke-[2.5]" />
         <span>Completed</span>
       </span>
     );
@@ -15,8 +15,8 @@ const StatusBadge = ({ status }) => {
 
   if (s === 'processing' || s === 'analyzing') {
     return (
-      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-[#E4ECF3] text-[#426179] border border-[#C9DBE8]">
-        <Loader2 className="w-3 h-3 text-[#6B8BA4] animate-spin shrink-0" />
+      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-[#D8E4EE] text-[#35536D] border border-[#BDD2E2]">
+        <Loader2 className="w-3 h-3 animate-spin stroke-[2]" />
         <span>{s === 'analyzing' ? 'Analyzing' : 'Processing'}</span>
       </span>
     );
@@ -24,17 +24,26 @@ const StatusBadge = ({ status }) => {
 
   if (s === 'uploaded') {
     return (
-      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-[#FAEDE7] text-[#8C523D] border border-[#F5D5C9]">
-        <Clock className="w-3 h-3 text-[#DF8F75] shrink-0" />
+      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-[#EDE9DE] text-[#685F4D] border border-[#DDD6C5]">
+        <Clock className="w-3 h-3 stroke-[2]" />
         <span>Uploaded</span>
       </span>
     );
   }
 
+  if (s === 'issues found' || s === 'issues') {
+    return (
+      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-[#FDF0DD] text-[#9C6A28] border border-[#F5DFBF]">
+        <AlertTriangle className="w-3 h-3 stroke-[2]" />
+        <span>Issues Found</span>
+      </span>
+    );
+  }
+
   return (
-    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-[#FDF3F2] text-[#C25450] border border-[#F8D1CE]">
-      <AlertCircle className="w-3 h-3 text-[#C25450] shrink-0" />
-      <span>Failed</span>
+    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-[#F9DFDE] text-[#B5413D] border border-[#F2CAC8]">
+      <AlertTriangle className="w-3 h-3 stroke-[2]" />
+      <span>{status || 'Contradictions'}</span>
     </span>
   );
 };

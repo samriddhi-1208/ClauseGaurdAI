@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Scale, Lock, Mail, User, ArrowRight, AlertCircle, ShieldCheck } from 'lucide-react';
+import { Shield, Lock, Mail, User, ArrowRight, AlertCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 const RegisterPage = () => {
@@ -45,80 +45,84 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6 font-sans text-slate-900">
-      <div className="w-full max-w-md bg-white rounded-xl shadow-xl p-8 border border-slate-200 relative">
+    <div className="min-h-screen bg-[#F8F7F2] flex items-center justify-center p-6 font-sans text-[#18231C]">
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-card p-8 md:p-9 border border-[#DDDCD3] relative">
         <div className="text-center mb-6">
-          <div className="w-11 h-11 rounded-lg bg-[#0F172A] flex items-center justify-center text-white mx-auto mb-3 shadow-sm">
-            <Scale className="w-5 h-5" />
+          <div className="w-12 h-12 rounded-2xl bg-[#3F6149] flex items-center justify-center text-white mx-auto mb-3.5 shadow-2xs">
+            <Shield className="w-6 h-6 stroke-[2]" />
           </div>
-          <h1 className="text-xl font-bold text-slate-900 tracking-tight">Create Workspace Account</h1>
-          <p className="text-xs text-slate-500 font-normal mt-1">Start analyzing contracts & detecting contradictions</p>
+          <h1 className="text-xl md:text-2xl font-semibold text-[#18231C] tracking-tight">
+            Create Workspace Account
+          </h1>
+          <p className="text-xs text-[#5A665D] font-normal mt-1">
+            Start analyzing contracts & detecting contradictions
+          </p>
         </div>
 
         {error && (
-          <div className="mb-5 p-3.5 bg-rose-50 border border-rose-200 rounded-lg flex items-center gap-2.5 text-xs font-medium text-rose-700">
-            <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
+          <div className="mb-5 p-3.5 bg-[#F9DFDE] border border-[#F2CAC8] rounded-xl flex items-center gap-2.5 text-xs font-semibold text-[#B5413D]">
+            <AlertCircle className="w-4 h-4 text-[#B5413D] shrink-0 stroke-[2]" />
             <span>{error}</span>
           </div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-3.5">
           <div>
-            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">Full Name</label>
+            <label className="block text-xs font-semibold text-[#2E3731] mb-1">Full Name</label>
             <div className="relative">
-              <User className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
+              <User className="w-4 h-4 text-[#8C948C] absolute left-3.5 top-3 stroke-[1.8]" />
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="Sarah Jenkins"
+                placeholder="Samriddhi Tiwari"
                 required
-                className="w-full pl-10 pr-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-slate-500 focus:bg-white transition-colors font-normal"
+                className="w-full pl-10 pr-3.5 py-2.5 bg-[#FAF9F5] border border-[#DDDCD3] rounded-xl text-xs md:text-sm text-[#18231C] placeholder-[#8C948C] focus:outline-none focus:border-[#3F6149] focus:bg-white transition-colors"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">Email Address</label>
+            <label className="block text-xs font-semibold text-[#2E3731] mb-1">Work Email</label>
             <div className="relative">
-              <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
+              <Mail className="w-4 h-4 text-[#8C948C] absolute left-3.5 top-3 stroke-[1.8]" />
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="counsel@lawfirm.com"
                 required
-                className="w-full pl-10 pr-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-slate-500 focus:bg-white transition-colors font-normal"
+                className="w-full pl-10 pr-3.5 py-2.5 bg-[#FAF9F5] border border-[#DDDCD3] rounded-xl text-xs md:text-sm text-[#18231C] placeholder-[#8C948C] focus:outline-none focus:border-[#3F6149] focus:bg-white transition-colors"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">Password (min 6 characters)</label>
+            <label className="block text-xs font-semibold text-[#2E3731] mb-1">Password (min 6 characters)</label>
             <div className="relative">
-              <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
+              <Lock className="w-4 h-4 text-[#8C948C] absolute left-3.5 top-3 stroke-[1.8]" />
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
                 required
-                className="w-full pl-10 pr-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-slate-500 focus:bg-white transition-colors font-normal"
+                className="w-full pl-10 pr-3.5 py-2.5 bg-[#FAF9F5] border border-[#DDDCD3] rounded-xl text-xs md:text-sm text-[#18231C] placeholder-[#8C948C] focus:outline-none focus:border-[#3F6149] focus:bg-white transition-colors"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">Confirm Password</label>
+            <label className="block text-xs font-semibold text-[#2E3731] mb-1">Confirm Password</label>
             <div className="relative">
-              <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
+              <Lock className="w-4 h-4 text-[#8C948C] absolute left-3.5 top-3 stroke-[1.8]" />
               <input
                 type="password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="••••••••"
                 required
-                className="w-full pl-10 pr-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-slate-500 focus:bg-white transition-colors font-normal"
+                className="w-full pl-10 pr-3.5 py-2.5 bg-[#FAF9F5] border border-[#DDDCD3] rounded-xl text-xs md:text-sm text-[#18231C] placeholder-[#8C948C] focus:outline-none focus:border-[#3F6149] focus:bg-white transition-colors"
               />
             </div>
           </div>
@@ -126,25 +130,18 @@ const RegisterPage = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2.5 bg-[#0F172A] hover:bg-slate-800 text-white font-medium text-sm rounded-lg transition-colors shadow-sm flex items-center justify-center gap-2 disabled:opacity-50 mt-2"
+            className="w-full py-2.5 px-4 bg-[#3F6149] hover:bg-[#34503C] text-white font-semibold text-xs md:text-sm rounded-xl transition-colors shadow-2xs flex items-center justify-center gap-2 disabled:opacity-50 mt-3"
           >
-            <span>{loading ? 'Creating Account...' : 'Register Workspace'}</span>
-            {!loading && <ArrowRight className="w-4 h-4" />}
+            <span>{loading ? 'Creating Workspace...' : 'Create Account'}</span>
+            {!loading && <ArrowRight className="w-4 h-4 stroke-[2]" />}
           </button>
         </form>
 
-        <div className="mt-6 pt-5 border-t border-slate-100 text-center space-y-3">
-          <p className="text-xs text-slate-500 font-normal">
-            Already have an account?{' '}
-            <Link to="/login" className="font-semibold text-blue-700 hover:underline">
-              Sign In
-            </Link>
-          </p>
-
-          <div className="flex items-center justify-center gap-1.5 text-[11px] text-slate-500 font-normal">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-            <span>256-Bit Encrypted Data Isolation</span>
-          </div>
+        <div className="mt-5 pt-4 border-t border-[#ECEAE2] text-center text-xs text-[#5A665D]">
+          Already have an account?{' '}
+          <Link to="/login" className="font-semibold text-[#18231C] hover:text-[#3F6149] transition-colors">
+            Sign In →
+          </Link>
         </div>
       </div>
     </div>

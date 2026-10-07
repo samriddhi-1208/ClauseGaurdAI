@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { UploadCloud, FileText, CheckCircle2, Loader2, AlertCircle, ArrowRight, Zap, X } from 'lucide-react';
+import { UploadCloud, FileText, Check, Loader2, AlertCircle, ArrowRight, Zap, X } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import StatusBadge from '../components/StatusBadge';
 import { documentAPI, demoAPI } from '../services/api';
@@ -91,106 +91,102 @@ const UploadPage = () => {
   };
 
   return (
-    <div className="flex-1 bg-slate-50 flex flex-col min-w-0 pb-12 font-sans text-slate-900">
-      <Navbar title="Upload Legal Documents" subtitle="Upload agreements, NDAs, or policies for AI clause extraction & vector indexing" />
+    <div className="flex-1 bg-[#F8F7F2] flex flex-col min-w-0 pb-16 font-sans text-[#18231C]">
+      <Navbar title="Upload Legal Documents" subtitle="Upload agreements, NDAs, or SLAs for AI clause extraction & vector indexing" />
 
-      <main className="p-6 md:p-8 max-w-4xl w-full mx-auto space-y-6">
+      <main className="p-6 md:p-10 max-w-4xl w-full mx-auto space-y-7">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-xl md:text-2xl font-bold text-slate-900 tracking-tight">Upload Contracts</h1>
-            <p className="text-xs text-slate-500 font-normal mt-0.5">
-              Upload agreements to extract clauses and perform cross-document contradiction detection
+            <h1 className="text-xl md:text-2xl font-semibold text-[#18231C] tracking-tight">
+              Contract Intake & Indexing
+            </h1>
+            <p className="text-xs text-[#5A665D] mt-0.5">
+              Select contracts in PDF, DOCX, or TXT format for automatic clause breakdown
             </p>
           </div>
 
           <button
             onClick={handleRunDemo}
             disabled={seeding}
-            className="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 font-medium text-xs rounded-lg shadow-2xs flex items-center gap-2 transition-colors disabled:opacity-50 shrink-0"
+            className="px-4 py-2 bg-white hover:bg-[#F2F0E8] text-[#18231C] border border-[#DDDCD3] font-semibold text-xs rounded-xl shadow-2xs flex items-center gap-2 transition-colors disabled:opacity-50 self-start sm:self-auto"
           >
-            <Zap className="w-3.5 h-3.5 text-amber-600" />
-            <span>{seeding ? 'Loading...' : 'Instant Demo Mode'}</span>
+            <Zap className="w-3.5 h-3.5 text-[#C27D38]" />
+            <span>{seeding ? 'Seeding Demo Data...' : 'Load Sample Contracts'}</span>
           </button>
         </div>
 
         {error && (
-          <div className="p-3.5 bg-rose-50 border border-rose-200 rounded-xl flex items-center gap-2.5 text-xs font-medium text-rose-700">
-            <AlertCircle className="w-4 h-4 text-rose-600 shrink-0" />
+          <div className="p-3.5 bg-[#F9DFDE] border border-[#F2CAC8] rounded-xl flex items-center gap-2.5 text-xs font-semibold text-[#B5413D]">
+            <AlertCircle className="w-4 h-4 text-[#B5413D] shrink-0" />
             <span>{error}</span>
           </div>
         )}
 
-        {/* Drag & Drop Upload Zone */}
+        {/* Drag and Drop Zone */}
         <div
           onDrop={handleDrop}
           onDragOver={handleDragOver}
           onClick={() => fileInputRef.current?.click()}
-          className="border-2 border-dashed border-slate-300 hover:border-slate-500 bg-white p-10 md:p-12 rounded-xl text-center cursor-pointer transition-colors shadow-sm group"
+          className="bg-white border-2 border-dashed border-[#D2DDD2] hover:border-[#3F6149] rounded-2xl p-8 md:p-12 text-center cursor-pointer transition-all shadow-card group"
         >
           <input
             type="file"
+            multiple
             ref={fileInputRef}
             onChange={handleFileChange}
-            multiple
             accept=".pdf,.docx,.txt"
             className="hidden"
           />
 
-          <div className="w-12 h-12 rounded-xl bg-slate-100 text-slate-700 flex items-center justify-center mx-auto mb-3 group-hover:scale-105 transition-transform">
-            <UploadCloud className="w-6 h-6" />
+          <div className="w-14 h-14 rounded-2xl bg-[#EAECE4] group-hover:bg-[#D7DCD3] text-[#3F6149] flex items-center justify-center mx-auto mb-4 transition-colors shadow-2xs">
+            <UploadCloud className="w-7 h-7 stroke-[1.8]" />
           </div>
 
-          <h3 className="font-semibold text-base text-slate-900 tracking-tight">Upload Legal Agreements</h3>
-          <p className="text-xs text-slate-500 font-normal mt-1 max-w-md mx-auto">
-            Drag and drop contracts here, or click to browse files on your computer.
+          <h3 className="text-sm md:text-base font-semibold text-[#18231C]">
+            Click to upload or drag & drop contracts
+          </h3>
+          <p className="text-xs text-[#5A665D] mt-1 max-w-sm mx-auto">
+            Supported formats: PDF, DOCX, TXT. Documents are securely processed and vectorized.
           </p>
-
-          <div className="flex items-center justify-center gap-2 mt-5">
-            <span className="px-2.5 py-1 bg-slate-100 text-slate-700 rounded text-xs font-medium border border-slate-200">
-              PDF
-            </span>
-            <span className="px-2.5 py-1 bg-slate-100 text-slate-700 rounded text-xs font-medium border border-slate-200">
-              DOCX
-            </span>
-            <span className="px-2.5 py-1 bg-slate-100 text-slate-700 rounded text-xs font-medium border border-slate-200">
-              TXT
-            </span>
-            <span className="px-2.5 py-1 bg-slate-100 text-slate-500 rounded text-xs font-normal border border-slate-200">
-              Max 25MB per file
-            </span>
-          </div>
         </div>
 
-        {/* Upload Queue */}
+        {/* Selected Files List */}
         {selectedFiles.length > 0 && (
-          <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-4">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-              <h4 className="font-semibold text-xs text-slate-900 uppercase tracking-wider">
-                Upload Queue ({selectedFiles.length} Selected)
-              </h4>
+          <div className="bg-white rounded-2xl border border-[#DDDCD3] p-6 shadow-card space-y-4">
+            <div className="flex items-center justify-between border-b border-[#ECEAE2] pb-3">
+              <h3 className="text-xs font-semibold text-[#18231C]">
+                Ready for Extraction ({selectedFiles.length} {selectedFiles.length === 1 ? 'file' : 'files'})
+              </h3>
               <button
                 onClick={() => setSelectedFiles([])}
-                className="text-xs font-medium text-slate-500 hover:text-rose-600 transition-colors"
+                className="text-[11px] font-semibold text-[#B5413D] hover:underline"
               >
                 Clear All
               </button>
             </div>
 
-            <div className="space-y-2">
-              {selectedFiles.map((file, idx) => (
-                <div key={idx} className="flex items-center justify-between p-3 bg-slate-50 rounded-lg border border-slate-200 text-xs">
-                  <div className="flex items-center gap-3 truncate">
-                    <FileText className="w-4 h-4 text-slate-600 shrink-0" />
+            <div className="space-y-2 max-h-60 overflow-y-auto pr-1">
+              {selectedFiles.map((f, idx) => (
+                <div
+                  key={idx}
+                  className="p-3 bg-[#FAF9F5] border border-[#DDDCD3] rounded-xl flex items-center justify-between text-xs"
+                >
+                  <div className="flex items-center gap-2.5 truncate">
+                    <div className="w-7 h-7 rounded-lg bg-[#D8E4EE] text-[#35536D] flex items-center justify-center shrink-0">
+                      <FileText className="w-4 h-4 stroke-[1.8]" />
+                    </div>
                     <div className="truncate">
-                      <h5 className="font-medium text-slate-900 truncate">{file.name}</h5>
-                      <span className="text-[11px] text-slate-500 font-normal">{Math.round(file.size / 1024)} KB</span>
+                      <p className="font-semibold text-[#18231C] truncate">{f.name}</p>
+                      <p className="text-[10px] text-[#758177]">{(f.size / 1024).toFixed(1)} KB</p>
                     </div>
                   </div>
 
                   <button
-                    onClick={() => removeFile(idx)}
-                    aria-label={`Remove ${file.name} from queue`}
-                    className="p-1 rounded text-slate-400 hover:text-rose-600 hover:bg-slate-200 transition-colors"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      removeFile(idx);
+                    }}
+                    className="p-1 text-[#8C948C] hover:text-[#B5413D] transition-colors"
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -199,14 +195,14 @@ const UploadPage = () => {
             </div>
 
             {uploading && (
-              <div className="space-y-2 pt-2">
-                <div className="flex justify-between text-xs font-medium text-slate-700">
-                  <span>Uploading & Extracting Clauses via Gemini AI...</span>
+              <div className="space-y-1.5 pt-2">
+                <div className="flex justify-between text-[11px] font-semibold text-[#3F6149]">
+                  <span>Extracting clauses & building semantic embeddings...</span>
                   <span>{uploadProgress}%</span>
                 </div>
-                <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+                <div className="w-full bg-[#EAECE4] rounded-full h-1.5 overflow-hidden">
                   <div
-                    className="h-full bg-blue-600 transition-all duration-300 rounded-full"
+                    className="bg-[#3F6149] h-1.5 rounded-full transition-all duration-300"
                     style={{ width: `${uploadProgress}%` }}
                   ></div>
                 </div>
@@ -216,56 +212,74 @@ const UploadPage = () => {
             <button
               onClick={handleUploadAll}
               disabled={uploading}
-              className="w-full py-2.5 bg-[#0F172A] hover:bg-slate-800 text-white font-medium text-xs md:text-sm rounded-lg transition-colors shadow-sm flex items-center justify-center gap-2 disabled:opacity-50"
+              className="w-full py-2.5 bg-[#3F6149] hover:bg-[#34503C] text-white font-semibold text-xs md:text-sm rounded-xl transition-colors shadow-2xs flex items-center justify-center gap-2 disabled:opacity-50 mt-2"
             >
               {uploading ? (
                 <>
                   <Loader2 className="w-4 h-4 animate-spin" />
-                  <span>Processing Upload Queue...</span>
+                  <span>Processing Documents...</span>
                 </>
               ) : (
                 <>
-                  <UploadCloud className="w-4 h-4" />
-                  <span>Process ({selectedFiles.length} Contracts)</span>
+                  <span>Upload & Analyze Obligations</span>
+                  <ArrowRight className="w-4 h-4 stroke-[2]" />
                 </>
               )}
             </button>
           </div>
         )}
 
-        {/* Processed Results Notification */}
+        {/* Processed Documents Result List */}
         {processedDocs.length > 0 && (
-          <div className="bg-white p-5 rounded-xl border border-emerald-300 shadow-sm space-y-4">
-            <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-              <div className="flex items-center gap-2 text-emerald-800">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                <h4 className="font-semibold text-xs uppercase tracking-wider">
-                  Upload Complete ({processedDocs.length} Documents)
-                </h4>
-              </div>
-
-              <Link
-                to="/compare"
-                className="px-3.5 py-1.5 bg-[#0F172A] hover:bg-slate-800 text-white font-medium text-xs rounded-md transition-colors flex items-center gap-1.5 shadow-sm"
-              >
-                <span>Proceed to Contradiction Scan</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
+          <div className="bg-white rounded-2xl border border-[#DDDCD3] p-6 shadow-card space-y-4">
+            <div className="flex items-center gap-2 text-xs font-semibold text-[#2F5236] border-b border-[#ECEAE2] pb-3">
+              <Check className="w-4 h-4 stroke-[2.5]" />
+              <span>Successfully Processed Documents ({processedDocs.length})</span>
             </div>
 
             <div className="space-y-2">
               {processedDocs.map((doc) => {
-                const docId = doc._id || doc.id;
+                const id = doc._id || doc.id;
                 return (
-                  <div key={docId} className="flex items-center justify-between p-3 bg-emerald-50/50 rounded-lg border border-emerald-200 text-xs">
-                    <div className="flex items-center gap-2.5">
-                      <FileText className="w-4 h-4 text-emerald-700" />
-                      <span className="font-medium text-slate-900">{doc.fileName}</span>
+                  <div
+                    key={id}
+                    className="p-3 bg-[#FAF9F5] border border-[#DDDCD3] rounded-xl flex items-center justify-between text-xs"
+                  >
+                    <div className="flex items-center gap-2.5 truncate">
+                      <div className="w-7 h-7 rounded-lg bg-[#E2ECE3] text-[#2F5236] flex items-center justify-center shrink-0">
+                        <FileText className="w-4 h-4 stroke-[1.8]" />
+                      </div>
+                      <div className="truncate">
+                        <p className="font-semibold text-[#18231C] truncate">{doc.fileName}</p>
+                        <p className="text-[10px] text-[#758177]">
+                          {doc.totalClauses || 0} clauses categorized into vector memory
+                        </p>
+                      </div>
                     </div>
-                    <StatusBadge status={doc.processingStatus} />
+
+                    <div className="flex items-center gap-3 shrink-0">
+                      <StatusBadge status={doc.processingStatus} />
+                      <Link
+                        to={`/documents/${id}`}
+                        className="text-xs font-semibold text-[#3F6149] hover:text-[#273C2D] flex items-center gap-1 transition-colors"
+                      >
+                        <span>View Clauses</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </Link>
+                    </div>
                   </div>
                 );
               })}
+            </div>
+
+            <div className="pt-3 flex justify-end">
+              <Link
+                to="/compare"
+                className="py-2.5 px-4 bg-[#3F6149] hover:bg-[#34503C] text-white font-semibold text-xs rounded-xl shadow-2xs flex items-center gap-2 transition-colors"
+              >
+                <span>Proceed to Cross-Document Comparison</span>
+                <ArrowRight className="w-4 h-4 stroke-[2]" />
+              </Link>
             </div>
           </div>
         )}

@@ -13,6 +13,8 @@ import DocumentDetailsPage from './pages/DocumentDetailsPage';
 import ComparePage from './pages/ComparePage';
 import ResultsPage from './pages/ResultsPage';
 import ChatPage from './pages/ChatPage';
+import ProfilePage from './pages/ProfilePage';
+import SettingsPage from './pages/SettingsPage';
 
 function App() {
   return (
@@ -33,6 +35,8 @@ function App() {
           <Route path="/results" element={<ResultsPage />} />
           <Route path="/results/:id" element={<ResultsPage />} />
           <Route path="/chat" element={<ChatPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/settings" element={<SettingsPage />} />
         </Route>
 
         {/* Catch-all Fallback */}
