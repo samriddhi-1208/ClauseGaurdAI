@@ -13,8 +13,7 @@ import {
   RefreshCw, 
   ShieldCheck, 
   Loader2,
-  AlertCircle,
-  HelpCircle
+  AlertCircle
 } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import { chatAPI, documentAPI } from '../services/api';
@@ -50,13 +49,6 @@ const STARTER_QUESTIONS = [
     question: "What are the termination conditions, notice periods, and post-termination obligations?",
     color: "bg-[#E2ECE3] text-[#2F5236]"
   }
-];
-
-const QUICK_HINTS = [
-  "When are payments due?",
-  "How can this contract be cancelled?",
-  "What are the confidentiality rules?",
-  "Are there liability caps?"
 ];
 
 const ChatPage = () => {
@@ -115,7 +107,7 @@ const ChatPage = () => {
     } catch (err) {
       console.warn('[Chat API Warning]', err);
       
-      // Plain English, beautifully structured legal explanation fallback
+      // Plain English, structured legal explanation fallback
       let fallbackAnswer = `### 📌 Summary in Simple Words\nAcross your uploaded agreements, each party has distinct responsibilities regarding payments, confidentiality, and cancellation.\n\n### 📋 Key Rules You Need to Know\n• **Payment Timelines**: Invoices must be paid within **Net-30 days**. Overdue payments incur standard late charges of 1.5% per month.\n• **Confidential Information**: Non-disclosure obligations remain in effect for **2 to 3 years** following the termination date.\n• **Contract Cancellation**: Either party can terminate by providing **30 days written notice** for convenience, or **15 days notice** if there is an uncured material breach.\n\n### ⚠️ Potential Risks to Watch\n• **Retention Conflict**: Check if your data purge schedule (typically 2 years) clashes with mandatory accounting retention (often 5 years).\n• **Liability Cap**: Financial liability is limited to total fees paid during the prior 12 months.`;
       
       if (question.toLowerCase().includes('retention') || question.toLowerCase().includes('data')) {
@@ -157,20 +149,20 @@ const ChatPage = () => {
         subtitle="Ask questions in simple words — we'll scan your contracts and explain them clearly" 
       />
 
-      {/* Main Content Area */}
-      <main className="flex-1 p-4 md:p-6 max-w-3xl w-full mx-auto flex flex-col justify-between space-y-6">
+      {/* Main Content Area: Natural Document Flow with Generous Spacing and Padding */}
+      <main className="p-6 md:p-10 max-w-4xl w-full mx-auto space-y-8 pb-20">
         
         {/* Simple Document & Status Selector */}
-        <div className="bg-white p-3 rounded-2xl border border-[#DDDCD3] shadow-card flex flex-wrap items-center justify-between gap-3 text-xs">
-          <div className="flex items-center gap-2">
-            <span className="font-semibold text-[#5A665D] flex items-center gap-1.5">
-              <Filter className="w-3.5 h-3.5 text-[#3F6149]" />
-              <span>Analyzing:</span>
-            </span>
+        <div className="bg-white p-4.5 rounded-2xl border border-[#DDDCD3] shadow-card flex flex-wrap items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 text-xs font-semibold text-[#5A665D]">
+              <Filter className="w-4 h-4 text-[#3F6149]" />
+              <span>Analyzing Contract:</span>
+            </div>
             <select
               value={selectedDocId}
               onChange={(e) => setSelectedDocId(e.target.value)}
-              className="bg-[#FAF9F5] border border-[#DDDCD3] rounded-xl px-2.5 py-1 text-xs font-semibold text-[#18231C] focus:outline-none focus:border-[#3F6149] max-w-xs truncate cursor-pointer"
+              className="bg-[#FAF9F5] border border-[#DDDCD3] rounded-xl px-3 py-1.5 text-xs font-semibold text-[#18231C] focus:outline-none focus:border-[#3F6149] max-w-xs truncate cursor-pointer"
             >
               <option value="">All Uploaded Contracts ({documents.length} files)</option>
               {documents.map((d) => (
@@ -181,8 +173,8 @@ const ChatPage = () => {
             </select>
           </div>
 
-          <div className="flex items-center gap-2.5">
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#E2ECE3] text-[#2F5236] border border-[#CADBCC]">
+          <div className="flex items-center gap-3">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-[#E2ECE3] text-[#2F5236] border border-[#CADBCC]">
               <span className="w-2 h-2 rounded-full bg-[#3F6149]"></span>
               <span>Contracts Ready</span>
             </span>
@@ -190,7 +182,7 @@ const ChatPage = () => {
             {isConversationActive && (
               <button
                 onClick={handleResetChat}
-                className="text-xs font-semibold text-[#5A665D] hover:text-[#18231C] flex items-center gap-1 transition-colors px-2 py-0.5"
+                className="text-xs font-semibold text-[#5A665D] hover:text-[#18231C] flex items-center gap-1.5 transition-colors px-2.5 py-1 rounded-lg hover:bg-[#F2F0E8]"
                 title="Start a new question"
               >
                 <RefreshCw className="w-3.5 h-3.5" />
@@ -201,50 +193,50 @@ const ChatPage = () => {
         </div>
 
         {/* Dynamic Center Stage: Starter Guide or Conversation Stream */}
-        <div className="flex-1 flex flex-col justify-center">
+        <div>
           {!isConversationActive ? (
             /* Starter Guide for Users */
-            <div className="py-2 space-y-6">
+            <div className="space-y-8">
               {/* Header Hero */}
-              <div className="text-center max-w-lg mx-auto space-y-2">
-                <div className="w-11 h-11 rounded-2xl bg-[#EAECE4] text-[#3F6149] flex items-center justify-center mx-auto shadow-2xs">
-                  <Sparkles className="w-5 h-5 stroke-[1.8]" />
+              <div className="text-center max-w-xl mx-auto space-y-3 pt-2">
+                <div className="w-12 h-12 rounded-2xl bg-[#EAECE4] text-[#3F6149] flex items-center justify-center mx-auto shadow-2xs">
+                  <Sparkles className="w-6 h-6 stroke-[1.8]" />
                 </div>
-                <h2 className="text-xl md:text-2xl font-semibold text-[#18231C] leading-snug">
+                <h2 className="text-2xl md:text-[26px] font-semibold text-[#18231C] leading-snug">
                   What would you like to understand about your contracts?
                 </h2>
-                <p className="text-xs md:text-sm text-[#5A665D] leading-relaxed font-normal">
-                  Click any common question below, or type your own question in the box at the bottom.
+                <p className="text-xs md:text-sm text-[#5A665D] leading-relaxed font-normal max-w-lg mx-auto">
+                  Click any common legal question below, or type your own question in plain English at the bottom.
                 </p>
               </div>
 
               {/* 4 User-Friendly Starter Cards */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 w-full">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 w-full">
                 {STARTER_QUESTIONS.map((card, idx) => {
                   const Icon = card.icon;
                   return (
                     <div
                       key={idx}
                       onClick={() => handleSend(card.question)}
-                      className="bg-white p-4.5 rounded-2xl border border-[#DDDCD3] shadow-card hover:border-[#3F6149] hover:shadow-md cursor-pointer transition-all space-y-2 group"
+                      className="bg-white p-6 rounded-2xl border border-[#DDDCD3] shadow-card hover:border-[#3F6149] hover:shadow-md cursor-pointer transition-all space-y-3.5 group"
                     >
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <div className={`w-7 h-7 rounded-lg ${card.color} flex items-center justify-center shrink-0`}>
-                            <Icon className="w-3.5 h-3.5 stroke-[2]" />
+                        <div className="flex items-center gap-2.5">
+                          <div className={`w-9 h-9 rounded-xl ${card.color} flex items-center justify-center shrink-0`}>
+                            <Icon className="w-4 h-4 stroke-[2]" />
                           </div>
-                          <span className="text-[11px] font-semibold uppercase tracking-wider text-[#758177]">
+                          <span className="text-xs font-semibold uppercase tracking-wider text-[#758177]">
                             {card.label}
                           </span>
                         </div>
-                        <ArrowRight className="w-3.5 h-3.5 text-[#8C948C] group-hover:text-[#3F6149] group-hover:translate-x-0.5 transition-all" />
+                        <ArrowRight className="w-4 h-4 text-[#8C948C] group-hover:text-[#3F6149] group-hover:translate-x-1 transition-all" />
                       </div>
                       
                       <div>
-                        <h3 className="text-xs md:text-[13px] font-semibold text-[#18231C] group-hover:text-[#3F6149] transition-colors leading-snug">
+                        <h3 className="text-sm font-semibold text-[#18231C] group-hover:text-[#3F6149] transition-colors leading-snug">
                           {card.title}
                         </h3>
-                        <p className="text-[11px] text-[#5A665D] leading-normal mt-1 font-normal">
+                        <p className="text-xs text-[#5A665D] leading-relaxed mt-1.5 font-normal">
                           {card.question}
                         </p>
                       </div>
@@ -255,25 +247,25 @@ const ChatPage = () => {
             </div>
           ) : (
             /* Active Conversation Stream */
-            <div className="space-y-4 w-full py-2">
+            <div className="space-y-6 w-full">
               {messages.map((msg, idx) => (
                 <div
                   key={idx}
-                  className={`flex items-start gap-3 ${
+                  className={`flex items-start gap-3.5 ${
                     msg.sender === 'user' ? 'justify-end' : 'justify-start'
                   }`}
                 >
                   {msg.sender === 'ai' && (
-                    <div className="w-8 h-8 rounded-xl bg-[#3F6149] text-white flex items-center justify-center shrink-0 shadow-2xs mt-1">
-                      <Bot className="w-4 h-4 stroke-[2]" />
+                    <div className="w-9 h-9 rounded-xl bg-[#3F6149] text-white flex items-center justify-center shrink-0 shadow-2xs mt-1">
+                      <Bot className="w-4.5 h-4.5 stroke-[2]" />
                     </div>
                   )}
 
                   <div
-                    className={`rounded-2xl p-4.5 text-xs md:text-sm leading-relaxed shadow-card ${
+                    className={`rounded-2xl p-5 md:p-6 text-xs md:text-sm leading-relaxed shadow-card ${
                       msg.sender === 'user'
-                        ? 'max-w-lg bg-[#EAECE4] text-[#18231C] border border-[#D7DACD] rounded-tr-xs ml-auto'
-                        : 'max-w-2xl bg-white text-[#18231C] border border-[#DDDCD3] space-y-2'
+                        ? 'max-w-xl bg-[#EAECE4] text-[#18231C] border border-[#D7DACD] rounded-tr-xs ml-auto'
+                        : 'max-w-2xl bg-white text-[#18231C] border border-[#DDDCD3] space-y-3'
                     }`}
                   >
                     <div className="whitespace-pre-line leading-relaxed font-normal">
@@ -282,18 +274,18 @@ const ChatPage = () => {
 
                     {/* Cited Sources Pill Box */}
                     {msg.sources && msg.sources.length > 0 && (
-                      <div className="mt-3 pt-3 border-t border-[#ECEAE2] space-y-1.5">
-                        <p className="text-[10px] font-semibold text-[#5A665D] uppercase tracking-wider flex items-center gap-1">
-                          <ShieldCheck className="w-3 h-3 text-[#3F6149]" />
+                      <div className="mt-4 pt-3.5 border-t border-[#ECEAE2] space-y-2">
+                        <p className="text-[11px] font-semibold text-[#5A665D] uppercase tracking-wider flex items-center gap-1.5">
+                          <ShieldCheck className="w-3.5 h-3.5 text-[#3F6149]" />
                           <span>Mentioned in your contracts:</span>
                         </p>
-                        <div className="flex flex-wrap gap-1.5">
+                        <div className="flex flex-wrap gap-2">
                           {msg.sources.map((src, sIdx) => (
                             <div
                               key={sIdx}
-                              className="px-2.5 py-1 rounded-lg bg-[#FAF9F5] border border-[#DDDCD3] text-[11px] font-medium text-[#2E3731] flex items-center gap-1.5"
+                              className="px-3 py-1.5 rounded-lg bg-[#FAF9F5] border border-[#DDDCD3] text-xs font-medium text-[#2E3731] flex items-center gap-2"
                             >
-                              <FileText className="w-3 h-3 text-[#3F6149]" />
+                              <FileText className="w-3.5 h-3.5 text-[#3F6149]" />
                               <span className="font-semibold">{src.fileName || 'Contract'}</span>
                               {src.pageNumber && (
                                 <span className="text-[#758177]">• Page {src.pageNumber}</span>
@@ -306,7 +298,7 @@ const ChatPage = () => {
                   </div>
 
                   {msg.sender === 'user' && (
-                    <div className="w-8 h-8 rounded-xl bg-[#EDE9DE] text-[#685F4D] flex items-center justify-center shrink-0 shadow-2xs font-bold text-xs mt-1">
+                    <div className="w-9 h-9 rounded-xl bg-[#EDE9DE] text-[#685F4D] flex items-center justify-center shrink-0 shadow-2xs font-bold text-xs mt-1">
                       S
                     </div>
                   )}
@@ -314,11 +306,11 @@ const ChatPage = () => {
               ))}
 
               {loading && (
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-xl bg-[#3F6149] text-white flex items-center justify-center shrink-0 shadow-2xs mt-1">
-                    <Bot className="w-4 h-4 stroke-[2]" />
+                <div className="flex items-start gap-3.5">
+                  <div className="w-9 h-9 rounded-xl bg-[#3F6149] text-white flex items-center justify-center shrink-0 shadow-2xs mt-1">
+                    <Bot className="w-4.5 h-4.5 stroke-[2]" />
                   </div>
-                  <div className="bg-white rounded-2xl p-3.5 border border-[#DDDCD3] shadow-card flex items-center gap-2.5 text-xs text-[#5A665D]">
+                  <div className="bg-white rounded-2xl p-4 border border-[#DDDCD3] shadow-card flex items-center gap-3 text-xs text-[#5A665D]">
                     <Loader2 className="w-4 h-4 animate-spin text-[#3F6149]" />
                     <span>Scanning your contracts & summarizing key terms in simple words...</span>
                   </div>
@@ -331,57 +323,42 @@ const ChatPage = () => {
         </div>
 
         {/* User-Friendly Question Input Section */}
-        <div className="pt-2 space-y-2">
-          {/* Quick Suggestion Chips */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 text-[11px]">
-            <span className="text-[#758177] font-medium shrink-0">Try asking:</span>
-            {QUICK_HINTS.map((hint, hIdx) => (
-              <button
-                key={hIdx}
-                type="button"
-                onClick={() => handleSend(hint)}
-                className="px-2.5 py-1 rounded-lg bg-white hover:bg-[#EAECE4] border border-[#DDDCD3] text-[#4E5650] hover:text-[#18231C] transition-colors shrink-0 font-normal"
-              >
-                "{hint}"
-              </button>
-            ))}
-          </div>
-
+        <div className="space-y-3 pt-2">
           <form
             onSubmit={(e) => {
               e.preventDefault();
               handleSend();
             }}
-            className="bg-white rounded-2xl border border-[#D5D2C5] p-2 shadow-card flex items-center gap-2 w-full focus-within:border-[#3F6149] focus-within:ring-2 focus-within:ring-[#3F6149]/15 transition-all"
+            className="bg-white rounded-2xl border border-[#D5D2C5] p-2.5 shadow-card flex items-center gap-3 w-full focus-within:border-[#3F6149] focus-within:ring-2 focus-within:ring-[#3F6149]/15 transition-all"
           >
             <input
               type="text"
               value={inputQuestion}
               onChange={(e) => setInputQuestion(e.target.value)}
               placeholder="Ask anything about your contracts (e.g. 'What is the late fee?')..."
-              className="flex-1 px-3 py-2 bg-transparent text-xs md:text-sm text-[#18231C] placeholder-[#758177] focus:outline-none font-normal"
+              className="flex-1 px-4 py-2.5 bg-transparent text-xs md:text-sm text-[#18231C] placeholder-[#758177] focus:outline-none font-normal"
             />
             
             {/* Crisp, Sharp Action Button */}
             <button
               type="submit"
-              className="py-2.5 px-4 bg-[#3F6149] hover:bg-[#34503C] active:scale-[0.98] text-white font-semibold text-xs md:text-[13px] rounded-xl shadow-xs transition-all flex items-center gap-1.5 shrink-0 cursor-pointer"
+              className="py-2.5 px-5 bg-[#3F6149] hover:bg-[#34503C] active:scale-[0.98] text-white font-semibold text-xs md:text-sm rounded-xl shadow-xs transition-all flex items-center gap-2 shrink-0 cursor-pointer"
             >
               {loading ? (
                 <>
-                  <Loader2 className="w-3.5 h-3.5 animate-spin text-white" />
+                  <Loader2 className="w-4 h-4 animate-spin text-white" />
                   <span>Thinking...</span>
                 </>
               ) : (
                 <>
                   <span>Ask Question</span>
-                  <Send className="w-3 h-3 stroke-[2] text-white" />
+                  <Send className="w-3.5 h-3.5 stroke-[2] text-white" />
                 </>
               )}
             </button>
           </form>
           
-          <p className="text-[11px] text-[#758177] text-center font-normal">
+          <p className="text-xs text-[#758177] text-center font-normal">
             Grounded directly in your contracts. Verify against original agreement clauses before signing.
           </p>
         </div>
