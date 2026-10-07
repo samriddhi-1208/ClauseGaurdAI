@@ -10,14 +10,14 @@ const ProtectedRoute = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#F8F7F2] flex items-center justify-center text-[#18231C]">
-        <div className="flex flex-col items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#3F6149] text-white flex items-center justify-center shadow-sm animate-pulse">
-            <Shield className="w-5 h-5 stroke-[2]" />
+      <div className="min-h-screen bg-[#0B0A08] flex items-center justify-center text-[#EDE5D5]">
+        <div className="flex flex-col items-center gap-3.5">
+          <div className="w-11 h-11 rounded-xl bg-[#1A1815] border border-[#C8A97E]/40 text-[#E5C38E] flex items-center justify-center shadow-md animate-pulse">
+            <Shield className="w-6 h-6 stroke-[2]" />
           </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 border-2 border-[#3F6149] border-t-transparent rounded-full animate-spin"></div>
-            <span className="text-xs font-semibold text-[#3F6149]">Loading ClauseGuard AI...</span>
+          <div className="flex items-center gap-2.5">
+            <div className="w-4 h-4 border-2 border-[#E5C38E] border-t-transparent rounded-full animate-spin"></div>
+            <span className="text-xs font-semibold text-[#C8A97E] tracking-wide">Loading ClauseGuard AI...</span>
           </div>
         </div>
       </div>
@@ -37,14 +37,14 @@ const ProtectedRoute = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8F7F2] text-[#18231C] flex">
+    <div className="min-h-screen bg-[#0B0A08] text-[#EDE5D5] flex selection:bg-[#E5C38E] selection:text-[#12110E]">
       {/* Sidebar: permanent on desktop & laptop, slide drawer on mobile */}
       <Sidebar 
         isMobileOpen={isMobileSidebarOpen} 
         onCloseMobile={closeMobileSidebar} 
       />
       {/* Main Page Area */}
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex-1 flex flex-col min-w-0 bg-[#0B0A08]">
         <Outlet context={{ toggleMobileSidebar }} />
       </div>
     </div>

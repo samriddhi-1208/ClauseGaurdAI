@@ -51,9 +51,9 @@ const DocumentDetailsPage = () => {
 
   if (loading) {
     return (
-      <div className="flex-1 bg-[#F8F7F2] flex flex-col min-w-0 font-sans text-[#18231C]">
+      <div className="flex-1 bg-[#0B0A08] flex flex-col min-w-0 font-sans text-[#EDE5D5]">
         <Navbar title="Contract Inspection" />
-        <div className="p-16 text-center text-[#6B736D] text-xs font-normal">
+        <div className="p-16 text-center text-[#8C806F] text-xs font-normal">
           Loading extracted clause breakdown...
         </div>
       </div>
@@ -62,15 +62,15 @@ const DocumentDetailsPage = () => {
 
   if (!document) {
     return (
-      <div className="flex-1 bg-[#F8F7F2] flex flex-col min-w-0 font-sans text-[#18231C]">
+      <div className="flex-1 bg-[#0B0A08] flex flex-col min-w-0 font-sans text-[#EDE5D5]">
         <Navbar title="Contract Not Found" />
         <div className="p-16 text-center space-y-4">
-          <p className="text-xs font-semibold text-[#6B736D]">
+          <p className="text-xs text-[#8C806F]">
             The requested legal document could not be found or access is restricted.
           </p>
           <Link
             to="/documents"
-            className="px-4 py-2 bg-[#3F6149] hover:bg-[#34503C] text-white text-xs font-semibold rounded-xl inline-block shadow-2xs"
+            className="px-4 py-2 bg-[#E5C38E] hover:bg-[#D6B27B] text-[#12110E] text-xs font-semibold rounded-lg inline-block"
           >
             Return to Contract Library
           </Link>
@@ -86,14 +86,14 @@ const DocumentDetailsPage = () => {
   }, {});
 
   return (
-    <div className="flex-1 bg-[#F8F7F2] flex flex-col min-w-0 pb-16 font-sans text-[#18231C]">
+    <div className="flex-1 bg-[#0B0A08] flex flex-col min-w-0 pb-16 font-sans text-[#EDE5D5] selection:bg-[#E5C38E]/20 selection:text-[#F8F6F0]">
       <Navbar title={document.fileName} subtitle="Extracted clauses, semantic categories, and page references" />
 
       <main className="p-6 md:p-10 max-w-7xl w-full mx-auto space-y-7">
         <div>
           <Link
             to="/documents"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#5A665D] hover:text-[#18231C] transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs text-[#A99E8C] hover:text-[#EDE5D5] transition-colors"
           >
             <ArrowLeft className="w-4 h-4 stroke-[2]" />
             <span>Back to Contract Library</span>
@@ -104,13 +104,13 @@ const DocumentDetailsPage = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
           
           {/* Left Column: Document Overview Sticky Sidebar */}
-          <div className="bg-white p-6 rounded-2xl border border-[#DDDCD3] shadow-card space-y-5 lg:sticky lg:top-24">
-            <div className="flex items-start gap-3 border-b border-[#ECEAE2] pb-4">
-              <div className="w-10 h-10 rounded-xl bg-[#D8E4EE] text-[#35536D] flex items-center justify-center shrink-0">
+          <div className="bg-[#12100D] p-6 rounded-xl border border-[#231F19] space-y-5 lg:sticky lg:top-24">
+            <div className="flex items-start gap-3 border-b border-[#1F1B16] pb-4">
+              <div className="w-10 h-10 rounded-lg bg-[#191612] border border-[#2D261C] text-[#E5C38E] flex items-center justify-center shrink-0">
                 <FileText className="w-5 h-5 stroke-[1.8]" />
               </div>
               <div className="truncate">
-                <h1 className="text-sm font-semibold text-[#18231C] truncate">{document.fileName}</h1>
+                <h1 className="text-sm font-serif font-medium text-[#F4EFE5] truncate">{document.fileName}</h1>
                 <div className="mt-1">
                   <StatusBadge status={document.processingStatus} />
                 </div>
@@ -118,12 +118,12 @@ const DocumentDetailsPage = () => {
             </div>
 
             <div className="space-y-3 text-xs">
-              <div className="flex items-center justify-between text-[#5A665D]">
+              <div className="flex items-center justify-between text-[#8C806F]">
                 <span className="flex items-center gap-1.5">
-                  <Calendar className="w-3.5 h-3.5 text-[#8C948C]" />
+                  <Calendar className="w-3.5 h-3.5 text-[#5C5346]" />
                   <span>Processed:</span>
                 </span>
-                <span className="font-semibold text-[#18231C]">
+                <span className="font-medium text-[#EDE5D5]">
                   {new Date(document.uploadDate || document.createdAt || Date.now()).toLocaleDateString('en-US', {
                     month: 'short',
                     day: 'numeric',
@@ -132,28 +132,28 @@ const DocumentDetailsPage = () => {
                 </span>
               </div>
 
-              <div className="flex items-center justify-between text-[#5A665D]">
+              <div className="flex items-center justify-between text-[#8C806F]">
                 <span className="flex items-center gap-1.5">
-                  <Layers className="w-3.5 h-3.5 text-[#8C948C]" />
+                  <Layers className="w-3.5 h-3.5 text-[#5C5346]" />
                   <span>Total Clauses:</span>
                 </span>
-                <span className="font-semibold text-[#18231C]">{clauses.length}</span>
+                <span className="font-medium text-[#EDE5D5]">{clauses.length}</span>
               </div>
             </div>
 
             {/* Category Breakdown Tags */}
-            <div className="border-t border-[#ECEAE2] pt-4 space-y-2">
-              <h4 className="text-[11px] font-semibold text-[#6B736D] uppercase tracking-wider">
+            <div className="border-t border-[#1F1B16] pt-4 space-y-2">
+              <h4 className="text-[11px] font-medium text-[#A99E8C] uppercase tracking-wider">
                 Category Distribution
               </h4>
               <div className="flex flex-wrap gap-1.5">
                 {Object.entries(categoryCounts).map(([cat, count]) => (
                   <span
                     key={cat}
-                    className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#EDE9DE] text-[#685F4D] border border-[#DDD6C5] text-[10px] font-semibold"
+                    className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#16130F] text-[#C9BEAE] border border-[#231F19] text-[10px]"
                   >
                     <span>{cat.replace(/_/g, ' ')}:</span>
-                    <span className="font-bold">{count}</span>
+                    <span className="font-medium text-[#E5C38E]">{count}</span>
                   </span>
                 ))}
               </div>
@@ -163,7 +163,7 @@ const DocumentDetailsPage = () => {
               <Link
                 to="/compare"
                 state={{ selectedDocumentIds: [document._id || document.id] }}
-                className="w-full py-2.5 px-4 bg-[#3F6149] hover:bg-[#34503C] text-white font-semibold text-xs rounded-xl shadow-2xs flex items-center justify-center gap-2 transition-colors"
+                className="w-full py-2.5 px-4 bg-[#E5C38E] hover:bg-[#D6B27B] text-[#12110E] font-semibold text-xs rounded-lg flex items-center justify-center gap-2 transition-colors cursor-pointer"
               >
                 <GitCompare className="w-3.5 h-3.5 stroke-[2]" />
                 <span>Compare This Document</span>
@@ -174,9 +174,9 @@ const DocumentDetailsPage = () => {
           {/* Right Column: Clauses Stream */}
           <div className="lg:col-span-2 space-y-5">
             {/* Category Filter Pills */}
-            <div className="bg-white p-4 rounded-2xl border border-[#DDDCD3] shadow-card">
-              <div className="flex items-center gap-2 mb-3 text-xs font-semibold text-[#18231C]">
-                <Filter className="w-3.5 h-3.5 text-[#3F6149]" />
+            <div className="bg-[#12100D] p-4 rounded-xl border border-[#231F19]">
+              <div className="flex items-center gap-2 mb-3 text-xs font-medium text-[#A99E8C]">
+                <Filter className="w-3.5 h-3.5 text-[#E5C38E]" />
                 <span>Filter by Category:</span>
               </div>
               <div className="flex flex-wrap gap-1.5">
@@ -188,10 +188,10 @@ const DocumentDetailsPage = () => {
                     <button
                       key={cat}
                       onClick={() => setSelectedCategory(cat)}
-                      className={`px-3 py-1 rounded-xl text-xs font-semibold transition-all ${
+                      className={`px-3 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer ${
                         selectedCategory === cat
-                          ? 'bg-[#3F6149] text-white shadow-2xs'
-                          : 'bg-[#FAF9F5] text-[#5A665D] hover:text-[#18231C] border border-[#DDDCD3] hover:border-[#BFD1DF]'
+                          ? 'bg-[#E5C38E] text-[#12110E]'
+                          : 'bg-[#16130F] text-[#8C806F] hover:text-[#EDE5D5] border border-[#231F19] hover:border-[#383127]'
                       }`}
                     >
                       {cat.replace(/_/g, ' ')} ({count})
@@ -204,41 +204,44 @@ const DocumentDetailsPage = () => {
             {/* Clauses List */}
             <div className="space-y-4">
               {filteredClauses.length === 0 ? (
-                <div className="bg-white rounded-2xl border border-[#DDDCD3] p-12 text-center text-xs text-[#6B736D] shadow-card">
+                <div className="bg-[#12100D] rounded-xl border border-[#231F19] p-12 text-center text-xs text-[#8C806F]">
                   No clauses found for the selected category.
                 </div>
               ) : (
                 filteredClauses.map((clause, idx) => (
                   <div
                     key={clause._id || clause.id || idx}
-                    className="bg-white p-6 rounded-2xl border border-[#DDDCD3] shadow-card space-y-3"
+                    className="bg-[#12100D] p-6 rounded-xl border border-[#231F19] space-y-3"
                   >
-                    <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#ECEAE2] pb-3">
+                    <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#1F1B16] pb-3">
                       <div className="flex items-center gap-2">
-                        <span className="w-6 h-6 rounded-full bg-[#EAECE4] text-[#3F6149] text-xs font-bold flex items-center justify-center">
+                        <span className="w-6 h-6 rounded bg-[#191612] border border-[#2D261C] text-[#E5C38E] text-xs font-mono font-medium flex items-center justify-center">
                           {idx + 1}
                         </span>
-                        <span className="font-semibold text-xs text-[#18231C]">
+                        <span className="font-serif font-medium text-xs text-[#F4EFE5]">
                           {clause.clauseId || `Clause #${idx + 1}`}
                         </span>
                       </div>
 
                       <div className="flex items-center gap-2">
-                        <span className="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-[#EDE9DE] text-[#685F4D] border border-[#DDD6C5]">
+                        <span className="px-2 py-0.5 rounded text-[10px] font-medium bg-[#171410] text-[#A99E8C] border border-[#2B251B]">
                           {clause.category || 'OTHER'}
                         </span>
                         {clause.pageNumber && (
-                          <span className="text-[10px] text-[#758177]">
+                          <span className="text-[10px] text-[#8C806F]">
                             Page {clause.pageNumber}
                           </span>
                         )}
                       </div>
                     </div>
 
-                    <div className="text-xs text-[#2E3731] leading-relaxed font-normal bg-[#FAF9F5] p-4 rounded-xl border border-[#E8E6DC]/80">
-                      <p className="whitespace-pre-line italic text-[#242C26]">
-                        "{clause.text}"
-                      </p>
+                    {/* Warm Cream Parchment Document Preview Excerpt */}
+                    <div className="bg-[#EFECE4] text-[#1B1915] p-4 rounded-lg border border-[#DDD6C5] shadow-xs">
+                      <div className="border-l-2 border-[#C9A765] pl-3 py-0.5">
+                        <p className="whitespace-pre-line italic font-serif text-[13px] md:text-[14px] text-[#1A1815] leading-relaxed">
+                          "{clause.text}"
+                        </p>
+                      </div>
                     </div>
                   </div>
                 ))

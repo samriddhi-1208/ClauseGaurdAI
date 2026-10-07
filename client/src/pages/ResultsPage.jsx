@@ -159,21 +159,11 @@ const ResultsPageContent = () => {
       const res = await analysisAPI.getById(analysisId);
       if (res.data?.success && res.data.analysis) {
         setSelectedAnalysis(res.data.analysis);
-        const fList = Array.isArray(res.data.findings) ? res.data.findings : [];
-        if (fList.length > 0) {
-          setFindings(fList);
-          const expMap = {};
-          fList.forEach((item, idx) => {
-            const key = item._id || item.id || idx;
-            expMap[key] = true;
-          });
-          setExpandedIds(expMap);
+        if (Array.isArray(res.data.analysis.findings) && res.data.analysis.findings.length > 0) {
+          setFindings(res.data.analysis.findings);
         } else {
           setFindings(FALLBACK_FINDINGS);
         }
-      } else {
-        setSelectedAnalysis(FALLBACK_ANALYSIS);
-        setFindings(FALLBACK_FINDINGS);
       }
     } catch (err) {
       console.warn('[Fetch Analysis Warning - using fallback]', err);
@@ -194,9 +184,6 @@ const ResultsPageContent = () => {
       const res = await demoAPI.seed();
       if (res.data?.success && res.data.analysisId) {
         fetchAnalysisById(res.data.analysisId);
-      } else {
-        setSelectedAnalysis(FALLBACK_ANALYSIS);
-        setFindings(FALLBACK_FINDINGS);
       }
     } catch (err) {
       console.warn('[Demo Warning - using fallback]', err);
@@ -232,7 +219,7 @@ const ResultsPageContent = () => {
   const auditDateStr = formatSafeDate(selectedAnalysis?.createdAt);
 
   return (
-    <div className="flex-1 bg-[#F8F7F2] flex flex-col min-w-0 pb-20 font-sans text-[#101A13]">
+    <div className="flex-1 bg-[#0B0A08] flex flex-col min-w-0 pb-20 font-sans text-[#EDE5D5] selection:bg-[#E5C38E]/20 selection:text-[#F8F6F0]">
       <Navbar title="Risk Insights & Contradictions" subtitle="Cross-document semantic conflict reports & legal recommendations" />
 
       <main className="p-6 md:p-10 max-w-7xl w-full mx-auto space-y-8 pb-24">
@@ -240,10 +227,10 @@ const ResultsPageContent = () => {
         {/* Top Header Bar */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl md:text-3xl font-bold text-[#101A13] tracking-tight">
+            <h1 className="text-2xl md:text-3xl font-serif text-[#F4EFE5] tracking-tight">
               Contradiction Audit Report
             </h1>
-            <p className="text-sm md:text-[15px] text-[#334237] mt-1 font-medium">
+            <p className="text-xs md:text-sm text-[#A99E8C] mt-1">
               Comprehensive discrepancy analysis across evaluated legal obligations
             </p>
           </div>
@@ -252,15 +239,15 @@ const ResultsPageContent = () => {
             <button
               onClick={handleRunDemo}
               disabled={seeding}
-              className="px-4 py-2.5 bg-white hover:bg-[#F2F0E8] text-[#101A13] border border-[#DDDCD3] font-bold text-xs md:text-sm rounded-xl shadow-2xs flex items-center gap-2 transition-colors disabled:opacity-50 cursor-pointer"
+              className="px-3.5 py-2 bg-[#14120E] hover:bg-[#1B1813] text-[#EDE5D5] border border-[#2D261C] hover:border-[#E5C38E]/50 font-medium text-xs md:text-sm rounded-lg flex items-center gap-2 transition-colors disabled:opacity-50 cursor-pointer"
             >
-              <Zap className="w-4 h-4 text-[#C27D38]" />
+              <Zap className="w-3.5 h-3.5 text-[#E5C38E]" />
               <span>{seeding ? 'Seeding...' : 'Load Sample Audit'}</span>
             </button>
 
             <Link
               to="/compare"
-              className="px-4 py-2.5 bg-[#3F6149] hover:bg-[#34503C] text-white font-bold text-xs md:text-sm rounded-xl shadow-2xs flex items-center gap-2 transition-colors cursor-pointer"
+              className="px-4 py-2 bg-[#E5C38E] hover:bg-[#D6B27B] text-[#12110E] font-semibold text-xs md:text-sm rounded-lg flex items-center gap-2 transition-colors cursor-pointer"
             >
               <GitCompare className="w-4 h-4 stroke-[2]" />
               <span>Compare Another Pair</span>
@@ -270,52 +257,52 @@ const ResultsPageContent = () => {
 
         {/* Audit Report Summary Banner */}
         {selectedAnalysis && (
-          <div className="bg-white rounded-2xl border border-[#DDDCD3] p-6 md:p-8 shadow-card space-y-6">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 border-b border-[#ECEAE2] pb-5">
+          <div className="bg-[#12100D] rounded-xl border border-[#231F19] p-6 md:p-8 space-y-6">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 border-b border-[#1F1B16] pb-5">
               <div>
                 <div className="flex items-center gap-2.5">
-                  <span className="text-xs md:text-sm font-bold text-[#274830] bg-[#E2ECE3] px-3 py-1 rounded-lg border border-[#CADBCC]">
+                  <span className="text-xs font-mono font-medium text-[#E5C38E] bg-[#1C1812] px-2.5 py-1 rounded border border-[#2E271D]">
                     AUDIT #{auditNumber}
                   </span>
-                  <span className="text-xs md:text-sm text-[#48554A] font-medium">
+                  <span className="text-xs text-[#8C806F]">
                     Executed on {auditDateStr}
                   </span>
                 </div>
-                <h2 className="text-lg md:text-xl font-bold text-[#101A13] mt-2.5 leading-snug">
+                <h2 className="text-lg md:text-xl font-serif text-[#F4EFE5] mt-2.5 leading-snug">
                   {safeFindingsList.length} Discrepancies Flagged Across Contract Obligations
                 </h2>
               </div>
 
               {/* 3 Triage Metric Pills */}
               <div className="flex items-center gap-3 flex-wrap">
-                <div className="bg-[#FAF0F0] border border-[#EED1D0] px-4 py-2.5 rounded-xl text-center min-w-[100px] shadow-2xs">
-                  <span className="text-2xl font-extrabold text-[#B5413D] leading-none block">{highRiskCount}</span>
-                  <span className="text-xs font-bold text-[#96302C] mt-1.5 block">High Risk</span>
+                <div className="bg-[#241314] border border-[#482325] px-4 py-2.5 rounded-lg text-center min-w-[96px]">
+                  <span className="text-2xl font-serif text-[#ECA09B] leading-none block">{highRiskCount}</span>
+                  <span className="text-xs text-[#ECA09B]/80 mt-1 block">High Risk</span>
                 </div>
 
-                <div className="bg-[#FAF1ED] border border-[#EDD5CA] px-4 py-2.5 rounded-xl text-center min-w-[100px] shadow-2xs">
-                  <span className="text-2xl font-extrabold text-[#9C6A28] leading-none block">{mediumRiskCount}</span>
-                  <span className="text-xs font-bold text-[#805018] mt-1.5 block">Medium Risk</span>
+                <div className="bg-[#231A10] border border-[#443118] px-4 py-2.5 rounded-lg text-center min-w-[96px]">
+                  <span className="text-2xl font-serif text-[#E5B56E] leading-none block">{mediumRiskCount}</span>
+                  <span className="text-xs text-[#E5B56E]/80 mt-1 block">Medium Risk</span>
                 </div>
 
-                <div className="bg-[#F1F5F8] border border-[#D5E0EA] px-4 py-2.5 rounded-xl text-center min-w-[100px] shadow-2xs">
-                  <span className="text-2xl font-extrabold text-[#2F5236] leading-none block">{lowRiskCount}</span>
-                  <span className="text-xs font-bold text-[#234229] mt-1.5 block">Low Risk</span>
+                <div className="bg-[#152319] border border-[#233B2B] px-4 py-2.5 rounded-lg text-center min-w-[96px]">
+                  <span className="text-2xl font-serif text-[#98C7A3] leading-none block">{lowRiskCount}</span>
+                  <span className="text-xs text-[#98C7A3]/80 mt-1 block">Low Risk</span>
                 </div>
               </div>
             </div>
 
             {/* Evaluated Contract Tags */}
-            <div className="flex items-center gap-2.5 flex-wrap text-xs md:text-sm text-[#38463C]">
-              <span className="font-bold text-[#101A13]">Evaluated Documents:</span>
+            <div className="flex items-center gap-2.5 flex-wrap text-xs md:text-sm text-[#A99E8C]">
+              <span className="font-medium text-[#EDE5D5]">Evaluated Documents:</span>
               {(selectedAnalysis.documents && selectedAnalysis.documents.length > 0 
                 ? selectedAnalysis.documents 
                 : FALLBACK_ANALYSIS.documents
               ).map((d, i) => {
                 const docName = safeString(d, `Contract #${i + 1}`);
                 return (
-                  <span key={i} className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-[#FAF9F5] border border-[#DDDCD3] text-[#101A13] font-semibold shadow-2xs">
-                    <FileText className="w-4 h-4 text-[#35536D]" />
+                  <span key={i} className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#16130F] border border-[#231F19] text-[#EDE5D5] text-xs">
+                    <FileText className="w-3.5 h-3.5 text-[#E5C38E]" />
                     <span>{docName}</span>
                   </span>
                 );
@@ -326,7 +313,7 @@ const ResultsPageContent = () => {
 
         {/* Findings Accordion Stream */}
         {loading ? (
-          <div className="py-16 text-center text-sm text-[#48554A] font-medium">
+          <div className="py-16 text-center text-sm text-[#8C806F]">
             Synthesizing cross-document contradiction findings...
           </div>
         ) : (
@@ -335,7 +322,6 @@ const ResultsPageContent = () => {
               const fId = finding?._id || finding?.id || idx;
               const isExpanded = !!expandedIds[fId];
 
-              // Safe strings guaranteed not to throw or be raw objects
               const docAName = safeString(finding?.doc1Name || finding?.documentAName || finding?.documentA, 'Sample_Contract_A_Enterprise.pdf');
               const docBName = safeString(finding?.doc2Name || finding?.documentBName || finding?.documentB, 'Sample_Contract_B_Vendor.pdf');
 
@@ -361,82 +347,94 @@ const ResultsPageContent = () => {
               return (
                 <div
                   key={fId}
-                  className="bg-white rounded-2xl border border-[#DDDCD3] shadow-card overflow-hidden transition-all"
+                  className="bg-[#12100D] rounded-xl border border-[#231F19] overflow-hidden transition-all"
                 >
                   {/* Finding Header */}
                   <div
                     onClick={() => toggleExpand(fId)}
-                    className="p-6 md:p-7 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#FAF9F5] transition-colors"
+                    className="p-5 md:p-6 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#171410] transition-colors"
                   >
-                    <div className="flex items-center gap-4 truncate min-w-0">
-                      <div className="w-9 h-9 rounded-xl bg-[#E2ECE3] text-[#274830] flex items-center justify-center text-sm font-bold shrink-0 shadow-2xs">
+                    <div className="flex items-center gap-3.5 truncate min-w-0">
+                      <div className="w-8 h-8 rounded-lg bg-[#191612] border border-[#2D261C] text-[#E5C38E] flex items-center justify-center text-xs font-serif font-bold shrink-0">
                         {idx + 1}
                       </div>
                       <div className="truncate">
-                        <h3 className="text-base md:text-lg font-bold text-[#101A13] truncate leading-snug">
+                        <h3 className="text-base font-serif text-[#F4EFE5] truncate leading-snug">
                           {titleDisplay}
                         </h3>
-                        <p className="text-xs md:text-sm text-[#48554A] font-semibold truncate mt-1">
+                        <p className="text-xs text-[#8C806F] truncate mt-0.5">
                           Scope: {categoryDisplay}
                         </p>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-3.5 shrink-0">
+                    <div className="flex items-center gap-3 shrink-0">
                       <RiskBadge riskLevel={finding?.riskLevel} classification={finding?.classification} />
-                      <button className="text-[#48554A] hover:text-[#101A13] p-1.5 rounded-lg hover:bg-[#EAECE4] transition-colors">
-                        {isExpanded ? <ChevronUp className="w-5 h-5 stroke-[2]" /> : <ChevronDown className="w-5 h-5 stroke-[2]" />}
+                      <button className="text-[#8C806F] hover:text-[#EDE5D5] p-1 rounded transition-colors">
+                        {isExpanded ? <ChevronUp className="w-4 h-4 stroke-[2]" /> : <ChevronDown className="w-4 h-4 stroke-[2]" />}
                       </button>
                     </div>
                   </div>
 
                   {/* Finding Body Details */}
                   {isExpanded && (
-                    <div className="p-7 pt-0 border-t border-[#ECEAE2] space-y-6 bg-white">
+                    <div className="p-6 pt-0 border-t border-[#1F1B16] space-y-5 bg-[#12100D]">
                       
-                      {/* Side-by-side Clause Excerpts */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 pt-5">
-                        {/* Clause 1 */}
-                        <div className="bg-[#FAF9F5] p-5 md:p-6 rounded-2xl border border-[#D8D6CC] space-y-3">
-                          <div className="flex items-center justify-between text-xs md:text-sm font-bold text-[#2A445A] border-b border-[#ECEAE2] pb-2">
-                            <span className="truncate">{docAName}</span>
-                            <span className="text-[#556358] font-semibold">Clause Excerpt</span>
+                      {/* Central CONTRADICTION DETECTED banner */}
+                      <div className="pt-4 flex items-center justify-center">
+                        <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-medium bg-[#221A10] border border-[#3E2D17] text-[#E5B56E]">
+                          <AlertTriangle className="w-3.5 h-3.5 text-[#E5B56E] stroke-[2]" />
+                          <span>CONTRADICTION DETECTED</span>
+                        </span>
+                      </div>
+
+                      {/* Side-by-side Warm Cream Document Excerpt Panels */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {/* Document A Parchment Panel */}
+                        <div className="bg-[#EFECE4] p-5 rounded-lg border border-[#DDD6C5] text-[#1B1915] space-y-2.5 shadow-sm">
+                          <div className="flex items-center justify-between text-xs font-medium text-[#4A453A] border-b border-[#DDD6C5] pb-2">
+                            <span className="truncate font-semibold">{docAName}</span>
+                            <span className="text-[11px] uppercase tracking-wider text-[#736B5E]">Clause A</span>
                           </div>
-                          <p className="text-[14px] md:text-[15px] text-[#111A13] font-medium leading-relaxed italic whitespace-pre-line">
-                            "{clauseAText}"
-                          </p>
+                          <div className="border-l-2 border-[#C9A765] pl-3 py-1 bg-[#E8E2D4]/50 rounded-r">
+                            <p className="font-serif text-[13px] md:text-[14px] text-[#1A1815] leading-relaxed italic">
+                              "{clauseAText}"
+                            </p>
+                          </div>
                         </div>
 
-                        {/* Clause 2 */}
-                        <div className="bg-[#FAF9F5] p-5 md:p-6 rounded-2xl border border-[#D8D6CC] space-y-3">
-                          <div className="flex items-center justify-between text-xs md:text-sm font-bold text-[#8C3A24] border-b border-[#ECEAE2] pb-2">
-                            <span className="truncate">{docBName}</span>
-                            <span className="text-[#556358] font-semibold">Conflicting Excerpt</span>
+                        {/* Document B Parchment Panel */}
+                        <div className="bg-[#EFECE4] p-5 rounded-lg border border-[#DDD6C5] text-[#1B1915] space-y-2.5 shadow-sm">
+                          <div className="flex items-center justify-between text-xs font-medium text-[#4A453A] border-b border-[#DDD6C5] pb-2">
+                            <span className="truncate font-semibold">{docBName}</span>
+                            <span className="text-[11px] uppercase tracking-wider text-[#A3523B]">Clause B (Conflicting)</span>
                           </div>
-                          <p className="text-[14px] md:text-[15px] text-[#111A13] font-medium leading-relaxed italic whitespace-pre-line">
-                            "{clauseBText}"
-                          </p>
+                          <div className="border-l-2 border-[#A3523B] pl-3 py-1 bg-[#E8E2D4]/50 rounded-r">
+                            <p className="font-serif text-[13px] md:text-[14px] text-[#1A1815] leading-relaxed italic">
+                              "{clauseBText}"
+                            </p>
+                          </div>
                         </div>
                       </div>
 
                       {/* AI Legal Explanation */}
-                      <div className="p-5 md:p-6 rounded-2xl bg-[#FDF3EE] border border-[#E9C7B8] text-xs md:text-sm space-y-2">
-                        <div className="flex items-center gap-2 font-bold text-[#8C3A24]">
-                          <AlertTriangle className="w-4 h-4 stroke-[2.5]" />
-                          <span className="text-xs md:text-sm uppercase tracking-wide">Legal Contradiction Breakdown:</span>
+                      <div className="p-4 rounded-lg bg-[#1D1712] border border-[#3A2A1E] text-xs md:text-sm space-y-1.5">
+                        <div className="flex items-center gap-2 text-xs font-medium text-[#E5B56E] uppercase tracking-wider">
+                          <AlertTriangle className="w-3.5 h-3.5 stroke-[2]" />
+                          <span>Legal Contradiction Breakdown:</span>
                         </div>
-                        <p className="text-[14px] md:text-[15px] text-[#152118] leading-relaxed font-medium pt-1">
+                        <p className="text-xs md:text-sm text-[#D5CEBF] leading-relaxed pt-0.5">
                           {explanationDisplay}
                         </p>
                       </div>
 
                       {/* AI Counsel Guidance & Recommendation */}
-                      <div className="p-5 md:p-6 rounded-2xl bg-[#EAF0E6] border border-[#C5D5C1] text-xs md:text-sm space-y-2">
-                        <div className="flex items-center gap-2 font-bold text-[#23452B]">
-                          <Lightbulb className="w-4 h-4 stroke-[2.5] text-[#274830]" />
-                          <span className="text-xs md:text-sm uppercase tracking-wide">Counsel Mitigation Guidance:</span>
+                      <div className="p-4 rounded-lg bg-[#151F18] border border-[#233B2B] text-xs md:text-sm space-y-1.5">
+                        <div className="flex items-center gap-2 text-xs font-medium text-[#98C7A3] uppercase tracking-wider">
+                          <Lightbulb className="w-3.5 h-3.5 stroke-[2] text-[#98C7A3]" />
+                          <span>Counsel Mitigation Guidance:</span>
                         </div>
-                        <p className="text-[14px] md:text-[15px] text-[#152118] leading-relaxed font-medium pt-1">
+                        <p className="text-xs md:text-sm text-[#D5CEBF] leading-relaxed pt-0.5">
                           {recommendationDisplay}
                         </p>
                       </div>

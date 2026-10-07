@@ -48,16 +48,16 @@ const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
       {/* Top & Navigation Section */}
       <div className="flex flex-col flex-1 overflow-y-auto">
         {/* Brand Header */}
-        <div className="px-5 py-5 border-b border-[#D7D5CB] flex items-center justify-between shrink-0">
+        <div className="px-5 py-5 border-b border-[#24201A] flex items-center justify-between shrink-0">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-[#3F6149] text-white flex items-center justify-center shrink-0 shadow-2xs">
-              <Shield className="w-5 h-5 stroke-[2.2]" />
+            <div className="w-9 h-9 rounded-xl bg-[#1A1815] border border-[#C8A97E]/40 text-[#E5C38E] flex items-center justify-center shrink-0 shadow-sm">
+              <Shield className="w-5 h-5 stroke-[2]" />
             </div>
             <div>
-              <h1 className="font-extrabold text-[16px] text-[#101A13] leading-snug">
+              <h1 className="font-serif font-bold text-[16px] text-[#F8F6F0] leading-snug">
                 ClauseGuard AI
               </h1>
-              <p className="text-xs text-[#38463C] font-semibold leading-normal mt-0.5">
+              <p className="text-xs text-[#8C806F] font-normal leading-normal mt-0.5">
                 Smarter Contracts. Safer Decisions.
               </p>
             </div>
@@ -67,7 +67,7 @@ const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
           {isMobile && (
             <button
               onClick={onCloseMobile}
-              className="p-1.5 rounded-lg text-[#38463C] hover:text-[#101A13] hover:bg-[#DCD8CB] transition-colors"
+              className="p-1.5 rounded-lg text-[#8C806F] hover:text-[#F8F6F0] hover:bg-[#1E1B16] transition-colors"
               aria-label="Close sidebar"
             >
               <X className="w-4 h-4 stroke-[2]" />
@@ -76,8 +76,8 @@ const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
         </div>
 
         {/* Main Navigation */}
-        <div className="px-3.5 py-4 space-y-1.5">
-          <p className="px-3 text-xs font-bold text-[#3B483E] uppercase tracking-wider mb-2">
+        <div className="px-3.5 py-4 space-y-1">
+          <p className="px-3 text-[11px] font-bold text-[#8C806F] uppercase tracking-wider mb-2">
             Workspace
           </p>
           {mainNav.map((item) => {
@@ -88,16 +88,18 @@ const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
                 to={item.path}
                 onClick={handleLinkClick}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-[14px] font-semibold transition-all ${
+                  `flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-[14px] transition-all group ${
                     isActive
-                      ? 'bg-[#D6D1C2] text-[#101A13] font-bold shadow-2xs'
-                      : 'text-[#28362D] hover:text-[#101A13] hover:bg-[#DFDBD0]'
+                      ? 'bg-[#221C13] text-[#F8F6F0] font-bold border-l-2 border-[#E5C38E] shadow-sm'
+                      : 'text-[#B8AC99] hover:text-[#F8F6F0] hover:bg-[#181613] font-medium'
                   }`
                 }
               >
                 {({ isActive }) => (
                   <>
-                    <Icon className={`w-4 h-4 shrink-0 stroke-[2] ${isActive ? 'text-[#274830]' : 'text-[#48554A]'}`} />
+                    <Icon className={`w-4 h-4 shrink-0 stroke-[2] transition-colors ${
+                      isActive ? 'text-[#E5C38E]' : 'text-[#8C806F] group-hover:text-[#E5C38E]'
+                    }`} />
                     <span>{item.label}</span>
                   </>
                 )}
@@ -107,11 +109,11 @@ const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
         </div>
 
         {/* Subtle Divider */}
-        <div className="mx-5 my-1.5 border-t border-[#D7D5CB]"></div>
+        <div className="mx-5 my-1.5 border-t border-[#24201A]"></div>
 
         {/* Preferences Navigation */}
-        <div className="px-3.5 py-2 space-y-1.5">
-          <p className="px-3 text-xs font-bold text-[#3B483E] uppercase tracking-wider mb-1.5">
+        <div className="px-3.5 py-2 space-y-1">
+          <p className="px-3 text-[11px] font-bold text-[#8C806F] uppercase tracking-wider mb-1.5">
             Preferences
           </p>
           {bottomNav.map((item) => {
@@ -122,16 +124,18 @@ const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
                 to={item.path}
                 onClick={handleLinkClick}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-[14px] font-semibold transition-all ${
+                  `flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-[14px] transition-all group ${
                     isActive
-                      ? 'bg-[#D6D1C2] text-[#101A13] font-bold shadow-2xs'
-                      : 'text-[#28362D] hover:text-[#101A13] hover:bg-[#DFDBD0]'
+                      ? 'bg-[#221C13] text-[#F8F6F0] font-bold border-l-2 border-[#E5C38E] shadow-sm'
+                      : 'text-[#B8AC99] hover:text-[#F8F6F0] hover:bg-[#181613] font-medium'
                   }`
                 }
               >
                 {({ isActive }) => (
                   <>
-                    <Icon className={`w-4 h-4 shrink-0 stroke-[2] ${isActive ? 'text-[#274830]' : 'text-[#48554A]'}`} />
+                    <Icon className={`w-4 h-4 shrink-0 stroke-[2] transition-colors ${
+                      isActive ? 'text-[#E5C38E]' : 'text-[#8C806F] group-hover:text-[#E5C38E]'
+                    }`} />
                     <span>{item.label}</span>
                   </>
                 )}
@@ -142,12 +146,12 @@ const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
 
         {/* Vector Status Badge */}
         <div className="px-3.5 mt-auto pt-3 pb-3">
-          <div className="p-3 bg-[#E2DFD4] border border-[#D7D5CB] rounded-xl text-xs space-y-1">
-            <div className="flex items-center gap-1.5 text-xs font-bold text-[#23452B]">
-              <Sparkles className="w-3.5 h-3.5 stroke-[2.2] text-[#2F5236]" />
+          <div className="p-3 bg-[#14120E] border border-[#2B251B] rounded-xl text-xs space-y-1">
+            <div className="flex items-center gap-1.5 text-xs font-bold text-[#E5C38E]">
+              <Sparkles className="w-3.5 h-3.5 stroke-[2.2] text-[#E5C38E]" />
               <span>Vector Memory Active</span>
             </div>
-            <p className="text-xs text-[#38463C] font-medium leading-relaxed">
+            <p className="text-xs text-[#8C806F] font-medium leading-relaxed">
               ChromaDB semantic indexing & Gemini 2.5 legal reasoning.
             </p>
           </div>
@@ -155,21 +159,21 @@ const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
       </div>
 
       {/* User Footer Profile */}
-      <div className="p-3.5 px-4 border-t border-[#D7D5CB] bg-[#E2DFD4] shrink-0">
+      <div className="p-3.5 px-4 border-t border-[#24201A] bg-[#12100D] shrink-0">
         <div className="flex items-center justify-between gap-2.5">
           <div 
             onClick={() => { navigate('/profile'); handleLinkClick(); }}
             className="flex items-center gap-2.5 truncate cursor-pointer group flex-1 min-w-0"
             title={`${user?.name || 'Samriddhi Tiwari'} (${user?.email || 'tiwari.samriddhi12@gmail.com'})`}
           >
-            <div className="w-8 h-8 rounded-full bg-[#3F6149] text-white flex items-center justify-center text-xs font-bold shrink-0 shadow-2xs">
+            <div className="w-8 h-8 rounded-full bg-[#241E15] border border-[#C8A97E]/50 text-[#E5C38E] flex items-center justify-center text-xs font-bold shrink-0 shadow-sm">
               {getInitials(user?.name)}
             </div>
             <div className="truncate min-w-0">
-              <p className="text-[13.5px] font-bold text-[#101A13] truncate group-hover:text-[#3F6149] transition-colors leading-snug">
+              <p className="text-[13.5px] font-bold text-[#F8F6F0] truncate group-hover:text-[#E5C38E] transition-colors leading-snug">
                 {user?.name || 'Samriddhi Tiwari'}
               </p>
-              <p className="text-[11px] text-[#455248] truncate font-semibold leading-normal">
+              <p className="text-[11px] text-[#8C806F] truncate font-medium leading-normal">
                 {user?.email || 'tiwari.samriddhi12@gmail.com'}
               </p>
             </div>
@@ -179,7 +183,7 @@ const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
             onClick={logout}
             title="Sign out"
             aria-label="Sign out"
-            className="p-1.5 rounded-lg text-[#48554A] hover:text-[#B5413D] hover:bg-[#DCD8CB] transition-colors shrink-0 ml-1 cursor-pointer"
+            className="p-1.5 rounded-lg text-[#8C806F] hover:text-[#E58882] hover:bg-[#221616] transition-colors shrink-0 ml-1 cursor-pointer"
           >
             <LogOut className="w-4 h-4 stroke-[2]" />
           </button>
@@ -194,14 +198,14 @@ const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
       {isMobileOpen && (
         <div 
           onClick={onCloseMobile}
-          className="fixed inset-0 bg-[#18231C]/35 backdrop-blur-xs z-40 md:hidden"
+          className="fixed inset-0 bg-[#000000]/70 backdrop-blur-xs z-40 md:hidden"
           aria-hidden="true"
         />
       )}
 
       {/* Mobile Slide-out Drawer */}
       <aside 
-        className={`fixed inset-y-0 left-0 w-64 bg-[#EAE8DF] text-[#101A13] flex flex-col justify-between border-r border-[#D7D5CB] z-50 select-none font-sans transition-transform duration-200 ease-in-out md:hidden ${
+        className={`fixed inset-y-0 left-0 w-64 bg-[#0E0D0B] text-[#EDE5D5] flex flex-col justify-between border-r border-[#24201A] z-50 select-none font-sans transition-transform duration-200 ease-in-out md:hidden ${
           isMobileOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -209,7 +213,7 @@ const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
       </aside>
 
       {/* Permanent Desktop & Laptop Sidebar */}
-      <aside className="hidden md:flex flex-col justify-between w-64 shrink-0 h-screen sticky top-0 bg-[#EAE8DF] text-[#101A13] border-r border-[#D7D5CB] z-20 select-none font-sans">
+      <aside className="hidden md:flex flex-col justify-between w-64 shrink-0 h-screen sticky top-0 bg-[#0E0D0B] text-[#EDE5D5] border-r border-[#24201A] z-20 select-none font-sans">
         {renderContent(false)}
       </aside>
     </>

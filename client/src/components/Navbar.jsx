@@ -36,13 +36,13 @@ const Navbar = ({ title, subtitle }) => {
 
   return (
     <>
-      <header className="bg-[#F8F7F2] border-b border-[#E2DFD5] px-6 md:px-10 py-4 md:py-5 flex items-center justify-between sticky top-0 z-30 font-sans shadow-2xs">
-        {/* Left Section: Mobile Menu Button + Bold Page Title */}
+      <header className="bg-[#0E0D0B] border-b border-[#24201A] px-6 md:px-10 py-4 md:py-5 flex items-center justify-between sticky top-0 z-30 font-sans">
+        {/* Left Section: Mobile Menu Button + Serif Page Title */}
         <div className="flex items-center gap-3.5 truncate pr-4">
           {outletContext?.toggleMobileSidebar && (
             <button
               onClick={outletContext.toggleMobileSidebar}
-              className="md:hidden p-2 rounded-xl bg-white border border-[#DDDCD3] text-[#4E5650] hover:text-[#18231C] transition-colors shrink-0 shadow-2xs"
+              className="md:hidden p-2 rounded-xl bg-[#161411] border border-[#2B251B] text-[#A89E8D] hover:text-[#F8F6F0] transition-colors shrink-0"
               aria-label="Toggle navigation menu"
             >
               <Menu className="w-4 h-4 stroke-[2]" />
@@ -50,11 +50,11 @@ const Navbar = ({ title, subtitle }) => {
           )}
 
           <div className="truncate">
-            <h1 className="text-lg md:text-xl font-bold text-[#101A13] tracking-tight leading-tight truncate">
+            <h1 className="text-lg md:text-xl font-serif font-bold text-[#F8F6F0] tracking-tight leading-tight truncate">
               {title}
             </h1>
             {subtitle && (
-              <p className="text-xs md:text-sm text-[#38463C] font-semibold leading-normal truncate mt-0.5">
+              <p className="text-xs md:text-sm text-[#A89E8D] font-normal leading-normal truncate mt-0.5">
                 {subtitle}
               </p>
             )}
@@ -67,11 +67,11 @@ const Navbar = ({ title, subtitle }) => {
           <button
             onClick={() => setIsSearchOpen(true)}
             aria-label="Search contracts"
-            className="flex items-center gap-2 px-3.5 py-2 bg-white hover:bg-[#F2F0E8] border border-[#DDDCD3] rounded-xl text-xs text-[#5A665D] transition-colors shadow-2xs cursor-pointer"
+            className="flex items-center gap-2 px-3.5 py-2 bg-[#161411] hover:bg-[#1E1B16] border border-[#2B251B] hover:border-[#3D3528] rounded-xl text-xs text-[#A89E8D] transition-colors cursor-pointer"
           >
-            <Search className="w-3.5 h-3.5 text-[#5A665D] stroke-[2]" />
+            <Search className="w-3.5 h-3.5 text-[#C8A97E] stroke-[2]" />
             <span className="hidden sm:inline font-medium">Search repository...</span>
-            <kbd className="hidden sm:inline px-1.5 py-0.5 bg-[#EDE9DE] border border-[#DDD6C5] rounded text-[10px] font-mono font-semibold text-[#5A665D]">
+            <kbd className="hidden sm:inline px-1.5 py-0.5 bg-[#201D17] border border-[#352F25] rounded text-[10px] font-mono font-semibold text-[#E5C38E]">
               Ctrl K
             </kbd>
           </button>
@@ -81,10 +81,10 @@ const Navbar = ({ title, subtitle }) => {
             <button
               onClick={() => setIsNotifOpen(prev => !prev)}
               aria-label="Open notifications"
-              className="p-2.5 rounded-xl bg-white hover:bg-[#F2F0E8] border border-[#DDDCD3] text-[#5A665D] hover:text-[#18231C] transition-colors relative shadow-2xs cursor-pointer"
+              className="p-2.5 rounded-xl bg-[#161411] hover:bg-[#1E1B16] border border-[#2B251B] hover:border-[#3D3528] text-[#A89E8D] hover:text-[#E5C38E] transition-colors relative cursor-pointer"
             >
               <Bell className="w-4 h-4 stroke-[1.8]" />
-              <span className="absolute top-2 right-2 w-1.5 h-1.5 bg-[#3F6149] rounded-full"></span>
+              <span className="absolute top-2 right-2 w-1.5 h-1.5 bg-[#E5C38E] rounded-full ring-2 ring-[#0E0D0B]"></span>
             </button>
 
             <NotificationDropdown isOpen={isNotifOpen} onClose={() => setIsNotifOpen(false)} />
@@ -93,19 +93,20 @@ const Navbar = ({ title, subtitle }) => {
           {/* User Avatar Circle */}
           <Link
             to="/profile"
-            className="flex items-center gap-2.5 pl-2.5 border-l border-[#E2DFD5] group"
+            className="flex items-center gap-2.5 pl-2.5 border-l border-[#24201A] group"
             title="View Counsel Profile"
           >
-            <div className="w-8 h-8 rounded-full bg-[#3F6149] text-white flex items-center justify-center text-xs font-semibold shrink-0 shadow-2xs group-hover:scale-105 transition-transform">
+            <div className="w-8 h-8 rounded-full bg-[#241E15] border border-[#C8A97E]/50 text-[#E5C38E] flex items-center justify-center text-xs font-bold shrink-0 shadow-sm group-hover:border-[#E5C38E] transition-colors">
               {getInitials(user?.name)}
             </div>
-            <span className="hidden md:inline text-xs font-semibold text-[#18231C] group-hover:text-[#3F6149] transition-colors">
-              {user?.name ? user.name.split(' ')[0] : 'Samriddhi'}
+            <span className="hidden lg:inline text-xs font-semibold text-[#EDE5D5] group-hover:text-[#E5C38E] transition-colors">
+              {user?.name ? user.name.split(' ')[0] : 'Counsel'}
             </span>
           </Link>
         </div>
       </header>
 
+      {/* Global Command Palette */}
       <GlobalSearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
     </>
   );

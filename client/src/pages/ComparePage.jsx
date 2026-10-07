@@ -101,7 +101,6 @@ const ComparePage = () => {
 
   const handleStartAnalysis = async () => {
     if (selectedDocIds.length < 2) {
-      // Auto select 2 docs if fewer than 2 selected so user never gets blocked
       setSelectedDocIds(['doc-1', 'doc-2']);
     }
 
@@ -143,16 +142,16 @@ const ComparePage = () => {
   };
 
   return (
-    <div className="flex-1 bg-[#F8F7F2] flex flex-col min-w-0 pb-16 font-sans text-[#18231C]">
-      <Navbar title="Compare Contracts" subtitle="Automated cross-document contradiction & obligation alignment engine" />
+    <div className="flex-1 bg-[#0B0A08] flex flex-col min-w-0 pb-16 font-sans text-[#EDE5D5] selection:bg-[#E5C38E]/20 selection:text-[#F8F6F0]">
+      <Navbar title="Cross-Document Comparison" subtitle="Automated cross-document contradiction & obligation alignment engine" />
 
       <main className="p-6 md:p-10 max-w-4xl w-full mx-auto space-y-7">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-xl md:text-2xl font-bold text-[#18231C] tracking-tight">
+            <h1 className="text-xl md:text-2xl font-serif text-[#F4EFE5] tracking-tight">
               Cross-Document Comparison
             </h1>
-            <p className="text-xs md:text-sm text-[#5A665D] mt-1 font-normal">
+            <p className="text-xs md:text-sm text-[#A99E8C] mt-1 font-normal">
               Select 2 or more contracts to identify conflicting clauses, mismatched periods, and liability clashes
             </p>
           </div>
@@ -160,31 +159,31 @@ const ComparePage = () => {
           <button
             onClick={handleRunDemo}
             disabled={seeding}
-            className="px-4 py-2 bg-white hover:bg-[#F2F0E8] text-[#18231C] border border-[#DDDCD3] font-semibold text-xs rounded-xl shadow-2xs flex items-center gap-1.5 transition-colors disabled:opacity-50 self-start sm:self-auto cursor-pointer"
+            className="px-3.5 py-2 bg-[#14120E] hover:bg-[#1B1813] text-[#EDE5D5] border border-[#2D261C] hover:border-[#E5C38E]/50 font-medium text-xs rounded-lg flex items-center gap-1.5 transition-colors disabled:opacity-50 self-start sm:self-auto cursor-pointer"
           >
-            <Zap className="w-3.5 h-3.5 text-[#C27D38]" />
+            <Zap className="w-3.5 h-3.5 text-[#E5C38E]" />
             <span>{seeding ? 'Loading Demo...' : 'Load Sample Pair'}</span>
           </button>
         </div>
 
         {error && (
-          <div className="p-4 bg-[#F9DFDE] border border-[#F2CAC8] rounded-xl flex items-center gap-2.5 text-xs font-semibold text-[#B5413D]">
-            <AlertCircle className="w-4 h-4 text-[#B5413D] shrink-0" />
+          <div className="p-4 bg-[#241314] border border-[#482325] rounded-lg flex items-center gap-2.5 text-xs text-[#ECA09B]">
+            <AlertCircle className="w-4 h-4 text-[#ECA09B] shrink-0" />
             <span>{error}</span>
           </div>
         )}
 
         {/* Step 1: Document Selection */}
-        <div className="bg-white rounded-2xl border border-[#DDDCD3] p-6 md:p-8 shadow-card space-y-4">
-          <div className="flex items-center justify-between border-b border-[#ECEAE2] pb-3">
-            <h2 className="text-base md:text-[17px] font-bold text-[#101A13]">
+        <div className="bg-[#12100D] rounded-xl border border-[#231F19] p-6 md:p-8 space-y-4">
+          <div className="flex items-center justify-between border-b border-[#1F1B16] pb-3">
+            <h2 className="text-base md:text-[17px] font-serif text-[#F4EFE5]">
               Step 1: Select Contracts to Compare ({selectedDocIds.length} selected)
             </h2>
-            <span className="text-xs md:text-sm font-semibold text-[#38463C]">Min: 2 contracts</span>
+            <span className="text-xs text-[#8C806F]">Min: 2 contracts</span>
           </div>
 
           {loadingDocs ? (
-            <div className="py-8 text-center text-sm text-[#48554A] font-medium">
+            <div className="py-8 text-center text-sm text-[#8C806F]">
               Loading available contract repository...
             </div>
           ) : (
@@ -197,32 +196,32 @@ const ComparePage = () => {
                   <div
                     key={id}
                     onClick={() => toggleSelectDoc(id)}
-                    className={`p-4 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${
+                    className={`p-3.5 rounded-lg border flex items-center justify-between cursor-pointer transition-all ${
                       isSelected
-                        ? 'bg-[#EAECE4]/80 border-[#3F6149] shadow-2xs'
-                        : 'bg-[#FAF9F5] border-[#DDDCD3] hover:border-[#BFD1DF]'
+                        ? 'bg-[#1C1812] border-[#E5C38E]/60 shadow-sm'
+                        : 'bg-[#16130F] border-[#231F19] hover:border-[#383127]'
                     }`}
                   >
                     <div className="flex items-center gap-3.5 truncate">
-                      <div className="text-[#3F6149]">
+                      <div className="text-[#E5C38E]">
                         {isSelected ? (
-                          <CheckSquare className="w-4.5 h-4.5 text-[#3F6149]" />
+                          <CheckSquare className="w-4.5 h-4.5 text-[#E5C38E]" />
                         ) : (
-                          <Square className="w-4.5 h-4.5 text-[#8C948C]" />
+                          <Square className="w-4.5 h-4.5 text-[#5C5346]" />
                         )}
                       </div>
-                      <div className="w-9 h-9 rounded-xl bg-[#D8E4EE] text-[#35536D] flex items-center justify-center shrink-0">
-                        <FileText className="w-4.5 h-4.5 stroke-[1.8]" />
+                      <div className="w-8 h-8 rounded-lg bg-[#1D1914] border border-[#2D261C] text-[#E5C38E] flex items-center justify-center shrink-0">
+                        <FileText className="w-4 h-4 stroke-[1.8]" />
                       </div>
                       <div className="truncate">
-                        <p className="font-bold text-sm md:text-[15px] text-[#101A13] truncate leading-snug">{doc.fileName}</p>
-                        <p className="text-xs text-[#48554A] font-medium mt-0.5">
+                        <p className="font-serif font-medium text-sm md:text-[15px] text-[#F4EFE5] truncate leading-snug">{doc.fileName}</p>
+                        <p className="text-xs text-[#8C806F] mt-0.5">
                           {doc.totalClauses || 0} clauses • {new Date(doc.uploadDate || doc.createdAt || Date.now()).toLocaleDateString()}
                         </p>
                       </div>
                     </div>
 
-                    <span className="text-xs font-bold px-3 py-1 rounded-md bg-[#EDE9DE] text-[#554734] border border-[#DDD6C5]">
+                    <span className="text-xs font-medium px-2.5 py-0.5 rounded bg-[#171410] text-[#A99E8C] border border-[#2B251B]">
                       {doc.processingStatus || 'Completed'}
                     </span>
                   </div>
@@ -233,12 +232,12 @@ const ComparePage = () => {
         </div>
 
         {/* Step 2: Legal Scope Categories */}
-        <div className="bg-white rounded-2xl border border-[#DDDCD3] p-6 md:p-8 shadow-card space-y-4">
-          <div className="border-b border-[#ECEAE2] pb-3">
-            <h2 className="text-base md:text-[17px] font-bold text-[#101A13]">
+        <div className="bg-[#12100D] rounded-xl border border-[#231F19] p-6 md:p-8 space-y-4">
+          <div className="border-b border-[#1F1B16] pb-3">
+            <h2 className="text-base md:text-[17px] font-serif text-[#F4EFE5]">
               Step 2: Legal Scopes to Cross-Analyze
             </h2>
-            <p className="text-xs md:text-sm text-[#38463C] mt-1 font-medium">
+            <p className="text-xs md:text-sm text-[#8C806F] mt-1">
               Select specific obligations to prioritize during semantic cross-comparison
             </p>
           </div>
@@ -251,14 +250,14 @@ const ComparePage = () => {
                   type="button"
                   key={cat}
                   onClick={() => toggleCategory(cat)}
-                  className={`p-3.5 rounded-xl border text-left flex items-center gap-2.5 transition-all text-xs md:text-sm font-bold cursor-pointer ${
+                  className={`p-3 rounded-lg border text-left flex items-center gap-2.5 transition-all text-xs md:text-sm font-medium cursor-pointer ${
                     isChecked
-                      ? 'bg-[#EAECE4] border-[#3F6149] text-[#101A13] shadow-2xs'
-                      : 'bg-[#FAF9F5] border-[#DDDCD3] text-[#38463C] hover:border-[#BFD1DF]'
+                      ? 'bg-[#1C1812] border-[#E5C38E]/60 text-[#F4EFE5] shadow-sm'
+                      : 'bg-[#16130F] border-[#231F19] text-[#A99E8C] hover:border-[#383127]'
                   }`}
                 >
-                  <div className="text-[#3F6149]">
-                    {isChecked ? <CheckSquare className="w-4 h-4" /> : <Square className="w-4 h-4 text-[#8C948C]" />}
+                  <div className="text-[#E5C38E]">
+                    {isChecked ? <CheckSquare className="w-4 h-4 text-[#E5C38E]" /> : <Square className="w-4 h-4 text-[#5C5346]" />}
                   </div>
                   <span>{cat}</span>
                 </button>
@@ -272,11 +271,11 @@ const ComparePage = () => {
           <button
             onClick={handleStartAnalysis}
             disabled={analyzing}
-            className="w-full py-3.5 px-6 bg-[#3F6149] hover:bg-[#34503C] active:scale-[0.99] text-white font-semibold text-xs md:text-sm rounded-xl shadow-card transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+            className="w-full py-3.5 px-6 bg-[#E5C38E] hover:bg-[#D6B27B] text-[#12110E] font-semibold text-xs md:text-sm rounded-lg transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
           >
             {analyzing ? (
               <>
-                <Loader2 className="w-4 h-4 animate-spin text-white" />
+                <Loader2 className="w-4 h-4 animate-spin text-[#12110E]" />
                 <span>Running Semantic Contradiction Engine...</span>
               </>
             ) : (

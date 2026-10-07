@@ -35,71 +35,59 @@ const NotificationDropdown = ({ isOpen, onClose }) => {
   };
 
   return (
-    <div className="absolute right-0 top-12 w-80 md:w-96 bg-white rounded-2xl shadow-dropdown border border-[#DDDCD3] z-50 overflow-hidden font-sans text-[#18231C]">
-      <div className="px-4 py-3 bg-[#F8F7F2] border-b border-[#E8E6DC] flex items-center justify-between">
+    <div className="absolute right-0 top-12 w-80 md:w-96 bg-[#14120E] rounded-2xl shadow-2xl border border-[#2B251B] z-50 overflow-hidden font-sans text-[#EDE5D5]">
+      <div className="px-4 py-3 bg-[#181612] border-b border-[#24201A] flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Bell className="w-4 h-4 text-[#3F6149] stroke-[2]" />
-          <h4 className="font-semibold text-xs text-[#18231C]">Notifications ({notifications.length})</h4>
+          <Bell className="w-4 h-4 text-[#E5C38E] stroke-[2]" />
+          <h4 className="font-serif font-bold text-xs text-[#F8F6F0]">Notifications ({notifications.length})</h4>
         </div>
         <button 
           onClick={onClose} 
           aria-label="Close notifications" 
-          className="text-[#6B736D] hover:text-[#18231C] transition-colors p-1 rounded-lg"
+          className="text-[#8C806F] hover:text-[#EDE5D5] transition-colors p-1 rounded-lg"
         >
           <X className="w-3.5 h-3.5 stroke-[2]" />
         </button>
       </div>
 
-      <div className="divide-y divide-[#F1EFE8] max-h-80 overflow-y-auto">
+      <div className="divide-y divide-[#221D16] max-h-80 overflow-y-auto">
         {notifications.length === 0 ? (
-          <div className="p-8 text-center text-xs text-[#6B736D] font-normal">
+          <div className="p-8 text-center text-xs text-[#8C806F] font-normal">
             No unread notifications.
           </div>
         ) : (
           notifications.map((n) => (
-            <div key={n.id} className="p-3.5 hover:bg-[#FAF9F5] transition-colors flex items-start justify-between gap-3 group">
-              <div className="flex items-start gap-2.5">
-                {n.type === 'risk' && (
-                  <div className="w-6 h-6 rounded-full bg-[#F9DFDE] text-[#B5413D] flex items-center justify-center shrink-0 mt-0.5">
-                    <AlertTriangle className="w-3 h-3 stroke-[2]" />
-                  </div>
-                )}
-                {n.type === 'success' && (
-                  <div className="w-6 h-6 rounded-full bg-[#E2ECE3] text-[#2F5236] flex items-center justify-center shrink-0 mt-0.5">
-                    <Check className="w-3 h-3 stroke-[2.5]" />
-                  </div>
-                )}
-                {n.type === 'warning' && (
-                  <div className="w-6 h-6 rounded-full bg-[#FDF0DD] text-[#9C6A28] flex items-center justify-center shrink-0 mt-0.5">
-                    <Clock className="w-3 h-3 stroke-[2]" />
-                  </div>
-                )}
-                <div>
-                  <h5 className="font-semibold text-xs text-[#18231C]">{n.title}</h5>
-                  <p className="text-[11px] text-[#5A665D] font-normal mt-0.5 leading-relaxed">{n.message}</p>
-                  <span className="text-[10px] text-[#8C948C] font-normal block mt-1">{n.time}</span>
+            <div key={n.id} className="p-3.5 hover:bg-[#1D1A15] transition-colors flex items-start justify-between gap-3 group">
+              <div className="flex items-start gap-2.5 min-w-0">
+                <div className={`w-7 h-7 rounded-xl flex items-center justify-center shrink-0 mt-0.5 ${
+                  n.type === 'risk' 
+                    ? 'bg-[#2B1716] text-[#E58882] border border-[#482523]' 
+                    : n.type === 'warning' 
+                    ? 'bg-[#2B2214] text-[#E5C38E] border border-[#4A3B20]' 
+                    : 'bg-[#18261C] text-[#86B392] border border-[#263D2E]'
+                }`}>
+                  {n.type === 'risk' && <AlertTriangle className="w-3.5 h-3.5 stroke-[2]" />}
+                  {n.type === 'warning' && <AlertTriangle className="w-3.5 h-3.5 stroke-[2]" />}
+                  {n.type === 'success' && <Check className="w-3.5 h-3.5 stroke-[2.5]" />}
+                </div>
+
+                <div className="min-w-0">
+                  <p className="font-bold text-xs text-[#F8F6F0] leading-snug">{n.title}</p>
+                  <p className="text-[11px] text-[#A89E8D] font-normal mt-0.5 leading-relaxed">{n.message}</p>
+                  <span className="text-[10px] text-[#8C806F] mt-1 block">{n.time}</span>
                 </div>
               </div>
 
-              <button
+              <button 
                 onClick={() => dismiss(n.id)}
-                aria-label={`Dismiss notification: ${n.title}`}
-                className="opacity-0 group-hover:opacity-100 p-1 text-[#8C948C] hover:text-[#18231C] rounded transition-opacity"
+                className="text-[#8C806F] hover:text-[#E58882] p-1 opacity-0 group-hover:opacity-100 transition-opacity shrink-0"
+                title="Dismiss"
               >
-                <X className="w-3.5 h-3.5" />
+                <X className="w-3 h-3 stroke-[2]" />
               </button>
             </div>
           ))
         )}
-      </div>
-
-      <div className="p-2.5 bg-[#F8F7F2] border-t border-[#E8E6DC] text-center">
-        <button
-          onClick={() => setNotifications([])}
-          className="text-[11px] font-semibold text-[#3F6149] hover:text-[#273C2D] transition-colors"
-        >
-          Clear all notifications
-        </button>
       </div>
     </div>
   );
