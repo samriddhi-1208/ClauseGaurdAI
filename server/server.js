@@ -32,12 +32,14 @@ const allowedOrigins = rawOrigins
   .map(o => o.trim())
   .filter(Boolean);
 
+const isDev = process.env.NODE_ENV !== 'production';
+
 app.use(cors({
   origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
+    if (!origin || allowedOrigins.includes(origin) || (isDev && /^http:\/\/(localhost|127\.0\.0\.1|\[::1\])(:\d+)?$/.test(origin))) {
       return callback(null, true);
     }
-    return callback(new Error('CORS blocked: Request origin not allowed'));
+    return callback(null, false);
   },
   credentials: true
 }));
