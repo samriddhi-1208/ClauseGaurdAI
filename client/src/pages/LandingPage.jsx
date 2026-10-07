@@ -83,11 +83,6 @@ const LandingPage = () => {
       {/* Hero Section */}
       <section className="pt-20 pb-16 px-6">
         <div className="max-w-4xl mx-auto text-center space-y-5">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#EAECE4] border border-[#D7DACD] text-[#34503C] text-xs font-semibold">
-            <Leaf className="w-3.5 h-3.5 stroke-[2] text-[#3F6149]" />
-            <span>AI-Powered Legal Contract Intelligence & Contradiction Detection</span>
-          </div>
-
           <h1 className="text-3xl md:text-5xl font-bold text-[#18231C] tracking-tight leading-tight">
             Analyze Multi-Contract Obligations.<br />
             <span className="text-[#3F6149]">Detect Cross-Document Contradictions.</span>
