@@ -85,14 +85,14 @@ const LandingPage = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="pt-20 pb-16 px-6">
-        <div className="max-w-4xl mx-auto text-center space-y-5">
-          <h1 className="text-3xl md:text-5xl font-bold text-[#18231C] tracking-tight leading-tight">
+      <section className="pt-8 md:pt-10 pb-12 px-6">
+        <div className="max-w-4xl mx-auto text-center space-y-4">
+          <h1 className="text-3xl md:text-5xl font-extrabold text-[#101A13] tracking-tight leading-tight">
             Analyze Multi-Contract Obligations.<br />
             <span className="text-[#3F6149]">Detect Cross-Document Contradictions.</span>
           </h1>
 
-          <p className="text-sm md:text-base text-[#5A665D] max-w-2xl mx-auto font-normal leading-relaxed">
+          <p className="text-sm md:text-base text-[#38463C] max-w-2xl mx-auto font-medium leading-relaxed">
             ClauseGuard AI automatically extracts contractual clauses, groups obligations by legal category, and runs semantic cross-document comparisons to uncover conflicting terms, retention clashes, and compliance risks.
           </p>
 
