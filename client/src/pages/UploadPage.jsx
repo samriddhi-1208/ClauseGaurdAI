@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { UploadCloud, FileText, Check, Loader2, AlertCircle, ArrowRight, Zap, X } from 'lucide-react';
 import Navbar from '../components/Navbar';
@@ -15,6 +15,29 @@ const UploadPage = () => {
 
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
+
+  // Poll for document processing completion if any document is in 'processing' status
+  useEffect(() => {
+    const hasPending = processedDocs.some(d => d.processingStatus === 'processing');
+    if (!hasPending) return;
+
+    const interval = setInterval(async () => {
+      try {
+        const res = await documentAPI.getAll();
+        if (res.data?.success && Array.isArray(res.data.documents)) {
+          const map = new Map(res.data.documents.map(d => [d._id || d.id, d]));
+          setProcessedDocs(prev => prev.map(doc => {
+            const fresh = map.get(doc._id || doc.id);
+            return fresh ? { ...doc, ...fresh } : doc;
+          }));
+        }
+      } catch (err) {
+        console.warn('[Doc Status Polling Error]', err);
+      }
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, [processedDocs]);
 
   const handleFileChange = (e) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -243,17 +266,24 @@ const UploadPage = () => {
                 return (
                   <div
                     key={id}
-                    className="p-3 bg-[#FAF9F5] border border-[#DDDCD3] rounded-xl flex items-center justify-between text-xs"
+                    className="p-3.5 bg-[#FAF9F5] border border-[#DDDCD3] rounded-xl flex items-center justify-between text-xs"
                   >
-                    <div className="flex items-center gap-2.5 truncate">
-                      <div className="w-7 h-7 rounded-lg bg-[#E2ECE3] text-[#2F5236] flex items-center justify-center shrink-0">
-                        <FileText className="w-4 h-4 stroke-[1.8]" />
+                    <div className="flex items-center gap-3 truncate">
+                      <div className="w-8 h-8 rounded-lg bg-[#E2ECE3] text-[#2F5236] flex items-center justify-center shrink-0">
+                        <FileText className="w-4 h-4 stroke-[2]" />
                       </div>
                       <div className="truncate">
-                        <p className="font-semibold text-[#18231C] truncate">{doc.fileName}</p>
-                        <p className="text-[10px] text-[#758177]">
-                          {doc.totalClauses || 0} clauses categorized into vector memory
-                        </p>
+                        <p className="font-bold text-sm text-[#101A13] truncate">{doc.fileName}</p>
+                        {doc.processingStatus === 'processing' ? (
+                          <p className="text-xs text-[#3F6149] font-medium flex items-center gap-1.5 mt-0.5">
+                            <Loader2 className="w-3 h-3 animate-spin text-[#3F6149]" />
+                            <span>Extracting clauses & vectorizing into memory...</span>
+                          </p>
+                        ) : (
+                          <p className="text-xs text-[#38463C] font-semibold mt-0.5">
+                            {doc.totalClauses || 0} clauses categorized into vector memory
+                          </p>
+                        )}
                       </div>
                     </div>
 

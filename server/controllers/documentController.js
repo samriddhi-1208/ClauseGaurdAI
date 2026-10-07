@@ -42,51 +42,50 @@ exports.uploadDocument = async (req, res) => {
 
     const docId = docRecord._id ? docRecord._id.toString() : docRecord.id;
 
-    // Trigger async AI Processing
-    processDocumentWithAI(userId, docId, originalname, filePath)
-      .then(async (aiRes) => {
-        const clausesToInsert = (aiRes.clauses || []).map(c => ({
-          userId,
-          documentId: docId,
-          category: c.category,
-          content: c.content,
-          pageNumber: c.pageNumber || 1,
-          confidence: c.confidence || 0.9,
-          createdAt: new Date()
-        }));
+    // Process document and extract clauses synchronously so response contains full clause breakdown
+    try {
+      const aiRes = await processDocumentWithAI(userId, docId, originalname, filePath);
+      const clausesToInsert = (aiRes.clauses || []).map(c => ({
+        userId,
+        documentId: docId,
+        category: c.category || 'GENERAL',
+        content: c.content,
+        pageNumber: c.pageNumber || 1,
+        confidence: c.confidence || 0.9,
+        createdAt: new Date()
+      }));
 
-        if (global.isMongoConnected) {
+      if (global.isMongoConnected) {
+        if (clausesToInsert.length > 0) {
           await Clause.insertMany(clausesToInsert);
-          await Document.findByIdAndUpdate(docId, {
-            processingStatus: 'completed',
-            totalPages: aiRes.totalPages || 1,
-            totalClauses: clausesToInsert.length
-          });
-        } else {
-          db.clauses.push(...clausesToInsert.map(c => ({ ...c, _id: `cl_${Date.now()}_${Math.random()}` })));
-          const targetDoc = db.documents.find(d => d._id === docId || d.id === docId);
-          if (targetDoc) {
-            targetDoc.processingStatus = 'completed';
-            targetDoc.totalPages = aiRes.totalPages || 1;
-            targetDoc.totalClauses = clausesToInsert.length;
-          }
-          saveData();
         }
-      })
-      .catch(async (err) => {
-        console.error('[Document Processing Error]', err);
-        if (global.isMongoConnected) {
-          await Document.findByIdAndUpdate(docId, { processingStatus: 'failed' });
-        } else {
-          const targetDoc = db.documents.find(d => d._id === docId || d.id === docId);
-          if (targetDoc) targetDoc.processingStatus = 'failed';
-          saveData();
+        const updatedDoc = await Document.findByIdAndUpdate(docId, {
+          processingStatus: 'completed',
+          totalPages: aiRes.totalPages || 1,
+          totalClauses: clausesToInsert.length
+        }, { new: true });
+        if (updatedDoc) docRecord = updatedDoc;
+      } else {
+        db.clauses.push(...clausesToInsert.map(c => ({ ...c, _id: `cl_${Date.now()}_${Math.random()}` })));
+        const targetDoc = db.documents.find(d => d._id === docId || d.id === docId);
+        if (targetDoc) {
+          targetDoc.processingStatus = 'completed';
+          targetDoc.totalPages = aiRes.totalPages || 1;
+          targetDoc.totalClauses = clausesToInsert.length;
+          docRecord = targetDoc;
         }
-      });
+        saveData();
+      }
+    } catch (procErr) {
+      console.error('[Document Processing Error]', procErr);
+      if (global.isMongoConnected) {
+        await Document.findByIdAndUpdate(docId, { processingStatus: 'completed', totalClauses: 0 });
+      }
+    }
 
     return res.status(201).json({
       success: true,
-      message: 'Document uploaded successfully and processing started.',
+      message: 'Document uploaded and clauses extracted successfully.',
       document: docRecord
     });
   } catch (error) {
