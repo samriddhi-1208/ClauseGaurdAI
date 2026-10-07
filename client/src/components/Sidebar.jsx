@@ -8,7 +8,6 @@ import {
   GitCompare, 
   ShieldAlert, 
   Clock, 
-  Settings, 
   User, 
   LogOut,
   X,
@@ -30,8 +29,7 @@ const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
   ];
 
   const bottomNav = [
-    { label: 'Settings', path: '/settings', icon: Settings },
-    { label: 'Profile', path: '/profile', icon: User },
+    { label: 'Counsel Profile', path: '/profile', icon: User },
   ];
 
   const getInitials = (name) => {

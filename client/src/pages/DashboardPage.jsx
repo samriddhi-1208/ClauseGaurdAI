@@ -12,7 +12,6 @@ import {
   Check, 
   LogOut,
   User,
-  Settings,
   Menu,
   UploadCloud,
   Search,
@@ -222,16 +221,6 @@ const DashboardPage = () => {
                 >
                   <User className="w-3.5 h-3.5 text-[#E5C38E]" />
                   <span>Counsel Profile</span>
-                </button>
-                <button
-                  onClick={() => {
-                    setIsProfileMenuOpen(false);
-                    navigate('/settings');
-                  }}
-                  className="w-full text-left px-3 py-2 hover:bg-[#1D1914] rounded-lg text-[#EDE5D5] flex items-center gap-2 transition-colors"
-                >
-                  <Settings className="w-3.5 h-3.5 text-[#E5C38E]" />
-                  <span>Workspace Settings</span>
                 </button>
                 <div className="my-1 border-t border-[#201C16]"></div>
                 <button
