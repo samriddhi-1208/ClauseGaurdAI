@@ -202,10 +202,10 @@ const ChatPage = () => {
                 <div className="w-12 h-12 rounded-2xl bg-[#EAECE4] text-[#3F6149] flex items-center justify-center mx-auto shadow-2xs">
                   <Sparkles className="w-6 h-6 stroke-[1.8]" />
                 </div>
-                <h2 className="text-2xl md:text-[28px] font-bold text-[#18231C] tracking-tight leading-tight">
+                <h2 className="text-2xl md:text-[30px] font-bold text-[#101A13] tracking-tight leading-tight">
                   What would you like to understand about your contracts?
                 </h2>
-                <p className="text-sm text-[#5A665D] leading-relaxed font-normal max-w-lg mx-auto">
+                <p className="text-sm md:text-[15px] text-[#38463C] leading-relaxed font-medium max-w-lg mx-auto">
                   Click any common legal question below, or type your own question in plain English at the bottom.
                 </p>
               </div>
@@ -218,25 +218,25 @@ const ChatPage = () => {
                     <div
                       key={idx}
                       onClick={() => handleSend(card.question)}
-                      className="bg-white p-6 rounded-2xl border border-[#DDDCD3] shadow-card hover:border-[#3F6149] hover:shadow-md cursor-pointer transition-all space-y-3.5 group"
+                      className="bg-white p-6 md:p-7 rounded-2xl border border-[#D8D6CC] shadow-card hover:border-[#3F6149] hover:shadow-md cursor-pointer transition-all space-y-3.5 group"
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2.5">
                           <div className={`w-9 h-9 rounded-xl ${card.color} flex items-center justify-center shrink-0`}>
                             <Icon className="w-4 h-4 stroke-[2]" />
                           </div>
-                          <span className="text-xs font-semibold uppercase tracking-wider text-[#758177]">
+                          <span className="text-xs font-bold uppercase tracking-wider text-[#48554A]">
                             {card.label}
                           </span>
                         </div>
-                        <ArrowRight className="w-4 h-4 text-[#8C948C] group-hover:text-[#3F6149] group-hover:translate-x-1 transition-all" />
+                        <ArrowRight className="w-4 h-4 text-[#48554A] group-hover:text-[#3F6149] group-hover:translate-x-1 transition-all" />
                       </div>
                       
                       <div>
-                        <h3 className="text-sm font-semibold text-[#18231C] group-hover:text-[#3F6149] transition-colors leading-snug">
+                        <h3 className="text-base md:text-[17px] font-bold text-[#101A13] group-hover:text-[#3F6149] transition-colors leading-snug">
                           {card.title}
                         </h3>
-                        <p className="text-xs text-[#5A665D] leading-relaxed mt-1.5 font-normal">
+                        <p className="text-sm text-[#38463C] leading-relaxed mt-1.5 font-medium">
                           {card.question}
                         </p>
                       </div>

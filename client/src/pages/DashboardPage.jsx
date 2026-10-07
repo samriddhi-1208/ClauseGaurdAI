@@ -289,49 +289,49 @@ const DashboardPage = () => {
           {/* Card 1: Total Documents (Dusty Blue) */}
           <div className="bg-[#F1F5F8] p-5 rounded-2xl border border-[#D5E0EA] shadow-card hover:border-[#BFD1DF] transition-all">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold text-[#2E3731]">Total Documents</span>
+              <span className="text-xs md:text-sm font-bold text-[#101A13]">Total Documents</span>
               <div className="w-8 h-8 rounded-full bg-[#D8E4EE] text-[#35536D] flex items-center justify-center shrink-0">
-                <FileText className="w-4 h-4 stroke-[1.8]" />
+                <FileText className="w-4 h-4 stroke-[2]" />
               </div>
             </div>
-            <p className="text-2xl font-bold text-[#18231C] mt-2.5 leading-none">{totalDocumentsCount}</p>
-            <p className="text-xs text-[#5A665D] font-normal mt-1.5">Uploaded & analyzed</p>
+            <p className="text-2xl md:text-3xl font-extrabold text-[#101A13] mt-2.5 leading-none">{totalDocumentsCount}</p>
+            <p className="text-xs md:text-[13px] text-[#38463C] font-semibold mt-1.5">Uploaded & analyzed</p>
           </div>
 
           {/* Card 2: Contradictions Found (Muted Peach) */}
           <div className="bg-[#FAF1ED] p-5 rounded-2xl border border-[#EDD5CA] shadow-card hover:border-[#E2C3B5] transition-all">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold text-[#2E3731]">Contradictions Found</span>
+              <span className="text-xs md:text-sm font-bold text-[#101A13]">Contradictions Found</span>
               <div className="w-8 h-8 rounded-full bg-[#F5DDD3] text-[#9B4F37] flex items-center justify-center shrink-0">
-                <AlertTriangle className="w-4 h-4 stroke-[1.8]" />
+                <AlertTriangle className="w-4 h-4 stroke-[2]" />
               </div>
             </div>
-            <p className="text-2xl font-bold text-[#18231C] mt-2.5 leading-none">{totalContradictionsCount}</p>
-            <p className="text-xs text-[#8C523D] font-normal mt-1.5">Needs your attention</p>
+            <p className="text-2xl md:text-3xl font-extrabold text-[#101A13] mt-2.5 leading-none">{totalContradictionsCount}</p>
+            <p className="text-xs md:text-[13px] text-[#80422E] font-semibold mt-1.5">Needs your attention</p>
           </div>
 
           {/* Card 3: High Risk Clauses (Muted Rose) */}
           <div className="bg-[#FAF0F0] p-5 rounded-2xl border border-[#EED1D0] shadow-card hover:border-[#E4BCBB] transition-all">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold text-[#2E3731]">High Risk Clauses</span>
+              <span className="text-xs md:text-sm font-bold text-[#101A13]">High Risk Clauses</span>
               <div className="w-8 h-8 rounded-full bg-[#F9DFDE] text-[#B5413D] flex items-center justify-center shrink-0">
-                <Shield className="w-4 h-4 stroke-[1.8]" />
+                <Shield className="w-4 h-4 stroke-[2]" />
               </div>
             </div>
-            <p className="text-2xl font-bold text-[#18231C] mt-2.5 leading-none">{highRiskCount}</p>
-            <p className="text-xs text-[#A63C38] font-normal mt-1.5">Review recommended</p>
+            <p className="text-2xl md:text-3xl font-extrabold text-[#101A13] mt-2.5 leading-none">{highRiskCount}</p>
+            <p className="text-xs md:text-[13px] text-[#96302C] font-semibold mt-1.5">Review recommended</p>
           </div>
 
           {/* Card 4: Analysis History (Muted Lavender) */}
           <div className="bg-[#F3F1F7] p-5 rounded-2xl border border-[#DDD7E7] shadow-card hover:border-[#CBC2DC] transition-all">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold text-[#2E3731]">Analysis History</span>
+              <span className="text-xs md:text-sm font-bold text-[#101A13]">Analysis History</span>
               <div className="w-8 h-8 rounded-full bg-[#E3DEEC] text-[#5B4F73] flex items-center justify-center shrink-0">
-                <Clock className="w-4 h-4 stroke-[1.8]" />
+                <Clock className="w-4 h-4 stroke-[2]" />
               </div>
             </div>
-            <p className="text-2xl font-bold text-[#18231C] mt-2.5 leading-none">{totalAnalysesCount}</p>
-            <p className="text-xs text-[#5B4F73] font-normal mt-1.5">View past reports</p>
+            <p className="text-2xl md:text-3xl font-extrabold text-[#101A13] mt-2.5 leading-none">{totalAnalysesCount}</p>
+            <p className="text-xs md:text-[13px] text-[#4F4166] font-semibold mt-1.5">View past reports</p>
           </div>
 
         </div>
@@ -372,10 +372,10 @@ const DashboardPage = () => {
                         <FileText className="w-4 h-4 stroke-[1.8]" />
                       </div>
                       <div className="truncate">
-                        <p className="text-xs md:text-[13px] font-semibold text-[#18231C] truncate group-hover:text-[#3F6149] transition-colors leading-snug">
+                        <p className="text-sm font-bold text-[#101A13] truncate group-hover:text-[#3F6149] transition-colors leading-snug">
                           {doc.fileName}
                         </p>
-                        <p className="text-xs text-[#758177] font-normal mt-0.5">
+                        <p className="text-xs text-[#48554A] font-semibold mt-0.5">
                           {doc.date}
                         </p>
                       </div>

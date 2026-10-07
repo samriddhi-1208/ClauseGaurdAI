@@ -101,10 +101,10 @@ const DocumentsPage = () => {
       <main className="p-6 md:p-10 max-w-7xl w-full mx-auto space-y-7">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-xl md:text-2xl font-semibold text-[#18231C] tracking-tight">
+            <h1 className="text-2xl md:text-3xl font-bold text-[#101A13] tracking-tight">
               Contract Library
             </h1>
-            <p className="text-xs text-[#5A665D] mt-0.5">
+            <p className="text-sm text-[#38463C] mt-1 font-medium">
               Select 2 or more contracts to initiate automated cross-document contradiction analysis
             </p>
           </div>

@@ -177,18 +177,18 @@ const ComparePage = () => {
         {/* Step 1: Document Selection */}
         <div className="bg-white rounded-2xl border border-[#DDDCD3] p-6 md:p-8 shadow-card space-y-4">
           <div className="flex items-center justify-between border-b border-[#ECEAE2] pb-3">
-            <h2 className="text-sm md:text-[15px] font-bold text-[#18231C]">
+            <h2 className="text-base md:text-[17px] font-bold text-[#101A13]">
               Step 1: Select Contracts to Compare ({selectedDocIds.length} selected)
             </h2>
-            <span className="text-xs font-medium text-[#5A665D]">Min: 2 contracts</span>
+            <span className="text-xs md:text-sm font-semibold text-[#38463C]">Min: 2 contracts</span>
           </div>
 
           {loadingDocs ? (
-            <div className="py-8 text-center text-xs text-[#6B736D] font-normal">
+            <div className="py-8 text-center text-sm text-[#48554A] font-medium">
               Loading available contract repository...
             </div>
           ) : (
-            <div className="space-y-2 max-h-72 overflow-y-auto pr-1">
+            <div className="space-y-2.5 max-h-72 overflow-y-auto pr-1">
               {documents.map((doc) => {
                 const id = doc._id || doc.id;
                 const isSelected = selectedDocIds.includes(id);
@@ -197,32 +197,32 @@ const ComparePage = () => {
                   <div
                     key={id}
                     onClick={() => toggleSelectDoc(id)}
-                    className={`p-3.5 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${
+                    className={`p-4 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${
                       isSelected
-                        ? 'bg-[#EAECE4]/60 border-[#3F6149] shadow-2xs'
+                        ? 'bg-[#EAECE4]/80 border-[#3F6149] shadow-2xs'
                         : 'bg-[#FAF9F5] border-[#DDDCD3] hover:border-[#BFD1DF]'
                     }`}
                   >
-                    <div className="flex items-center gap-3 truncate">
+                    <div className="flex items-center gap-3.5 truncate">
                       <div className="text-[#3F6149]">
                         {isSelected ? (
-                          <CheckSquare className="w-4 h-4 text-[#3F6149]" />
+                          <CheckSquare className="w-4.5 h-4.5 text-[#3F6149]" />
                         ) : (
-                          <Square className="w-4 h-4 text-[#8C948C]" />
+                          <Square className="w-4.5 h-4.5 text-[#8C948C]" />
                         )}
                       </div>
-                      <div className="w-8 h-8 rounded-lg bg-[#D8E4EE] text-[#35536D] flex items-center justify-center shrink-0">
-                        <FileText className="w-4 h-4 stroke-[1.8]" />
+                      <div className="w-9 h-9 rounded-xl bg-[#D8E4EE] text-[#35536D] flex items-center justify-center shrink-0">
+                        <FileText className="w-4.5 h-4.5 stroke-[1.8]" />
                       </div>
                       <div className="truncate">
-                        <p className="font-semibold text-xs md:text-[13px] text-[#18231C] truncate leading-snug">{doc.fileName}</p>
-                        <p className="text-[11px] text-[#758177] font-normal mt-0.5">
+                        <p className="font-bold text-sm md:text-[15px] text-[#101A13] truncate leading-snug">{doc.fileName}</p>
+                        <p className="text-xs text-[#48554A] font-medium mt-0.5">
                           {doc.totalClauses || 0} clauses • {new Date(doc.uploadDate || doc.createdAt || Date.now()).toLocaleDateString()}
                         </p>
                       </div>
                     </div>
 
-                    <span className="text-[10px] font-semibold px-2.5 py-1 rounded-md bg-[#EDE9DE] text-[#685F4D] border border-[#DDD6C5]">
+                    <span className="text-xs font-bold px-3 py-1 rounded-md bg-[#EDE9DE] text-[#554734] border border-[#DDD6C5]">
                       {doc.processingStatus || 'Completed'}
                     </span>
                   </div>
@@ -235,15 +235,15 @@ const ComparePage = () => {
         {/* Step 2: Legal Scope Categories */}
         <div className="bg-white rounded-2xl border border-[#DDDCD3] p-6 md:p-8 shadow-card space-y-4">
           <div className="border-b border-[#ECEAE2] pb-3">
-            <h2 className="text-sm md:text-[15px] font-bold text-[#18231C]">
+            <h2 className="text-base md:text-[17px] font-bold text-[#101A13]">
               Step 2: Legal Scopes to Cross-Analyze
             </h2>
-            <p className="text-xs text-[#5A665D] mt-0.5 font-normal">
+            <p className="text-xs md:text-sm text-[#38463C] mt-1 font-medium">
               Select specific obligations to prioritize during semantic cross-comparison
             </p>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {CATEGORY_CHECKBOXES.map((cat) => {
               const isChecked = selectedCategories.includes(cat);
               return (
@@ -251,14 +251,14 @@ const ComparePage = () => {
                   type="button"
                   key={cat}
                   onClick={() => toggleCategory(cat)}
-                  className={`p-3.5 rounded-xl border text-left flex items-center gap-2.5 transition-all text-xs font-semibold cursor-pointer ${
+                  className={`p-3.5 rounded-xl border text-left flex items-center gap-2.5 transition-all text-xs md:text-sm font-bold cursor-pointer ${
                     isChecked
-                      ? 'bg-[#EAECE4] border-[#3F6149] text-[#18231C] shadow-2xs'
-                      : 'bg-[#FAF9F5] border-[#DDDCD3] text-[#5A665D] hover:border-[#BFD1DF]'
+                      ? 'bg-[#EAECE4] border-[#3F6149] text-[#101A13] shadow-2xs'
+                      : 'bg-[#FAF9F5] border-[#DDDCD3] text-[#38463C] hover:border-[#BFD1DF]'
                   }`}
                 >
                   <div className="text-[#3F6149]">
-                    {isChecked ? <CheckSquare className="w-3.5 h-3.5" /> : <Square className="w-3.5 h-3.5 text-[#8C948C]" />}
+                    {isChecked ? <CheckSquare className="w-4 h-4" /> : <Square className="w-4 h-4 text-[#8C948C]" />}
                   </div>
                   <span>{cat}</span>
                 </button>

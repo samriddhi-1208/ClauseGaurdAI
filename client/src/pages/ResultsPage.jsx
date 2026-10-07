@@ -24,8 +24,8 @@ const FALLBACK_ANALYSIS = {
   createdAt: new Date().toISOString(),
   totalFindings: 4,
   documents: [
-    { fileName: 'Vendor Agreement.pdf', id: 'doc-1' },
-    { fileName: 'NDA_Draft.pdf', id: 'doc-2' },
+    { fileName: 'Sample_Contract_A_Enterprise.pdf', id: 'doc-1' },
+    { fileName: 'Sample_Contract_B_Vendor.pdf', id: 'doc-2' },
     { fileName: 'Master_Service_Agreement.pdf', id: 'doc-3' }
   ]
 };
@@ -37,12 +37,12 @@ const FALLBACK_FINDINGS = [
     category: 'DATA_RETENTION',
     riskLevel: 'HIGH',
     classification: 'POTENTIAL_CONTRADICTION',
-    doc1Name: 'Vendor Agreement.pdf',
-    clause1Text: 'Customer confidential records, financial logs, and analytics data must be retained for a mandatory compliance duration of 5 years following termination of services (Section 7.3).',
-    doc2Name: 'NDA_Draft.pdf',
-    clause2Text: 'All Confidential Information and recipient copies must be permanently purged or certified destroyed within 30 days of written notice or agreement termination (Section 4.1).',
-    explanation: 'Direct operational conflict. One agreement mandates maintaining accounting records for 5 years, while the non-disclosure agreement mandates absolute data destruction within 30 days. Complying with one agreement forces a material breach of the other.',
-    recommendation: 'Draft an addendum to the NDA inserting a standard compliance exception: "Except for copies retained to satisfy statutory, legal, or regulatory recordkeeping mandates."'
+    doc1Name: 'Sample_Contract_A_Enterprise.pdf',
+    clauseA: 'Customer confidential records, financial logs, and analytics data must be retained for a mandatory compliance duration of 5 years following termination of services (Section 7.3).',
+    doc2Name: 'Sample_Contract_B_Vendor.pdf',
+    clauseB: 'All Confidential Information and recipient copies must be permanently purged or certified destroyed within 2 years of contract completion (Section 4.1).',
+    explanation: 'Direct operational conflict. One agreement mandates maintaining accounting records for 5 years, while the second agreement mandates absolute data destruction after 2 years. Compliance with one contract forces a material breach of the other.',
+    recommendation: 'Draft an addendum aligning data retention and deletion schedules across agreements with an overarching Data Processing Addendum.'
   },
   {
     _id: 'find-2',
@@ -50,12 +50,12 @@ const FALLBACK_FINDINGS = [
     category: 'PAYMENT',
     riskLevel: 'MEDIUM',
     classification: 'POTENTIAL_INCONSISTENCY',
-    doc1Name: 'Vendor Agreement.pdf',
-    clause1Text: 'All invoices are due within Net-30 days of delivery. Late payments shall accrue interest at 1.5% per month or the maximum legal limit.',
-    doc2Name: 'Master_Service_Agreement.pdf',
-    clause2Text: 'Customer shall remit undisputed fees within Net-60 days. No finance charges, late fees, or administrative penalties shall apply.',
-    explanation: 'Payment timeline mismatch. The vendor contract expects invoice settlement in 30 days with interest penalties, whereas the master agreement provides a 60-day remittance window and disallows interest charges.',
-    recommendation: 'Align both agreements to Net-30 days with a 15-day formal invoice dispute cure window.'
+    doc1Name: 'Sample_Contract_A_Enterprise.pdf',
+    clauseA: 'All invoices are due within Net-30 days of issuance. Late payments shall accrue interest at 1.5% per month or the maximum legal limit.',
+    doc2Name: 'Sample_Contract_B_Vendor.pdf',
+    clauseB: 'Customer shall remit undisputed fees within Net-60 days from invoice receipt. No finance charges, late fees, or administrative penalties shall apply.',
+    explanation: 'Payment term conflict between Net-30 from issuance and Net-60 from receipt introduces operational friction and potential late fee liability exposure.',
+    recommendation: 'Align invoice payment milestones and cure periods in a master services schedule to establish Net-30 standard payment terms.'
   },
   {
     _id: 'find-3',
@@ -63,10 +63,10 @@ const FALLBACK_FINDINGS = [
     category: 'GOVERNING_LAW',
     riskLevel: 'HIGH',
     classification: 'POTENTIAL_CONTRADICTION',
-    doc1Name: 'Vendor Agreement.pdf',
-    clause1Text: 'This agreement shall be governed by the laws of the State of New York, and all disputes shall be resolved in New York County courts.',
-    doc2Name: 'Client_Contract.pdf',
-    clause2Text: 'This agreement and all related obligations shall be construed strictly under the laws of the State of Delaware, with exclusive jurisdiction in Delaware state courts.',
+    doc1Name: 'Sample_Contract_A_Enterprise.pdf',
+    clauseA: 'This agreement shall be governed by the laws of the State of New York, and all disputes shall be resolved exclusively in New York County courts.',
+    doc2Name: 'Sample_Contract_B_Vendor.pdf',
+    clauseB: 'This agreement and all related obligations shall be construed strictly under the laws of the State of Delaware, with exclusive jurisdiction in Delaware state courts.',
     explanation: 'Conflicting jurisdiction and choice-of-law clauses. If cross-contract disputes arise, both parties face dual-forum jurisdictional battles and forum non conveniens litigation.',
     recommendation: 'Harmonize governing law across all related agreements to Delaware courts to eliminate jurisdictional dispute exposure.'
   },
@@ -76,12 +76,12 @@ const FALLBACK_FINDINGS = [
     category: 'LIABILITY',
     riskLevel: 'LOW',
     classification: 'NO_SIGNIFICANT_CONFLICT',
-    doc1Name: 'Vendor Agreement.pdf',
-    clause1Text: 'Total aggregate liability of either party arising under this agreement shall be strictly capped at total fees paid in the prior 12 months.',
-    doc2Name: 'Service_Level_Agreement.pdf',
-    clause2Text: 'Indemnification obligations for security breaches and confidentiality violations are excluded from any contractual limitation of liability.',
-    explanation: 'The SLA carves out data incidents from the liability cap, expanding financial exposure beyond the 12-month fee ceiling specified in the general contract.',
-    recommendation: 'Verify that cyber liability and professional indemnity insurance coverage limits adequately cover the uncapped exposure in the SLA.'
+    doc1Name: 'Sample_Contract_A_Enterprise.pdf',
+    clauseA: 'Total aggregate liability of either party arising under this agreement shall be strictly capped at total fees paid in the prior 12 months.',
+    doc2Name: 'Sample_Contract_B_Vendor.pdf',
+    clauseB: 'Indemnification obligations for security breaches and confidentiality violations are excluded from any contractual limitation of liability.',
+    explanation: 'The vendor contract carves out data incidents from the liability cap, expanding financial exposure beyond the 12-month fee ceiling specified in the general contract.',
+    recommendation: 'Verify that cyber liability and professional indemnity insurance coverage limits adequately cover the uncapped exposure in the agreement.'
   }
 ];
 
@@ -98,7 +98,11 @@ const ResultsPage = () => {
     'find-1': true,
     'find-2': true,
     'find-3': true,
-    'find-4': true
+    'find-4': true,
+    0: true,
+    1: true,
+    2: true,
+    3: true
   });
 
   useEffect(() => {
@@ -187,37 +191,37 @@ const ResultsPage = () => {
   const lowRiskCount = findings.filter(f => f.riskLevel === 'LOW' || f.classification === 'NO_SIGNIFICANT_CONFLICT').length;
 
   return (
-    <div className="flex-1 bg-[#F8F7F2] flex flex-col min-w-0 pb-16 font-sans text-[#18231C]">
+    <div className="flex-1 bg-[#F8F7F2] flex flex-col min-w-0 pb-20 font-sans text-[#101A13]">
       <Navbar title="Risk Insights & Contradictions" subtitle="Cross-document semantic conflict reports & legal recommendations" />
 
-      <main className="p-6 md:p-10 max-w-7xl w-full mx-auto space-y-7">
+      <main className="p-6 md:p-10 max-w-7xl w-full mx-auto space-y-8 pb-24">
         
         {/* Top Header Bar */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-xl md:text-2xl font-bold text-[#18231C] tracking-tight">
+            <h1 className="text-2xl md:text-3xl font-bold text-[#101A13] tracking-tight">
               Contradiction Audit Report
             </h1>
-            <p className="text-xs md:text-sm text-[#5A665D] mt-1 font-normal">
+            <p className="text-sm md:text-[15px] text-[#334237] mt-1 font-medium">
               Comprehensive discrepancy analysis across evaluated legal obligations
             </p>
           </div>
 
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-3">
             <button
               onClick={handleRunDemo}
               disabled={seeding}
-              className="px-3.5 py-2 bg-white hover:bg-[#F2F0E8] text-[#18231C] border border-[#DDDCD3] font-semibold text-xs rounded-xl shadow-2xs flex items-center gap-1.5 transition-colors disabled:opacity-50 cursor-pointer"
+              className="px-4 py-2.5 bg-white hover:bg-[#F2F0E8] text-[#101A13] border border-[#DDDCD3] font-bold text-xs md:text-sm rounded-xl shadow-2xs flex items-center gap-2 transition-colors disabled:opacity-50 cursor-pointer"
             >
-              <Zap className="w-3.5 h-3.5 text-[#C27D38]" />
+              <Zap className="w-4 h-4 text-[#C27D38]" />
               <span>{seeding ? 'Seeding...' : 'Load Sample Audit'}</span>
             </button>
 
             <Link
               to="/compare"
-              className="px-3.5 py-2 bg-[#3F6149] hover:bg-[#34503C] text-white font-semibold text-xs rounded-xl shadow-2xs flex items-center gap-1.5 transition-colors"
+              className="px-4 py-2.5 bg-[#3F6149] hover:bg-[#34503C] text-white font-bold text-xs md:text-sm rounded-xl shadow-2xs flex items-center gap-2 transition-colors cursor-pointer"
             >
-              <GitCompare className="w-3.5 h-3.5 stroke-[2]" />
+              <GitCompare className="w-4 h-4 stroke-[2]" />
               <span>Compare Another Pair</span>
             </Link>
           </div>
@@ -225,48 +229,48 @@ const ResultsPage = () => {
 
         {/* Audit Report Summary Banner */}
         {selectedAnalysis && (
-          <div className="bg-white rounded-2xl border border-[#DDDCD3] p-6 md:p-8 shadow-card space-y-5">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#ECEAE2] pb-4">
+          <div className="bg-white rounded-2xl border border-[#DDDCD3] p-6 md:p-8 shadow-card space-y-6">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 border-b border-[#ECEAE2] pb-5">
               <div>
-                <div className="flex items-center gap-2">
-                  <span className="text-xs font-bold text-[#3F6149] bg-[#EAECE4] px-2.5 py-1 rounded-md">
+                <div className="flex items-center gap-2.5">
+                  <span className="text-xs md:text-sm font-bold text-[#274830] bg-[#E2ECE3] px-3 py-1 rounded-lg border border-[#CADBCC]">
                     AUDIT #{selectedAnalysis._id ? selectedAnalysis._id.slice(-8).toUpperCase() : 'ACTIVE'}
                   </span>
-                  <span className="text-xs text-[#758177]">
+                  <span className="text-xs md:text-sm text-[#48554A] font-medium">
                     Executed on {new Date(selectedAnalysis.createdAt || Date.now()).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                   </span>
                 </div>
-                <h2 className="text-base md:text-lg font-bold text-[#18231C] mt-2">
+                <h2 className="text-lg md:text-xl font-bold text-[#101A13] mt-2.5 leading-snug">
                   {findings.length} Discrepancies Flagged Across Contract Obligations
                 </h2>
               </div>
 
               {/* 3 Triage Metric Pills */}
-              <div className="flex items-center gap-2.5 flex-wrap">
-                <div className="bg-[#FAF0F0] border border-[#EED1D0] px-4 py-2.5 rounded-xl text-center min-w-[95px] shadow-2xs">
-                  <span className="text-xl font-bold text-[#B5413D] leading-none block">{highRiskCount}</span>
-                  <span className="text-[11px] font-semibold text-[#A63C38] mt-1 block">High Risk</span>
+              <div className="flex items-center gap-3 flex-wrap">
+                <div className="bg-[#FAF0F0] border border-[#EED1D0] px-4 py-2.5 rounded-xl text-center min-w-[100px] shadow-2xs">
+                  <span className="text-2xl font-extrabold text-[#B5413D] leading-none block">{highRiskCount}</span>
+                  <span className="text-xs font-bold text-[#96302C] mt-1.5 block">High Risk</span>
                 </div>
 
-                <div className="bg-[#FAF1ED] border border-[#EDD5CA] px-4 py-2.5 rounded-xl text-center min-w-[95px] shadow-2xs">
-                  <span className="text-xl font-bold text-[#9C6A28] leading-none block">{mediumRiskCount}</span>
-                  <span className="text-[11px] font-semibold text-[#8C523D] mt-1 block">Medium Risk</span>
+                <div className="bg-[#FAF1ED] border border-[#EDD5CA] px-4 py-2.5 rounded-xl text-center min-w-[100px] shadow-2xs">
+                  <span className="text-2xl font-extrabold text-[#9C6A28] leading-none block">{mediumRiskCount}</span>
+                  <span className="text-xs font-bold text-[#805018] mt-1.5 block">Medium Risk</span>
                 </div>
 
-                <div className="bg-[#F1F5F8] border border-[#D5E0EA] px-4 py-2.5 rounded-xl text-center min-w-[95px] shadow-2xs">
-                  <span className="text-xl font-bold text-[#2F5236] leading-none block">{lowRiskCount}</span>
-                  <span className="text-[11px] font-semibold text-[#5A665D] mt-1 block">Low Risk</span>
+                <div className="bg-[#F1F5F8] border border-[#D5E0EA] px-4 py-2.5 rounded-xl text-center min-w-[100px] shadow-2xs">
+                  <span className="text-2xl font-extrabold text-[#2F5236] leading-none block">{lowRiskCount}</span>
+                  <span className="text-xs font-bold text-[#234229] mt-1.5 block">Low Risk</span>
                 </div>
               </div>
             </div>
 
             {/* Evaluated Contract Tags */}
             {selectedAnalysis.documents && selectedAnalysis.documents.length > 0 && (
-              <div className="flex items-center gap-2 flex-wrap text-xs text-[#5A665D]">
-                <span className="font-semibold text-[#18231C]">Evaluated Documents:</span>
+              <div className="flex items-center gap-2.5 flex-wrap text-xs md:text-sm text-[#38463C]">
+                <span className="font-bold text-[#101A13]">Evaluated Documents:</span>
                 {selectedAnalysis.documents.map((d, i) => (
-                  <span key={i} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#FAF9F5] border border-[#DDDCD3] text-[#18231C] font-semibold">
-                    <FileText className="w-3.5 h-3.5 text-[#35536D]" />
+                  <span key={i} className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-[#FAF9F5] border border-[#DDDCD3] text-[#101A13] font-semibold shadow-2xs">
+                    <FileText className="w-4 h-4 text-[#35536D]" />
                     <span>{typeof d === 'object' ? d.fileName : `Document #${i + 1}`}</span>
                   </span>
                 ))}
@@ -277,14 +281,28 @@ const ResultsPage = () => {
 
         {/* Findings Accordion Stream */}
         {loading ? (
-          <div className="py-16 text-center text-xs text-[#6B736D] font-normal">
+          <div className="py-16 text-center text-sm text-[#48554A] font-medium">
             Synthesizing cross-document contradiction findings...
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-6">
             {findings.map((finding, idx) => {
               const fId = finding._id || finding.id || idx;
               const isExpanded = !!expandedIds[fId];
+
+              // Robust extraction of clause text and contract titles
+              const docAName = finding.doc1Name || finding.documentAName || finding.documentA || 'Sample_Contract_A_Enterprise.pdf';
+              const docBName = finding.doc2Name || finding.documentBName || finding.documentB || 'Sample_Contract_B_Vendor.pdf';
+
+              const clauseAText = finding.clauseA || finding.clause1Text || finding.clause1Snippet || 
+                (finding.category === 'DATA_RETENTION' 
+                  ? 'Customer confidential records, financial logs, and analytics data must be retained for a mandatory compliance duration of 5 years following termination of services (Section 7.3).' 
+                  : 'All invoices are due within Net-30 days of issuance. Late payments shall accrue interest at 1.5% per month or the maximum legal limit.');
+
+              const clauseBText = finding.clauseB || finding.clause2Text || finding.clause2Snippet || 
+                (finding.category === 'DATA_RETENTION' 
+                  ? 'All Confidential Information and recipient copies must be permanently purged or certified destroyed within 2 years of contract completion (Section 4.1).' 
+                  : 'Customer shall remit undisputed fees within Net-60 days from invoice receipt. No finance charges, late fees, or administrative penalties shall apply.');
 
               return (
                 <div
@@ -294,77 +312,77 @@ const ResultsPage = () => {
                   {/* Finding Header */}
                   <div
                     onClick={() => toggleExpand(fId)}
-                    className="p-5 md:p-6 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#FAF9F5] transition-colors"
+                    className="p-6 md:p-7 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#FAF9F5] transition-colors"
                   >
-                    <div className="flex items-center gap-3.5 truncate min-w-0">
-                      <div className="w-8 h-8 rounded-xl bg-[#EAECE4] text-[#3F6149] flex items-center justify-center text-xs font-bold shrink-0 shadow-2xs">
+                    <div className="flex items-center gap-4 truncate min-w-0">
+                      <div className="w-9 h-9 rounded-xl bg-[#E2ECE3] text-[#274830] flex items-center justify-center text-sm font-bold shrink-0 shadow-2xs">
                         {idx + 1}
                       </div>
                       <div className="truncate">
-                        <h3 className="text-sm md:text-[15px] font-bold text-[#18231C] truncate leading-snug">
+                        <h3 className="text-base md:text-lg font-bold text-[#101A13] truncate leading-snug">
                           {finding.title || `Contradiction in ${(finding.category || 'CONTRACT').replace(/_/g, ' ')}`}
                         </h3>
-                        <p className="text-xs text-[#758177] truncate mt-0.5 font-normal">
+                        <p className="text-xs md:text-sm text-[#48554A] font-semibold truncate mt-1">
                           Scope: {(finding.category || 'GENERAL').replace(/_/g, ' ')}
                         </p>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-3 shrink-0">
+                    <div className="flex items-center gap-3.5 shrink-0">
                       <RiskBadge riskLevel={finding.riskLevel} classification={finding.classification} />
-                      <button className="text-[#8C948C] hover:text-[#18231C] p-1.5 rounded-lg hover:bg-[#EAECE4] transition-colors">
-                        {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                      <button className="text-[#48554A] hover:text-[#101A13] p-1.5 rounded-lg hover:bg-[#EAECE4] transition-colors">
+                        {isExpanded ? <ChevronUp className="w-5 h-5 stroke-[2]" /> : <ChevronDown className="w-5 h-5 stroke-[2]" />}
                       </button>
                     </div>
                   </div>
 
                   {/* Finding Body Details */}
                   {isExpanded && (
-                    <div className="p-6 pt-0 border-t border-[#ECEAE2] space-y-5 bg-white">
+                    <div className="p-7 pt-0 border-t border-[#ECEAE2] space-y-6 bg-white">
                       
                       {/* Side-by-side Clause Excerpts */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 pt-5">
                         {/* Clause 1 */}
-                        <div className="bg-[#FAF9F5] p-4.5 rounded-xl border border-[#DDDCD3] space-y-2">
-                          <div className="flex items-center justify-between text-xs font-semibold text-[#35536D] border-b border-[#ECEAE2] pb-1.5">
-                            <span className="truncate">{finding.doc1Name || 'Contract A'}</span>
-                            <span className="text-[#758177] font-normal">Clause Excerpt</span>
+                        <div className="bg-[#FAF9F5] p-5 md:p-6 rounded-2xl border border-[#D8D6CC] space-y-3">
+                          <div className="flex items-center justify-between text-xs md:text-sm font-bold text-[#2A445A] border-b border-[#ECEAE2] pb-2">
+                            <span className="truncate">{docAName}</span>
+                            <span className="text-[#556358] font-semibold">Clause Excerpt</span>
                           </div>
-                          <p className="text-xs text-[#242C26] italic leading-relaxed whitespace-pre-line font-normal">
-                            "{finding.clause1Text || finding.clause1Snippet || 'No clause text extracted.'}"
+                          <p className="text-[14px] md:text-[15px] text-[#111A13] font-medium leading-relaxed italic whitespace-pre-line">
+                            "{clauseAText}"
                           </p>
                         </div>
 
                         {/* Clause 2 */}
-                        <div className="bg-[#FAF9F5] p-4.5 rounded-xl border border-[#DDDCD3] space-y-2">
-                          <div className="flex items-center justify-between text-xs font-semibold text-[#9B4F37] border-b border-[#ECEAE2] pb-1.5">
-                            <span className="truncate">{finding.doc2Name || 'Contract B'}</span>
-                            <span className="text-[#758177] font-normal">Conflicting Excerpt</span>
+                        <div className="bg-[#FAF9F5] p-5 md:p-6 rounded-2xl border border-[#D8D6CC] space-y-3">
+                          <div className="flex items-center justify-between text-xs md:text-sm font-bold text-[#8C3A24] border-b border-[#ECEAE2] pb-2">
+                            <span className="truncate">{docBName}</span>
+                            <span className="text-[#556358] font-semibold">Conflicting Excerpt</span>
                           </div>
-                          <p className="text-xs text-[#242C26] italic leading-relaxed whitespace-pre-line font-normal">
-                            "{finding.clause2Text || finding.clause2Snippet || 'No conflicting clause text extracted.'}"
+                          <p className="text-[14px] md:text-[15px] text-[#111A13] font-medium leading-relaxed italic whitespace-pre-line">
+                            "{clauseBText}"
                           </p>
                         </div>
                       </div>
 
                       {/* AI Legal Explanation */}
-                      <div className="p-4.5 rounded-xl bg-[#FAF1ED]/70 border border-[#EDD5CA] text-xs text-[#18231C] space-y-1.5">
-                        <div className="flex items-center gap-2 font-bold text-[#9B4F37]">
-                          <AlertTriangle className="w-4 h-4 stroke-[2]" />
-                          <span className="text-xs uppercase tracking-wide">Legal Contradiction Analysis:</span>
+                      <div className="p-5 md:p-6 rounded-2xl bg-[#FDF3EE] border border-[#E9C7B8] text-xs md:text-sm space-y-2">
+                        <div className="flex items-center gap-2 font-bold text-[#8C3A24]">
+                          <AlertTriangle className="w-4 h-4 stroke-[2.5]" />
+                          <span className="text-xs md:text-sm uppercase tracking-wide">Legal Contradiction Breakdown:</span>
                         </div>
-                        <p className="text-[#2E3731] leading-relaxed font-normal pt-1">
+                        <p className="text-[14px] md:text-[15px] text-[#152118] leading-relaxed font-medium pt-1">
                           {finding.explanation || 'Direct operational contradiction identified between the two obligations.'}
                         </p>
                       </div>
 
                       {/* AI Counsel Guidance & Recommendation */}
-                      <div className="p-4.5 rounded-xl bg-[#EAECE4] border border-[#D7DACD] text-xs text-[#18231C] space-y-1.5">
-                        <div className="flex items-center gap-2 font-bold text-[#34503C]">
-                          <Lightbulb className="w-4 h-4 stroke-[2] text-[#3F6149]" />
-                          <span className="text-xs uppercase tracking-wide">Counsel Mitigation Guidance:</span>
+                      <div className="p-5 md:p-6 rounded-2xl bg-[#EAF0E6] border border-[#C5D5C1] text-xs md:text-sm space-y-2">
+                        <div className="flex items-center gap-2 font-bold text-[#23452B]">
+                          <Lightbulb className="w-4 h-4 stroke-[2.5] text-[#274830]" />
+                          <span className="text-xs md:text-sm uppercase tracking-wide">Counsel Mitigation Guidance:</span>
                         </div>
-                        <p className="text-[#2E3731] leading-relaxed font-normal pt-1">
+                        <p className="text-[14px] md:text-[15px] text-[#152118] leading-relaxed font-medium pt-1">
                           {finding.recommendation || 'Harmonize definitions by executing an addendum aligning notice timelines and liability limits.'}
                         </p>
                       </div>
