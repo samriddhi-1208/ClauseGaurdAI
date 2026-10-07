@@ -1,87 +1,57 @@
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { 
-  Home, 
+  LayoutDashboard, 
   UploadCloud, 
-  FolderOpen, 
+  Search,
   GitCompare, 
   ShieldAlert, 
-  MessageSquare, 
+  Clock, 
   Scale, 
-  Zap, 
   Settings,
-  LogOut 
+  LogOut,
+  User
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import { demoAPI } from '../services/api';
 
 const Sidebar = () => {
   const { logout, user } = useAuth();
   const navigate = useNavigate();
-  const [seeding, setSeeding] = useState(false);
-
-  const handleRunDemo = async () => {
-    try {
-      setSeeding(true);
-      const res = await demoAPI.seed();
-      if (res.data.success) {
-        navigate(`/results/${res.data.analysisId}`);
-      }
-    } catch (err) {
-      console.error('[Demo Seed Error]', err);
-      alert('Failed to launch demo mode');
-    } finally {
-      setSeeding(false);
-    }
-  };
 
   const navItems = [
-    { label: 'Overview', path: '/dashboard', icon: Home },
+    { label: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
     { label: 'Upload Documents', path: '/upload', icon: UploadCloud },
-    { label: 'Document Library', path: '/documents', icon: FolderOpen },
+    { label: 'Analyze', path: '/chat', icon: Search },
     { label: 'Compare Contracts', path: '/compare', icon: GitCompare },
-    { label: 'Risk Analysis', path: '/results', icon: ShieldAlert },
-    { label: 'AI Legal Assistant', path: '/chat', icon: MessageSquare },
+    { label: 'Risk Insights', path: '/results', icon: ShieldAlert },
+    { label: 'History', path: '/documents', icon: Clock },
   ];
 
   const getInitials = (name) => {
-    if (!name) return 'LA';
+    if (!name) return 'ST';
     const parts = name.trim().split(' ');
     if (parts.length >= 2) return `${parts[0][0]}${parts[1][0]}`.toUpperCase();
     return name.substring(0, 2).toUpperCase();
   };
 
   return (
-    <aside className="w-64 bg-[#0F172A] text-slate-200 min-h-screen flex flex-col justify-between border-r border-slate-800 shrink-0 sticky top-0 h-screen select-none font-sans z-40">
+    <aside className="w-60 bg-[#F5F4EE] text-[#2E3430] min-h-screen flex flex-col justify-between border-r border-[#E8E7E0] shrink-0 sticky top-0 h-screen select-none font-sans z-40">
       <div>
         {/* Brand Header */}
-        <div className="px-5 py-4 flex items-center gap-3 border-b border-slate-800/80">
-          <div className="w-9 h-9 rounded-lg bg-blue-600/90 flex items-center justify-center text-white shadow-sm shrink-0">
-            <Scale className="w-5 h-5" />
+        <div className="px-5 py-5 flex items-center gap-3 border-b border-[#E8E7E0]/70">
+          <div className="w-8 h-8 rounded-lg bg-[#E7ECE7] text-[#2F4335] flex items-center justify-center shrink-0">
+            <Scale className="w-4 h-4 stroke-[1.75]" />
           </div>
           <div>
-            <h1 className="font-bold text-white text-sm tracking-tight leading-none">
-              ClauseGuard <span className="text-blue-400">AI</span>
+            <h1 className="font-semibold text-sm text-[#1F2421] tracking-tight leading-none">
+              ClauseGuard <span className="text-[#5B8266] font-medium">AI</span>
             </h1>
-            <p className="text-[10px] text-slate-400 font-semibold tracking-wider uppercase mt-1">Legal Intelligence</p>
+            <p className="text-[10px] text-[#7B847E] font-normal tracking-wide mt-1">Contract Intelligence</p>
           </div>
-        </div>
-
-        {/* Demo Mode Button */}
-        <div className="px-4 pt-3.5 pb-2">
-          <button
-            onClick={handleRunDemo}
-            disabled={seeding}
-            className="w-full flex items-center justify-center gap-2 px-3 py-2 bg-slate-800/80 hover:bg-slate-800 text-amber-300 border border-amber-500/30 font-medium text-xs rounded-lg transition-colors disabled:opacity-50 group"
-          >
-            <Zap className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-            <span>{seeding ? 'Loading Demo...' : 'Instant Demo Mode'}</span>
-          </button>
         </div>
 
         {/* Navigation Section */}
-        <div className="px-3 py-2">
-          <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider px-3 mb-2">Main Navigation</p>
+        <div className="px-3 py-4">
           <nav className="space-y-1">
             {navItems.map((item) => {
               const Icon = item.icon;
@@ -90,16 +60,16 @@ const Sidebar = () => {
                   key={item.path}
                   to={item.path}
                   className={({ isActive }) =>
-                    `flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-medium transition-all ${
+                    `flex items-center gap-3 px-3 py-2 rounded-xl text-xs transition-colors ${
                       isActive
-                        ? 'bg-slate-800 text-white font-semibold shadow-xs border-l-2 border-blue-500 pl-2.5'
-                        : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
+                        ? 'bg-[#E7ECE7] text-[#1C2D24] font-medium shadow-2xs'
+                        : 'text-[#606963] hover:text-[#1F2421] hover:bg-[#EBEAE3] font-normal'
                     }`
                   }
                 >
                   {({ isActive }) => (
                     <>
-                      <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-blue-400' : 'text-slate-400'}`} />
+                      <Icon className={`w-4 h-4 shrink-0 stroke-[1.75] ${isActive ? 'text-[#3D5745]' : 'text-[#7B847E]'}`} />
                       <span>{item.label}</span>
                     </>
                   )}
@@ -110,35 +80,35 @@ const Sidebar = () => {
         </div>
       </div>
 
-      {/* Bottom User Profile Section */}
-      <div className="p-3.5 border-t border-slate-800/80 bg-[#0B132B]">
+      {/* Bottom Profile / Settings Section */}
+      <div className="p-3 border-t border-[#E8E7E0]/80 bg-[#EFEFE8]">
         <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-2.5 truncate">
-            <div className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-semibold shrink-0">
+            <div className="w-7 h-7 rounded-full bg-[#5B8266] text-white flex items-center justify-center text-[11px] font-medium shrink-0">
               {getInitials(user?.name)}
             </div>
             <div className="truncate">
-              <p className="text-xs font-semibold text-white truncate">{user?.name || 'Counsel'}</p>
-              <p className="text-[11px] text-slate-400 font-normal truncate">{user?.email || 'counsel@firm.com'}</p>
+              <p className="text-xs font-medium text-[#1F2421] truncate">{user?.name || 'Samriddhi'}</p>
+              <p className="text-[10px] text-[#7B847E] truncate font-normal">{user?.email || 'user@workspace.com'}</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-1 shrink-0">
+          <div className="flex items-center gap-0.5 shrink-0">
             <button
-              onClick={() => alert('ClauseGuard AI Workspace: v1.0 Enterprise Edition')}
-              title="Workspace Information"
-              aria-label="Workspace Information"
-              className="p-1.5 rounded-md text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+              onClick={() => alert(`ClauseGuard AI Workspace\nUser: ${user?.name || 'Samriddhi'}\nRole: Contract Counsel`)}
+              title="Settings & Profile"
+              aria-label="Settings and Profile"
+              className="p-1.5 rounded-lg text-[#7B847E] hover:text-[#1F2421] hover:bg-[#E4E3DC] transition-colors"
             >
-              <Settings className="w-3.5 h-3.5" />
+              <Settings className="w-3.5 h-3.5 stroke-[1.75]" />
             </button>
             <button
               onClick={logout}
               title="Sign out"
               aria-label="Sign out"
-              className="p-1.5 rounded-md text-slate-400 hover:text-rose-400 hover:bg-slate-800 transition-colors"
+              className="p-1.5 rounded-lg text-[#7B847E] hover:text-[#C25450] hover:bg-[#E4E3DC] transition-colors"
             >
-              <LogOut className="w-3.5 h-3.5" />
+              <LogOut className="w-3.5 h-3.5 stroke-[1.75]" />
             </button>
           </div>
         </div>
