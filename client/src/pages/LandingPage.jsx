@@ -249,11 +249,6 @@ const LandingPage = () => {
                 </div>
 
               </div>
-
-              {/* Sub-tagline below tilted sheet */}
-              <p className="text-xs text-[#B8AC99] font-normal text-right pt-4 pr-3 max-w-sm">
-                Premium legal intelligence, made practical for everyday contract work.
-              </p>
             </div>
 
           </div>
