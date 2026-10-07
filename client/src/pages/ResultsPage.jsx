@@ -351,15 +351,15 @@ const ResultsPageContent = () => {
                     onClick={() => toggleExpand(fId)}
                     className="p-5 md:p-6 flex items-center justify-between gap-4 cursor-pointer hover:bg-[#171410] transition-colors"
                   >
-                    <div className="flex items-center gap-3.5 truncate min-w-0">
-                      <div className="w-8 h-8 rounded-lg bg-[#191612] border border-[#2D261C] text-[#E5C38E] flex items-center justify-center text-xs font-serif font-bold shrink-0">
+                    <div className="flex items-center gap-4 truncate min-w-0">
+                      <div className="w-10 h-10 rounded-xl bg-[#191612] border border-[#2D261C] text-[#E5C38E] flex items-center justify-center text-sm font-serif font-bold shrink-0">
                         {idx + 1}
                       </div>
                       <div className="truncate">
-                        <h3 className="text-base font-serif text-[#F4EFE5] truncate leading-snug">
+                        <h3 className="text-lg md:text-xl font-serif font-medium text-[#F4EFE5] truncate leading-snug tracking-normal">
                           {titleDisplay}
                         </h3>
-                        <p className="text-xs text-[#8C806F] truncate mt-0.5">
+                        <p className="text-xs md:text-sm text-[#A99E8C] truncate mt-1">
                           Scope: {categoryDisplay}
                         </p>
                       </div>
@@ -393,8 +393,8 @@ const ResultsPageContent = () => {
                             <span className="truncate font-semibold">{docAName}</span>
                             <span className="text-[11px] uppercase tracking-wider text-[#736B5E]">Clause A</span>
                           </div>
-                          <div className="border-l-2 border-[#C9A765] pl-3 py-1 bg-[#E8E2D4]/50 rounded-r">
-                            <p className="font-serif text-[13px] md:text-[14px] text-[#1A1815] leading-relaxed italic">
+                          <div className="border-l-2 border-[#C9A765] pl-3.5 py-1 bg-[#E8E2D4]/50 rounded-r">
+                            <p className="font-serif text-[14px] md:text-[15.5px] text-[#1A1815] leading-relaxed italic">
                               "{clauseAText}"
                             </p>
                           </div>
@@ -402,12 +402,12 @@ const ResultsPageContent = () => {
 
                         {/* Document B Parchment Panel */}
                         <div className="bg-[#EFECE4] p-5 rounded-lg border border-[#DDD6C5] text-[#1B1915] space-y-2.5 shadow-sm">
-                          <div className="flex items-center justify-between text-xs font-medium text-[#4A453A] border-b border-[#DDD6C5] pb-2">
+                          <div className="flex items-center justify-between text-xs md:text-sm font-medium text-[#4A453A] border-b border-[#DDD6C5] pb-2">
                             <span className="truncate font-semibold">{docBName}</span>
                             <span className="text-[11px] uppercase tracking-wider text-[#A3523B]">Clause B (Conflicting)</span>
                           </div>
-                          <div className="border-l-2 border-[#A3523B] pl-3 py-1 bg-[#E8E2D4]/50 rounded-r">
-                            <p className="font-serif text-[13px] md:text-[14px] text-[#1A1815] leading-relaxed italic">
+                          <div className="border-l-2 border-[#A3523B] pl-3.5 py-1 bg-[#E8E2D4]/50 rounded-r">
+                            <p className="font-serif text-[14px] md:text-[15.5px] text-[#1A1815] leading-relaxed italic">
                               "{clauseBText}"
                             </p>
                           </div>
@@ -415,23 +415,23 @@ const ResultsPageContent = () => {
                       </div>
 
                       {/* AI Legal Explanation */}
-                      <div className="p-4 rounded-lg bg-[#1D1712] border border-[#3A2A1E] text-xs md:text-sm space-y-1.5">
-                        <div className="flex items-center gap-2 text-xs font-medium text-[#E5B56E] uppercase tracking-wider">
+                      <div className="p-5 rounded-lg bg-[#1D1712] border border-[#3A2A1E] text-sm space-y-2">
+                        <div className="flex items-center gap-2 text-xs font-semibold text-[#E5B56E] uppercase tracking-wider">
                           <AlertTriangle className="w-3.5 h-3.5 stroke-[2]" />
                           <span>Legal Contradiction Breakdown:</span>
                         </div>
-                        <p className="text-xs md:text-sm text-[#D5CEBF] leading-relaxed pt-0.5">
+                        <p className="text-sm text-[#D5CEBF] leading-relaxed pt-0.5">
                           {explanationDisplay}
                         </p>
                       </div>
 
                       {/* AI Counsel Guidance & Recommendation */}
-                      <div className="p-4 rounded-lg bg-[#151F18] border border-[#233B2B] text-xs md:text-sm space-y-1.5">
-                        <div className="flex items-center gap-2 text-xs font-medium text-[#98C7A3] uppercase tracking-wider">
+                      <div className="p-5 rounded-lg bg-[#151F18] border border-[#233B2B] text-sm space-y-2">
+                        <div className="flex items-center gap-2 text-xs font-semibold text-[#98C7A3] uppercase tracking-wider">
                           <Lightbulb className="w-3.5 h-3.5 stroke-[2] text-[#98C7A3]" />
                           <span>Counsel Mitigation Guidance:</span>
                         </div>
-                        <p className="text-xs md:text-sm text-[#D5CEBF] leading-relaxed pt-0.5">
+                        <p className="text-sm text-[#D5CEBF] leading-relaxed pt-0.5">
                           {recommendationDisplay}
                         </p>
                       </div>
