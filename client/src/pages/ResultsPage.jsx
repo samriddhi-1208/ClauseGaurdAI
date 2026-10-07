@@ -114,16 +114,8 @@ const ResultsPageContent = () => {
   const [loading, setLoading] = useState(false);
   const [seeding, setSeeding] = useState(false);
   
-  const [expandedIds, setExpandedIds] = useState({
-    'find-1': true,
-    'find-2': true,
-    'find-3': true,
-    'find-4': true,
-    0: true,
-    1: true,
-    2: true,
-    3: true
-  });
+  // Collapsed by default - click row/dropdown to expand
+  const [expandedIds, setExpandedIds] = useState({});
 
   useEffect(() => {
     if (id) {
