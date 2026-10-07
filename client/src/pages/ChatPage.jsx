@@ -348,10 +348,6 @@ const ChatPage = () => {
               )}
             </button>
           </form>
-          
-          <p className="text-[11px] text-[#8C806F] text-center">
-            Deterministic RAG engine grounded in contract text. Always review original agreement clauses before signing.
-          </p>
         </div>
 
       </main>

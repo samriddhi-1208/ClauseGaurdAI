@@ -230,9 +230,6 @@ const ResultsPageContent = () => {
             <h1 className="text-2xl md:text-3xl font-serif font-medium text-[#F4EFE5] tracking-normal leading-snug">
               Contradiction Audit Report
             </h1>
-            <p className="text-sm text-[#B9AE9A] mt-2 leading-relaxed">
-              Comprehensive discrepancy analysis across evaluated legal obligations
-            </p>
           </div>
 
           <div className="flex items-center gap-3">
