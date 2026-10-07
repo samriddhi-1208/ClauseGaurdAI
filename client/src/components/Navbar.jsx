@@ -50,11 +50,11 @@ const Navbar = ({ title, subtitle }) => {
           )}
 
           <div className="truncate">
-            <h1 className="text-lg md:text-xl font-serif font-bold text-[#F8F6F0] tracking-tight leading-tight truncate">
+            <h1 className="text-lg md:text-xl font-serif font-medium text-[#F8F6F0] tracking-normal leading-snug truncate">
               {title}
             </h1>
             {subtitle && (
-              <p className="text-xs md:text-sm text-[#A89E8D] font-normal leading-normal truncate mt-0.5">
+              <p className="text-xs md:text-sm text-[#A89E8D] font-normal leading-relaxed truncate mt-1">
                 {subtitle}
               </p>
             )}

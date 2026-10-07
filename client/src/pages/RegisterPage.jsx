@@ -51,10 +51,10 @@ const RegisterPage = () => {
           <div className="w-12 h-12 rounded-xl bg-[#191612] border border-[#2D261C] flex items-center justify-center text-[#E5C38E] mx-auto mb-3.5 shadow-sm">
             <Shield className="w-6 h-6 stroke-[1.8]" />
           </div>
-          <h1 className="text-xl md:text-2xl font-serif text-[#F4EFE5] tracking-tight">
+          <h1 className="text-xl md:text-2xl font-serif font-medium text-[#F4EFE5] tracking-normal leading-snug">
             Create Workspace Account
           </h1>
-          <p className="text-xs text-[#8C806F] mt-1 font-normal">
+          <p className="text-xs md:text-sm text-[#B9AE9A] mt-2 font-normal leading-relaxed">
             Start analyzing contracts & detecting contradictions
           </p>
         </div>

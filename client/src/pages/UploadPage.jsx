@@ -120,10 +120,10 @@ const UploadPage = () => {
       <main className="p-6 md:p-10 max-w-4xl w-full mx-auto space-y-7">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-xl md:text-2xl font-serif text-[#F4EFE5] tracking-tight">
+            <h1 className="text-2xl md:text-3xl font-serif font-medium text-[#F4EFE5] tracking-normal leading-snug">
               Contract Intake & Indexing
             </h1>
-            <p className="text-xs text-[#A99E8C] mt-0.5">
+            <p className="text-sm text-[#B9AE9A] mt-2 leading-relaxed">
               Select contracts in PDF, DOCX, or TXT format for automatic clause breakdown
             </p>
           </div>
@@ -131,7 +131,7 @@ const UploadPage = () => {
           <button
             onClick={handleRunDemo}
             disabled={seeding}
-            className="px-3.5 py-2 bg-[#14120E] hover:bg-[#1B1813] text-[#EDE5D5] border border-[#2D261C] hover:border-[#E5C38E]/50 font-medium text-xs rounded-lg flex items-center gap-2 transition-colors disabled:opacity-50 self-start sm:self-auto cursor-pointer"
+            className="px-4 py-2.5 bg-[#14120E] hover:bg-[#1B1813] text-[#EDE5D5] border border-[#2D261C] hover:border-[#E5C38E]/50 font-medium text-xs md:text-sm rounded-lg flex items-center gap-2 transition-colors disabled:opacity-50 self-start sm:self-auto cursor-pointer"
           >
             <Zap className="w-3.5 h-3.5 text-[#E5C38E]" />
             <span>{seeding ? 'Seeding Demo Data...' : 'Load Sample Contracts'}</span>
@@ -139,7 +139,7 @@ const UploadPage = () => {
         </div>
 
         {error && (
-          <div className="p-3.5 bg-[#241314] border border-[#482325] rounded-lg flex items-center gap-2.5 text-xs text-[#ECA09B]">
+          <div className="p-4 bg-[#241314] border border-[#482325] rounded-lg flex items-center gap-2.5 text-xs md:text-sm text-[#ECA09B]">
             <AlertCircle className="w-4 h-4 text-[#ECA09B] shrink-0" />
             <span>{error}</span>
           </div>
@@ -150,7 +150,7 @@ const UploadPage = () => {
           onDrop={handleDrop}
           onDragOver={handleDragOver}
           onClick={() => fileInputRef.current?.click()}
-          className="bg-[#12100D] border-2 border-dashed border-[#2B251B] hover:border-[#E5C38E]/60 rounded-xl p-8 md:p-12 text-center cursor-pointer transition-all group"
+          className="bg-[#12100D] border-2 border-dashed border-[#2B251B] hover:border-[#E5C38E]/60 rounded-xl p-10 md:p-14 text-center cursor-pointer transition-all group"
         >
           <input
             type="file"
@@ -165,10 +165,10 @@ const UploadPage = () => {
             <UploadCloud className="w-7 h-7 stroke-[1.8]" />
           </div>
 
-          <h3 className="text-sm md:text-base font-serif text-[#F4EFE5]">
+          <h3 className="text-base md:text-lg font-serif font-medium text-[#F4EFE5] tracking-normal leading-snug">
             Click to upload or drag & drop contracts
           </h3>
-          <p className="text-xs text-[#8C806F] mt-1 max-w-sm mx-auto">
+          <p className="text-xs md:text-sm text-[#A99E8C] mt-2.5 max-w-md mx-auto leading-relaxed">
             Supported formats: PDF, DOCX, TXT. Documents are securely parsed and vectorized into isolated embeddings.
           </p>
         </div>

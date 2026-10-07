@@ -169,12 +169,12 @@ const DashboardPage = () => {
 
           <div>
             <div className="flex items-center gap-2.5">
-              <h1 className="text-2xl md:text-[28px] font-serif text-[#F4EFE5] tracking-tight leading-tight">
+              <h1 className="text-2xl md:text-3xl font-serif font-medium text-[#F4EFE5] tracking-normal leading-snug">
                 Good morning, {userName}
               </h1>
               <span className="w-1.5 h-1.5 rounded-full bg-[#E5C38E]"></span>
             </div>
-            <p className="text-xs md:text-sm text-[#A99E8C] font-normal leading-normal mt-1">
+            <p className="text-xs md:text-sm text-[#B9AE9A] font-normal leading-relaxed mt-1.5">
               Overview of your contract portfolio, detected contradictions, and legal exposure.
             </p>
           </div>

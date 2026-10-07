@@ -194,10 +194,10 @@ const ChatPage = () => {
                 <div className="w-12 h-12 rounded-xl bg-[#191612] border border-[#2D261C] text-[#E5C38E] flex items-center justify-center mx-auto">
                   <Sparkles className="w-6 h-6 stroke-[1.8]" />
                 </div>
-                <h2 className="text-2xl md:text-[28px] font-serif text-[#F4EFE5] tracking-tight leading-tight">
+                <h2 className="text-2xl md:text-[28px] font-serif font-medium text-[#F4EFE5] tracking-normal leading-snug">
                   What would you like to examine across your agreements?
                 </h2>
-                <p className="text-xs md:text-sm text-[#8C806F] leading-relaxed max-w-lg mx-auto">
+                <p className="text-sm text-[#B9AE9A] leading-relaxed max-w-lg mx-auto mt-2">
                   Select a common counsel inquiry below, or type your specific legal question in the prompt bar.
                 </p>
               </div>

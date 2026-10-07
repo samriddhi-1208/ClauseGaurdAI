@@ -236,9 +236,9 @@ const DocumentDetailsPage = () => {
                     </div>
 
                     {/* Warm Cream Parchment Document Preview Excerpt */}
-                    <div className="bg-[#EFECE4] text-[#1B1915] p-4 rounded-lg border border-[#DDD6C5] shadow-xs">
-                      <div className="border-l-2 border-[#C9A765] pl-3 py-0.5">
-                        <p className="whitespace-pre-line italic font-serif text-[13px] md:text-[14px] text-[#1A1815] leading-relaxed">
+                    <div className="bg-[#EFECE4] text-[#1B1915] p-5 rounded-lg border border-[#DDD6C5] shadow-xs">
+                      <div className="border-l-2 border-[#C9A765] pl-3.5 py-1">
+                        <p className="whitespace-pre-line italic font-serif text-[14px] md:text-[15px] text-[#1A1815] leading-relaxed tracking-normal">
                           "{clause.text}"
                         </p>
                       </div>

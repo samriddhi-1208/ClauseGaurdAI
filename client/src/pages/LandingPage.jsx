@@ -57,7 +57,7 @@ const LandingPage = () => {
               <Shield className="w-5 h-5 stroke-[2]" />
             </div>
             <div>
-              <span className="font-serif font-bold text-lg md:text-xl text-[#F8F6F0] tracking-tight block leading-tight">
+              <span className="font-serif font-bold text-lg md:text-xl text-[#F8F6F0] tracking-normal block leading-tight">
                 ClauseGuard AI
               </span>
               <span className="hidden sm:block text-xs text-[#A89E8D] font-normal leading-normal mt-0.5">
@@ -120,7 +120,7 @@ const LandingPage = () => {
                 </span>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif text-[#F8F6F0] leading-[1.12] tracking-tight">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif text-[#F8F6F0] leading-[1.14] tracking-normal">
                 Turn Complex<br />
                 Contracts<br />
                 into <span className="text-[#E5C38E] italic font-serif">Clear Insights</span>
@@ -261,7 +261,7 @@ const LandingPage = () => {
           <span className="text-[11px] font-bold tracking-[0.22em] text-[#C8A97E] uppercase block">
             THE INTELLIGENCE BEHIND EVERY AGREEMENT
           </span>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-[#F8F6F0] tracking-tight">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-[#F8F6F0] tracking-normal leading-snug">
             Everything You Need to Understand Your Contracts
           </h2>
         </div>
@@ -330,7 +330,7 @@ const LandingPage = () => {
           <span className="text-[11px] font-bold tracking-[0.22em] text-[#C8A97E] uppercase block">
             A CLEARER VIEW OF EVERY DETAIL
           </span>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-[#F8F6F0] tracking-tight">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-[#F8F6F0] tracking-normal leading-snug">
             See Contradictions Clearly
           </h2>
         </div>
@@ -398,7 +398,7 @@ const LandingPage = () => {
           <span className="text-[11px] font-bold tracking-[0.22em] text-[#C8A97E] uppercase block">
             A MORE CONSIDERED WORKFLOW
           </span>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-[#F8F6F0] tracking-tight">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-[#F8F6F0] tracking-normal leading-snug">
             How It Works
           </h2>
         </div>
@@ -459,7 +459,7 @@ const LandingPage = () => {
         <span className="text-[11px] font-bold tracking-[0.22em] text-[#C8A97E] uppercase block">
           CLARITY STARTS HERE
         </span>
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-[#F8F6F0] tracking-tight">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-[#F8F6F0] tracking-normal leading-snug">
           Make Every Contract Clearer.
         </h2>
         <p className="text-sm md:text-base text-[#A89E8D] max-w-lg mx-auto leading-relaxed">

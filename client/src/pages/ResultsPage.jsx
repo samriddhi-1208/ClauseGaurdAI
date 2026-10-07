@@ -227,10 +227,10 @@ const ResultsPageContent = () => {
         {/* Top Header Bar */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl md:text-3xl font-serif text-[#F4EFE5] tracking-tight">
+            <h1 className="text-2xl md:text-3xl font-serif font-medium text-[#F4EFE5] tracking-normal leading-snug">
               Contradiction Audit Report
             </h1>
-            <p className="text-xs md:text-sm text-[#A99E8C] mt-1">
+            <p className="text-sm text-[#B9AE9A] mt-2 leading-relaxed">
               Comprehensive discrepancy analysis across evaluated legal obligations
             </p>
           </div>

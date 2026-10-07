@@ -18,23 +18,31 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    letter-spacing: -0.01em;
-    line-height: 1.6;
+    letter-spacing: 0.01em;
+    line-height: 1.68;
+    word-spacing: 0.02em;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    letter-spacing: -0.02em;
-    font-weight: 700;
+    font-weight: 600;
     color: #F4EFE5;
+    letter-spacing: 0.015em;
+    line-height: 1.35;
+  }
+
+  .font-serif {
+    letter-spacing: 0.02em;
   }
 
   p {
-    line-height: 1.65;
+    line-height: 1.7;
     color: #B9AE9A;
+    letter-spacing: 0.01em;
   }
 
   input, textarea, select, button {
     font-family: 'Plus Jakarta Sans', sans-serif;
+    letter-spacing: 0.01em;
   }
 }
 

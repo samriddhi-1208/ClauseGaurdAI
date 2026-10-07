@@ -54,10 +54,10 @@ const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
               <Shield className="w-5 h-5 stroke-[2]" />
             </div>
             <div>
-              <h1 className="font-serif font-bold text-[16px] text-[#F8F6F0] leading-snug">
+              <h1 className="font-serif font-semibold text-[17px] text-[#F8F6F0] tracking-normal leading-snug">
                 ClauseGuard AI
               </h1>
-              <p className="text-xs text-[#8C806F] font-normal leading-normal mt-0.5">
+              <p className="text-xs text-[#A99E8C] font-normal leading-relaxed mt-1">
                 Smarter Contracts. Safer Decisions.
               </p>
             </div>
@@ -77,7 +77,7 @@ const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
 
         {/* Main Navigation */}
         <div className="px-3.5 py-4 space-y-1">
-          <p className="px-3 text-[11px] font-bold text-[#8C806F] uppercase tracking-wider mb-2">
+          <p className="px-3 text-[11px] font-semibold text-[#8C806F] uppercase tracking-[0.14em] mb-2.5">
             Workspace
           </p>
           {mainNav.map((item) => {
@@ -113,7 +113,7 @@ const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
 
         {/* Preferences Navigation */}
         <div className="px-3.5 py-2 space-y-1">
-          <p className="px-3 text-[11px] font-bold text-[#8C806F] uppercase tracking-wider mb-1.5">
+          <p className="px-3 text-[11px] font-semibold text-[#8C806F] uppercase tracking-[0.14em] mb-2">
             Preferences
           </p>
           {bottomNav.map((item) => {

@@ -35,10 +35,10 @@ const ProfilePage = () => {
           <div className="flex-1 text-center sm:text-left">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div>
-                <h1 className="text-xl md:text-2xl font-serif text-[#F4EFE5] tracking-tight">
+                <h1 className="text-xl md:text-2xl font-serif font-medium text-[#F4EFE5] tracking-normal leading-snug">
                   {name}
                 </h1>
-                <p className="text-xs text-[#8C806F] mt-0.5">{email}</p>
+                <p className="text-xs md:text-sm text-[#B9AE9A] mt-1.5 leading-relaxed">{email}</p>
               </div>
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded text-xs font-medium bg-[#152319] text-[#98C7A3] border border-[#233B2B] self-center sm:self-auto">
                 <Shield className="w-3.5 h-3.5 stroke-[2]" />
