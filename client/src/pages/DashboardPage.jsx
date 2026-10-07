@@ -404,14 +404,6 @@ const DashboardPage = () => {
               )}
             </div>
 
-            {/* Bottom Card Summary */}
-            <div className="pt-3.5 mt-2 border-t border-[#1F1B16] flex items-center justify-between text-xs text-[#8C806F]">
-              <span>{displayDocs.length} agreement{displayDocs.length !== 1 ? 's' : ''} indexed</span>
-              <span className="text-[#E5C38E] font-medium flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#E5C38E]"></span>
-                ChromaDB synchronized
-              </span>
-            </div>
           </div>
 
           {/* RIGHT COLUMN: Contract Intelligence (5 cols) */}
@@ -577,9 +569,6 @@ const DashboardPage = () => {
               </div>
             </div>
 
-            <div className="pt-2 text-[11px] text-[#8C806F] text-center">
-              Powered by ClauseGuard Deep Semantic Engine
-            </div>
           </div>
 
         </div>
