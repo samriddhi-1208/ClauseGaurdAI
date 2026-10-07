@@ -153,16 +153,16 @@ const ChatPage = () => {
       <main className="p-6 md:p-10 max-w-4xl w-full mx-auto space-y-8 pb-20">
         
         {/* Simple Document & Status Selector */}
-        <div className="bg-white p-4.5 rounded-2xl border border-[#DDDCD3] shadow-card flex flex-wrap items-center justify-between gap-4">
+        <div className="bg-white p-5 rounded-2xl border border-[#DDDCD3] shadow-card flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2 text-xs font-semibold text-[#5A665D]">
+            <div className="flex items-center gap-2 text-[13px] font-semibold text-[#18231C]">
               <Filter className="w-4 h-4 text-[#3F6149]" />
               <span>Analyzing Contract:</span>
             </div>
             <select
               value={selectedDocId}
               onChange={(e) => setSelectedDocId(e.target.value)}
-              className="bg-[#FAF9F5] border border-[#DDDCD3] rounded-xl px-3 py-1.5 text-xs font-semibold text-[#18231C] focus:outline-none focus:border-[#3F6149] max-w-xs truncate cursor-pointer"
+              className="bg-[#FAF9F5] border border-[#DDDCD3] rounded-xl px-3.5 py-2 text-xs font-semibold text-[#18231C] focus:outline-none focus:border-[#3F6149] max-w-xs truncate cursor-pointer shadow-2xs"
             >
               <option value="">All Uploaded Contracts ({documents.length} files)</option>
               {documents.map((d) => (
@@ -174,7 +174,7 @@ const ChatPage = () => {
           </div>
 
           <div className="flex items-center gap-3">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-[#E2ECE3] text-[#2F5236] border border-[#CADBCC]">
+            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#E2ECE3] text-[#2F5236] border border-[#CADBCC]">
               <span className="w-2 h-2 rounded-full bg-[#3F6149]"></span>
               <span>Contracts Ready</span>
             </span>
@@ -182,7 +182,7 @@ const ChatPage = () => {
             {isConversationActive && (
               <button
                 onClick={handleResetChat}
-                className="text-xs font-semibold text-[#5A665D] hover:text-[#18231C] flex items-center gap-1.5 transition-colors px-2.5 py-1 rounded-lg hover:bg-[#F2F0E8]"
+                className="text-xs font-semibold text-[#5A665D] hover:text-[#18231C] flex items-center gap-1.5 transition-colors px-3 py-1.5 rounded-xl hover:bg-[#F2F0E8] border border-[#DDDCD3]"
                 title="Start a new question"
               >
                 <RefreshCw className="w-3.5 h-3.5" />
@@ -202,10 +202,10 @@ const ChatPage = () => {
                 <div className="w-12 h-12 rounded-2xl bg-[#EAECE4] text-[#3F6149] flex items-center justify-center mx-auto shadow-2xs">
                   <Sparkles className="w-6 h-6 stroke-[1.8]" />
                 </div>
-                <h2 className="text-2xl md:text-[26px] font-semibold text-[#18231C] leading-snug">
+                <h2 className="text-2xl md:text-[28px] font-bold text-[#18231C] tracking-tight leading-tight">
                   What would you like to understand about your contracts?
                 </h2>
-                <p className="text-xs md:text-sm text-[#5A665D] leading-relaxed font-normal max-w-lg mx-auto">
+                <p className="text-sm text-[#5A665D] leading-relaxed font-normal max-w-lg mx-auto">
                   Click any common legal question below, or type your own question in plain English at the bottom.
                 </p>
               </div>
