@@ -339,22 +339,22 @@ const LandingPage = () => {
         <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           
           {/* Card A: Service Agreement */}
-          <div className="bg-[#EFECE4] text-[#1A1815] p-7 md:p-8 rounded-2xl shadow-xl border border-[#D5CFBE] space-y-3.5">
-            <span className="text-[11px] font-bold tracking-widest text-[#736A5B] uppercase block">
+          <div className="bg-[#E5DFD0] text-[#16130F] p-7 md:p-8 rounded-2xl shadow-xl border border-[#C8BFAC] space-y-3.5">
+            <span className="text-[11px] font-bold tracking-widest text-[#6B5F4D] uppercase block">
               CONTRACT A
             </span>
             <h3 className="font-serif text-xl font-bold text-[#14120E]">
               Service Agreement
             </h3>
-            <div className="space-y-2.5 pt-1 text-sm md:text-base text-[#2E281F] leading-relaxed font-serif">
-              <p>
-                Payment: <span className="bg-[#EED5A5] px-2 py-0.5 rounded text-[#2E2413] font-sans font-bold">$50,000</span> payable within <span className="bg-[#EED5A5] px-2 py-0.5 rounded text-[#2E2413] font-sans font-bold">30 days</span>.
+            <div className="space-y-2.5 pt-1 text-sm md:text-base leading-relaxed font-serif">
+              <p className="text-[#16130F]">
+                <strong className="font-semibold text-[#14120E]">Payment:</strong> <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">$50,000</span> payable within <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">30 days</span>.
               </p>
-              <p>
-                Termination: Advance written notice of <span className="bg-[#EED5A5] px-2 py-0.5 rounded text-[#2E2413] font-sans font-bold">30 days</span> required.
+              <p className="text-[#16130F]">
+                <strong className="font-semibold text-[#14120E]">Termination:</strong> Advance written notice of <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">30 days</span> required.
               </p>
-              <p>
-                Retention: Audit records must be retained for <span className="bg-[#EED5A5] px-2 py-0.5 rounded text-[#2E2413] font-sans font-bold">5 years</span>.
+              <p className="text-[#16130F]">
+                <strong className="font-semibold text-[#14120E]">Retention:</strong> Audit records must be retained for <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">5 years</span>.
               </p>
             </div>
           </div>
@@ -369,22 +369,22 @@ const LandingPage = () => {
           </div>
 
           {/* Card B: Revised Agreement */}
-          <div className="bg-[#EFECE4] text-[#1A1815] p-7 md:p-8 rounded-2xl shadow-xl border border-[#D5CFBE] space-y-3.5">
-            <span className="text-[11px] font-bold tracking-widest text-[#736A5B] uppercase block">
+          <div className="bg-[#E5DFD0] text-[#16130F] p-7 md:p-8 rounded-2xl shadow-xl border border-[#C8BFAC] space-y-3.5">
+            <span className="text-[11px] font-bold tracking-widest text-[#6B5F4D] uppercase block">
               CONTRACT B
             </span>
             <h3 className="font-serif text-xl font-bold text-[#14120E]">
               Revised Agreement
             </h3>
-            <div className="space-y-2.5 pt-1 text-sm md:text-base text-[#2E281F] leading-relaxed font-serif">
-              <p>
-                Payment: <span className="bg-[#EED5A5] px-2 py-0.5 rounded text-[#2E2413] font-sans font-bold">$60,000</span> payable within <span className="bg-[#EED5A5] px-2 py-0.5 rounded text-[#2E2413] font-sans font-bold">60 days</span>.
+            <div className="space-y-2.5 pt-1 text-sm md:text-base leading-relaxed font-serif">
+              <p className="text-[#16130F]">
+                <strong className="font-semibold text-[#14120E]">Payment:</strong> <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">$60,000</span> payable within <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">60 days</span>.
               </p>
-              <p>
-                Termination: Advance written notice of <span className="bg-[#EED5A5] px-2 py-0.5 rounded text-[#2E2413] font-sans font-bold">60 days</span> required.
+              <p className="text-[#16130F]">
+                <strong className="font-semibold text-[#14120E]">Termination:</strong> Advance written notice of <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">60 days</span> required.
               </p>
-              <p>
-                Retention: All confidential records purged within <span className="bg-[#EED5A5] px-2 py-0.5 rounded text-[#2E2413] font-sans font-bold">2 years</span>.
+              <p className="text-[#16130F]">
+                <strong className="font-semibold text-[#14120E]">Retention:</strong> All confidential records purged within <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">2 years</span>.
               </p>
             </div>
           </div>
