@@ -177,21 +177,21 @@ const LandingPage = () => {
 
       {/* Bottom Quote Banner */}
       <section className="py-12 px-6 mt-auto">
-        <div className="max-w-4xl mx-auto bg-[#EAECE4] border border-[#D7DACD] rounded-2xl p-6 text-center space-y-2 shadow-2xs">
-          <div className="inline-flex items-center justify-center text-[#3F6149]">
-            <Leaf className="w-5 h-5 stroke-[2]" />
+        <div className="max-w-4xl mx-auto bg-[#EAECE4] border border-[#D4D8CB] rounded-2xl p-8 md:p-10 text-center space-y-3 shadow-2xs">
+          <div className="inline-flex items-center justify-center text-[#3F6149] bg-[#DEE2D7] p-2.5 rounded-2xl">
+            <Leaf className="w-7 h-7 stroke-[2.2]" />
           </div>
-          <h3 className="text-sm md:text-base font-semibold text-[#34503C]">
+          <h3 className="text-xl md:text-2xl font-extrabold text-[#16301D] tracking-tight leading-snug">
             Better contracts. Stronger partnerships.
           </h3>
-          <p className="text-xs text-[#5A665D] max-w-md mx-auto">
+          <p className="text-sm md:text-base font-semibold text-[#344638] max-w-xl mx-auto leading-relaxed">
             Empowering legal operations and corporate counsel with automated contract conflict intelligence.
           </p>
         </div>
       </section>
 
       {/* Minimal Footer */}
-      <footer className="border-t border-[#E2DFD5] py-6 px-6 text-center text-xs text-[#758177]">
+      <footer className="border-t border-[#E2DFD5] py-6 px-6 text-center text-xs md:text-[13px] font-semibold text-[#4F5D52]">
         <p>© 2026 ClauseGuard AI — Legal Contract Intelligence & Contradiction Detection</p>
       </footer>
     </div>
