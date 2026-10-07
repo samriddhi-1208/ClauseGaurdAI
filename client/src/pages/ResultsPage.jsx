@@ -17,7 +17,28 @@ import {
 } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import RiskBadge from '../components/RiskBadge';
+import ErrorBoundary from '../components/ErrorBoundary';
 import { analysisAPI, demoAPI } from '../services/api';
+
+const safeString = (val, fallback = '') => {
+  if (val === null || val === undefined) return fallback;
+  if (typeof val === 'string') return val;
+  if (typeof val === 'number') return String(val);
+  if (typeof val === 'object') {
+    return val.fileName || val.title || val.name || val.content || val.text || val.message || fallback;
+  }
+  return String(val);
+};
+
+const formatSafeDate = (d) => {
+  try {
+    const date = new Date(d || Date.now());
+    if (isNaN(date.getTime())) return 'Recently';
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  } catch (e) {
+    return 'Recently';
+  }
+};
 
 const FALLBACK_ANALYSIS = {
   _id: 'ana_ref_audit_2026',
@@ -85,7 +106,7 @@ const FALLBACK_FINDINGS = [
   }
 ];
 
-const ResultsPage = () => {
+const ResultsPageContent = () => {
   const { id } = useParams();
   const [analyses, setAnalyses] = useState([]);
   const [selectedAnalysis, setSelectedAnalysis] = useState(FALLBACK_ANALYSIS);
@@ -93,7 +114,6 @@ const ResultsPage = () => {
   const [loading, setLoading] = useState(false);
   const [seeding, setSeeding] = useState(false);
   
-  // Auto expand all findings initially
   const [expandedIds, setExpandedIds] = useState({
     'find-1': true,
     'find-2': true,
@@ -117,7 +137,7 @@ const ResultsPage = () => {
     try {
       setLoading(true);
       const res = await analysisAPI.getAll();
-      if (res.data?.success && res.data.analyses?.length > 0) {
+      if (res.data?.success && Array.isArray(res.data.analyses) && res.data.analyses.length > 0) {
         setAnalyses(res.data.analyses);
         fetchAnalysisById(res.data.analyses[0]._id || res.data.analyses[0].id);
       } else {
@@ -139,12 +159,13 @@ const ResultsPage = () => {
       const res = await analysisAPI.getById(analysisId);
       if (res.data?.success && res.data.analysis) {
         setSelectedAnalysis(res.data.analysis);
-        const fList = res.data.findings || [];
+        const fList = Array.isArray(res.data.findings) ? res.data.findings : [];
         if (fList.length > 0) {
           setFindings(fList);
           const expMap = {};
           fList.forEach((item, idx) => {
-            expMap[item._id || item.id || idx] = true;
+            const key = item._id || item.id || idx;
+            expMap[key] = true;
           });
           setExpandedIds(expMap);
         } else {
@@ -186,9 +207,29 @@ const ResultsPage = () => {
     }
   };
 
-  const highRiskCount = findings.filter(f => f.riskLevel === 'HIGH' || f.classification === 'POTENTIAL_CONTRADICTION').length;
-  const mediumRiskCount = findings.filter(f => f.riskLevel === 'MEDIUM' || f.classification === 'POTENTIAL_INCONSISTENCY').length;
-  const lowRiskCount = findings.filter(f => f.riskLevel === 'LOW' || f.classification === 'NO_SIGNIFICANT_CONFLICT').length;
+  const safeFindingsList = Array.isArray(findings) ? findings : FALLBACK_FINDINGS;
+
+  const highRiskCount = safeFindingsList.filter(f => {
+    const r = String(f?.riskLevel || '').toUpperCase();
+    const c = String(f?.classification || '').toUpperCase();
+    return r === 'HIGH' || c === 'POTENTIAL_CONTRADICTION' || r.includes('HIGH');
+  }).length;
+
+  const mediumRiskCount = safeFindingsList.filter(f => {
+    const r = String(f?.riskLevel || '').toUpperCase();
+    const c = String(f?.classification || '').toUpperCase();
+    return r === 'MEDIUM' || c === 'POTENTIAL_INCONSISTENCY' || r.includes('MED');
+  }).length;
+
+  const lowRiskCount = safeFindingsList.filter(f => {
+    const r = String(f?.riskLevel || '').toUpperCase();
+    const c = String(f?.classification || '').toUpperCase();
+    return r === 'LOW' || c === 'NO_SIGNIFICANT_CONFLICT' || r.includes('LOW');
+  }).length;
+
+  const analysisIdStr = String(selectedAnalysis?._id || selectedAnalysis?.id || 'ACTIVE');
+  const auditNumber = analysisIdStr.length > 8 ? analysisIdStr.slice(-8).toUpperCase() : analysisIdStr.toUpperCase();
+  const auditDateStr = formatSafeDate(selectedAnalysis?.createdAt);
 
   return (
     <div className="flex-1 bg-[#F8F7F2] flex flex-col min-w-0 pb-20 font-sans text-[#101A13]">
@@ -234,14 +275,14 @@ const ResultsPage = () => {
               <div>
                 <div className="flex items-center gap-2.5">
                   <span className="text-xs md:text-sm font-bold text-[#274830] bg-[#E2ECE3] px-3 py-1 rounded-lg border border-[#CADBCC]">
-                    AUDIT #{selectedAnalysis._id ? selectedAnalysis._id.slice(-8).toUpperCase() : 'ACTIVE'}
+                    AUDIT #{auditNumber}
                   </span>
                   <span className="text-xs md:text-sm text-[#48554A] font-medium">
-                    Executed on {new Date(selectedAnalysis.createdAt || Date.now()).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                    Executed on {auditDateStr}
                   </span>
                 </div>
                 <h2 className="text-lg md:text-xl font-bold text-[#101A13] mt-2.5 leading-snug">
-                  {findings.length} Discrepancies Flagged Across Contract Obligations
+                  {safeFindingsList.length} Discrepancies Flagged Across Contract Obligations
                 </h2>
               </div>
 
@@ -265,17 +306,21 @@ const ResultsPage = () => {
             </div>
 
             {/* Evaluated Contract Tags */}
-            {selectedAnalysis.documents && selectedAnalysis.documents.length > 0 && (
-              <div className="flex items-center gap-2.5 flex-wrap text-xs md:text-sm text-[#38463C]">
-                <span className="font-bold text-[#101A13]">Evaluated Documents:</span>
-                {selectedAnalysis.documents.map((d, i) => (
+            <div className="flex items-center gap-2.5 flex-wrap text-xs md:text-sm text-[#38463C]">
+              <span className="font-bold text-[#101A13]">Evaluated Documents:</span>
+              {(selectedAnalysis.documents && selectedAnalysis.documents.length > 0 
+                ? selectedAnalysis.documents 
+                : FALLBACK_ANALYSIS.documents
+              ).map((d, i) => {
+                const docName = safeString(d, `Contract #${i + 1}`);
+                return (
                   <span key={i} className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-[#FAF9F5] border border-[#DDDCD3] text-[#101A13] font-semibold shadow-2xs">
                     <FileText className="w-4 h-4 text-[#35536D]" />
-                    <span>{typeof d === 'object' ? d.fileName : `Document #${i + 1}`}</span>
+                    <span>{docName}</span>
                   </span>
-                ))}
-              </div>
-            )}
+                );
+              })}
+            </div>
           </div>
         )}
 
@@ -286,23 +331,32 @@ const ResultsPage = () => {
           </div>
         ) : (
           <div className="space-y-6">
-            {findings.map((finding, idx) => {
-              const fId = finding._id || finding.id || idx;
+            {safeFindingsList.map((finding, idx) => {
+              const fId = finding?._id || finding?.id || idx;
               const isExpanded = !!expandedIds[fId];
 
-              // Robust extraction of clause text and contract titles
-              const docAName = finding.doc1Name || finding.documentAName || finding.documentA || 'Sample_Contract_A_Enterprise.pdf';
-              const docBName = finding.doc2Name || finding.documentBName || finding.documentB || 'Sample_Contract_B_Vendor.pdf';
+              // Safe strings guaranteed not to throw or be raw objects
+              const docAName = safeString(finding?.doc1Name || finding?.documentAName || finding?.documentA, 'Sample_Contract_A_Enterprise.pdf');
+              const docBName = safeString(finding?.doc2Name || finding?.documentBName || finding?.documentB, 'Sample_Contract_B_Vendor.pdf');
 
-              const clauseAText = finding.clauseA || finding.clause1Text || finding.clause1Snippet || 
-                (finding.category === 'DATA_RETENTION' 
-                  ? 'Customer confidential records, financial logs, and analytics data must be retained for a mandatory compliance duration of 5 years following termination of services (Section 7.3).' 
-                  : 'All invoices are due within Net-30 days of issuance. Late payments shall accrue interest at 1.5% per month or the maximum legal limit.');
+              const clauseAText = safeString(
+                finding?.clauseA || finding?.clause1Text || finding?.clause1Snippet,
+                (String(finding?.category).toUpperCase().includes('RETENTION')
+                  ? 'Customer confidential records, financial logs, and analytics data must be retained for a mandatory compliance duration of 5 years following termination of services (Section 7.3).'
+                  : 'All invoices are due within Net-30 days of issuance. Late payments shall accrue interest at 1.5% per month or the maximum legal limit.')
+              );
 
-              const clauseBText = finding.clauseB || finding.clause2Text || finding.clause2Snippet || 
-                (finding.category === 'DATA_RETENTION' 
-                  ? 'All Confidential Information and recipient copies must be permanently purged or certified destroyed within 2 years of contract completion (Section 4.1).' 
-                  : 'Customer shall remit undisputed fees within Net-60 days from invoice receipt. No finance charges, late fees, or administrative penalties shall apply.');
+              const clauseBText = safeString(
+                finding?.clauseB || finding?.clause2Text || finding?.clause2Snippet,
+                (String(finding?.category).toUpperCase().includes('RETENTION')
+                  ? 'All Confidential Information and recipient copies must be permanently purged or certified destroyed within 2 years of contract completion (Section 4.1).'
+                  : 'Customer shall remit undisputed fees within Net-60 days from invoice receipt. No finance charges, late fees, or administrative penalties shall apply.')
+              );
+
+              const categoryDisplay = safeString(finding?.category, 'CONTRACT').replace(/_/g, ' ');
+              const titleDisplay = safeString(finding?.title, `Contradiction in ${categoryDisplay}`);
+              const explanationDisplay = safeString(finding?.explanation, 'Direct operational contradiction identified between the two obligations.');
+              const recommendationDisplay = safeString(finding?.recommendation, 'Harmonize definitions by executing an addendum aligning notice timelines and liability limits.');
 
               return (
                 <div
@@ -320,16 +374,16 @@ const ResultsPage = () => {
                       </div>
                       <div className="truncate">
                         <h3 className="text-base md:text-lg font-bold text-[#101A13] truncate leading-snug">
-                          {finding.title || `Contradiction in ${(finding.category || 'CONTRACT').replace(/_/g, ' ')}`}
+                          {titleDisplay}
                         </h3>
                         <p className="text-xs md:text-sm text-[#48554A] font-semibold truncate mt-1">
-                          Scope: {(finding.category || 'GENERAL').replace(/_/g, ' ')}
+                          Scope: {categoryDisplay}
                         </p>
                       </div>
                     </div>
 
                     <div className="flex items-center gap-3.5 shrink-0">
-                      <RiskBadge riskLevel={finding.riskLevel} classification={finding.classification} />
+                      <RiskBadge riskLevel={finding?.riskLevel} classification={finding?.classification} />
                       <button className="text-[#48554A] hover:text-[#101A13] p-1.5 rounded-lg hover:bg-[#EAECE4] transition-colors">
                         {isExpanded ? <ChevronUp className="w-5 h-5 stroke-[2]" /> : <ChevronDown className="w-5 h-5 stroke-[2]" />}
                       </button>
@@ -372,7 +426,7 @@ const ResultsPage = () => {
                           <span className="text-xs md:text-sm uppercase tracking-wide">Legal Contradiction Breakdown:</span>
                         </div>
                         <p className="text-[14px] md:text-[15px] text-[#152118] leading-relaxed font-medium pt-1">
-                          {finding.explanation || 'Direct operational contradiction identified between the two obligations.'}
+                          {explanationDisplay}
                         </p>
                       </div>
 
@@ -383,7 +437,7 @@ const ResultsPage = () => {
                           <span className="text-xs md:text-sm uppercase tracking-wide">Counsel Mitigation Guidance:</span>
                         </div>
                         <p className="text-[14px] md:text-[15px] text-[#152118] leading-relaxed font-medium pt-1">
-                          {finding.recommendation || 'Harmonize definitions by executing an addendum aligning notice timelines and liability limits.'}
+                          {recommendationDisplay}
                         </p>
                       </div>
 
@@ -396,6 +450,14 @@ const ResultsPage = () => {
         )}
       </main>
     </div>
+  );
+};
+
+const ResultsPage = () => {
+  return (
+    <ErrorBoundary>
+      <ResultsPageContent />
+    </ErrorBoundary>
   );
 };
 
