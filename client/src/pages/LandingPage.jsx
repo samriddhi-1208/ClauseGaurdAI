@@ -99,13 +99,13 @@ const LandingPage = () => {
 
       {/* HERO SECTION */}
       <section className="relative overflow-hidden border-b border-[#24201A] bg-[#0E0D0B]">
-        {/* Background Atmosphere Image - Clearly visible brass scales and mahogany library */}
+        {/* Background Atmosphere Image - Positioned to show brass scales clearly between headline and document */}
         <div 
-          className="absolute inset-0 bg-cover bg-right md:bg-center pointer-events-none opacity-85 brightness-95 contrast-105"
+          className="absolute inset-0 bg-cover bg-[position:60%_center] md:bg-[position:56%_center] pointer-events-none opacity-90 brightness-95 contrast-105"
           style={{ backgroundImage: `url('/legal_hero_bg.jpg')` }}
         />
-        {/* Soft targeted gradient to ensure left text readability without obscuring the background */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0C0B0A] via-[#0C0B0A]/70 to-transparent pointer-events-none w-full md:w-3/4" />
+        {/* Soft targeted gradient to ensure left text readability without obscuring the brass balance scale */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0C0B0A] via-[#0C0B0A]/65 to-transparent pointer-events-none w-full md:w-1/2" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0C0B0A] via-transparent to-transparent pointer-events-none h-full" />
 
         <div className="relative max-w-7xl mx-auto px-6 pt-16 md:pt-24 pb-20">
@@ -174,73 +174,73 @@ const LandingPage = () => {
 
             </div>
 
-            {/* Right Visual: Contract Review Parchment Document */}
+            {/* Right Visual: Compact Contract Review Parchment Document shifted right to reveal scales */}
             <div className="lg:col-span-5 flex flex-col items-center lg:items-end justify-center">
-              <div className="relative w-full max-w-md transform -rotate-6 hover:-rotate-2 transition-transform duration-500 ease-out">
+              <div className="relative w-full max-w-[340px] sm:max-w-[365px] transform -rotate-6 lg:translate-x-6 xl:translate-x-10 hover:-rotate-2 transition-transform duration-500 ease-out">
                 
                 {/* Parchment Document Sheet with crisp dark border and deep drop shadow */}
-                <div className="relative bg-[#EAE4D3] text-[#1B1915] rounded-2xl p-7 md:p-8 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.95)] border-2 border-[#1E1B15] space-y-4 font-sans">
+                <div className="relative bg-[#EAE4D3] text-[#1B1915] rounded-2xl p-5 sm:p-6 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.95)] border-2 border-[#1E1B15] space-y-3 font-sans">
                   
                   {/* Document Title Header */}
-                  <div className="text-center border-b border-[#CDC5B0] pb-3">
-                    <span className="font-serif tracking-[0.24em] text-xs md:text-[13px] font-bold text-[#342D21] uppercase block">
+                  <div className="text-center border-b border-[#CDC5B0] pb-2.5">
+                    <span className="font-serif tracking-[0.24em] text-xs font-bold text-[#342D21] uppercase block">
                       CONTRACT REVIEW
                     </span>
                   </div>
 
                   {/* Intro document skeleton lines */}
-                  <div className="space-y-1.5 pb-1">
+                  <div className="space-y-1 pb-0.5">
                     <div className="h-1 bg-[#CCC4B0] rounded-full w-full"></div>
                     <div className="h-1 bg-[#CCC4B0] rounded-full w-5/6"></div>
                   </div>
 
                   {/* Clause 1: Payment Terms */}
-                  <div className="space-y-1 pt-0.5">
+                  <div className="space-y-1">
                     <div className="inline-block">
-                      <span className="bg-[#EED5A5] text-[#342711] px-2.5 py-0.5 rounded text-[11px] font-bold tracking-wide">
+                      <span className="bg-[#EED5A5] text-[#342711] px-2 py-0.5 rounded text-[10.5px] font-bold tracking-wide">
                         1. Payment Terms
                       </span>
                     </div>
-                    <p className="text-[11.5px] text-[#3E382C] font-medium leading-relaxed">
+                    <p className="text-[11px] text-[#3E382C] font-medium leading-relaxed">
                       Invoices payable within Net-30 days of receipt; late fees accrue at 1.5% monthly.
                     </p>
                     <div className="h-1 bg-[#CCC4B0] rounded-full w-4/5"></div>
                   </div>
 
                   {/* Clause 2: Termination */}
-                  <div className="space-y-1 pt-0.5">
+                  <div className="space-y-1">
                     <div className="inline-block">
-                      <span className="bg-[#EED5A5] text-[#342711] px-2.5 py-0.5 rounded text-[11px] font-bold tracking-wide">
+                      <span className="bg-[#EED5A5] text-[#342711] px-2 py-0.5 rounded text-[10.5px] font-bold tracking-wide">
                         2. Termination
                       </span>
                     </div>
-                    <p className="text-[11.5px] text-[#3E382C] font-medium leading-relaxed">
+                    <p className="text-[11px] text-[#3E382C] font-medium leading-relaxed">
                       Immediate termination upon material breach with standard 30-day cure period.
                     </p>
                     <div className="h-1 bg-[#CCC4B0] rounded-full w-3/4"></div>
                   </div>
 
                   {/* Clause 3: Confidentiality */}
-                  <div className="space-y-1 pt-0.5">
+                  <div className="space-y-1">
                     <div className="inline-block">
-                      <span className="bg-[#EED5A5] text-[#342711] px-2.5 py-0.5 rounded text-[11px] font-bold tracking-wide">
+                      <span className="bg-[#EED5A5] text-[#342711] px-2 py-0.5 rounded text-[10.5px] font-bold tracking-wide">
                         3. Confidentiality
                       </span>
                     </div>
-                    <p className="text-[11.5px] text-[#3E382C] font-medium leading-relaxed">
+                    <p className="text-[11px] text-[#3E382C] font-medium leading-relaxed">
                       Non-disclosure covenants remain enforceable for five (5) years post-termination.
                     </p>
                     <div className="h-1 bg-[#CCC4B0] rounded-full w-5/6"></div>
                   </div>
 
                   {/* Clause 4: Liability */}
-                  <div className="space-y-1 pt-0.5">
+                  <div className="space-y-1">
                     <div className="inline-block">
-                      <span className="bg-[#EED5A5] text-[#342711] px-2.5 py-0.5 rounded text-[11px] font-bold tracking-wide">
+                      <span className="bg-[#EED5A5] text-[#342711] px-2 py-0.5 rounded text-[10.5px] font-bold tracking-wide">
                         4. Liability
                       </span>
                     </div>
-                    <p className="text-[11.5px] text-[#3E382C] font-medium leading-relaxed">
+                    <p className="text-[11px] text-[#3E382C] font-medium leading-relaxed">
                       Total aggregate liability capped at total fees remitted during previous 12 months.
                     </p>
                     <div className="h-1 bg-[#CCC4B0] rounded-full w-2/3"></div>
