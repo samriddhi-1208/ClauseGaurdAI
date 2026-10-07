@@ -160,15 +160,16 @@ const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
           <div 
             onClick={() => { navigate('/profile'); handleLinkClick(); }}
             className="flex items-center gap-2.5 truncate cursor-pointer group flex-1 min-w-0"
+            title={`${user?.name || 'Samriddhi Tiwari'} (${user?.email || 'tiwari.samriddhi12@gmail.com'})`}
           >
             <div className="w-8 h-8 rounded-full bg-[#3F6149] text-white flex items-center justify-center text-xs font-bold shrink-0 shadow-2xs">
               {getInitials(user?.name)}
             </div>
             <div className="truncate min-w-0">
-              <p className="text-[14px] font-bold text-[#101A13] truncate group-hover:text-[#3F6149] transition-colors leading-snug">
+              <p className="text-[13.5px] font-bold text-[#101A13] truncate group-hover:text-[#3F6149] transition-colors leading-snug">
                 {user?.name || 'Samriddhi Tiwari'}
               </p>
-              <p className="text-xs text-[#38463C] truncate font-medium leading-normal">
+              <p className="text-[11px] text-[#455248] truncate font-semibold leading-normal">
                 {user?.email || 'tiwari.samriddhi12@gmail.com'}
               </p>
             </div>
@@ -178,7 +179,7 @@ const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
             onClick={logout}
             title="Sign out"
             aria-label="Sign out"
-            className="p-1.5 rounded-lg text-[#48554A] hover:text-[#B5413D] hover:bg-[#DCD8CB] transition-colors shrink-0 ml-1"
+            className="p-1.5 rounded-lg text-[#48554A] hover:text-[#B5413D] hover:bg-[#DCD8CB] transition-colors shrink-0 ml-1 cursor-pointer"
           >
             <LogOut className="w-4 h-4 stroke-[2]" />
           </button>
