@@ -199,15 +199,15 @@ const DashboardPage = () => {
           )}
 
           <div>
-            <div className="flex items-center gap-2">
-              <h1 className="text-2xl md:text-[28px] font-semibold text-[#18231C] tracking-tight leading-tight">
+            <div className="flex items-center gap-2.5">
+              <h1 className="text-2xl md:text-[28px] font-semibold text-[#18231C] leading-tight">
                 Good morning, {userName}!
               </h1>
               <span className="inline-flex items-center justify-center text-[#3F6149]">
                 <Leaf className="w-5 h-5 stroke-[2]" />
               </span>
             </div>
-            <p className="text-xs md:text-sm text-[#5A665D] font-normal mt-1">
+            <p className="text-xs md:text-sm text-[#5A665D] font-normal leading-normal mt-1">
               Here's an overview of your contract analysis.
             </p>
           </div>
@@ -244,7 +244,7 @@ const DashboardPage = () => {
               <div className="absolute right-0 top-11 w-52 bg-white rounded-2xl shadow-dropdown border border-[#DDDCD3] p-1.5 z-50 text-xs font-normal">
                 <div className="px-3 py-2 border-b border-[#ECEAE2]">
                   <p className="font-semibold text-[#18231C] truncate">{fullName}</p>
-                  <p className="text-[10px] text-[#758177] truncate">{user?.email || 'tiwari.samriddhi12@gmail.com'}</p>
+                  <p className="text-[11px] text-[#758177] truncate mt-0.5">{user?.email || 'tiwari.samriddhi12@gmail.com'}</p>
                 </div>
                 <button
                   onClick={() => {
@@ -295,7 +295,7 @@ const DashboardPage = () => {
               </div>
             </div>
             <p className="text-2xl font-bold text-[#18231C] mt-2.5 leading-none">{totalDocumentsCount}</p>
-            <p className="text-[11px] text-[#5A665D] font-normal mt-1.5">Uploaded & analyzed</p>
+            <p className="text-xs text-[#5A665D] font-normal mt-1.5">Uploaded & analyzed</p>
           </div>
 
           {/* Card 2: Contradictions Found (Muted Peach) */}
@@ -307,7 +307,7 @@ const DashboardPage = () => {
               </div>
             </div>
             <p className="text-2xl font-bold text-[#18231C] mt-2.5 leading-none">{totalContradictionsCount}</p>
-            <p className="text-[11px] text-[#8C523D] font-normal mt-1.5">Needs your attention</p>
+            <p className="text-xs text-[#8C523D] font-normal mt-1.5">Needs your attention</p>
           </div>
 
           {/* Card 3: High Risk Clauses (Muted Rose) */}
@@ -319,7 +319,7 @@ const DashboardPage = () => {
               </div>
             </div>
             <p className="text-2xl font-bold text-[#18231C] mt-2.5 leading-none">{highRiskCount}</p>
-            <p className="text-[11px] text-[#A63C38] font-normal mt-1.5">Review recommended</p>
+            <p className="text-xs text-[#A63C38] font-normal mt-1.5">Review recommended</p>
           </div>
 
           {/* Card 4: Analysis History (Muted Lavender) */}
@@ -331,7 +331,7 @@ const DashboardPage = () => {
               </div>
             </div>
             <p className="text-2xl font-bold text-[#18231C] mt-2.5 leading-none">{totalAnalysesCount}</p>
-            <p className="text-[11px] text-[#5B4F73] font-normal mt-1.5">View past reports</p>
+            <p className="text-xs text-[#5B4F73] font-normal mt-1.5">View past reports</p>
           </div>
 
         </div>
@@ -372,20 +372,20 @@ const DashboardPage = () => {
                         <FileText className="w-4 h-4 stroke-[1.8]" />
                       </div>
                       <div className="truncate">
-                        <p className="text-xs font-semibold text-[#18231C] truncate group-hover:text-[#3F6149] transition-colors">
+                        <p className="text-xs md:text-[13px] font-semibold text-[#18231C] truncate group-hover:text-[#3F6149] transition-colors leading-snug">
                           {doc.fileName}
                         </p>
-                        <p className="text-[11px] text-[#758177] font-normal">
+                        <p className="text-xs text-[#758177] font-normal mt-0.5">
                           {doc.date}
                         </p>
                       </div>
                     </div>
 
                     <div className="flex items-center gap-2.5 shrink-0">
-                      <span className="px-2 py-0.5 rounded-md text-[10px] font-medium bg-[#EDE9DE] text-[#685F4D] border border-[#DDD6C5]">
+                      <span className="px-2 py-0.5 rounded-md text-[11px] font-medium bg-[#EDE9DE] text-[#685F4D] border border-[#DDD6C5]">
                         {doc.type}
                       </span>
-                      <span className={`px-2 py-0.5 rounded-full text-[10px] font-semibold ${badgeClass}`}>
+                      <span className={`px-2.5 py-0.5 rounded-full text-[11px] font-semibold ${badgeClass}`}>
                         {doc.status}
                       </span>
                       <Link
@@ -481,10 +481,10 @@ const DashboardPage = () => {
                         </div>
                         <div className="truncate min-w-0">
                           <p className="font-semibold text-[#18231C] text-xs truncate leading-snug">{act.title}</p>
-                          <p className="text-[11px] text-[#758177] font-normal truncate mt-0.5">{act.detail}</p>
+                          <p className="text-xs text-[#758177] font-normal truncate mt-0.5">{act.detail}</p>
                         </div>
                       </div>
-                      <span className="text-[10px] text-[#8C948C] shrink-0 font-normal">{act.time}</span>
+                      <span className="text-[11px] text-[#8C948C] shrink-0 font-normal">{act.time}</span>
                     </div>
                   );
                 })}
@@ -497,7 +497,7 @@ const DashboardPage = () => {
 
         {/* 7. Bottom Quote Banner */}
         <div className="pt-2">
-          <div className="w-full bg-[#EAECE4] border border-[#D7DACD] rounded-2xl py-3 px-6 flex items-center justify-center gap-2 text-xs font-semibold text-[#34503C] shadow-2xs">
+          <div className="w-full bg-[#EAECE4] border border-[#D7DACD] rounded-2xl py-3 px-6 flex items-center justify-center gap-2 text-xs md:text-[13px] font-semibold text-[#34503C] shadow-2xs">
             <Leaf className="w-4 h-4 stroke-[1.8] text-[#3F6149]" />
             <span>Better contracts. Stronger partnerships.</span>
           </div>

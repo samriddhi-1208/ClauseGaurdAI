@@ -9,9 +9,21 @@
     color: #18231C;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    letter-spacing: -0.006em;
+    line-height: 1.55;
   }
 
-  input, textarea, select {
+  h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.015em;
+    line-height: 1.3;
+  }
+
+  p {
+    line-height: 1.6;
+  }
+
+  input, textarea, select, button {
     font-family: inherit;
   }
 }

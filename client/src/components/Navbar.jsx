@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Bell, Menu, Shield } from 'lucide-react';
+import { Search, Bell, Menu } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useOutletContext, Link } from 'react-router-dom';
 import GlobalSearchModal from './GlobalSearchModal';
@@ -50,11 +50,11 @@ const Navbar = ({ title, subtitle }) => {
           )}
 
           <div className="truncate">
-            <h2 className="text-sm md:text-base font-semibold text-[#18231C] leading-tight truncate">
+            <h2 className="text-sm md:text-[15px] font-semibold text-[#18231C] leading-snug truncate">
               {title}
             </h2>
             {subtitle && (
-              <p className="text-[11px] md:text-xs text-[#5A665D] font-normal truncate mt-0.5">
+              <p className="text-[11px] md:text-xs text-[#5A665D] font-normal leading-normal truncate mt-0.5">
                 {subtitle}
               </p>
             )}
@@ -90,16 +90,17 @@ const Navbar = ({ title, subtitle }) => {
             <NotificationDropdown isOpen={isNotifOpen} onClose={() => setIsNotifOpen(false)} />
           </div>
 
-          {/* User Avatar */}
+          {/* User Avatar Circle */}
           <Link
             to="/profile"
             className="flex items-center gap-2 pl-2 border-l border-[#E2DFD5] group"
+            title="View Counsel Profile"
           >
             <div className="w-7 h-7 rounded-full bg-[#3F6149] text-white flex items-center justify-center text-xs font-semibold shrink-0 shadow-2xs">
               {getInitials(user?.name)}
             </div>
             <span className="hidden md:inline text-xs font-semibold text-[#18231C] group-hover:text-[#3F6149] transition-colors">
-              {user?.name || 'Samriddhi'}
+              {user?.name ? user.name.split(' ')[0] : 'Samriddhi'}
             </span>
           </Link>
         </div>
