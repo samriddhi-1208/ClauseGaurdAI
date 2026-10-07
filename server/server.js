@@ -26,7 +26,7 @@ app.use(helmet({
 }));
 
 // CORS Configuration
-const rawOrigins = process.env.ALLOWED_ORIGINS || process.env.CLIENT_URL || 'http://localhost:5173,http://127.0.0.1:5173';
+const rawOrigins = process.env.ALLOWED_ORIGINS || process.env.CLIENT_URL || 'https://clause-gaurd-ai.vercel.app,http://localhost:5173,http://127.0.0.1:5173';
 const allowedOrigins = rawOrigins
   .split(',')
   .map(o => o.trim())
@@ -34,15 +34,30 @@ const allowedOrigins = rawOrigins
 
 const isDev = process.env.NODE_ENV !== 'production';
 
-app.use(cors({
+const isOriginAllowed = (origin) => {
+  if (!origin) return true;
+  if (allowedOrigins.includes(origin)) return true;
+  // Automatically allow all Vercel domains (production and preview branches)
+  if (/^https:\/\/.*\.vercel\.app$/.test(origin)) return true;
+  // Allow local development ports
+  if (isDev && /^http:\/\/(localhost|127\.0\.0\.1|\[::1\])(:\d+)?$/.test(origin)) return true;
+  return false;
+};
+
+const corsOptions = {
   origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin) || (isDev && /^http:\/\/(localhost|127\.0\.0\.1|\[::1\])(:\d+)?$/.test(origin))) {
+    if (isOriginAllowed(origin)) {
       return callback(null, true);
     }
     return callback(null, false);
   },
-  credentials: true
-}));
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
