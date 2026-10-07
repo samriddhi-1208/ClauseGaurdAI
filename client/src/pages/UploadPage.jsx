@@ -123,9 +123,6 @@ const UploadPage = () => {
             <h1 className="text-2xl md:text-3xl font-serif font-medium text-[#F4EFE5] tracking-normal leading-snug">
               Contract Intake & Indexing
             </h1>
-            <p className="text-sm text-[#B9AE9A] mt-2 leading-relaxed">
-              Select contracts in PDF, DOCX, or TXT format for automatic clause breakdown
-            </p>
           </div>
 
           <button
