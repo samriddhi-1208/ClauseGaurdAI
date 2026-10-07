@@ -99,14 +99,14 @@ const LandingPage = () => {
 
       {/* HERO SECTION */}
       <section className="relative overflow-hidden border-b border-[#24201A] bg-[#0E0D0B]">
-        {/* Background Atmosphere Image */}
+        {/* Background Atmosphere Image - Clearly visible brass scales and mahogany library */}
         <div 
-          className="absolute inset-0 bg-cover bg-center pointer-events-none opacity-35"
+          className="absolute inset-0 bg-cover bg-right md:bg-center pointer-events-none opacity-85 brightness-95 contrast-105"
           style={{ backgroundImage: `url('/legal_hero_bg.jpg')` }}
         />
-        {/* Deep ambient gradient overlays */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0C0B0A] via-[#0C0B0A]/85 to-[#0C0B0A]/40 pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0C0B0A]/40 to-[#0C0B0A] pointer-events-none" />
+        {/* Soft targeted gradient to ensure left text readability without obscuring the background */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0C0B0A] via-[#0C0B0A]/70 to-transparent pointer-events-none w-full md:w-3/4" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0C0B0A] via-transparent to-transparent pointer-events-none h-full" />
 
         <div className="relative max-w-7xl mx-auto px-6 pt-16 md:pt-24 pb-20">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
