@@ -11,8 +11,7 @@ import {
   Settings, 
   User, 
   LogOut,
-  X,
-  Sparkles
+  X
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
@@ -89,9 +88,6 @@ const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
 
           {/* Main Navigation */}
           <div className="px-3.5 py-4 space-y-1">
-            <p className="px-3 text-[11px] font-semibold text-[#6E7B71] uppercase tracking-[0.05em] mb-2">
-              Workspace
-            </p>
             {mainNav.map((item) => {
               const Icon = item.icon;
               return (
@@ -118,14 +114,11 @@ const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
             })}
           </div>
 
-          {/* Divider */}
+          {/* Subtle Divider */}
           <div className="mx-5 my-1 border-t border-[#D7D5CB]/80"></div>
 
-          {/* Preferences Navigation */}
+          {/* Settings & Profile Navigation */}
           <div className="px-3.5 py-2 space-y-1">
-            <p className="px-3 text-[11px] font-semibold text-[#6E7B71] uppercase tracking-[0.05em] mb-1.5">
-              Preferences
-            </p>
             {bottomNav.map((item) => {
               const Icon = item.icon;
               return (
@@ -150,19 +143,6 @@ const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
                 </NavLink>
               );
             })}
-          </div>
-
-          {/* Vector Status Badge in Sidebar (Neatly anchored above user profile) */}
-          <div className="px-3.5 mt-auto pt-3 pb-3">
-            <div className="p-3 bg-[#E2DFD4]/70 border border-[#D7D5CB] rounded-xl text-xs space-y-1">
-              <div className="flex items-center gap-1.5 text-[11px] font-semibold text-[#304E39]">
-                <Sparkles className="w-3.5 h-3.5 stroke-[2] text-[#3F6149]" />
-                <span>Vector Memory Active</span>
-              </div>
-              <p className="text-[11px] text-[#5A635B] leading-relaxed">
-                ChromaDB semantic indexing & Gemini 2.5 legal reasoning.
-              </p>
-            </div>
           </div>
         </div>
 

@@ -37,12 +37,12 @@ const ProtectedRoute = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-[#F8F7F2] text-[#18231C]">
+    <div className="flex h-screen overflow-hidden bg-[#F8F7F2] text-[#18231C]">
       <Sidebar 
         isMobileOpen={isMobileSidebarOpen} 
         onCloseMobile={closeMobileSidebar} 
       />
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex-1 flex flex-col min-w-0 h-full overflow-y-auto">
         <Outlet context={{ toggleMobileSidebar }} />
       </div>
     </div>
