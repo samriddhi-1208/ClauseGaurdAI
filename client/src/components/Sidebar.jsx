@@ -10,8 +10,7 @@ import {
   Clock, 
   User, 
   LogOut,
-  X,
-  Sparkles
+  X
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
@@ -140,19 +139,6 @@ const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
               </NavLink>
             );
           })}
-        </div>
-
-        {/* Vector Status Badge */}
-        <div className="px-3.5 mt-auto pt-3 pb-3">
-          <div className="p-3 bg-[#14120E] border border-[#2B251B] rounded-xl text-xs space-y-1">
-            <div className="flex items-center gap-1.5 text-xs font-bold text-[#E5C38E]">
-              <Sparkles className="w-3.5 h-3.5 stroke-[2.2] text-[#E5C38E]" />
-              <span>Vector Memory Active</span>
-            </div>
-            <p className="text-xs text-[#8C806F] font-medium leading-relaxed">
-              ChromaDB semantic indexing & Gemini 2.5 legal reasoning.
-            </p>
-          </div>
         </div>
       </div>
 
