@@ -61,7 +61,7 @@ const LandingPage = () => {
                 ClauseGuard AI
               </span>
               <span className="hidden sm:block text-xs text-[#A89E8D] font-normal leading-normal mt-0.5">
-                Smarter Contracts. Safer Decisions.
+                Smarter Contracts · Safer Decisions
               </span>
             </div>
           </Link>
@@ -127,7 +127,7 @@ const LandingPage = () => {
               </h1>
 
               <p className="text-sm md:text-base text-[#BDB2A0] max-w-lg font-normal leading-relaxed">
-                Upload legal documents, compare contracts, detect contradictions, and uncover potential risks with AI-powered analysis.
+                Upload legal documents, compare contracts, detect contradictions, and uncover potential risks with AI-powered analysis
               </p>
 
               {/* Action Buttons */}
@@ -202,7 +202,7 @@ const LandingPage = () => {
                       </span>
                     </div>
                     <p className="text-[11px] text-[#3E382C] font-medium leading-relaxed">
-                      Invoices payable within Net-30 days of receipt; late fees accrue at 1.5% monthly.
+                      Invoices payable within Net-30 days of receipt; late fees accrue at 1.5% monthly
                     </p>
                     <div className="h-1 bg-[#CCC4B0] rounded-full w-4/5"></div>
                   </div>
@@ -215,7 +215,7 @@ const LandingPage = () => {
                       </span>
                     </div>
                     <p className="text-[11px] text-[#3E382C] font-medium leading-relaxed">
-                      Immediate termination upon material breach with standard 30-day cure period.
+                      Immediate termination upon material breach with standard 30-day cure period
                     </p>
                     <div className="h-1 bg-[#CCC4B0] rounded-full w-3/4"></div>
                   </div>
@@ -228,7 +228,7 @@ const LandingPage = () => {
                       </span>
                     </div>
                     <p className="text-[11px] text-[#3E382C] font-medium leading-relaxed">
-                      Non-disclosure covenants remain enforceable for five (5) years post-termination.
+                      Non-disclosure covenants remain enforceable for five (5) years post-termination
                     </p>
                     <div className="h-1 bg-[#CCC4B0] rounded-full w-5/6"></div>
                   </div>
@@ -241,7 +241,7 @@ const LandingPage = () => {
                       </span>
                     </div>
                     <p className="text-[11px] text-[#3E382C] font-medium leading-relaxed">
-                      Total aggregate liability capped at total fees remitted during previous 12 months.
+                      Total aggregate liability capped at total fees remitted during previous 12 months
                     </p>
                     <div className="h-1 bg-[#CCC4B0] rounded-full w-2/3"></div>
                   </div>
@@ -278,7 +278,7 @@ const LandingPage = () => {
               Smart Contract Analysis
             </h3>
             <p className="text-xs md:text-[13px] text-[#A89E8D] leading-relaxed">
-              Analyze important clauses and extract meaningful information.
+              Analyze important clauses and extract meaningful information
             </p>
           </div>
 
@@ -291,7 +291,7 @@ const LandingPage = () => {
               Contradiction Detection
             </h3>
             <p className="text-xs md:text-[13px] text-[#A89E8D] leading-relaxed">
-              Compare multiple contracts and identify conflicting terms.
+              Compare multiple contracts and identify conflicting terms
             </p>
           </div>
 
@@ -304,7 +304,7 @@ const LandingPage = () => {
               Risk Identification
             </h3>
             <p className="text-xs md:text-[13px] text-[#A89E8D] leading-relaxed">
-              Identify clauses that may require additional review.
+              Identify clauses that may require additional review
             </p>
           </div>
 
@@ -317,7 +317,7 @@ const LandingPage = () => {
               Cross-Document Intelligence
             </h3>
             <p className="text-xs md:text-[13px] text-[#A89E8D] leading-relaxed">
-              Connect information across multiple legal documents.
+              Connect information across multiple legal documents
             </p>
           </div>
 
@@ -348,13 +348,13 @@ const LandingPage = () => {
             </h3>
             <div className="space-y-2.5 pt-1 text-sm md:text-base leading-relaxed font-serif">
               <p className="text-[#16130F]">
-                <strong className="font-semibold text-[#14120E]">Payment:</strong> <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">$50,000</span> payable within <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">30 days</span>.
+                <strong className="font-semibold text-[#14120E]">Payment:</strong> <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">$50,000</span> payable within <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">30 days</span>
               </p>
               <p className="text-[#16130F]">
-                <strong className="font-semibold text-[#14120E]">Termination:</strong> Advance written notice of <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">30 days</span> required.
+                <strong className="font-semibold text-[#14120E]">Termination:</strong> Advance written notice of <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">30 days</span> required
               </p>
               <p className="text-[#16130F]">
-                <strong className="font-semibold text-[#14120E]">Retention:</strong> Audit records must be retained for <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">5 years</span>.
+                <strong className="font-semibold text-[#14120E]">Retention:</strong> Audit records must be retained for <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">5 years</span>
               </p>
             </div>
           </div>
@@ -378,13 +378,13 @@ const LandingPage = () => {
             </h3>
             <div className="space-y-2.5 pt-1 text-sm md:text-base leading-relaxed font-serif">
               <p className="text-[#16130F]">
-                <strong className="font-semibold text-[#14120E]">Payment:</strong> <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">$60,000</span> payable within <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">60 days</span>.
+                <strong className="font-semibold text-[#14120E]">Payment:</strong> <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">$60,000</span> payable within <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">60 days</span>
               </p>
               <p className="text-[#16130F]">
-                <strong className="font-semibold text-[#14120E]">Termination:</strong> Advance written notice of <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">60 days</span> required.
+                <strong className="font-semibold text-[#14120E]">Termination:</strong> Advance written notice of <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">60 days</span> required
               </p>
               <p className="text-[#16130F]">
-                <strong className="font-semibold text-[#14120E]">Retention:</strong> All confidential records purged within <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">2 years</span>.
+                <strong className="font-semibold text-[#14120E]">Retention:</strong> All confidential records purged within <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">2 years</span>
               </p>
             </div>
           </div>
@@ -416,7 +416,7 @@ const LandingPage = () => {
               <span className="text-xs font-semibold text-[#8C806F] block">01</span>
               <h3 className="font-serif text-lg font-bold text-[#F8F6F0]">Upload</h3>
               <p className="text-xs md:text-[13px] text-[#A89E8D] leading-relaxed">
-                Upload your legal documents.
+                Upload your legal documents
               </p>
             </div>
 
@@ -426,7 +426,7 @@ const LandingPage = () => {
               <span className="text-xs font-semibold text-[#8C806F] block">02</span>
               <h3 className="font-serif text-lg font-bold text-[#F8F6F0]">Analyze</h3>
               <p className="text-xs md:text-[13px] text-[#A89E8D] leading-relaxed">
-                AI extracts and understands important clauses.
+                AI extracts and understands important clauses
               </p>
             </div>
 
@@ -436,7 +436,7 @@ const LandingPage = () => {
               <span className="text-xs font-semibold text-[#8C806F] block">03</span>
               <h3 className="font-serif text-lg font-bold text-[#F8F6F0]">Compare</h3>
               <p className="text-xs md:text-[13px] text-[#A89E8D] leading-relaxed">
-                Compare information across documents.
+                Compare information across documents
               </p>
             </div>
 
@@ -446,7 +446,7 @@ const LandingPage = () => {
               <span className="text-xs font-semibold text-[#8C806F] block">04</span>
               <h3 className="font-serif text-lg font-bold text-[#F8F6F0]">Discover</h3>
               <p className="text-xs md:text-[13px] text-[#A89E8D] leading-relaxed">
-                Find contradictions and potential risks.
+                Find contradictions and potential risks
               </p>
             </div>
 
@@ -460,10 +460,10 @@ const LandingPage = () => {
           CLARITY STARTS HERE
         </span>
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-[#F8F6F0] tracking-normal leading-snug">
-          Make Every Contract Clearer.
+          Make Every Contract Clearer
         </h2>
         <p className="text-sm md:text-base text-[#A89E8D] max-w-lg mx-auto leading-relaxed">
-          Understand your agreements, identify contradictions, and make more informed decisions.
+          Understand your agreements, identify contradictions, and make more informed decisions
         </p>
         <div className="pt-4">
           <Link
@@ -481,7 +481,7 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
             <h4 className="font-serif font-bold text-sm text-[#F8F6F0]">ClauseGuard AI</h4>
-            <p className="text-xs text-[#8C806F] mt-0.5">Smarter Contracts. Safer Decisions.</p>
+            <p className="text-xs text-[#8C806F] mt-0.5">Smarter Contracts · Safer Decisions</p>
           </div>
           <p className="text-xs text-[#61584C]">
             © 2026 ClauseGuard AI — Automated Legal Contract Intelligence & Contradiction Detection

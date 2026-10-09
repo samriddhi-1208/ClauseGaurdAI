@@ -415,7 +415,7 @@ const DashboardPage = () => {
               </div>
               <h3 className="text-lg font-serif text-[#F4EFE5] font-medium">Contract Intelligence</h3>
               <p className="text-xs md:text-sm text-[#A99E8C] mt-1.5 leading-relaxed">
-                Detect contradictions. Mitigate hidden liabilities. Make confident counsel decisions.
+                Detect contradictions, mitigate hidden liabilities, and make confident counsel decisions
               </p>
 
               <div className="space-y-3 pt-5">
@@ -577,7 +577,7 @@ const DashboardPage = () => {
         <div className="pt-2">
           <div className="w-full bg-[#12100D] border border-[#231F19] rounded-xl py-3.5 px-6 flex items-center justify-center gap-2.5 text-xs md:text-sm font-medium text-[#A99E8C]">
             <Shield className="w-4 h-4 text-[#E5C38E] stroke-[1.8]" />
-            <span>Editorial legal protection with deterministic contradiction verification.</span>
+            <span>Editorial legal protection with deterministic contradiction verification</span>
           </div>
         </div>
 

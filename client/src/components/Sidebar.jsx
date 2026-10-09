@@ -55,7 +55,7 @@ const Sidebar = ({ isMobileOpen, onCloseMobile }) => {
                 ClauseGuard AI
               </h1>
               <p className="text-xs text-[#A99E8C] font-normal leading-relaxed mt-1">
-                Smarter Contracts. Safer Decisions.
+                Smarter Contracts · Safer Decisions
               </p>
             </div>
           </div>

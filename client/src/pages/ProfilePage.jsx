@@ -51,7 +51,7 @@ const ProfilePage = () => {
                   Account Created Successfully
                 </p>
                 <p className="text-xs text-[#B9AE9A] mt-0.5 leading-relaxed">
-                  Set up your counsel credentials below so they appear correctly on audit reports and clause exports.
+                  Set up your counsel credentials below so they appear correctly on audit reports and clause exports
                 </p>
               </div>
             </div>
@@ -106,14 +106,14 @@ const ProfilePage = () => {
         <div className="bg-[#12100D] rounded-xl border border-[#231F19] p-6 md:p-8 space-y-6">
           <div className="border-b border-[#1F1B16] pb-4">
             <h2 className="text-base font-serif text-[#F4EFE5]">Personal Information</h2>
-            <p className="text-xs text-[#8C806F] mt-0.5">Update your displayed legal identity on audit reports and clause exports.</p>
+            <p className="text-xs text-[#8C806F] mt-0.5">Update your displayed legal identity on audit reports and clause exports</p>
           </div>
 
           {saved && (
             <div className="p-3.5 bg-[#152319] border border-[#233B2B] rounded-lg flex items-center justify-between gap-2.5 text-xs text-[#98C7A3]">
               <div className="flex items-center gap-2">
                 <Check className="w-4 h-4 stroke-[2.5]" />
-                <span>Profile details saved successfully.</span>
+                <span>Profile details saved successfully</span>
               </div>
               <button
                 type="button"
