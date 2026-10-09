@@ -247,7 +247,7 @@ const PuzzleFeatureSection = () => {
 
       {/* Top Header Area: Eyebrow + Controls */}
       <div className={`text-center relative z-10 w-full max-w-2xl mx-auto transition-all duration-500 ${
-        isHeadlineVisible ? 'space-y-1 sm:space-y-1.5 mb-2 sm:mb-3' : 'mb-5 sm:mb-8'
+        isHeadlineVisible ? 'space-y-2.5 sm:space-y-3.5 mb-3 sm:mb-5' : 'mb-5 sm:mb-8'
       }`}>
         <div className="flex items-center justify-center gap-2 px-2">
           <span className="text-[10px] sm:text-xs font-bold tracking-[0.2em] sm:tracking-[0.24em] text-[#C8A97E] uppercase block text-center">
@@ -268,12 +268,12 @@ const PuzzleFeatureSection = () => {
         {/* Phase A & B: Reserved Height Typewriter Headline (Collapses smoothly when washed out) */}
         <div className={`flex items-center justify-center px-2 transition-all duration-500 overflow-hidden ${
           isHeadlineVisible 
-            ? 'min-h-[64px] sm:min-h-[68px] md:min-h-[78px] opacity-100 my-1' 
+            ? 'min-h-[72px] sm:min-h-[96px] md:min-h-[114px] lg:min-h-[128px] opacity-100 my-1' 
             : 'max-h-0 min-h-0 opacity-0 my-0 py-0'
         }`}>
           {isHeadlineVisible && (
             <h2
-              className={`text-xl sm:text-3xl md:text-4xl lg:text-[42px] font-serif font-bold text-[#FAF8F5] tracking-tight leading-snug transition-all duration-250 ease-out select-none text-center ${
+              className={`text-xl sm:text-3xl md:text-4xl lg:text-[42px] font-serif font-bold text-[#FAF8F5] tracking-tight leading-normal sm:leading-[1.44] md:leading-[1.48] transition-all duration-250 ease-out select-none text-center ${
                 isHeadlineWashingOut 
                   ? 'opacity-0 filter blur-md scale-[1.02] text-[#E5C38E]/40' 
                   : 'opacity-100 filter blur-0 scale-100'
