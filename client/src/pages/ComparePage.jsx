@@ -145,13 +145,13 @@ const ComparePage = () => {
     <div className="flex-1 bg-[#0B0A08] flex flex-col min-w-0 pb-16 font-sans text-[#EDE5D5] selection:bg-[#E5C38E]/20 selection:text-[#F8F6F0]">
       <Navbar title="Cross-Document Comparison" subtitle="Automated cross-document contradiction & obligation alignment engine" />
 
-      <main className="p-6 md:p-10 max-w-4xl w-full mx-auto space-y-7">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <main className="p-4 sm:p-6 md:p-10 max-w-4xl w-full mx-auto space-y-6 sm:space-y-7">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
           <div>
-            <h1 className="text-2xl md:text-3xl font-serif font-medium text-[#F4EFE5] tracking-normal leading-snug">
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-serif font-medium text-[#F4EFE5] tracking-normal leading-snug">
               Cross-Document Comparison
             </h1>
-            <p className="text-sm text-[#B9AE9A] mt-2 leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#B9AE9A] mt-1 sm:mt-2 leading-relaxed">
               Select 2 or more contracts to identify conflicting clauses, mismatched periods, and liability clashes
             </p>
           </div>
@@ -159,7 +159,7 @@ const ComparePage = () => {
           <button
             onClick={handleRunDemo}
             disabled={seeding}
-            className="px-3.5 py-2 bg-[#14120E] hover:bg-[#1B1813] text-[#EDE5D5] border border-[#2D261C] hover:border-[#E5C38E]/50 font-medium text-xs rounded-lg flex items-center gap-1.5 transition-colors disabled:opacity-50 self-start sm:self-auto cursor-pointer"
+            className="px-3.5 py-2 bg-[#14120E] hover:bg-[#1B1813] text-[#EDE5D5] border border-[#2D261C] hover:border-[#E5C38E]/50 font-medium text-xs rounded-lg flex items-center justify-center gap-1.5 transition-colors disabled:opacity-50 self-stretch sm:self-auto cursor-pointer"
           >
             <Zap className="w-3.5 h-3.5 text-[#E5C38E]" />
             <span>{seeding ? 'Loading Demo...' : 'Load Sample Pair'}</span>
@@ -167,16 +167,16 @@ const ComparePage = () => {
         </div>
 
         {error && (
-          <div className="p-4 bg-[#241314] border border-[#482325] rounded-lg flex items-center gap-2.5 text-xs text-[#ECA09B]">
+          <div className="p-3.5 sm:p-4 bg-[#241314] border border-[#482325] rounded-lg flex items-center gap-2.5 text-xs text-[#ECA09B]">
             <AlertCircle className="w-4 h-4 text-[#ECA09B] shrink-0" />
             <span>{error}</span>
           </div>
         )}
 
         {/* Step 1: Document Selection */}
-        <div className="bg-[#12100D] rounded-xl border border-[#231F19] p-6 md:p-8 space-y-4">
+        <div className="bg-[#12100D] rounded-xl border border-[#231F19] p-4 sm:p-6 md:p-8 space-y-4">
           <div className="flex items-center justify-between border-b border-[#1F1B16] pb-3">
-            <h2 className="text-base md:text-[17px] font-serif text-[#F4EFE5]">
+            <h2 className="text-sm sm:text-base md:text-[17px] font-serif text-[#F4EFE5]">
               Step 1: Select Contracts to Compare ({selectedDocIds.length} selected)
             </h2>
             <span className="text-xs text-[#8C806F]">Min: 2 contracts</span>

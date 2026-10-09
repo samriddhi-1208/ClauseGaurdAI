@@ -44,7 +44,7 @@ const GlobalSearchModal = ({ isOpen, onClose }) => {
     : analyses.slice(0, 2);
 
   return (
-    <div className="fixed inset-0 z-50 bg-[#000000]/70 backdrop-blur-xs flex items-start justify-center pt-20 px-4 font-sans">
+    <div className="fixed inset-0 z-50 bg-[#000000]/70 backdrop-blur-xs flex items-start justify-center pt-8 sm:pt-20 px-3 sm:px-4 font-sans">
       <div className="bg-[#14120E] w-full max-w-2xl rounded-2xl shadow-2xl border border-[#2B251B] overflow-hidden flex flex-col max-h-[80vh] text-[#EDE5D5]">
         {/* Search Input Bar */}
         <div className="p-4 border-b border-[#24201A] flex items-center gap-3 bg-[#181612]">

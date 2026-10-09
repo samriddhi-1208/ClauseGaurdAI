@@ -143,13 +143,13 @@ const ChatPage = () => {
         subtitle="Ask questions in simple words — we'll scan your contracts and explain them clearly" 
       />
 
-      <main className="p-6 md:p-10 max-w-4xl w-full mx-auto space-y-8 pb-20">
+      <main className="p-4 sm:p-6 md:p-10 max-w-4xl w-full mx-auto space-y-6 sm:space-y-8 pb-20">
         
         {/* Document & Status Selector */}
-        <div className="bg-[#12100D] p-4 rounded-xl border border-[#231F19] flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2 text-xs font-medium text-[#A99E8C]">
-              <Filter className="w-4 h-4 text-[#E5C38E]" />
+        <div className="bg-[#12100D] p-3.5 sm:p-4 rounded-xl border border-[#231F19] flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            <div className="flex items-center gap-1.5 sm:gap-2 text-xs font-medium text-[#A99E8C]">
+              <Filter className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#E5C38E]" />
               <span>Scope:</span>
             </div>
             <select
@@ -321,28 +321,29 @@ const ChatPage = () => {
               e.preventDefault();
               handleSend();
             }}
-            className="bg-[#12100D] rounded-xl border border-[#231F19] p-2 flex items-center gap-3 w-full focus-within:border-[#E5C38E]/60 transition-all"
+            className="bg-[#12100D] rounded-xl border border-[#231F19] p-1.5 sm:p-2 flex items-center gap-2 sm:gap-3 w-full focus-within:border-[#E5C38E]/60 transition-all"
           >
             <input
               type="text"
               value={inputQuestion}
               onChange={(e) => setInputQuestion(e.target.value)}
-              placeholder="Ask anything about your contracts (e.g. 'What are the indemnity caps?')..."
-              className="flex-1 px-3 py-2 bg-transparent text-xs md:text-sm text-[#EDE5D5] placeholder-[#8C806F] focus:outline-none font-normal"
+              placeholder="Ask about your contracts (e.g. 'What are the indemnity caps?')..."
+              className="flex-1 min-w-0 px-2 sm:px-3 py-2 bg-transparent text-xs md:text-sm text-[#EDE5D5] placeholder-[#8C806F] focus:outline-none font-normal"
             />
             
             <button
               type="submit"
-              className="py-2 px-4 bg-[#E5C38E] hover:bg-[#D6B27B] text-[#12110E] font-semibold text-xs md:text-sm rounded-lg transition-all flex items-center gap-2 shrink-0 cursor-pointer"
+              className="py-2 px-3 sm:px-4 bg-[#E5C38E] hover:bg-[#D6B27B] text-[#12110E] font-semibold text-xs md:text-sm rounded-lg transition-all flex items-center gap-1.5 sm:gap-2 shrink-0 cursor-pointer"
             >
               {loading ? (
                 <>
                   <Loader2 className="w-4 h-4 animate-spin text-[#12110E]" />
-                  <span>Thinking...</span>
+                  <span className="hidden xs:inline">Thinking...</span>
                 </>
               ) : (
                 <>
-                  <span>Ask Engine</span>
+                  <span className="hidden xs:inline">Ask</span>
+                  <span>Engine</span>
                   <Send className="w-3.5 h-3.5 stroke-[2] text-[#12110E]" />
                 </>
               )}

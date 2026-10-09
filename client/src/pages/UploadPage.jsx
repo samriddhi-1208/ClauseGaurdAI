@@ -117,10 +117,10 @@ const UploadPage = () => {
     <div className="flex-1 bg-[#0B0A08] flex flex-col min-w-0 pb-16 font-sans text-[#EDE5D5] selection:bg-[#E5C38E]/20 selection:text-[#F8F6F0]">
       <Navbar title="Contract Intake & Upload" subtitle="Upload agreements, NDAs, or SLAs for AI clause extraction & vector indexing" />
 
-      <main className="p-6 md:p-10 max-w-4xl w-full mx-auto space-y-7">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <main className="p-4 sm:p-6 md:p-10 max-w-4xl w-full mx-auto space-y-6 sm:space-y-7">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
           <div>
-            <h1 className="text-2xl md:text-3xl font-serif font-medium text-[#F4EFE5] tracking-normal leading-snug">
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-serif font-medium text-[#F4EFE5] tracking-normal leading-snug">
               Contract Intake & Indexing
             </h1>
           </div>
@@ -128,7 +128,7 @@ const UploadPage = () => {
           <button
             onClick={handleRunDemo}
             disabled={seeding}
-            className="px-4 py-2.5 bg-[#14120E] hover:bg-[#1B1813] text-[#EDE5D5] border border-[#2D261C] hover:border-[#E5C38E]/50 font-medium text-xs md:text-sm rounded-lg flex items-center gap-2 transition-colors disabled:opacity-50 self-start sm:self-auto cursor-pointer"
+            className="px-4 py-2 sm:py-2.5 bg-[#14120E] hover:bg-[#1B1813] text-[#EDE5D5] border border-[#2D261C] hover:border-[#E5C38E]/50 font-medium text-xs md:text-sm rounded-lg flex items-center justify-center gap-2 transition-colors disabled:opacity-50 self-stretch sm:self-auto cursor-pointer"
           >
             <Zap className="w-3.5 h-3.5 text-[#E5C38E]" />
             <span>{seeding ? 'Seeding Demo Data...' : 'Load Sample Contracts'}</span>
@@ -136,7 +136,7 @@ const UploadPage = () => {
         </div>
 
         {error && (
-          <div className="p-4 bg-[#241314] border border-[#482325] rounded-lg flex items-center gap-2.5 text-xs md:text-sm text-[#ECA09B]">
+          <div className="p-3.5 sm:p-4 bg-[#241314] border border-[#482325] rounded-lg flex items-center gap-2.5 text-xs md:text-sm text-[#ECA09B]">
             <AlertCircle className="w-4 h-4 text-[#ECA09B] shrink-0" />
             <span>{error}</span>
           </div>
@@ -147,7 +147,7 @@ const UploadPage = () => {
           onDrop={handleDrop}
           onDragOver={handleDragOver}
           onClick={() => fileInputRef.current?.click()}
-          className="bg-[#12100D] border-2 border-dashed border-[#2B251B] hover:border-[#E5C38E]/60 rounded-xl p-10 md:p-14 text-center cursor-pointer transition-all group"
+          className="bg-[#12100D] border-2 border-dashed border-[#2B251B] hover:border-[#E5C38E]/60 rounded-xl p-6 sm:p-10 md:p-14 text-center cursor-pointer transition-all group"
         >
           <input
             type="file"
@@ -158,21 +158,21 @@ const UploadPage = () => {
             className="hidden"
           />
 
-          <div className="w-14 h-14 rounded-xl bg-[#1A1712] border border-[#2E271D] group-hover:border-[#E5C38E]/40 text-[#E5C38E] flex items-center justify-center mx-auto mb-4 transition-colors">
-            <UploadCloud className="w-7 h-7 stroke-[1.8]" />
+          <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-[#1A1712] border border-[#2E271D] group-hover:border-[#E5C38E]/40 text-[#E5C38E] flex items-center justify-center mx-auto mb-3 sm:mb-4 transition-colors">
+            <UploadCloud className="w-6 h-6 sm:w-7 sm:h-7 stroke-[1.8]" />
           </div>
 
-          <h3 className="text-base md:text-lg font-serif font-medium text-[#F4EFE5] tracking-normal leading-snug">
+          <h3 className="text-sm sm:text-base md:text-lg font-serif font-medium text-[#F4EFE5] tracking-normal leading-snug">
             Click to upload or drag & drop contracts
           </h3>
-          <p className="text-xs md:text-sm text-[#A99E8C] mt-2.5 max-w-md mx-auto leading-relaxed">
+          <p className="text-[11px] sm:text-xs md:text-sm text-[#A99E8C] mt-2 sm:mt-2.5 max-w-md mx-auto leading-relaxed">
             Supported formats: PDF, DOCX, TXT. Documents are securely parsed and vectorized into isolated embeddings.
           </p>
         </div>
 
         {/* Selected Files List */}
         {selectedFiles.length > 0 && (
-          <div className="bg-[#12100D] rounded-xl border border-[#231F19] p-6 space-y-4">
+          <div className="bg-[#12100D] rounded-xl border border-[#231F19] p-4 sm:p-6 space-y-4">
             <div className="flex items-center justify-between border-b border-[#1F1B16] pb-3">
               <h3 className="text-xs uppercase tracking-wider text-[#A99E8C] font-medium">
                 Ready for Extraction ({selectedFiles.length} {selectedFiles.length === 1 ? 'file' : 'files'})

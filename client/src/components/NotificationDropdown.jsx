@@ -35,7 +35,7 @@ const NotificationDropdown = ({ isOpen, onClose }) => {
   };
 
   return (
-    <div className="absolute right-0 top-12 w-80 md:w-96 bg-[#14120E] rounded-2xl shadow-2xl border border-[#2B251B] z-50 overflow-hidden font-sans text-[#EDE5D5]">
+    <div className="fixed sm:absolute left-3 right-3 sm:left-auto sm:right-0 top-16 sm:top-12 max-w-[calc(100vw-1.5rem)] sm:w-80 md:w-96 bg-[#14120E] rounded-2xl shadow-2xl border border-[#2B251B] z-50 overflow-hidden font-sans text-[#EDE5D5]">
       <div className="px-4 py-3 bg-[#181612] border-b border-[#24201A] flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Bell className="w-4 h-4 text-[#E5C38E] stroke-[2]" />

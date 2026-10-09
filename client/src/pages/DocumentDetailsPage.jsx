@@ -89,7 +89,7 @@ const DocumentDetailsPage = () => {
     <div className="flex-1 bg-[#0B0A08] flex flex-col min-w-0 pb-16 font-sans text-[#EDE5D5] selection:bg-[#E5C38E]/20 selection:text-[#F8F6F0]">
       <Navbar title={document.fileName} subtitle="Extracted clauses, semantic categories, and page references" />
 
-      <main className="p-6 md:p-10 max-w-7xl w-full mx-auto space-y-7">
+      <main className="p-4 sm:p-6 md:p-10 max-w-7xl w-full mx-auto space-y-6 sm:space-y-7">
         <div>
           <Link
             to="/documents"
@@ -104,7 +104,7 @@ const DocumentDetailsPage = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
           
           {/* Left Column: Document Overview Sticky Sidebar */}
-          <div className="bg-[#12100D] p-6 rounded-xl border border-[#231F19] space-y-5 lg:sticky lg:top-24">
+          <div className="bg-[#12100D] p-4 sm:p-6 rounded-xl border border-[#231F19] space-y-5 lg:sticky lg:top-24">
             <div className="flex items-start gap-3 border-b border-[#1F1B16] pb-4">
               <div className="w-10 h-10 rounded-lg bg-[#191612] border border-[#2D261C] text-[#E5C38E] flex items-center justify-center shrink-0">
                 <FileText className="w-5 h-5 stroke-[1.8]" />

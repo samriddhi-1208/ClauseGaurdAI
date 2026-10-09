@@ -45,8 +45,8 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B0A08] flex items-center justify-center p-6 font-sans text-[#EDE5D5] selection:bg-[#E5C38E]/20 selection:text-[#F8F6F0]">
-      <div className="w-full max-w-md bg-[#12100D] rounded-xl shadow-2xl p-8 md:p-9 border border-[#231F19] relative">
+    <div className="min-h-screen bg-[#0B0A08] flex items-center justify-center p-4 sm:p-6 font-sans text-[#EDE5D5] selection:bg-[#E5C38E]/20 selection:text-[#F8F6F0]">
+      <div className="w-full max-w-md bg-[#12100D] rounded-xl shadow-2xl p-5 sm:p-8 md:p-9 border border-[#231F19] relative">
         <div className="text-center mb-7">
           <div className="w-12 h-12 rounded-xl bg-[#191612] border border-[#2D261C] flex items-center justify-center text-[#E5C38E] mx-auto mb-3.5 shadow-sm">
             <Shield className="w-6 h-6 stroke-[1.8]" />

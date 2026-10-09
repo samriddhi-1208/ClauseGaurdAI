@@ -154,38 +154,40 @@ const DashboardPage = () => {
     <div className="flex-1 bg-[#0B0A08] min-h-screen flex flex-col font-sans text-[#EDE5D5] pb-16 selection:bg-[#E5C38E]/20 selection:text-[#F8F6F0]">
       
       {/* Top Header Bar */}
-      <header className="px-6 md:px-10 pt-7 pb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#1F1B16] bg-[#0E0D0B]/80 backdrop-blur-md sticky top-0 z-20">
-        <div className="flex items-center gap-3">
-          {outletContext?.toggleMobileSidebar && (
-            <button
-              onClick={outletContext.toggleMobileSidebar}
-              className="lg:hidden p-2 rounded-lg bg-[#14120E] border border-[#24201A] text-[#B9AE9A] hover:text-[#EDE5D5] transition-colors shrink-0"
-              aria-label="Toggle navigation menu"
-            >
-              <Menu className="w-4 h-4 stroke-[2]" />
-            </button>
-          )}
+      <header className="px-4 sm:px-6 md:px-10 py-4 sm:py-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 border-b border-[#1F1B16] bg-[#0E0D0B]/80 backdrop-blur-md sticky top-0 z-20">
+        <div className="flex items-center justify-between w-full sm:w-auto">
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            {outletContext?.toggleMobileSidebar && (
+              <button
+                onClick={outletContext.toggleMobileSidebar}
+                className="md:hidden p-2 rounded-lg bg-[#14120E] border border-[#24201A] text-[#B9AE9A] hover:text-[#EDE5D5] transition-colors shrink-0"
+                aria-label="Toggle navigation menu"
+              >
+                <Menu className="w-4 h-4 stroke-[2]" />
+              </button>
+            )}
 
-          <div>
-            <div className="flex items-center gap-2.5">
-              <h1 className="text-2xl md:text-3xl font-serif font-medium text-[#F4EFE5] tracking-normal leading-snug">
-                Good morning, {userName}
-              </h1>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#E5C38E]"></span>
+            <div>
+              <div className="flex items-center gap-2">
+                <h1 className="text-xl sm:text-2xl md:text-3xl font-serif font-medium text-[#F4EFE5] tracking-normal leading-snug">
+                  Good morning, {userName}
+                </h1>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#E5C38E]"></span>
+              </div>
+              <p className="hidden xs:block text-xs md:text-sm text-[#B9AE9A] font-normal leading-relaxed mt-0.5 sm:mt-1.5">
+                Overview of your contract portfolio, detected contradictions, and legal exposure.
+              </p>
             </div>
-            <p className="text-xs md:text-sm text-[#B9AE9A] font-normal leading-relaxed mt-1.5">
-              Overview of your contract portfolio, detected contradictions, and legal exposure.
-            </p>
           </div>
         </div>
 
         {/* Top Right User & Notifications */}
-        <div className="flex items-center gap-3 relative shrink-0">
+        <div className="flex items-center justify-end gap-2.5 sm:gap-3 relative shrink-0">
           <div className="relative">
             <button
               onClick={() => setIsNotifOpen(prev => !prev)}
               aria-label="View notifications"
-              className="p-2.5 rounded-lg bg-[#14120E] hover:bg-[#1B1813] border border-[#24201A] text-[#B9AE9A] hover:text-[#EDE5D5] transition-colors relative cursor-pointer"
+              className="p-2 sm:p-2.5 rounded-lg bg-[#14120E] hover:bg-[#1B1813] border border-[#24201A] text-[#B9AE9A] hover:text-[#EDE5D5] transition-colors relative cursor-pointer"
             >
               <Bell className="w-4 h-4 stroke-[1.8]" />
               <span className="absolute top-2 right-2 w-1.5 h-1.5 bg-[#E5C38E] rounded-full ring-2 ring-[#14120E]"></span>
@@ -197,7 +199,7 @@ const DashboardPage = () => {
           <div className="relative">
             <button
               onClick={() => setIsProfileMenuOpen(prev => !prev)}
-              className="flex items-center gap-2.5 px-3 py-2 bg-[#14120E] hover:bg-[#1B1813] border border-[#24201A] rounded-lg text-xs text-[#EDE5D5] transition-colors cursor-pointer"
+              className="flex items-center gap-2 sm:gap-2.5 px-2.5 sm:px-3 py-1.5 sm:py-2 bg-[#14120E] hover:bg-[#1B1813] border border-[#24201A] rounded-lg text-xs text-[#EDE5D5] transition-colors cursor-pointer"
             >
               <div className="w-6 h-6 rounded-full bg-[#201B13] border border-[#3A3326] text-[#E5C38E] flex items-center justify-center text-xs font-serif font-bold shrink-0">
                 {userName.charAt(0)}
@@ -237,10 +239,10 @@ const DashboardPage = () => {
       </header>
 
       {/* Main Container */}
-      <main className="p-6 md:p-10 max-w-6xl w-full mx-auto space-y-8">
+      <main className="p-4 sm:p-6 md:p-10 max-w-6xl w-full mx-auto space-y-6 sm:space-y-8">
 
         {/* 4 Summary Stat Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           
           {/* Card 1: Total Documents */}
           <div className="bg-[#12100D] p-5 rounded-xl border border-[#231F19] hover:border-[#383127] transition-all group">
@@ -358,8 +360,8 @@ const DashboardPage = () => {
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-2.5 shrink-0">
-                        <span className="px-2 py-0.5 rounded text-[11px] font-medium bg-[#171410] text-[#A99E8C] border border-[#2B251B]">
+                      <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+                        <span className="hidden xs:inline-block px-2 py-0.5 rounded text-[11px] font-medium bg-[#171410] text-[#A99E8C] border border-[#2B251B]">
                           {doc.type}
                         </span>
                         {badge}

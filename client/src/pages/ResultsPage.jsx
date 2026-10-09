@@ -214,21 +214,21 @@ const ResultsPageContent = () => {
     <div className="flex-1 bg-[#0B0A08] flex flex-col min-w-0 pb-20 font-sans text-[#EDE5D5] selection:bg-[#E5C38E]/20 selection:text-[#F8F6F0]">
       <Navbar title="Risk Insights & Contradictions" subtitle="Cross-document semantic conflict reports & legal recommendations" />
 
-      <main className="p-6 md:p-10 max-w-7xl w-full mx-auto space-y-8 pb-24">
+      <main className="p-4 sm:p-6 md:p-10 max-w-7xl w-full mx-auto space-y-6 sm:space-y-8 pb-24">
         
         {/* Top Header Bar */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
           <div>
-            <h1 className="text-2xl md:text-3xl font-serif font-medium text-[#F4EFE5] tracking-normal leading-snug">
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-serif font-medium text-[#F4EFE5] tracking-normal leading-snug">
               Contradiction Audit Report
             </h1>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col xs:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3">
             <button
               onClick={handleRunDemo}
               disabled={seeding}
-              className="px-3.5 py-2 bg-[#14120E] hover:bg-[#1B1813] text-[#EDE5D5] border border-[#2D261C] hover:border-[#E5C38E]/50 font-medium text-xs md:text-sm rounded-lg flex items-center gap-2 transition-colors disabled:opacity-50 cursor-pointer"
+              className="px-3.5 py-2 bg-[#14120E] hover:bg-[#1B1813] text-[#EDE5D5] border border-[#2D261C] hover:border-[#E5C38E]/50 font-medium text-xs md:text-sm rounded-lg flex items-center justify-center gap-2 transition-colors disabled:opacity-50 cursor-pointer"
             >
               <Zap className="w-3.5 h-3.5 text-[#E5C38E]" />
               <span>{seeding ? 'Seeding...' : 'Load Sample Audit'}</span>
@@ -236,7 +236,7 @@ const ResultsPageContent = () => {
 
             <Link
               to="/compare"
-              className="px-4 py-2 bg-[#E5C38E] hover:bg-[#D6B27B] text-[#12110E] font-semibold text-xs md:text-sm rounded-lg flex items-center gap-2 transition-colors cursor-pointer"
+              className="px-4 py-2 bg-[#E5C38E] hover:bg-[#D6B27B] text-[#12110E] font-semibold text-xs md:text-sm rounded-lg flex items-center justify-center gap-2 transition-colors cursor-pointer"
             >
               <GitCompare className="w-4 h-4 stroke-[2]" />
               <span>Compare Another Pair</span>
@@ -246,37 +246,37 @@ const ResultsPageContent = () => {
 
         {/* Audit Report Summary Banner */}
         {selectedAnalysis && (
-          <div className="bg-[#12100D] rounded-xl border border-[#231F19] p-6 md:p-8 space-y-6">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 border-b border-[#1F1B16] pb-5">
+          <div className="bg-[#12100D] rounded-xl border border-[#231F19] p-4 sm:p-6 md:p-8 space-y-5 sm:space-y-6">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-5 border-b border-[#1F1B16] pb-4 sm:pb-5">
               <div>
                 <div className="flex items-center gap-2.5">
-                  <span className="text-xs font-mono font-medium text-[#E5C38E] bg-[#1C1812] px-2.5 py-1 rounded border border-[#2E271D]">
+                  <span className="text-[11px] sm:text-xs font-mono font-medium text-[#E5C38E] bg-[#1C1812] px-2.5 py-1 rounded border border-[#2E271D]">
                     AUDIT #{auditNumber}
                   </span>
                   <span className="text-xs text-[#8C806F]">
                     Executed on {auditDateStr}
                   </span>
                 </div>
-                <h2 className="text-lg md:text-xl font-serif text-[#F4EFE5] mt-2.5 leading-snug">
+                <h2 className="text-base sm:text-lg md:text-xl font-serif text-[#F4EFE5] mt-2 sm:mt-2.5 leading-snug">
                   {safeFindingsList.length} Discrepancies Flagged Across Contract Obligations
                 </h2>
               </div>
 
               {/* 3 Triage Metric Pills */}
-              <div className="flex items-center gap-3 flex-wrap">
-                <div className="bg-[#241314] border border-[#482325] px-4 py-2.5 rounded-lg text-center min-w-[96px]">
-                  <span className="text-2xl font-serif text-[#ECA09B] leading-none block">{highRiskCount}</span>
-                  <span className="text-xs text-[#ECA09B]/80 mt-1 block">High Risk</span>
+              <div className="grid grid-cols-3 gap-2 sm:gap-3 w-full sm:w-auto">
+                <div className="bg-[#241314] border border-[#482325] px-2.5 sm:px-4 py-2 sm:py-2.5 rounded-lg text-center">
+                  <span className="text-xl sm:text-2xl font-serif text-[#ECA09B] leading-none block">{highRiskCount}</span>
+                  <span className="text-[10px] sm:text-xs text-[#ECA09B]/80 mt-1 block">High Risk</span>
                 </div>
 
-                <div className="bg-[#231A10] border border-[#443118] px-4 py-2.5 rounded-lg text-center min-w-[96px]">
-                  <span className="text-2xl font-serif text-[#E5B56E] leading-none block">{mediumRiskCount}</span>
-                  <span className="text-xs text-[#E5B56E]/80 mt-1 block">Medium Risk</span>
+                <div className="bg-[#231A10] border border-[#443118] px-2.5 sm:px-4 py-2 sm:py-2.5 rounded-lg text-center">
+                  <span className="text-xl sm:text-2xl font-serif text-[#E5B56E] leading-none block">{mediumRiskCount}</span>
+                  <span className="text-[10px] sm:text-xs text-[#E5B56E]/80 mt-1 block">Medium Risk</span>
                 </div>
 
-                <div className="bg-[#152319] border border-[#233B2B] px-4 py-2.5 rounded-lg text-center min-w-[96px]">
-                  <span className="text-2xl font-serif text-[#98C7A3] leading-none block">{lowRiskCount}</span>
-                  <span className="text-xs text-[#98C7A3]/80 mt-1 block">Low Risk</span>
+                <div className="bg-[#152319] border border-[#233B2B] px-2.5 sm:px-4 py-2 sm:py-2.5 rounded-lg text-center">
+                  <span className="text-xl sm:text-2xl font-serif text-[#98C7A3] leading-none block">{lowRiskCount}</span>
+                  <span className="text-[10px] sm:text-xs text-[#98C7A3]/80 mt-1 block">Low Risk</span>
                 </div>
               </div>
             </div>

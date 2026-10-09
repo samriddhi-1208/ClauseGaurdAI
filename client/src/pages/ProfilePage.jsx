@@ -38,19 +38,19 @@ const ProfilePage = () => {
     <div className="flex-1 bg-[#0B0A08] flex flex-col min-w-0 pb-16 font-sans text-[#EDE5D5] selection:bg-[#E5C38E]/20 selection:text-[#F8F6F0]">
       <Navbar title="Counsel Profile" subtitle="Manage your legal credentials, workspace identity, and profile preferences" />
 
-      <main className="p-6 md:p-10 max-w-4xl w-full mx-auto space-y-7">
+      <main className="p-4 sm:p-6 md:p-10 max-w-4xl w-full mx-auto space-y-6 sm:space-y-7">
         {/* Onboarding Welcome Banner for newly registered users */}
         {isNewAccount && (
-          <div className="p-5 bg-[#14120E] border border-[#2D261C] rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm">
-            <div className="flex items-start sm:items-center gap-3.5">
-              <div className="w-10 h-10 rounded-xl bg-[#191612] border border-[#3A3022] flex items-center justify-center text-[#E5C38E] shrink-0 shadow-inner">
-                <Sparkles className="w-5 h-5 stroke-[1.8]" />
+          <div className="p-4 sm:p-5 bg-[#14120E] border border-[#2D261C] rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4 shadow-sm">
+            <div className="flex items-start sm:items-center gap-3 sm:gap-3.5">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#191612] border border-[#3A3022] flex items-center justify-center text-[#E5C38E] shrink-0 shadow-inner">
+                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.8]" />
               </div>
               <div>
-                <p className="text-sm font-serif font-medium text-[#F4EFE5]">
+                <p className="text-xs sm:text-sm font-serif font-medium text-[#F4EFE5]">
                   Account Created Successfully
                 </p>
-                <p className="text-xs text-[#B9AE9A] mt-0.5 leading-relaxed">
+                <p className="text-[11px] sm:text-xs text-[#B9AE9A] mt-0.5 leading-relaxed">
                   Set up your counsel credentials below so they appear correctly on audit reports and clause exports
                 </p>
               </div>
@@ -58,7 +58,7 @@ const ProfilePage = () => {
             <button
               type="button"
               onClick={() => navigate('/dashboard')}
-              className="py-2 px-4 bg-[#1B1813] hover:bg-[#231F19] border border-[#2D261C] hover:border-[#E5C38E]/40 text-[#E5C38E] text-xs font-medium rounded-lg transition-colors flex items-center gap-1.5 self-start sm:self-auto shrink-0 cursor-pointer"
+              className="py-2 px-3.5 sm:px-4 bg-[#1B1813] hover:bg-[#231F19] border border-[#2D261C] hover:border-[#E5C38E]/40 text-[#E5C38E] text-xs font-medium rounded-lg transition-colors flex items-center justify-center gap-1.5 self-stretch sm:self-auto shrink-0 cursor-pointer"
             >
               <span>Skip to Dashboard</span>
               <ArrowRight className="w-3.5 h-3.5 stroke-[2]" />
@@ -67,8 +67,8 @@ const ProfilePage = () => {
         )}
 
         {/* Profile Header Card */}
-        <div className="bg-[#12100D] rounded-xl border border-[#231F19] p-6 md:p-8 flex flex-col sm:flex-row items-center sm:items-start gap-6">
-          <div className="w-20 h-20 rounded-xl bg-[#191612] border border-[#2D261C] text-[#E5C38E] flex items-center justify-center font-serif text-3xl font-bold shrink-0 shadow-sm">
+        <div className="bg-[#12100D] rounded-xl border border-[#231F19] p-4 sm:p-6 md:p-8 flex flex-col sm:flex-row items-center sm:items-start gap-5 sm:gap-6">
+          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl bg-[#191612] border border-[#2D261C] text-[#E5C38E] flex items-center justify-center font-serif text-2xl sm:text-3xl font-bold shrink-0 shadow-sm">
             {getInitials(name)}
           </div>
           <div className="flex-1 text-center sm:text-left">

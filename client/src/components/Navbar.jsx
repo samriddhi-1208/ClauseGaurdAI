@@ -36,9 +36,9 @@ const Navbar = ({ title, subtitle }) => {
 
   return (
     <>
-      <header className="bg-[#0E0D0B] border-b border-[#24201A] px-6 md:px-10 py-4 md:py-5 flex items-center justify-between sticky top-0 z-30 font-sans">
+      <header className="bg-[#0E0D0B] border-b border-[#24201A] px-3.5 sm:px-6 md:px-10 py-3 sm:py-4 md:py-5 flex items-center justify-between sticky top-0 z-30 font-sans">
         {/* Left Section: Mobile Menu Button + Serif Page Title */}
-        <div className="flex items-center gap-3.5 truncate pr-4">
+        <div className="flex items-center gap-2.5 sm:gap-3.5 truncate pr-2 sm:pr-4">
           {outletContext?.toggleMobileSidebar && (
             <button
               onClick={outletContext.toggleMobileSidebar}
@@ -50,11 +50,11 @@ const Navbar = ({ title, subtitle }) => {
           )}
 
           <div className="truncate">
-            <h1 className="text-lg md:text-xl font-serif font-medium text-[#F8F6F0] tracking-normal leading-snug truncate">
+            <h1 className="text-base sm:text-lg md:text-xl font-serif font-medium text-[#F8F6F0] tracking-normal leading-snug truncate">
               {title}
             </h1>
             {subtitle && (
-              <p className="text-xs md:text-sm text-[#A89E8D] font-normal leading-relaxed truncate mt-1">
+              <p className="hidden xs:block text-xs md:text-sm text-[#A89E8D] font-normal leading-relaxed truncate mt-0.5 sm:mt-1">
                 {subtitle}
               </p>
             )}
@@ -62,12 +62,12 @@ const Navbar = ({ title, subtitle }) => {
         </div>
 
         {/* Right Section: Search + Notifications + Profile */}
-        <div className="flex items-center gap-3 shrink-0">
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           {/* Quick Search */}
           <button
             onClick={() => setIsSearchOpen(true)}
             aria-label="Search contracts"
-            className="flex items-center gap-2 px-3.5 py-2 bg-[#161411] hover:bg-[#1E1B16] border border-[#2B251B] hover:border-[#3D3528] rounded-xl text-xs text-[#A89E8D] transition-colors cursor-pointer"
+            className="flex items-center gap-2 p-2 sm:px-3.5 sm:py-2 bg-[#161411] hover:bg-[#1E1B16] border border-[#2B251B] hover:border-[#3D3528] rounded-xl text-xs text-[#A89E8D] transition-colors cursor-pointer"
           >
             <Search className="w-3.5 h-3.5 text-[#C8A97E] stroke-[2]" />
             <span className="hidden sm:inline font-medium">Search repository...</span>

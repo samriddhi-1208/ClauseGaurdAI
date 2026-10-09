@@ -98,13 +98,13 @@ const DocumentsPage = () => {
     <div className="flex-1 bg-[#0B0A08] flex flex-col min-w-0 pb-16 font-sans text-[#EDE5D5] selection:bg-[#E5C38E]/20 selection:text-[#F8F6F0]">
       <Navbar title="Contract Library" subtitle="Manage legal contracts, extracted clauses, and vector storage" />
 
-      <main className="p-6 md:p-10 max-w-7xl w-full mx-auto space-y-7">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <main className="p-4 sm:p-6 md:p-10 max-w-7xl w-full mx-auto space-y-6 sm:space-y-7">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
           <div>
-            <h1 className="text-2xl md:text-3xl font-serif font-medium text-[#F4EFE5] tracking-normal leading-snug">
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-serif font-medium text-[#F4EFE5] tracking-normal leading-snug">
               Contract Library
             </h1>
-            <p className="text-sm text-[#B9AE9A] mt-2 leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#B9AE9A] mt-1 sm:mt-2 leading-relaxed">
               Select 2 or more contracts to initiate automated cross-document contradiction analysis
             </p>
           </div>
