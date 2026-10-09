@@ -3,9 +3,12 @@ import { RotateCcw } from 'lucide-react';
 
 /**
  * ContradictionsSection Component
- * Implements a premium crumpled-paper unfolding animation for Contract A and Contract B,
- * revealing the central 'CONTRADICTION DETECTED' badge with a champagne-gold glow,
- * then cleanly settling into the exact existing comparison UI.
+ * Implements a realistic crumpled-paper unfolding animation for Contract A and Contract B:
+ * - Starts with slightly crumpled cream-colored sheets with physical 3D perspective and soft lighting.
+ * - Smoothly unfolds and flattens into rectangular contract cards.
+ * - Reveals the central 'CONTRADICTION DETECTED' badge in the dedicated horizontal gap between cards.
+ * - The badge NEVER overlaps the contract text.
+ * - Settle cleanly into the original clean comparison UI with identical text, fonts, and colors.
  */
 const ContradictionsSection = () => {
   const sectionRef = useRef(null);
@@ -49,21 +52,20 @@ const ContradictionsSection = () => {
     };
   }, [phase, prefersReducedMotion]);
 
-  // Master Animation Timing Sequence
-  // t=0: crumpled (initial physical paper state)
-  // t=600ms: unfolding begins (papers flatten, rotate to 0deg, creases fade)
-  // t=1600ms: contradiction badge reveals with gold glow
-  // t=2800ms: settle completely into clean comparison state
+  // Master Animation Timing Sequence:
+  // 1. Initial crumpled state (0s to 500ms)
+  // 2. Unfolding begins (500ms to 2400ms)
+  // 3. Settle completely into original clean cards (2600ms)
   useEffect(() => {
     if (phase !== 'crumpled') return;
 
     const timerUnfold = setTimeout(() => {
       setPhase('unfolding');
-    }, 600);
+    }, 500);
 
     const timerComplete = setTimeout(() => {
       setPhase('complete');
-    }, 2800);
+    }, 2600);
 
     return () => {
       clearTimeout(timerUnfold);
@@ -75,50 +77,51 @@ const ContradictionsSection = () => {
     setPhase('crumpled');
   };
 
-  // Determine dynamic classes based on animation phase
   const isCrumpled = phase === 'crumpled';
   const isUnfolding = phase === 'unfolding';
   const isComplete = phase === 'complete';
 
-  // Card A Transform styling
+  // Card A 3D Transform and Shadow
   const getCardAStyle = () => {
     if (prefersReducedMotion || isComplete) {
       return {
-        transform: 'perspective(1200px) rotate(0deg) rotateX(0deg) rotateY(0deg) translate(0px, 0px) scale(1)',
-        transition: 'transform 1200ms cubic-bezier(0.25, 1, 0.35, 1), box-shadow 1200ms ease-out'
+        transform: 'perspective(1000px) rotate(0deg) rotateX(0deg) rotateY(0deg) translate3d(0, 0, 0) scale(1)',
+        transition: 'transform 1400ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 1400ms ease-out'
       };
     }
     if (isCrumpled) {
       return {
-        transform: 'perspective(1200px) rotate(-3deg) rotateX(4deg) rotateY(-4deg) translate(-4px, -3px) scale(0.975)',
-        boxShadow: '0 24px 45px -12px rgba(0, 0, 0, 0.85), 0 8px 16px -6px rgba(0, 0, 0, 0.65)'
+        transform: 'perspective(1000px) rotate(-2.4deg) rotateX(3.5deg) rotateY(-3deg) translate3d(-3px, -4px, 0) scale(0.98)',
+        boxShadow: '0 24px 38px -12px rgba(0, 0, 0, 0.75), 0 8px 16px -6px rgba(0, 0, 0, 0.55)',
+        transition: 'none'
       };
     }
-    // 'unfolding' state
+    // unfolding
     return {
-      transform: 'perspective(1200px) rotate(0deg) rotateX(0deg) rotateY(0deg) translate(0px, 0px) scale(1)',
-      transition: 'transform 1400ms cubic-bezier(0.25, 1, 0.35, 1), box-shadow 1400ms ease-out'
+      transform: 'perspective(1000px) rotate(0deg) rotateX(0deg) rotateY(0deg) translate3d(0, 0, 0) scale(1)',
+      transition: 'transform 1400ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 1400ms ease-out'
     };
   };
 
-  // Card B Transform styling
+  // Card B 3D Transform and Shadow
   const getCardBStyle = () => {
     if (prefersReducedMotion || isComplete) {
       return {
-        transform: 'perspective(1200px) rotate(0deg) rotateX(0deg) rotateY(0deg) translate(0px, 0px) scale(1)',
-        transition: 'transform 1200ms cubic-bezier(0.25, 1, 0.35, 1), box-shadow 1200ms ease-out'
+        transform: 'perspective(1000px) rotate(0deg) rotateX(0deg) rotateY(0deg) translate3d(0, 0, 0) scale(1)',
+        transition: 'transform 1400ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 1400ms ease-out'
       };
     }
     if (isCrumpled) {
       return {
-        transform: 'perspective(1200px) rotate(2.8deg) rotateX(3.5deg) rotateY(4deg) translate(4px, -2px) scale(0.975)',
-        boxShadow: '0 24px 45px -12px rgba(0, 0, 0, 0.85), 0 8px 16px -6px rgba(0, 0, 0, 0.65)'
+        transform: 'perspective(1000px) rotate(2.2deg) rotateX(3deg) rotateY(3.5deg) translate3d(3px, -3px, 0) scale(0.98)',
+        boxShadow: '0 24px 38px -12px rgba(0, 0, 0, 0.75), 0 8px 16px -6px rgba(0, 0, 0, 0.55)',
+        transition: 'none'
       };
     }
-    // 'unfolding' state
+    // unfolding
     return {
-      transform: 'perspective(1200px) rotate(0deg) rotateX(0deg) rotateY(0deg) translate(0px, 0px) scale(1)',
-      transition: 'transform 1400ms cubic-bezier(0.25, 1, 0.35, 1), box-shadow 1400ms ease-out'
+      transform: 'perspective(1000px) rotate(0deg) rotateX(0deg) rotateY(0deg) translate3d(0, 0, 0) scale(1)',
+      transition: 'transform 1400ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 1400ms ease-out'
     };
   };
 
@@ -150,101 +153,98 @@ const ContradictionsSection = () => {
         </h2>
       </div>
 
-      {/* Side-by-Side Comparison Cards Container with Unfolding Mechanics */}
-      <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center">
+      {/* 
+        3-Column Grid on Desktop, Single-Column on Mobile:
+        Column 1: Card A
+        Column 2: Central Contradiction Badge (guaranteed dedicated space, ZERO overlap with text)
+        Column 3: Card B
+      */}
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] items-stretch gap-6 lg:gap-5 xl:gap-8 relative">
         
         {/* ============================================================== */}
         {/* CARD A: Service Agreement (Contract A) */}
         {/* ============================================================== */}
         <div 
           style={getCardAStyle()}
-          className="relative bg-[#E5DFD0] text-[#16130F] p-5 sm:p-7 md:p-8 rounded-2xl shadow-xl border border-[#C8BFAC] space-y-3.5 transform-gpu transition-all"
+          className="relative bg-[#E5DFD0] text-[#16130F] p-5 sm:p-7 md:p-8 rounded-2xl shadow-xl border border-[#C8BFAC] flex flex-col justify-between transform-gpu transition-all"
         >
-          {/* Subtle Paper Creases & Dog-ear Corner Overlay */}
-          <div 
-            className={`absolute inset-0 pointer-events-none rounded-2xl overflow-hidden transition-opacity duration-1000 ease-out z-10 ${
-              isComplete ? 'opacity-0' : 'opacity-85'
-            }`}
-            aria-hidden="true"
-          >
-            {/* Realistic diagonal crease lines and fold shadows */}
+          {/* Subtle Initial Paper Lighting & Dog-Ear Fold (Fades to 0, completely gone in final state) */}
+          {!isComplete && (
             <div 
-              className="absolute inset-0 mix-blend-multiply opacity-30"
-              style={{
-                backgroundImage: 'linear-gradient(118deg, transparent 20%, rgba(0,0,0,0.18) 22%, rgba(255,255,255,0.45) 23.5%, transparent 26%, transparent 45%, rgba(0,0,0,0.2) 48%, rgba(255,255,255,0.5) 49.5%, transparent 52%, transparent 70%, rgba(0,0,0,0.14) 73%, rgba(255,255,255,0.35) 74.5%, transparent 77%)'
-              }}
-            />
-            {/* Natural facet lighting */}
-            <div 
-              className="absolute inset-0 mix-blend-soft-light opacity-50"
-              style={{
-                backgroundImage: 'radial-gradient(ellipse at 30% 35%, rgba(255,255,255,0.7) 0%, transparent 60%), radial-gradient(ellipse at 75% 70%, rgba(0,0,0,0.2) 0%, transparent 50%)'
-              }}
-            />
-            {/* Dog-ear folded corner at top-right */}
-            <div 
-              className="absolute top-0 right-0 transition-all duration-700 ease-out"
-              style={{
-                width: '36px',
-                height: '36px',
-                transform: isCrumpled ? 'scale(1)' : 'scale(0)',
-                opacity: isCrumpled ? 0.95 : 0,
-                transformOrigin: 'top right'
-              }}
+              className={`absolute inset-0 pointer-events-none rounded-2xl overflow-hidden transition-opacity duration-1000 ease-out z-10 ${
+                isUnfolding ? 'opacity-0' : 'opacity-100'
+              }`}
+              aria-hidden="true"
             >
+              {/* Soft ambient light falloff (NO stripes) */}
               <div 
-                className="w-full h-full bg-[#D6CEBC] shadow-sm border-b border-l border-[#B3A790]"
+                className="absolute inset-0 mix-blend-multiply opacity-20"
                 style={{
-                  clipPath: 'polygon(0 0, 100% 100%, 0 100%)'
+                  backgroundImage: 'radial-gradient(circle at 20% 20%, rgba(255,255,255,0.8) 0%, rgba(0,0,0,0.12) 60%, transparent 100%)'
                 }}
               />
+              {/* Subtle top-right folded corner that uncurls */}
+              <div 
+                className="absolute top-0 right-0 w-8 h-8 transition-transform duration-700 ease-out"
+                style={{
+                  transform: isCrumpled ? 'scale(1)' : 'scale(0)',
+                  transformOrigin: 'top right'
+                }}
+              >
+                <div 
+                  className="w-full h-full bg-[#D4CCA] shadow-sm border-b border-l border-[#BDB3A0]"
+                  style={{ clipPath: 'polygon(0 0, 100% 100%, 0 100%)' }}
+                />
+              </div>
             </div>
-          </div>
+          )}
 
-          {/* Existing Content */}
-          <span className="text-[11px] font-bold tracking-widest text-[#6B5F4D] uppercase block">
-            CONTRACT A
-          </span>
-          <h3 className="font-serif text-lg sm:text-xl font-bold text-[#14120E]">
-            Service Agreement
-          </h3>
-          <div className="space-y-2.5 pt-1 text-xs sm:text-sm md:text-base leading-relaxed font-serif">
-            <p className="text-[#16130F]">
-              <strong className="font-semibold text-[#14120E]">Payment:</strong> <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">$50,000</span> payable within <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">30 days</span>
-            </p>
-            <p className="text-[#16130F]">
-              <strong className="font-semibold text-[#14120E]">Termination:</strong> Advance written notice of <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">30 days</span> required
-            </p>
-            <p className="text-[#16130F]">
-              <strong className="font-semibold text-[#14120E]">Retention:</strong> Audit records must be retained for <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">5 years</span>
-            </p>
+          {/* Clean Original Card Content */}
+          <div className="space-y-3.5">
+            <span className="text-[11px] font-bold tracking-widest text-[#6B5F4D] uppercase block">
+              CONTRACT A
+            </span>
+            <h3 className="font-serif text-lg sm:text-xl font-bold text-[#14120E]">
+              Service Agreement
+            </h3>
+            <div className="space-y-2.5 pt-1 text-xs sm:text-sm md:text-base leading-relaxed font-serif">
+              <p className="text-[#16130F]">
+                <strong className="font-semibold text-[#14120E]">Payment:</strong> <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">$50,000</span> payable within <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">30 days</span>
+              </p>
+              <p className="text-[#16130F]">
+                <strong className="font-semibold text-[#14120E]">Termination:</strong> Advance written notice of <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">30 days</span> required
+              </p>
+              <p className="text-[#16130F]">
+                <strong className="font-semibold text-[#14120E]">Retention:</strong> Audit records must be retained for <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">5 years</span>
+              </p>
+            </div>
           </div>
         </div>
 
         {/* ============================================================== */}
-        {/* CENTRAL FLOATING BADGE: CONTRADICTION DETECTED */}
-        {/* Revealed smoothly with champagne-gold outline during unfolding */}
+        {/* CENTRAL BADGE: CONTRADICTION DETECTED */}
+        {/* Positioned in dedicated center column/gap, ZERO overlap with text */}
         {/* ============================================================== */}
-        <div 
-          className="lg:absolute lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 flex justify-center z-20 my-2 lg:my-0 transition-all duration-700 ease-out"
-          style={{
-            opacity: isCrumpled ? 0 : 1,
-            transform: isCrumpled 
-              ? 'scale(0.7)' 
-              : 'scale(1)',
-            transitionDelay: isUnfolding ? '300ms' : '0ms'
-          }}
-        >
+        <div className="self-center flex items-center justify-center my-2 lg:my-0 z-20 shrink-0">
           <div 
-            className={`w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#161411] flex flex-col items-center justify-center p-2 text-center shadow-2xl transition-all duration-700 ${
-              isUnfolding 
-                ? 'border-2 border-[#E5C38E] ring-4 ring-[#E5C38E]/60 shadow-[0_0_30px_rgba(229,195,142,0.4)] animate-pulse'
-                : 'border-2 border-[#3D3528] ring-4 ring-[#0C0B0A]'
-            }`}
+            className="transition-all duration-700 ease-out"
+            style={{
+              opacity: isCrumpled ? 0 : 1,
+              transform: isCrumpled ? 'scale(0.8)' : 'scale(1)',
+              transitionDelay: isUnfolding ? '350ms' : '0ms'
+            }}
           >
-            <span className="text-[8px] sm:text-[9px] font-bold tracking-widest text-[#E5C38E] leading-tight uppercase select-none">
-              CONTRADICTION<br />DETECTED
-            </span>
+            <div 
+              className={`w-20 h-20 sm:w-22 sm:h-22 rounded-full bg-[#14120E] flex flex-col items-center justify-center p-2 text-center transition-all duration-700 ${
+                isUnfolding 
+                  ? 'border border-[#E5C38E] ring-4 ring-[#E5C38E]/50 shadow-[0_0_24px_rgba(229,195,142,0.35)]' 
+                  : 'border border-[#C8A97E]/70 ring-4 ring-[#0C0B0A] shadow-2xl'
+              }`}
+            >
+              <span className="text-[8px] sm:text-[9px] font-bold tracking-widest text-[#E5C38E] leading-tight uppercase select-none">
+                CONTRADICTION<br />DETECTED
+              </span>
+            </div>
           </div>
         </div>
 
@@ -253,66 +253,58 @@ const ContradictionsSection = () => {
         {/* ============================================================== */}
         <div 
           style={getCardBStyle()}
-          className="relative bg-[#E5DFD0] text-[#16130F] p-5 sm:p-7 md:p-8 rounded-2xl shadow-xl border border-[#C8BFAC] space-y-3.5 transform-gpu transition-all"
+          className="relative bg-[#E5DFD0] text-[#16130F] p-5 sm:p-7 md:p-8 rounded-2xl shadow-xl border border-[#C8BFAC] flex flex-col justify-between transform-gpu transition-all"
         >
-          {/* Subtle Paper Creases & Fold Overlay */}
-          <div 
-            className={`absolute inset-0 pointer-events-none rounded-2xl overflow-hidden transition-opacity duration-1000 ease-out z-10 ${
-              isComplete ? 'opacity-0' : 'opacity-85'
-            }`}
-            aria-hidden="true"
-          >
-            {/* Realistic diagonal crease lines and fold shadows */}
+          {/* Subtle Initial Paper Lighting & Dog-Ear Fold (Fades to 0, completely gone in final state) */}
+          {!isComplete && (
             <div 
-              className="absolute inset-0 mix-blend-multiply opacity-30"
-              style={{
-                backgroundImage: 'linear-gradient(62deg, transparent 22%, rgba(0,0,0,0.18) 24%, rgba(255,255,255,0.45) 25.5%, transparent 28%, transparent 50%, rgba(0,0,0,0.2) 53%, rgba(255,255,255,0.5) 54.5%, transparent 57%, transparent 75%, rgba(0,0,0,0.14) 77%, rgba(255,255,255,0.35) 78.5%, transparent 81%)'
-              }}
-            />
-            {/* Natural facet lighting */}
-            <div 
-              className="absolute inset-0 mix-blend-soft-light opacity-50"
-              style={{
-                backgroundImage: 'radial-gradient(ellipse at 70% 35%, rgba(255,255,255,0.7) 0%, transparent 60%), radial-gradient(ellipse at 25% 75%, rgba(0,0,0,0.2) 0%, transparent 50%)'
-              }}
-            />
-            {/* Dog-ear folded corner at bottom-right */}
-            <div 
-              className="absolute bottom-0 right-0 transition-all duration-700 ease-out"
-              style={{
-                width: '36px',
-                height: '36px',
-                transform: isCrumpled ? 'scale(1)' : 'scale(0)',
-                opacity: isCrumpled ? 0.95 : 0,
-                transformOrigin: 'bottom right'
-              }}
+              className={`absolute inset-0 pointer-events-none rounded-2xl overflow-hidden transition-opacity duration-1000 ease-out z-10 ${
+                isUnfolding ? 'opacity-0' : 'opacity-100'
+              }`}
+              aria-hidden="true"
             >
+              {/* Soft ambient light falloff (NO stripes) */}
               <div 
-                className="w-full h-full bg-[#D6CEBC] shadow-sm border-t border-l border-[#B3A790]"
+                className="absolute inset-0 mix-blend-multiply opacity-20"
                 style={{
-                  clipPath: 'polygon(0 100%, 100% 0, 0 0)'
+                  backgroundImage: 'radial-gradient(circle at 80% 80%, rgba(255,255,255,0.8) 0%, rgba(0,0,0,0.12) 60%, transparent 100%)'
                 }}
               />
+              {/* Subtle bottom-right folded corner that uncurls */}
+              <div 
+                className="absolute bottom-0 right-0 w-8 h-8 transition-transform duration-700 ease-out"
+                style={{
+                  transform: isCrumpled ? 'scale(1)' : 'scale(0)',
+                  transformOrigin: 'bottom right'
+                }}
+              >
+                <div 
+                  className="w-full h-full bg-[#D4CCA] shadow-sm border-t border-l border-[#BDB3A0]"
+                  style={{ clipPath: 'polygon(0 100%, 100% 0, 0 0)' }}
+                />
+              </div>
             </div>
-          </div>
+          )}
 
-          {/* Existing Content */}
-          <span className="text-[11px] font-bold tracking-widest text-[#6B5F4D] uppercase block">
-            CONTRACT B
-          </span>
-          <h3 className="font-serif text-lg sm:text-xl font-bold text-[#14120E]">
-            Revised Agreement
-          </h3>
-          <div className="space-y-2.5 pt-1 text-xs sm:text-sm md:text-base leading-relaxed font-serif">
-            <p className="text-[#16130F]">
-              <strong className="font-semibold text-[#14120E]">Payment:</strong> <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">$60,000</span> payable within <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">60 days</span>
-            </p>
-            <p className="text-[#16130F]">
-              <strong className="font-semibold text-[#14120E]">Termination:</strong> Advance written notice of <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">60 days</span> required
-            </p>
-            <p className="text-[#16130F]">
-              <strong className="font-semibold text-[#14120E]">Retention:</strong> All confidential records purged within <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">2 years</span>
-            </p>
+          {/* Clean Original Card Content */}
+          <div className="space-y-3.5">
+            <span className="text-[11px] font-bold tracking-widest text-[#6B5F4D] uppercase block">
+              CONTRACT B
+            </span>
+            <h3 className="font-serif text-lg sm:text-xl font-bold text-[#14120E]">
+              Revised Agreement
+            </h3>
+            <div className="space-y-2.5 pt-1 text-xs sm:text-sm md:text-base leading-relaxed font-serif">
+              <p className="text-[#16130F]">
+                <strong className="font-semibold text-[#14120E]">Payment:</strong> <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">$60,000</span> payable within <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">60 days</span>
+              </p>
+              <p className="text-[#16130F]">
+                <strong className="font-semibold text-[#14120E]">Termination:</strong> Advance written notice of <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">60 days</span> required
+              </p>
+              <p className="text-[#16130F]">
+                <strong className="font-semibold text-[#14120E]">Retention:</strong> All confidential records purged within <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">2 years</span>
+              </p>
+            </div>
           </div>
         </div>
 
