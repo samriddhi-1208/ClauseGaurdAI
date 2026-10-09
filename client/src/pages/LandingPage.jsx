@@ -17,6 +17,7 @@ import {
 import { demoAPI } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import PuzzleFeatureSection from '../components/PuzzleFeatureSection';
+import ContradictionsSection from '../components/ContradictionsSection';
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -399,73 +400,8 @@ const LandingPage = () => {
         <PuzzleFeatureSection />
       </div>
 
-      {/* SECTION 3: SEE CONTRADICTIONS CLEARLY (Visual Comparison Demo) */}
-      <section id="contradictions" className="py-14 sm:py-20 md:py-24 px-4 sm:px-6 max-w-7xl mx-auto w-full border-b border-[#24201A] overflow-hidden">
-        <div className="space-y-2 mb-8 sm:mb-12">
-          <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.22em] text-[#C8A97E] uppercase block">
-            A CLEARER VIEW OF EVERY DETAIL
-          </span>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif text-[#F8F6F0] tracking-normal leading-snug">
-            See Contradictions Clearly
-          </h2>
-        </div>
-
-        {/* Side-by-Side Interactive Comparison Cards */}
-        <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center">
-          
-          {/* Card A: Service Agreement */}
-          <div className="bg-[#E5DFD0] text-[#16130F] p-5 sm:p-7 md:p-8 rounded-2xl shadow-xl border border-[#C8BFAC] space-y-3.5">
-            <span className="text-[11px] font-bold tracking-widest text-[#6B5F4D] uppercase block">
-              CONTRACT A
-            </span>
-            <h3 className="font-serif text-lg sm:text-xl font-bold text-[#14120E]">
-              Service Agreement
-            </h3>
-            <div className="space-y-2.5 pt-1 text-xs sm:text-sm md:text-base leading-relaxed font-serif">
-              <p className="text-[#16130F]">
-                <strong className="font-semibold text-[#14120E]">Payment:</strong> <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">$50,000</span> payable within <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">30 days</span>
-              </p>
-              <p className="text-[#16130F]">
-                <strong className="font-semibold text-[#14120E]">Termination:</strong> Advance written notice of <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">30 days</span> required
-              </p>
-              <p className="text-[#16130F]">
-                <strong className="font-semibold text-[#14120E]">Retention:</strong> Audit records must be retained for <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">5 years</span>
-              </p>
-            </div>
-          </div>
-
-          {/* Central Floating Badge: CONTRADICTION DETECTED */}
-          <div className="lg:absolute lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 flex justify-center z-20 my-2 lg:my-0">
-            <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-[#161411] border-2 border-[#3D3528] flex flex-col items-center justify-center p-2 text-center shadow-2xl ring-4 ring-[#0C0B0A]">
-              <span className="text-[8px] sm:text-[9px] font-bold tracking-widest text-[#E5C38E] leading-tight uppercase">
-                CONTRADICTION<br />DETECTED
-              </span>
-            </div>
-          </div>
-
-          {/* Card B: Revised Agreement */}
-          <div className="bg-[#E5DFD0] text-[#16130F] p-5 sm:p-7 md:p-8 rounded-2xl shadow-xl border border-[#C8BFAC] space-y-3.5">
-            <span className="text-[11px] font-bold tracking-widest text-[#6B5F4D] uppercase block">
-              CONTRACT B
-            </span>
-            <h3 className="font-serif text-lg sm:text-xl font-bold text-[#14120E]">
-              Revised Agreement
-            </h3>
-            <div className="space-y-2.5 pt-1 text-xs sm:text-sm md:text-base leading-relaxed font-serif">
-              <p className="text-[#16130F]">
-                <strong className="font-semibold text-[#14120E]">Payment:</strong> <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">$60,000</span> payable within <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">60 days</span>
-              </p>
-              <p className="text-[#16130F]">
-                <strong className="font-semibold text-[#14120E]">Termination:</strong> Advance written notice of <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">60 days</span> required
-              </p>
-              <p className="text-[#16130F]">
-                <strong className="font-semibold text-[#14120E]">Retention:</strong> All confidential records purged within <span className="bg-[#DDBE84] px-2 py-0.5 rounded text-[#14120E] font-sans font-bold border border-[#C9A765]/40">2 years</span>
-              </p>
-            </div>
-          </div>
-
-        </div>
-      </section>
+      {/* SECTION 3: SEE CONTRADICTIONS CLEARLY (Visual Comparison Demo with Crumpled Paper Unfolding) */}
+      <ContradictionsSection />
 
       {/* SECTION 4: HOW IT WORKS */}
       <section id="how-it-works" className="py-14 sm:py-20 md:py-24 px-4 sm:px-6 max-w-7xl mx-auto w-full border-b border-[#24201A]">
